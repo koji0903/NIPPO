@@ -15,5 +15,20 @@ namespace NIPPO
         {
             InitializeComponent();
         }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void コード発行_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void DalyReport_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
