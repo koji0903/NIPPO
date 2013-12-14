@@ -79,7 +79,8 @@
     <Property Name="deleted_at" Type="datetime" Nullable="true" />
     <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="sections_ID" Type="int" Nullable="false" />
+    <Property Name="authorities_ID" Type="int" Nullable="true" />
+    <Property Name="sections_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="authorities">
     <Key>
@@ -90,7 +91,6 @@
     <Property Name="project_management" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="list_viewer" Type="nvarchar(max)" Nullable="false" />
     <Property Name="input" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="users_ID" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="sections">
     <Key>
@@ -101,8 +101,8 @@
     <Property Name="name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
     <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="created_at" Type="datetime" Nullable="false" />
-    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="updated_at" Type="datetime" Nullable="true" />
     <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="deleted_at" Type="datetime" Nullable="true" />
@@ -124,14 +124,13 @@
     <Property Name="overtime150" Type="smallint" Nullable="true" />
     <Property Name="holiday_work_times" Type="smallint" Nullable="true" />
     <Property Name="note" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="created_at" Type="datetime" Nullable="false" />
-    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="updated_at" Type="datetime" Nullable="true" />
     <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="deleted_at" Type="smallint" Nullable="true" />
     <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="users_ID" Type="int" Nullable="false" />
-    <Property Name="work_detail_ID" Type="int" Nullable="false" />
+    <Property Name="users_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="work_detail">
     <Key>
@@ -140,8 +139,8 @@
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="times" Type="datetimeoffset" Nullable="false" />
     <Property Name="note" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="projects_ID" Type="int" Nullable="false" />
-    <Property Name="tasks_ID" Type="int" Nullable="false" />
+    <Property Name="work_reports_ID" Type="int" Nullable="true" />
+    <Property Name="projects_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="projects">
     <Key>
@@ -156,8 +155,8 @@
     <Property Name="end_date" Type="datetime" Nullable="true" />
     <Property Name="project_code" Type="smallint" Nullable="true" />
     <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="created_at" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="created_at" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="updated_at" Type="nvarchar(max)" Nullable="true" />
     <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="deleted_at" Type="nvarchar(max)" Nullable="true" />
@@ -165,8 +164,8 @@
     <Property Name="share_flag" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="tentative_flag" Type="bit" Nullable="false" DefaultValue="false" />
     <Property Name="tentative_created_by" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="business_type_ID" Type="int" Nullable="false" />
-    <Property Name="business_detail_ID" Type="int" Nullable="false" />
+    <Property Name="business_type_ID" Type="int" Nullable="true" />
+    <Property Name="business_detail_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="tasks">
     <Key>
@@ -177,12 +176,13 @@
     <Property Name="name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
     <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="created_at" Type="datetime" Nullable="false" />
-    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="updated_at" Type="datetime" Nullable="true" />
     <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="deleted_at" Type="datetime" Nullable="true" />
     <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="work_detail_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="customers">
     <Key>
@@ -193,13 +193,13 @@
     <Property Name="name" Type="nvarchar(max)" Nullable="false" />
     <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
     <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
-    <Property Name="created_at" Type="datetime" Nullable="false" />
-    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="updated_at" Type="datetime" Nullable="true" />
     <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="deleted_at" Type="datetime" Nullable="true" />
     <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="projects_ID" Type="int" Nullable="false" />
+    <Property Name="projects_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="holidays">
     <Key>
@@ -244,7 +244,7 @@
     <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="deleted_at" Type="datetime" Nullable="true" />
     <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="business_segments_ID" Type="int" Nullable="false" />
+    <Property Name="business_segments_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="business_detail">
     <Key>
@@ -262,23 +262,23 @@
     <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="deleted_at" Type="datetime" Nullable="true" />
     <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="business_type_ID" Type="int" Nullable="false" />
+    <Property Name="business_type_ID" Type="int" Nullable="true" />
   </EntityType>
   <Association Name="authoritiesusers">
-    <End Role="authorities" Type="WorkManagerDB.Store.authorities" Multiplicity="*" />
-    <End Role="users" Type="WorkManagerDB.Store.users" Multiplicity="1" />
+    <End Role="authorities" Type="WorkManagerDB.Store.authorities" Multiplicity="0..1" />
+    <End Role="users" Type="WorkManagerDB.Store.users" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="users">
+      <Principal Role="authorities">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="authorities">
-        <PropertyRef Name="users_ID" />
+      <Dependent Role="users">
+        <PropertyRef Name="authorities_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="userssections">
     <End Role="users" Type="WorkManagerDB.Store.users" Multiplicity="*" />
-    <End Role="sections" Type="WorkManagerDB.Store.sections" Multiplicity="1" />
+    <End Role="sections" Type="WorkManagerDB.Store.sections" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="sections">
         <PropertyRef Name="ID" />
@@ -289,7 +289,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="userswork_reports">
-    <End Role="users" Type="WorkManagerDB.Store.users" Multiplicity="1" />
+    <End Role="users" Type="WorkManagerDB.Store.users" Multiplicity="0..1" />
     <End Role="work_reports" Type="WorkManagerDB.Store.work_reports" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="users">
@@ -301,20 +301,20 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="work_reportswork_detail">
-    <End Role="work_reports" Type="WorkManagerDB.Store.work_reports" Multiplicity="*" />
-    <End Role="work_detail" Type="WorkManagerDB.Store.work_detail" Multiplicity="1" />
+    <End Role="work_reports" Type="WorkManagerDB.Store.work_reports" Multiplicity="0..1" />
+    <End Role="work_detail" Type="WorkManagerDB.Store.work_detail" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="work_detail">
+      <Principal Role="work_reports">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="work_reports">
-        <PropertyRef Name="work_detail_ID" />
+      <Dependent Role="work_detail">
+        <PropertyRef Name="work_reports_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="work_detailprojects">
     <End Role="work_detail" Type="WorkManagerDB.Store.work_detail" Multiplicity="*" />
-    <End Role="projects" Type="WorkManagerDB.Store.projects" Multiplicity="1" />
+    <End Role="projects" Type="WorkManagerDB.Store.projects" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="projects">
         <PropertyRef Name="ID" />
@@ -325,19 +325,19 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="work_detailtasks">
-    <End Role="work_detail" Type="WorkManagerDB.Store.work_detail" Multiplicity="*" />
-    <End Role="tasks" Type="WorkManagerDB.Store.tasks" Multiplicity="1" />
+    <End Role="work_detail" Type="WorkManagerDB.Store.work_detail" Multiplicity="0..1" />
+    <End Role="tasks" Type="WorkManagerDB.Store.tasks" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="tasks">
+      <Principal Role="work_detail">
         <PropertyRef Name="ID" />
       </Principal>
-      <Dependent Role="work_detail">
-        <PropertyRef Name="tasks_ID" />
+      <Dependent Role="tasks">
+        <PropertyRef Name="work_detail_ID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
   <Association Name="projectscustomers">
-    <End Role="projects" Type="WorkManagerDB.Store.projects" Multiplicity="1" />
+    <End Role="projects" Type="WorkManagerDB.Store.projects" Multiplicity="0..1" />
     <End Role="customers" Type="WorkManagerDB.Store.customers" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="projects">
@@ -349,7 +349,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="business_segmentsbusiness_type">
-    <End Role="business_segments" Type="WorkManagerDB.Store.businnes_segments" Multiplicity="1" />
+    <End Role="business_segments" Type="WorkManagerDB.Store.businnes_segments" Multiplicity="0..1" />
     <End Role="business_type" Type="WorkManagerDB.Store.business_type" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="business_segments">
@@ -361,7 +361,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="business_typebusiness_detail">
-    <End Role="business_type" Type="WorkManagerDB.Store.business_type" Multiplicity="1" />
+    <End Role="business_type" Type="WorkManagerDB.Store.business_type" Multiplicity="0..1" />
     <End Role="business_detail" Type="WorkManagerDB.Store.business_detail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="business_type">
@@ -374,7 +374,7 @@
   </Association>
   <Association Name="projectsbusiness_type">
     <End Role="projects" Type="WorkManagerDB.Store.projects" Multiplicity="*" />
-    <End Role="business_type" Type="WorkManagerDB.Store.business_type" Multiplicity="1" />
+    <End Role="business_type" Type="WorkManagerDB.Store.business_type" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="business_type">
         <PropertyRef Name="ID" />
@@ -386,7 +386,7 @@
   </Association>
   <Association Name="projectsbusiness_detail">
     <End Role="projects" Type="WorkManagerDB.Store.projects" Multiplicity="*" />
-    <End Role="business_detail" Type="WorkManagerDB.Store.business_detail" Multiplicity="1" />
+    <End Role="business_detail" Type="WorkManagerDB.Store.business_detail" Multiplicity="0..1" />
     <ReferentialConstraint>
       <Principal Role="business_detail">
         <PropertyRef Name="ID" />
@@ -494,10 +494,10 @@
           <NavigationProperty Name="users" Relationship="WorkManagerDB.authoritiesusers" FromRole="authorities" ToRole="users" />
         </EntityType>
         <Association Name="authoritiesusers">
-          <End Type="WorkManagerDB.authorities" Role="authorities" Multiplicity="1" />
-          <End Type="WorkManagerDB.users" Role="users" Multiplicity="1" />
+          <End Type="WorkManagerDB.authorities" Role="authorities" Multiplicity="0..1" />
+          <End Type="WorkManagerDB.users" Role="users" Multiplicity="0..1" />
         </Association>
-        <EntityType Name="sections" Abstract="true">
+        <EntityType Name="sections" Abstract="false">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -516,7 +516,7 @@
         </EntityType>
         <Association Name="userssections">
           <End Type="WorkManagerDB.users" Role="users" Multiplicity="*" />
-          <End Type="WorkManagerDB.sections" Role="sections" Multiplicity="1" />
+          <End Type="WorkManagerDB.sections" Role="sections" Multiplicity="0..1" />
         </Association>
         <EntityType Name="work_reports">
           <Key>
@@ -544,7 +544,7 @@
           <NavigationProperty Name="work_detail" Relationship="WorkManagerDB.work_reportswork_detail" FromRole="work_reports" ToRole="work_detail" />
         </EntityType>
         <Association Name="userswork_reports">
-          <End Type="WorkManagerDB.users" Role="users" Multiplicity="1" />
+          <End Type="WorkManagerDB.users" Role="users" Multiplicity="0..1" />
           <End Type="WorkManagerDB.work_reports" Role="work_reports" Multiplicity="*" />
         </Association>
         <EntityType Name="work_detail">
@@ -559,8 +559,8 @@
           <NavigationProperty Name="tasks" Relationship="WorkManagerDB.work_detailtasks" FromRole="work_detail" ToRole="tasks" />
         </EntityType>
         <Association Name="work_reportswork_detail">
-          <End Type="WorkManagerDB.work_reports" Role="work_reports" Multiplicity="1" />
-          <End Type="WorkManagerDB.work_detail" Role="work_detail" Multiplicity="1" />
+          <End Type="WorkManagerDB.work_reports" Role="work_reports" Multiplicity="0..1" />
+          <End Type="WorkManagerDB.work_detail" Role="work_detail" Multiplicity="0..1" />
         </Association>
         <EntityType Name="projects">
           <Key>
@@ -591,7 +591,7 @@
         </EntityType>
         <Association Name="work_detailprojects">
           <End Type="WorkManagerDB.work_detail" Role="work_detail" Multiplicity="*" />
-          <End Type="WorkManagerDB.projects" Role="projects" Multiplicity="1" />
+          <End Type="WorkManagerDB.projects" Role="projects" Multiplicity="0..1" />
         </Association>
         <EntityType Name="tasks">
           <Key>
@@ -611,8 +611,8 @@
           <NavigationProperty Name="work_detail" Relationship="WorkManagerDB.work_detailtasks" FromRole="tasks" ToRole="work_detail" />
         </EntityType>
         <Association Name="work_detailtasks">
-          <End Type="WorkManagerDB.work_detail" Role="work_detail" Multiplicity="*" />
-          <End Type="WorkManagerDB.tasks" Role="tasks" Multiplicity="1" />
+          <End Type="WorkManagerDB.work_detail" Role="work_detail" Multiplicity="0..1" />
+          <End Type="WorkManagerDB.tasks" Role="tasks" Multiplicity="0..1" />
         </Association>
         <EntityType Name="customers">
           <Key>
@@ -632,7 +632,7 @@
           <NavigationProperty Name="projects" Relationship="WorkManagerDB.projectscustomers" FromRole="customers" ToRole="projects" />
         </EntityType>
         <Association Name="projectscustomers">
-          <End Type="WorkManagerDB.projects" Role="projects" Multiplicity="1" />
+          <End Type="WorkManagerDB.projects" Role="projects" Multiplicity="0..1" />
           <End Type="WorkManagerDB.customers" Role="customers" Multiplicity="*" />
         </Association>
         <EntityType Name="holidays">
@@ -707,20 +707,20 @@
           <NavigationProperty Name="projects" Relationship="WorkManagerDB.projectsbusiness_detail" FromRole="business_detail" ToRole="projects" />
         </EntityType>
         <Association Name="business_segmentsbusiness_type">
-          <End Type="WorkManagerDB.business_segments" Role="business_segments" Multiplicity="1" />
+          <End Type="WorkManagerDB.business_segments" Role="business_segments" Multiplicity="0..1" />
           <End Type="WorkManagerDB.business_type" Role="business_type" Multiplicity="*" />
         </Association>
         <Association Name="business_typebusiness_detail">
-          <End Type="WorkManagerDB.business_type" Role="business_type" Multiplicity="1" />
+          <End Type="WorkManagerDB.business_type" Role="business_type" Multiplicity="0..1" />
           <End Type="WorkManagerDB.business_detail" Role="business_detail" Multiplicity="*" />
         </Association>
         <Association Name="projectsbusiness_type">
           <End Type="WorkManagerDB.projects" Role="projects" Multiplicity="*" />
-          <End Type="WorkManagerDB.business_type" Role="business_type" Multiplicity="1" />
+          <End Type="WorkManagerDB.business_type" Role="business_type" Multiplicity="0..1" />
         </Association>
         <Association Name="projectsbusiness_detail">
           <End Type="WorkManagerDB.projects" Role="projects" Multiplicity="*" />
-          <End Type="WorkManagerDB.business_detail" Role="business_detail" Multiplicity="1" />
+          <End Type="WorkManagerDB.business_detail" Role="business_detail" Multiplicity="0..1" />
         </Association>
       </Schema>
     </edmx:ConceptualModels>
@@ -930,13 +930,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="authoritiesusers" TypeName="WorkManagerDB.authoritiesusers" StoreEntitySet="authorities">
-      <EndProperty Name="users">
-        <ScalarProperty Name="ID" ColumnName="users_ID" />
-      </EndProperty>
+    <AssociationSetMapping Name="authoritiesusers" TypeName="WorkManagerDB.authoritiesusers" StoreEntitySet="users">
       <EndProperty Name="authorities">
+        <ScalarProperty Name="ID" ColumnName="authorities_ID" />
+      </EndProperty>
+      <EndProperty Name="users">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="authorities_ID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="userssections" TypeName="WorkManagerDB.userssections" StoreEntitySet="users">
       <EndProperty Name="sections">
@@ -945,6 +946,7 @@
       <EndProperty Name="users">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="sections_ID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="userswork_reports" TypeName="WorkManagerDB.userswork_reports" StoreEntitySet="work_reports">
       <EndProperty Name="users">
@@ -953,14 +955,16 @@
       <EndProperty Name="work_reports">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="users_ID" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="work_reportswork_detail" TypeName="WorkManagerDB.work_reportswork_detail" StoreEntitySet="work_reports">
-      <EndProperty Name="work_detail">
-        <ScalarProperty Name="ID" ColumnName="work_detail_ID" />
-      </EndProperty>
+    <AssociationSetMapping Name="work_reportswork_detail" TypeName="WorkManagerDB.work_reportswork_detail" StoreEntitySet="work_detail">
       <EndProperty Name="work_reports">
+        <ScalarProperty Name="ID" ColumnName="work_reports_ID" />
+      </EndProperty>
+      <EndProperty Name="work_detail">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="work_reports_ID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="work_detailprojects" TypeName="WorkManagerDB.work_detailprojects" StoreEntitySet="work_detail">
       <EndProperty Name="projects">
@@ -969,14 +973,16 @@
       <EndProperty Name="work_detail">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="projects_ID" IsNull="false" />
     </AssociationSetMapping>
-    <AssociationSetMapping Name="work_detailtasks" TypeName="WorkManagerDB.work_detailtasks" StoreEntitySet="work_detail">
-      <EndProperty Name="tasks">
-        <ScalarProperty Name="ID" ColumnName="tasks_ID" />
-      </EndProperty>
+    <AssociationSetMapping Name="work_detailtasks" TypeName="WorkManagerDB.work_detailtasks" StoreEntitySet="tasks">
       <EndProperty Name="work_detail">
+        <ScalarProperty Name="ID" ColumnName="work_detail_ID" />
+      </EndProperty>
+      <EndProperty Name="tasks">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="work_detail_ID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="projectscustomers" TypeName="WorkManagerDB.projectscustomers" StoreEntitySet="customers">
       <EndProperty Name="projects">
@@ -985,6 +991,7 @@
       <EndProperty Name="customers">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="projects_ID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="business_segmentsbusiness_type" TypeName="WorkManagerDB.business_segmentsbusiness_type" StoreEntitySet="business_type">
       <EndProperty Name="business_segments">
@@ -993,6 +1000,7 @@
       <EndProperty Name="business_type">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="business_segments_ID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="business_typebusiness_detail" TypeName="WorkManagerDB.business_typebusiness_detail" StoreEntitySet="business_detail">
       <EndProperty Name="business_type">
@@ -1001,6 +1009,7 @@
       <EndProperty Name="business_detail">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="business_type_ID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="projectsbusiness_type" TypeName="WorkManagerDB.projectsbusiness_type" StoreEntitySet="projects">
       <EndProperty Name="business_type">
@@ -1009,6 +1018,7 @@
       <EndProperty Name="projects">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="business_type_ID" IsNull="false" />
     </AssociationSetMapping>
     <AssociationSetMapping Name="projectsbusiness_detail" TypeName="WorkManagerDB.projectsbusiness_detail" StoreEntitySet="projects">
       <EndProperty Name="business_detail">
@@ -1017,6 +1027,7 @@
       <EndProperty Name="projects">
         <ScalarProperty Name="ID" ColumnName="ID" />
       </EndProperty>
+      <Condition ColumnName="business_detail_ID" IsNull="false" />
     </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>

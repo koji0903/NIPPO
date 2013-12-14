@@ -19,17 +19,17 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM リレーションシップのメタデータ
 
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "authoritiesusers", "authorities", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.authorities), "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.users))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "userssections", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.users), "sections", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.sections))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "userswork_reports", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.users), "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_reports))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_reportswork_detail", "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.work_reports), "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.work_detail))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_detailprojects", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_detail), "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.projects))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_detailtasks", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_detail), "tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.tasks))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectscustomers", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.projects), "customers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.customers))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "business_segmentsbusiness_type", "business_segments", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.business_segments), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_type))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "business_typebusiness_detail", "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.business_type), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_detail))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectsbusiness_type", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.projects), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.business_type))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectsbusiness_detail", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.projects), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.business_detail))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "authoritiesusers", "authorities", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.authorities), "users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.users))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "userssections", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.users), "sections", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.sections))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "userswork_reports", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.users), "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_reports))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_reportswork_detail", "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_reports), "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_detail))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_detailprojects", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_detail), "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.projects))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_detailtasks", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_detail), "tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.tasks))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectscustomers", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.projects), "customers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.customers))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "business_segmentsbusiness_type", "business_segments", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_segments), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_type))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "business_typebusiness_detail", "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_type), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_detail))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectsbusiness_type", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.projects), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_type))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectsbusiness_detail", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.projects), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_detail))]
 
 #endregion
 
@@ -2860,8 +2860,27 @@ namespace NIPPO
     [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="sections")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public abstract partial class sections : EntityObject
+    public partial class sections : EntityObject
     {
+        #region ファクトリ メソッド
+    
+        /// <summary>
+        /// 新しい sections オブジェクトを作成します。
+        /// </summary>
+        /// <param name="id">ID プロパティの初期値。</param>
+        /// <param name="code">code プロパティの初期値。</param>
+        /// <param name="name">name プロパティの初期値。</param>
+        public static sections Createsections(global::System.Int32 id, global::System.Int16 code, global::System.String name)
+        {
+            sections sections = new sections();
+            sections.ID = id;
+            sections.code = code;
+            sections.name = name;
+            return sections;
+        }
+
+        #endregion
+
         #region プリミティブ プロパティ
     
         /// <summary>
@@ -3470,17 +3489,33 @@ namespace NIPPO
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "work_detailtasks", "work_detail")]
-        public EntityCollection<work_detail> work_detail
+        public work_detail work_detail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<work_detail>("WorkManagerDB.work_detailtasks", "work_detail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("WorkManagerDB.work_detailtasks", "work_detail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("WorkManagerDB.work_detailtasks", "work_detail").Value = value;
+            }
+        }
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<work_detail> work_detailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("WorkManagerDB.work_detailtasks", "work_detail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<work_detail>("WorkManagerDB.work_detailtasks", "work_detail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<work_detail>("WorkManagerDB.work_detailtasks", "work_detail", value);
                 }
             }
         }

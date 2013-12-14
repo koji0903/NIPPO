@@ -2,11 +2,9 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/14/2013 16:31:23
--- Generated from EDMX file: ${NIPPO}\NIPPO\NIPPO_DB.edmx
+-- Date Created: 12/14/2013 17:03:08
+-- Generated from EDMX file: C:\Users\koji\Documents\Visual Studio 2010\Projects\NIPPO\NIPPO\NIPPO_DB.edmx
 -- --------------------------------------------------
-
-CREATE DATABASE nippo_db;
 
 SET QUOTED_IDENTIFIER OFF;
 GO
@@ -112,6 +110,7 @@ CREATE TABLE [dbo].[users] (
     [deleted_at] datetime  NULL,
     [deleted_by] nvarchar(max)  NULL,
     [delete_flag] bit  NOT NULL,
+    [authorities_ID] int  NULL,
     [sections_ID] int  NULL
 );
 GO
@@ -122,8 +121,7 @@ CREATE TABLE [dbo].[authorities] (
     [master] bit  NOT NULL,
     [project_management] bit  NOT NULL,
     [list_viewer] nvarchar(max)  NOT NULL,
-    [input] nvarchar(max)  NOT NULL,
-    [users_ID] int  NOT NULL
+    [input] nvarchar(max)  NOT NULL
 );
 GO
 
@@ -134,8 +132,8 @@ CREATE TABLE [dbo].[sections] (
     [name] nvarchar(max)  NOT NULL,
     [alias] nvarchar(max)  NULL,
     [delete_flag] bit  NOT NULL,
-    [created_at] datetime  NOT NULL,
-    [created_by] nvarchar(max)  NOT NULL,
+    [created_at] datetime  NULL,
+    [created_by] nvarchar(max)  NULL,
     [updated_at] datetime  NULL,
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] datetime  NULL,
@@ -157,14 +155,13 @@ CREATE TABLE [dbo].[work_reports] (
     [overtime150] smallint  NULL,
     [holiday_work_times] smallint  NULL,
     [note] nvarchar(max)  NULL,
-    [created_at] datetime  NOT NULL,
-    [created_by] nvarchar(max)  NOT NULL,
+    [created_at] datetime  NULL,
+    [created_by] nvarchar(max)  NULL,
     [updated_at] datetime  NULL,
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] smallint  NULL,
     [deleted_by] nvarchar(max)  NULL,
-    [users_ID] int  NOT NULL,
-    [work_detail_ID] int  NOT NULL
+    [users_ID] int  NULL
 );
 GO
 
@@ -173,8 +170,8 @@ CREATE TABLE [dbo].[work_detail] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [times] datetimeoffset  NOT NULL,
     [note] nvarchar(max)  NULL,
-    [projects_ID] int  NOT NULL,
-    [tasks_ID] int  NOT NULL
+    [work_reports_ID] int  NULL,
+    [projects_ID] int  NULL
 );
 GO
 
@@ -189,8 +186,8 @@ CREATE TABLE [dbo].[projects] (
     [end_date] datetime  NULL,
     [project_code] smallint  NULL,
     [delete_flag] bit  NOT NULL,
-    [created_at] nvarchar(max)  NOT NULL,
-    [created_by] nvarchar(max)  NOT NULL,
+    [created_at] nvarchar(max)  NULL,
+    [created_by] nvarchar(max)  NULL,
     [updated_at] nvarchar(max)  NULL,
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] nvarchar(max)  NULL,
@@ -198,8 +195,8 @@ CREATE TABLE [dbo].[projects] (
     [share_flag] bit  NOT NULL,
     [tentative_flag] bit  NOT NULL,
     [tentative_created_by] nvarchar(max)  NULL,
-    [business_type_ID] int  NOT NULL,
-    [business_detail_ID] int  NOT NULL
+    [business_type_ID] int  NULL,
+    [business_detail_ID] int  NULL
 );
 GO
 
@@ -210,12 +207,13 @@ CREATE TABLE [dbo].[tasks] (
     [name] nvarchar(max)  NOT NULL,
     [alias] nvarchar(max)  NULL,
     [delete_flag] bit  NOT NULL,
-    [created_at] datetime  NOT NULL,
-    [created_by] nvarchar(max)  NOT NULL,
+    [created_at] datetime  NULL,
+    [created_by] nvarchar(max)  NULL,
     [updated_at] datetime  NULL,
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] datetime  NULL,
-    [deleted_by] nvarchar(max)  NULL
+    [deleted_by] nvarchar(max)  NULL,
+    [work_detail_ID] int  NULL
 );
 GO
 
@@ -226,13 +224,13 @@ CREATE TABLE [dbo].[customers] (
     [name] nvarchar(max)  NOT NULL,
     [alias] nvarchar(max)  NULL,
     [delete_flag] bit  NOT NULL,
-    [created_at] datetime  NOT NULL,
-    [created_by] nvarchar(max)  NOT NULL,
+    [created_at] datetime  NULL,
+    [created_by] nvarchar(max)  NULL,
     [updated_at] datetime  NULL,
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] datetime  NULL,
     [deleted_by] nvarchar(max)  NULL,
-    [projects_ID] int  NOT NULL
+    [projects_ID] int  NULL
 );
 GO
 
@@ -277,7 +275,7 @@ CREATE TABLE [dbo].[business_type] (
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] datetime  NULL,
     [deleted_by] nvarchar(max)  NULL,
-    [business_segments_ID] int  NOT NULL
+    [business_segments_ID] int  NULL
 );
 GO
 
@@ -295,7 +293,7 @@ CREATE TABLE [dbo].[business_detail] (
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] datetime  NULL,
     [deleted_by] nvarchar(max)  NULL,
-    [business_type_ID] int  NOT NULL
+    [business_type_ID] int  NULL
 );
 GO
 
@@ -379,18 +377,18 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [users_ID] in table 'authorities'
-ALTER TABLE [dbo].[authorities]
+-- Creating foreign key on [authorities_ID] in table 'users'
+ALTER TABLE [dbo].[users]
 ADD CONSTRAINT [FK_authoritiesusers]
-    FOREIGN KEY ([users_ID])
-    REFERENCES [dbo].[users]
+    FOREIGN KEY ([authorities_ID])
+    REFERENCES [dbo].[authorities]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_authoritiesusers'
 CREATE INDEX [IX_FK_authoritiesusers]
-ON [dbo].[authorities]
-    ([users_ID]);
+ON [dbo].[users]
+    ([authorities_ID]);
 GO
 
 -- Creating foreign key on [sections_ID] in table 'users'
@@ -421,18 +419,18 @@ ON [dbo].[work_reports]
     ([users_ID]);
 GO
 
--- Creating foreign key on [work_detail_ID] in table 'work_reports'
-ALTER TABLE [dbo].[work_reports]
+-- Creating foreign key on [work_reports_ID] in table 'work_detail'
+ALTER TABLE [dbo].[work_detail]
 ADD CONSTRAINT [FK_work_reportswork_detail]
-    FOREIGN KEY ([work_detail_ID])
-    REFERENCES [dbo].[work_detail]
+    FOREIGN KEY ([work_reports_ID])
+    REFERENCES [dbo].[work_reports]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_work_reportswork_detail'
 CREATE INDEX [IX_FK_work_reportswork_detail]
-ON [dbo].[work_reports]
-    ([work_detail_ID]);
+ON [dbo].[work_detail]
+    ([work_reports_ID]);
 GO
 
 -- Creating foreign key on [projects_ID] in table 'work_detail'
@@ -449,18 +447,18 @@ ON [dbo].[work_detail]
     ([projects_ID]);
 GO
 
--- Creating foreign key on [tasks_ID] in table 'work_detail'
-ALTER TABLE [dbo].[work_detail]
+-- Creating foreign key on [work_detail_ID] in table 'tasks'
+ALTER TABLE [dbo].[tasks]
 ADD CONSTRAINT [FK_work_detailtasks]
-    FOREIGN KEY ([tasks_ID])
-    REFERENCES [dbo].[tasks]
+    FOREIGN KEY ([work_detail_ID])
+    REFERENCES [dbo].[work_detail]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_work_detailtasks'
 CREATE INDEX [IX_FK_work_detailtasks]
-ON [dbo].[work_detail]
-    ([tasks_ID]);
+ON [dbo].[tasks]
+    ([work_detail_ID]);
 GO
 
 -- Creating foreign key on [projects_ID] in table 'customers'
