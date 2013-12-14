@@ -4,11 +4,399 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Namespace="WorkManagerDB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
-        <EntityContainer Name="WorkManagerDBTargetContainer" >
-        </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="WorkManagerDB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="WorkManagerDBStoreContainer">
+    <EntitySet Name="users" EntityType="WorkManagerDB.Store.users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="authorities" EntityType="WorkManagerDB.Store.authorities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sections" EntityType="WorkManagerDB.Store.sections" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="work_reports" EntityType="WorkManagerDB.Store.work_reports" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="work_detail" EntityType="WorkManagerDB.Store.work_detail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="projects" EntityType="WorkManagerDB.Store.projects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tasks" EntityType="WorkManagerDB.Store.tasks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="customers" EntityType="WorkManagerDB.Store.customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="holidays" EntityType="WorkManagerDB.Store.holidays" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="businnes_segments" EntityType="WorkManagerDB.Store.businnes_segments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="business_type" EntityType="WorkManagerDB.Store.business_type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="business_detail" EntityType="WorkManagerDB.Store.business_detail" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="authoritiesusers" Association="WorkManagerDB.Store.authoritiesusers">
+      <End Role="authorities" EntitySet="authorities" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="userssections" Association="WorkManagerDB.Store.userssections">
+      <End Role="users" EntitySet="users" />
+      <End Role="sections" EntitySet="sections" />
+    </AssociationSet>
+    <AssociationSet Name="userswork_reports" Association="WorkManagerDB.Store.userswork_reports">
+      <End Role="users" EntitySet="users" />
+      <End Role="work_reports" EntitySet="work_reports" />
+    </AssociationSet>
+    <AssociationSet Name="work_reportswork_detail" Association="WorkManagerDB.Store.work_reportswork_detail">
+      <End Role="work_reports" EntitySet="work_reports" />
+      <End Role="work_detail" EntitySet="work_detail" />
+    </AssociationSet>
+    <AssociationSet Name="work_detailprojects" Association="WorkManagerDB.Store.work_detailprojects">
+      <End Role="work_detail" EntitySet="work_detail" />
+      <End Role="projects" EntitySet="projects" />
+    </AssociationSet>
+    <AssociationSet Name="work_detailtasks" Association="WorkManagerDB.Store.work_detailtasks">
+      <End Role="work_detail" EntitySet="work_detail" />
+      <End Role="tasks" EntitySet="tasks" />
+    </AssociationSet>
+    <AssociationSet Name="projectscustomers" Association="WorkManagerDB.Store.projectscustomers">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="customers" EntitySet="customers" />
+    </AssociationSet>
+    <AssociationSet Name="business_segmentsbusiness_type" Association="WorkManagerDB.Store.business_segmentsbusiness_type">
+      <End Role="business_segments" EntitySet="businnes_segments" />
+      <End Role="business_type" EntitySet="business_type" />
+    </AssociationSet>
+    <AssociationSet Name="business_typebusiness_detail" Association="WorkManagerDB.Store.business_typebusiness_detail">
+      <End Role="business_type" EntitySet="business_type" />
+      <End Role="business_detail" EntitySet="business_detail" />
+    </AssociationSet>
+    <AssociationSet Name="projectsbusiness_type" Association="WorkManagerDB.Store.projectsbusiness_type">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="business_type" EntitySet="business_type" />
+    </AssociationSet>
+    <AssociationSet Name="projectsbusiness_detail" Association="WorkManagerDB.Store.projectsbusiness_detail">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="business_detail" EntitySet="business_detail" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="login" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="firstname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="sections_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="authorities">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="master" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="project_management" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="list_viewer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="input" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="users_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sections">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="work_reports">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="year" Type="smallint" Nullable="false" />
+    <Property Name="month" Type="smallint" Nullable="false" />
+    <Property Name="day" Type="smallint" Nullable="false" />
+    <Property Name="FY" Type="smallint" Nullable="false" />
+    <Property Name="start_time" Type="datetime" Nullable="true" />
+    <Property Name="end_time" Type="datetime" Nullable="true" />
+    <Property Name="work_times" Type="smallint" Nullable="true" />
+    <Property Name="overtime125" Type="smallint" Nullable="true" />
+    <Property Name="overtime150" Type="smallint" Nullable="true" />
+    <Property Name="holiday_work_times" Type="smallint" Nullable="true" />
+    <Property Name="note" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="smallint" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="users_ID" Type="int" Nullable="false" />
+    <Property Name="work_detail_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="work_detail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="times" Type="datetimeoffset" Nullable="false" />
+    <Property Name="note" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="projects_ID" Type="int" Nullable="false" />
+    <Property Name="tasks_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="projects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FY" Type="smallint" Nullable="false" />
+    <Property Name="num" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="start_date" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="end_date" Type="datetime" Nullable="true" />
+    <Property Name="project_code" Type="smallint" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="updated_at" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="share_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="tentative_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="tentative_created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="business_type_ID" Type="int" Nullable="false" />
+    <Property Name="business_detail_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tasks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="projects_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="holidays">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="year" Type="decimal" Nullable="false" />
+    <Property Name="month" Type="decimal" Nullable="false" />
+    <Property Name="day" Type="decimal" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="businnes_segments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FY" Type="smallint" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="business_type">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FY" Type="smallint" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="business_segments_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="business_detail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FY" Type="smallint" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="false" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="business_type_ID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="authoritiesusers">
+    <End Role="authorities" Type="WorkManagerDB.Store.authorities" Multiplicity="*" />
+    <End Role="users" Type="WorkManagerDB.Store.users" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="authorities">
+        <PropertyRef Name="users_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="userssections">
+    <End Role="users" Type="WorkManagerDB.Store.users" Multiplicity="*" />
+    <End Role="sections" Type="WorkManagerDB.Store.sections" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="sections">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="sections_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="userswork_reports">
+    <End Role="users" Type="WorkManagerDB.Store.users" Multiplicity="1" />
+    <End Role="work_reports" Type="WorkManagerDB.Store.work_reports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="work_reports">
+        <PropertyRef Name="users_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="work_reportswork_detail">
+    <End Role="work_reports" Type="WorkManagerDB.Store.work_reports" Multiplicity="*" />
+    <End Role="work_detail" Type="WorkManagerDB.Store.work_detail" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="work_detail">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="work_reports">
+        <PropertyRef Name="work_detail_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="work_detailprojects">
+    <End Role="work_detail" Type="WorkManagerDB.Store.work_detail" Multiplicity="*" />
+    <End Role="projects" Type="WorkManagerDB.Store.projects" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="work_detail">
+        <PropertyRef Name="projects_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="work_detailtasks">
+    <End Role="work_detail" Type="WorkManagerDB.Store.work_detail" Multiplicity="*" />
+    <End Role="tasks" Type="WorkManagerDB.Store.tasks" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="tasks">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="work_detail">
+        <PropertyRef Name="tasks_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projectscustomers">
+    <End Role="projects" Type="WorkManagerDB.Store.projects" Multiplicity="1" />
+    <End Role="customers" Type="WorkManagerDB.Store.customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="customers">
+        <PropertyRef Name="projects_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="business_segmentsbusiness_type">
+    <End Role="business_segments" Type="WorkManagerDB.Store.businnes_segments" Multiplicity="1" />
+    <End Role="business_type" Type="WorkManagerDB.Store.business_type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_segments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="business_type">
+        <PropertyRef Name="business_segments_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="business_typebusiness_detail">
+    <End Role="business_type" Type="WorkManagerDB.Store.business_type" Multiplicity="1" />
+    <End Role="business_detail" Type="WorkManagerDB.Store.business_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="business_detail">
+        <PropertyRef Name="business_type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projectsbusiness_type">
+    <End Role="projects" Type="WorkManagerDB.Store.projects" Multiplicity="*" />
+    <End Role="business_type" Type="WorkManagerDB.Store.business_type" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="business_type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="projects">
+        <PropertyRef Name="business_type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projectsbusiness_detail">
+    <End Role="projects" Type="WorkManagerDB.Store.projects" Multiplicity="*" />
+    <End Role="business_detail" Type="WorkManagerDB.Store.business_detail" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="business_detail">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="projects">
+        <PropertyRef Name="business_detail_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="WorkManagerDB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
@@ -24,32 +412,51 @@
             <End Role="users" EntitySet="users" />
             <End Role="sections" EntitySet="sections" />
           </AssociationSet>
-          <EntitySet Name="work_reports設定" EntityType="WorkManagerDB.work_reports" />
+          <EntitySet Name="work_reports" EntityType="WorkManagerDB.work_reports" />
           <AssociationSet Name="userswork_reports" Association="WorkManagerDB.userswork_reports">
             <End Role="users" EntitySet="users" />
-            <End Role="work_reports" EntitySet="work_reports設定" />
+            <End Role="work_reports" EntitySet="work_reports" />
           </AssociationSet>
-          <EntitySet Name="work_detail設定" EntityType="WorkManagerDB.work_detail" />
+          <EntitySet Name="work_detail" EntityType="WorkManagerDB.work_detail" />
           <AssociationSet Name="work_reportswork_detail" Association="WorkManagerDB.work_reportswork_detail">
-            <End Role="work_reports" EntitySet="work_reports設定" />
-            <End Role="work_detail" EntitySet="work_detail設定" />
+            <End Role="work_reports" EntitySet="work_reports" />
+            <End Role="work_detail" EntitySet="work_detail" />
           </AssociationSet>
-          <EntitySet Name="projects設定" EntityType="WorkManagerDB.projects" />
+          <EntitySet Name="projects" EntityType="WorkManagerDB.projects" />
           <AssociationSet Name="work_detailprojects" Association="WorkManagerDB.work_detailprojects">
-            <End Role="work_detail" EntitySet="work_detail設定" />
-            <End Role="projects" EntitySet="projects設定" />
+            <End Role="work_detail" EntitySet="work_detail" />
+            <End Role="projects" EntitySet="projects" />
           </AssociationSet>
-          <EntitySet Name="tasks設定" EntityType="WorkManagerDB.tasks" />
+          <EntitySet Name="tasks" EntityType="WorkManagerDB.tasks" />
           <AssociationSet Name="work_detailtasks" Association="WorkManagerDB.work_detailtasks">
-            <End Role="work_detail" EntitySet="work_detail設定" />
-            <End Role="tasks" EntitySet="tasks設定" />
+            <End Role="work_detail" EntitySet="work_detail" />
+            <End Role="tasks" EntitySet="tasks" />
           </AssociationSet>
-          <EntitySet Name="customers設定" EntityType="WorkManagerDB.customers" />
+          <EntitySet Name="customers" EntityType="WorkManagerDB.customers" />
           <AssociationSet Name="projectscustomers" Association="WorkManagerDB.projectscustomers">
-            <End Role="projects" EntitySet="projects設定" />
-            <End Role="customers" EntitySet="customers設定" />
+            <End Role="projects" EntitySet="projects" />
+            <End Role="customers" EntitySet="customers" />
           </AssociationSet>
-          <EntitySet Name="holidays設定" EntityType="WorkManagerDB.holidays" />
+          <EntitySet Name="holidays" EntityType="WorkManagerDB.holidays" />
+          <EntitySet Name="businnes_segments" EntityType="WorkManagerDB.business_segments" />
+          <EntitySet Name="business_type" EntityType="WorkManagerDB.business_type" />
+          <EntitySet Name="business_detail" EntityType="WorkManagerDB.business_detail" />
+          <AssociationSet Name="business_segmentsbusiness_type" Association="WorkManagerDB.business_segmentsbusiness_type">
+            <End Role="business_segments" EntitySet="businnes_segments" />
+            <End Role="business_type" EntitySet="business_type" />
+          </AssociationSet>
+          <AssociationSet Name="business_typebusiness_detail" Association="WorkManagerDB.business_typebusiness_detail">
+            <End Role="business_type" EntitySet="business_type" />
+            <End Role="business_detail" EntitySet="business_detail" />
+          </AssociationSet>
+          <AssociationSet Name="projectsbusiness_type" Association="WorkManagerDB.projectsbusiness_type">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="business_type" EntitySet="business_type" />
+          </AssociationSet>
+          <AssociationSet Name="projectsbusiness_detail" Association="WorkManagerDB.projectsbusiness_detail">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="business_detail" EntitySet="business_detail" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="users">
           <Key>
@@ -60,24 +467,28 @@
           <Property Type="String" Name="password" Nullable="false" />
           <Property Type="String" Name="lastname" Nullable="false" />
           <Property Type="String" Name="firstname" Nullable="false" />
-          <Property Type="String" Name="created_at" Nullable="false" />
-          <Property Type="String" Name="created_by" Nullable="false" />
-          <Property Type="String" Name="updated_at" Nullable="false" />
-          <Property Type="String" Name="updated_by" Nullable="false" />
-          <Property Type="String" Name="deleted_at" Nullable="false" />
-          <Property Type="String" Name="deleted_by" Nullable="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
           <NavigationProperty Name="authorities" Relationship="WorkManagerDB.authoritiesusers" FromRole="users" ToRole="authorities" />
-          <Property Type="String" Name="delete_flag" Nullable="false" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
           <NavigationProperty Name="sections" Relationship="WorkManagerDB.userssections" FromRole="users" ToRole="sections" />
           <NavigationProperty Name="work_reports" Relationship="WorkManagerDB.userswork_reports" FromRole="users" ToRole="work_reports" />
         </EntityType>
         <EntityType Name="authorities">
+          <Documentation>
+            <Summary>権限</Summary>
+            <LongDescription>ユーザの権限情報を保存する</LongDescription>
+          </Documentation>
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="master" Nullable="false" />
-          <Property Type="String" Name="project_management" Nullable="false" />
+          <Property Type="Boolean" Name="master" Nullable="false" DefaultValue="false" ConcurrencyMode="None" />
+          <Property Type="Boolean" Name="project_management" Nullable="false" DefaultValue="false" />
           <Property Type="String" Name="list_viewer" Nullable="false" />
           <Property Type="String" Name="input" Nullable="false" />
           <NavigationProperty Name="users" Relationship="WorkManagerDB.authoritiesusers" FromRole="authorities" ToRole="users" />
@@ -86,21 +497,21 @@
           <End Type="WorkManagerDB.authorities" Role="authorities" Multiplicity="1" />
           <End Type="WorkManagerDB.users" Role="users" Multiplicity="1" />
         </Association>
-        <EntityType Name="sections">
+        <EntityType Name="sections" Abstract="true">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="code" Nullable="false" />
+          <Property Type="Int16" Name="code" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" />
-          <Property Type="String" Name="alias" Nullable="false" />
-          <Property Type="String" Name="delete_flag" Nullable="false" />
-          <Property Type="String" Name="created_at" Nullable="false" />
-          <Property Type="String" Name="created_by" Nullable="false" />
-          <Property Type="String" Name="updated_at" Nullable="false" />
-          <Property Type="String" Name="updated_by" Nullable="false" />
-          <Property Type="String" Name="deleted_at" Nullable="false" />
-          <Property Type="String" Name="deleted_by" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
           <NavigationProperty Name="users" Relationship="WorkManagerDB.userssections" FromRole="sections" ToRole="users" />
         </EntityType>
         <Association Name="userssections">
@@ -112,23 +523,23 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="year" Nullable="false" />
-          <Property Type="String" Name="month" Nullable="false" />
-          <Property Type="String" Name="day" Nullable="false" />
-          <Property Type="String" Name="FY" Nullable="false" />
-          <Property Type="String" Name="start_time" Nullable="false" />
-          <Property Type="String" Name="end_time" Nullable="false" />
-          <Property Type="String" Name="work_times" Nullable="false" />
-          <Property Type="String" Name="overtime125" Nullable="false" />
-          <Property Type="String" Name="overtime150" Nullable="false" />
-          <Property Type="String" Name="holiday_work_times" Nullable="false" />
-          <Property Type="String" Name="note" Nullable="false" />
-          <Property Type="String" Name="created_at" Nullable="false" />
-          <Property Type="String" Name="created_by" Nullable="false" />
-          <Property Type="String" Name="updated_at" Nullable="false" />
-          <Property Type="String" Name="updated_by" Nullable="false" />
-          <Property Type="String" Name="deleted_at" Nullable="false" />
-          <Property Type="String" Name="deleted_by" Nullable="false" />
+          <Property Type="Int16" Name="year" Nullable="false" />
+          <Property Type="Int16" Name="month" Nullable="false" />
+          <Property Type="Int16" Name="day" Nullable="false" />
+          <Property Type="Int16" Name="FY" Nullable="false" />
+          <Property Type="DateTime" Name="start_time" Nullable="true" />
+          <Property Type="DateTime" Name="end_time" Nullable="true" />
+          <Property Type="Int16" Name="work_times" Nullable="true" />
+          <Property Type="Int16" Name="overtime125" Nullable="true" />
+          <Property Type="Int16" Name="overtime150" Nullable="true" />
+          <Property Type="Int16" Name="holiday_work_times" Nullable="true" />
+          <Property Type="String" Name="note" Nullable="true" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="Int16" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
           <NavigationProperty Name="users" Relationship="WorkManagerDB.userswork_reports" FromRole="work_reports" ToRole="users" />
           <NavigationProperty Name="work_detail" Relationship="WorkManagerDB.work_reportswork_detail" FromRole="work_reports" ToRole="work_detail" />
         </EntityType>
@@ -141,8 +552,8 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="times" Nullable="false" />
-          <Property Type="String" Name="note" Nullable="false" />
+          <Property Type="DateTimeOffset" Name="times" Nullable="false" />
+          <Property Type="String" Name="note" Nullable="true" />
           <NavigationProperty Name="work_reports" Relationship="WorkManagerDB.work_reportswork_detail" FromRole="work_detail" ToRole="work_reports" />
           <NavigationProperty Name="projects" Relationship="WorkManagerDB.work_detailprojects" FromRole="work_detail" ToRole="projects" />
           <NavigationProperty Name="tasks" Relationship="WorkManagerDB.work_detailtasks" FromRole="work_detail" ToRole="tasks" />
@@ -156,25 +567,27 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="FY" Nullable="false" />
-          <Property Type="String" Name="num" Nullable="false" />
+          <Property Type="Int16" Name="FY" Nullable="false" />
+          <Property Type="Int16" Name="num" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" />
-          <Property Type="String" Name="alias" Nullable="false" />
-          <Property Type="String" Name="start_date" Nullable="false" />
-          <Property Type="String" Name="end_date" Nullable="false" />
-          <Property Type="String" Name="project_code" Nullable="false" />
-          <Property Type="String" Name="delete_flag" Nullable="false" />
-          <Property Type="String" Name="created_at" Nullable="false" />
-          <Property Type="String" Name="created_by" Nullable="false" />
-          <Property Type="String" Name="updated_at" Nullable="false" />
-          <Property Type="String" Name="updated_by" Nullable="false" />
-          <Property Type="String" Name="deleted_at" Nullable="false" />
-          <Property Type="String" Name="deleted_by" Nullable="false" />
-          <Property Type="String" Name="share_flag" Nullable="false" />
-          <Property Type="String" Name="tentative_flag" Nullable="false" />
-          <Property Type="String" Name="tentative_created_by" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="String" Name="start_date" Nullable="true" />
+          <Property Type="DateTime" Name="end_date" Nullable="true" />
+          <Property Type="Int16" Name="project_code" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="String" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="String" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="String" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <Property Type="Boolean" Name="share_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="Boolean" Name="tentative_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="String" Name="tentative_created_by" Nullable="true" />
           <NavigationProperty Name="work_detail" Relationship="WorkManagerDB.work_detailprojects" FromRole="projects" ToRole="work_detail" />
           <NavigationProperty Name="customers" Relationship="WorkManagerDB.projectscustomers" FromRole="projects" ToRole="customers" />
+          <NavigationProperty Name="business_type" Relationship="WorkManagerDB.projectsbusiness_type" FromRole="projects" ToRole="business_type" />
+          <NavigationProperty Name="business_detail" Relationship="WorkManagerDB.projectsbusiness_detail" FromRole="projects" ToRole="business_detail" />
         </EntityType>
         <Association Name="work_detailprojects">
           <End Type="WorkManagerDB.work_detail" Role="work_detail" Multiplicity="*" />
@@ -185,16 +598,16 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="code" Nullable="false" />
+          <Property Type="Int16" Name="code" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" />
-          <Property Type="String" Name="alias" Nullable="false" />
-          <Property Type="String" Name="delete_flag" Nullable="false" />
-          <Property Type="String" Name="created_at" Nullable="false" />
-          <Property Type="String" Name="created_by" Nullable="false" />
-          <Property Type="String" Name="updated_at" Nullable="false" />
-          <Property Type="String" Name="updated_by" Nullable="false" />
-          <Property Type="String" Name="deleted_at" Nullable="false" />
-          <Property Type="String" Name="deleted_by" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
           <NavigationProperty Name="work_detail" Relationship="WorkManagerDB.work_detailtasks" FromRole="tasks" ToRole="work_detail" />
         </EntityType>
         <Association Name="work_detailtasks">
@@ -206,16 +619,16 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="code" Nullable="false" />
+          <Property Type="Int16" Name="code" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" />
-          <Property Type="String" Name="alias" Nullable="false" />
-          <Property Type="String" Name="delete_flag" Nullable="false" />
-          <Property Type="String" Name="created_at" Nullable="false" />
-          <Property Type="String" Name="created_by" Nullable="false" />
-          <Property Type="String" Name="updated_at" Nullable="false" />
-          <Property Type="String" Name="updated_by" Nullable="false" />
-          <Property Type="String" Name="deleted_at" Nullable="false" />
-          <Property Type="String" Name="deleted_by" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
           <NavigationProperty Name="projects" Relationship="WorkManagerDB.projectscustomers" FromRole="customers" ToRole="projects" />
         </EntityType>
         <Association Name="projectscustomers">
@@ -223,26 +636,390 @@
           <End Type="WorkManagerDB.customers" Role="customers" Multiplicity="*" />
         </Association>
         <EntityType Name="holidays">
+          <Documentation>
+            <Summary>休日</Summary>
+            <LongDescription>休日情報を保存する。休日指定はマスタ管理者が行う</LongDescription>
+          </Documentation>
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="year" Nullable="false" />
-          <Property Type="String" Name="month" Nullable="false" />
-          <Property Type="String" Name="day" Nullable="false" />
+          <Property Type="Decimal" Name="year" Nullable="false" />
+          <Property Type="Decimal" Name="month" Nullable="false" />
+          <Property Type="Decimal" Name="day" Nullable="false" />
           <Property Type="String" Name="name" Nullable="false" />
         </EntityType>
+        <EntityType Name="business_segments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="FY" Nullable="false" />
+          <Property Type="Int16" Name="code" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="false" />
+          <Property Type="String" Name="created_by" Nullable="false" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="business_type" Relationship="WorkManagerDB.business_segmentsbusiness_type" FromRole="business_segments" ToRole="business_type" />
+        </EntityType>
+        <EntityType Name="business_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="FY" Nullable="false" />
+          <Property Type="Int16" Name="code" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="false" />
+          <Property Type="String" Name="created_by" Nullable="false" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="business_segments" Relationship="WorkManagerDB.business_segmentsbusiness_type" FromRole="business_type" ToRole="business_segments" />
+          <NavigationProperty Name="business_detail" Relationship="WorkManagerDB.business_typebusiness_detail" FromRole="business_type" ToRole="business_detail" />
+          <NavigationProperty Name="projects" Relationship="WorkManagerDB.projectsbusiness_type" FromRole="business_type" ToRole="projects" />
+        </EntityType>
+        <EntityType Name="business_detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="FY" Nullable="false" />
+          <Property Type="Int16" Name="code" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="false" />
+          <Property Type="String" Name="created_by" Nullable="false" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="business_type" Relationship="WorkManagerDB.business_typebusiness_detail" FromRole="business_detail" ToRole="business_type" />
+          <NavigationProperty Name="projects" Relationship="WorkManagerDB.projectsbusiness_detail" FromRole="business_detail" ToRole="projects" />
+        </EntityType>
+        <Association Name="business_segmentsbusiness_type">
+          <End Type="WorkManagerDB.business_segments" Role="business_segments" Multiplicity="1" />
+          <End Type="WorkManagerDB.business_type" Role="business_type" Multiplicity="*" />
+        </Association>
+        <Association Name="business_typebusiness_detail">
+          <End Type="WorkManagerDB.business_type" Role="business_type" Multiplicity="1" />
+          <End Type="WorkManagerDB.business_detail" Role="business_detail" Multiplicity="*" />
+        </Association>
+        <Association Name="projectsbusiness_type">
+          <End Type="WorkManagerDB.projects" Role="projects" Multiplicity="*" />
+          <End Type="WorkManagerDB.business_type" Role="business_type" Multiplicity="1" />
+        </Association>
+        <Association Name="projectsbusiness_detail">
+          <End Type="WorkManagerDB.projects" Role="projects" Multiplicity="*" />
+          <End Type="WorkManagerDB.business_detail" Role="business_detail" Multiplicity="1" />
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
-        <Alias Key="Model" Value="WorkManagerDB" />
-        <Alias Key="Target" Value="WorkManagerDB.Store" />
-        <EntityContainerMapping CdmEntityContainer="WorkManagerDBContainer" StorageEntityContainer="WorkManagerDBTargetContainer">
-        </EntityContainerMapping>
-      </Mapping>
-    </edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="WorkManagerDBStoreContainer" CdmEntityContainer="WorkManagerDBContainer">
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.users)">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="authorities">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.authorities)">
+        <MappingFragment StoreEntitySet="authorities">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="master" ColumnName="master" />
+          <ScalarProperty Name="project_management" ColumnName="project_management" />
+          <ScalarProperty Name="list_viewer" ColumnName="list_viewer" />
+          <ScalarProperty Name="input" ColumnName="input" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sections">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.sections)">
+        <MappingFragment StoreEntitySet="sections">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="work_reports">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.work_reports)">
+        <MappingFragment StoreEntitySet="work_reports">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="month" ColumnName="month" />
+          <ScalarProperty Name="day" ColumnName="day" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="start_time" ColumnName="start_time" />
+          <ScalarProperty Name="end_time" ColumnName="end_time" />
+          <ScalarProperty Name="work_times" ColumnName="work_times" />
+          <ScalarProperty Name="overtime125" ColumnName="overtime125" />
+          <ScalarProperty Name="overtime150" ColumnName="overtime150" />
+          <ScalarProperty Name="holiday_work_times" ColumnName="holiday_work_times" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="work_detail">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.work_detail)">
+        <MappingFragment StoreEntitySet="work_detail">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="times" ColumnName="times" />
+          <ScalarProperty Name="note" ColumnName="note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="projects">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.projects)">
+        <MappingFragment StoreEntitySet="projects">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="num" ColumnName="num" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="project_code" ColumnName="project_code" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+          <ScalarProperty Name="share_flag" ColumnName="share_flag" />
+          <ScalarProperty Name="tentative_flag" ColumnName="tentative_flag" />
+          <ScalarProperty Name="tentative_created_by" ColumnName="tentative_created_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tasks">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.tasks)">
+        <MappingFragment StoreEntitySet="tasks">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customers">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.customers)">
+        <MappingFragment StoreEntitySet="customers">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="holidays">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.holidays)">
+        <MappingFragment StoreEntitySet="holidays">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="month" ColumnName="month" />
+          <ScalarProperty Name="day" ColumnName="day" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="businnes_segments">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.business_segments)">
+        <MappingFragment StoreEntitySet="businnes_segments">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="business_type">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.business_type)">
+        <MappingFragment StoreEntitySet="business_type">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="business_detail">
+      <EntityTypeMapping TypeName="IsTypeOf(WorkManagerDB.business_detail)">
+        <MappingFragment StoreEntitySet="business_detail">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="authoritiesusers" TypeName="WorkManagerDB.authoritiesusers" StoreEntitySet="authorities">
+      <EndProperty Name="users">
+        <ScalarProperty Name="ID" ColumnName="users_ID" />
+      </EndProperty>
+      <EndProperty Name="authorities">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="userssections" TypeName="WorkManagerDB.userssections" StoreEntitySet="users">
+      <EndProperty Name="sections">
+        <ScalarProperty Name="ID" ColumnName="sections_ID" />
+      </EndProperty>
+      <EndProperty Name="users">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="userswork_reports" TypeName="WorkManagerDB.userswork_reports" StoreEntitySet="work_reports">
+      <EndProperty Name="users">
+        <ScalarProperty Name="ID" ColumnName="users_ID" />
+      </EndProperty>
+      <EndProperty Name="work_reports">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="work_reportswork_detail" TypeName="WorkManagerDB.work_reportswork_detail" StoreEntitySet="work_reports">
+      <EndProperty Name="work_detail">
+        <ScalarProperty Name="ID" ColumnName="work_detail_ID" />
+      </EndProperty>
+      <EndProperty Name="work_reports">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="work_detailprojects" TypeName="WorkManagerDB.work_detailprojects" StoreEntitySet="work_detail">
+      <EndProperty Name="projects">
+        <ScalarProperty Name="ID" ColumnName="projects_ID" />
+      </EndProperty>
+      <EndProperty Name="work_detail">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="work_detailtasks" TypeName="WorkManagerDB.work_detailtasks" StoreEntitySet="work_detail">
+      <EndProperty Name="tasks">
+        <ScalarProperty Name="ID" ColumnName="tasks_ID" />
+      </EndProperty>
+      <EndProperty Name="work_detail">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="projectscustomers" TypeName="WorkManagerDB.projectscustomers" StoreEntitySet="customers">
+      <EndProperty Name="projects">
+        <ScalarProperty Name="ID" ColumnName="projects_ID" />
+      </EndProperty>
+      <EndProperty Name="customers">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="business_segmentsbusiness_type" TypeName="WorkManagerDB.business_segmentsbusiness_type" StoreEntitySet="business_type">
+      <EndProperty Name="business_segments">
+        <ScalarProperty Name="ID" ColumnName="business_segments_ID" />
+      </EndProperty>
+      <EndProperty Name="business_type">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="business_typebusiness_detail" TypeName="WorkManagerDB.business_typebusiness_detail" StoreEntitySet="business_detail">
+      <EndProperty Name="business_type">
+        <ScalarProperty Name="ID" ColumnName="business_type_ID" />
+      </EndProperty>
+      <EndProperty Name="business_detail">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="projectsbusiness_type" TypeName="WorkManagerDB.projectsbusiness_type" StoreEntitySet="projects">
+      <EndProperty Name="business_type">
+        <ScalarProperty Name="ID" ColumnName="business_type_ID" />
+      </EndProperty>
+      <EndProperty Name="projects">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="projectsbusiness_detail" TypeName="WorkManagerDB.projectsbusiness_detail" StoreEntitySet="projects">
+      <EndProperty Name="business_detail">
+        <ScalarProperty Name="ID" ColumnName="business_detail_ID" />
+      </EndProperty>
+      <EndProperty Name="projects">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
@@ -260,44 +1037,63 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram Name="WorkManagerDB" ZoomLevel="114" >
-        <EntityTypeShape EntityType="WorkManagerDB.users" Width="1.5" PointX="6" PointY="3.375" Height="3.8585416666666656" />
-        <EntityTypeShape EntityType="WorkManagerDB.authorities" Width="1.5" PointX="6" PointY="0.5" Height="2.1502083333333331" />
+        <EntityTypeShape EntityType="WorkManagerDB.users" Width="1.5" PointX="6" PointY="3.375" Height="4.285625" />
+        <EntityTypeShape EntityType="WorkManagerDB.authorities" Width="1.5" PointX="3.875" PointY="3.375" Height="2.36375" />
         <AssociationConnector Association="WorkManagerDB.authoritiesusers">
-          <ConnectorPoint PointX="6.75" PointY="2.86375" />
-          <ConnectorPoint PointX="6.75" PointY="3.375" />
+          <ConnectorPoint PointX="5.375" PointY="4.556875" />
+          <ConnectorPoint PointX="6" PointY="4.556875" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="WorkManagerDB.sections" Width="1.5" PointX="6" PointY="8" Height="3.6449999999999996" />
+        <EntityTypeShape EntityType="WorkManagerDB.sections" Width="1.5" PointX="6" PointY="8.25" Height="3.6449999999999996" />
         <AssociationConnector Association="WorkManagerDB.userssections">
           <ConnectorPoint PointX="6.75" PointY="7.660625" />
-          <ConnectorPoint PointX="6.75" PointY="8" />
+          <ConnectorPoint PointX="6.75" PointY="8.25" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="WorkManagerDB.work_reports" Width="1.5" PointX="8.5" PointY="3.375" Height="4.92625" />
+        <EntityTypeShape EntityType="WorkManagerDB.work_reports" Width="1.5" PointX="8" PointY="3.375" Height="5.3533333333333335" />
         <AssociationConnector Association="WorkManagerDB.userswork_reports">
           <ConnectorPoint PointX="7.5" PointY="5.5178125" />
-          <ConnectorPoint PointX="8.5" PointY="5.5178125" />
+          <ConnectorPoint PointX="8" PointY="5.5178125" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="WorkManagerDB.work_detail" Width="1.5" PointX="10.75" PointY="4.25" Height="1.9366666666666665" />
+        <EntityTypeShape EntityType="WorkManagerDB.work_detail" Width="1.5" PointX="10" PointY="3.375" Height="2.3637499999999996" />
         <AssociationConnector Association="WorkManagerDB.work_reportswork_detail">
-          <ConnectorPoint PointX="10" PointY="5.2183333333333337" />
-          <ConnectorPoint PointX="10.75" PointY="5.2183333333333337" />
+          <ConnectorPoint PointX="9.5" PointY="4.556875" />
+          <ConnectorPoint PointX="10" PointY="4.556875" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="WorkManagerDB.projects" Width="1.5" PointX="12.875" PointY="1.5" Height="5.1397916666666656" />
+        <EntityTypeShape EntityType="WorkManagerDB.projects" Width="1.5" PointX="12.125" PointY="3.375" Height="5.7804166666666656" />
         <AssociationConnector Association="WorkManagerDB.work_detailprojects">
-          <ConnectorPoint PointX="12.25" PointY="5.3251041666666659" />
-          <ConnectorPoint PointX="12.875" PointY="5.3251041666666659" />
+          <ConnectorPoint PointX="11.5" PointY="4.556875" />
+          <ConnectorPoint PointX="12.125" PointY="4.556875" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="WorkManagerDB.tasks" Width="1.5" PointX="12.875" PointY="7.5" Height="3.6449999999999996" />
+        <EntityTypeShape EntityType="WorkManagerDB.tasks" Width="1.5" PointX="10" PointY="6.25" Height="3.6449999999999996" />
         <AssociationConnector Association="WorkManagerDB.work_detailtasks">
-          <ConnectorPoint PointX="11.5" PointY="6.61375" />
-          <ConnectorPoint PointX="11.5" PointY="9.3225" />
-          <ConnectorPoint PointX="12.875" PointY="9.3225" />
+          <ConnectorPoint PointX="10.75" PointY="5.73875" />
+          <ConnectorPoint PointX="10.75" PointY="6.25" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="WorkManagerDB.customers" Width="1.5" PointX="15.25" PointY="5.625" Height="3.4314583333333335" />
+        <EntityTypeShape EntityType="WorkManagerDB.customers" Width="1.5" PointX="14.625" PointY="5.5" Height="3.6449999999999996" />
         <AssociationConnector Association="WorkManagerDB.projectscustomers">
-          <ConnectorPoint PointX="14.375" PointY="6.2391666666666659" />
-          <ConnectorPoint PointX="15.25" PointY="6.2391666666666659" />
+          <ConnectorPoint PointX="13.625" PointY="7.3225" />
+          <ConnectorPoint PointX="14.625" PointY="7.3225" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="WorkManagerDB.holidays" Width="1.5" PointX="3.5" PointY="9.375" Height="2.1502083333333335" />
+        <EntityTypeShape EntityType="WorkManagerDB.holidays" Width="1.5" PointX="4.125" PointY="8" Height="2.1502083333333335" />
+        <EntityTypeShape EntityType="WorkManagerDB.business_segments" Width="1.5" PointX="14.75" PointY="0.75" Height="3.8585416666666656" />
+        <EntityTypeShape EntityType="WorkManagerDB.business_type" Width="1.5" PointX="16.625" PointY="0.75" Height="4.0720833333333326" />
+        <EntityTypeShape EntityType="WorkManagerDB.business_detail" Width="1.5" PointX="18.5" PointY="0.75" Height="3.8585416666666656" />
+        <AssociationConnector Association="WorkManagerDB.business_segmentsbusiness_type">
+          <ConnectorPoint PointX="16.25" PointY="2.6792708333333328" />
+          <ConnectorPoint PointX="16.625" PointY="2.6792708333333328" />
+        </AssociationConnector>
+        <AssociationConnector Association="WorkManagerDB.business_typebusiness_detail">
+          <ConnectorPoint PointX="18.125" PointY="2.6792708333333328" />
+          <ConnectorPoint PointX="18.5" PointY="2.6792708333333328" />
+        </AssociationConnector>
+        <AssociationConnector Association="WorkManagerDB.projectsbusiness_type">
+          <ConnectorPoint PointX="13.625" PointY="4.8533333333333326" />
+          <ConnectorPoint PointX="16.625" PointY="4.8533333333333326" />
+        </AssociationConnector>
+        <AssociationConnector Association="WorkManagerDB.projectsbusiness_detail">
+          <ConnectorPoint PointX="13.625" PointY="5.2678125" />
+          <ConnectorPoint PointX="19.25" PointY="5.2678125" />
+          <ConnectorPoint PointX="19.25" PointY="4.8220833333333326" />
+        </AssociationConnector>
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

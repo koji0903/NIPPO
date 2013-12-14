@@ -19,17 +19,21 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM リレーションシップのメタデータ
 
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "authoritiesusers", "authorities", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WorkManager.authorities), "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WorkManager.users))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "userssections", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WorkManager.users), "sections", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WorkManager.sections))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "userswork_reports", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WorkManager.users), "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WorkManager.work_reports))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_reportswork_detail", "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WorkManager.work_reports), "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WorkManager.work_detail))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_detailprojects", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WorkManager.work_detail), "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WorkManager.projects))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_detailtasks", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WorkManager.work_detail), "tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WorkManager.tasks))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectscustomers", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(WorkManager.projects), "customers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(WorkManager.customers))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "authoritiesusers", "authorities", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.authorities), "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.users))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "userssections", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.users), "sections", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.sections))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "userswork_reports", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.users), "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_reports))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_reportswork_detail", "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.work_reports), "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.work_detail))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_detailprojects", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_detail), "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.projects))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_detailtasks", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_detail), "tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.tasks))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectscustomers", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.projects), "customers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.customers))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "business_segmentsbusiness_type", "business_segments", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.business_segments), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_type))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "business_typebusiness_detail", "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.business_type), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_detail))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectsbusiness_type", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.projects), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.business_type))]
+[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectsbusiness_detail", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.projects), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(NIPPO.business_detail))]
 
 #endregion
 
-namespace WorkManager
+namespace NIPPO
 {
     #region コンテキスト
     
@@ -128,98 +132,146 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        public ObjectSet<work_reports> work_reports設定
+        public ObjectSet<work_reports> work_reports
         {
             get
             {
-                if ((_work_reports設定 == null))
+                if ((_work_reports == null))
                 {
-                    _work_reports設定 = base.CreateObjectSet<work_reports>("work_reports設定");
+                    _work_reports = base.CreateObjectSet<work_reports>("work_reports");
                 }
-                return _work_reports設定;
+                return _work_reports;
             }
         }
-        private ObjectSet<work_reports> _work_reports設定;
+        private ObjectSet<work_reports> _work_reports;
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        public ObjectSet<work_detail> work_detail設定
+        public ObjectSet<work_detail> work_detail
         {
             get
             {
-                if ((_work_detail設定 == null))
+                if ((_work_detail == null))
                 {
-                    _work_detail設定 = base.CreateObjectSet<work_detail>("work_detail設定");
+                    _work_detail = base.CreateObjectSet<work_detail>("work_detail");
                 }
-                return _work_detail設定;
+                return _work_detail;
             }
         }
-        private ObjectSet<work_detail> _work_detail設定;
+        private ObjectSet<work_detail> _work_detail;
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        public ObjectSet<projects> projects設定
+        public ObjectSet<projects> projects
         {
             get
             {
-                if ((_projects設定 == null))
+                if ((_projects == null))
                 {
-                    _projects設定 = base.CreateObjectSet<projects>("projects設定");
+                    _projects = base.CreateObjectSet<projects>("projects");
                 }
-                return _projects設定;
+                return _projects;
             }
         }
-        private ObjectSet<projects> _projects設定;
+        private ObjectSet<projects> _projects;
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        public ObjectSet<tasks> tasks設定
+        public ObjectSet<tasks> tasks
         {
             get
             {
-                if ((_tasks設定 == null))
+                if ((_tasks == null))
                 {
-                    _tasks設定 = base.CreateObjectSet<tasks>("tasks設定");
+                    _tasks = base.CreateObjectSet<tasks>("tasks");
                 }
-                return _tasks設定;
+                return _tasks;
             }
         }
-        private ObjectSet<tasks> _tasks設定;
+        private ObjectSet<tasks> _tasks;
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        public ObjectSet<customers> customers設定
+        public ObjectSet<customers> customers
         {
             get
             {
-                if ((_customers設定 == null))
+                if ((_customers == null))
                 {
-                    _customers設定 = base.CreateObjectSet<customers>("customers設定");
+                    _customers = base.CreateObjectSet<customers>("customers");
                 }
-                return _customers設定;
+                return _customers;
             }
         }
-        private ObjectSet<customers> _customers設定;
+        private ObjectSet<customers> _customers;
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        public ObjectSet<holidays> holidays設定
+        public ObjectSet<holidays> holidays
         {
             get
             {
-                if ((_holidays設定 == null))
+                if ((_holidays == null))
                 {
-                    _holidays設定 = base.CreateObjectSet<holidays>("holidays設定");
+                    _holidays = base.CreateObjectSet<holidays>("holidays");
                 }
-                return _holidays設定;
+                return _holidays;
             }
         }
-        private ObjectSet<holidays> _holidays設定;
+        private ObjectSet<holidays> _holidays;
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        public ObjectSet<business_segments> businnes_segments
+        {
+            get
+            {
+                if ((_businnes_segments == null))
+                {
+                    _businnes_segments = base.CreateObjectSet<business_segments>("businnes_segments");
+                }
+                return _businnes_segments;
+            }
+        }
+        private ObjectSet<business_segments> _businnes_segments;
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        public ObjectSet<business_type> business_type
+        {
+            get
+            {
+                if ((_business_type == null))
+                {
+                    _business_type = base.CreateObjectSet<business_type>("business_type");
+                }
+                return _business_type;
+            }
+        }
+        private ObjectSet<business_type> _business_type;
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        public ObjectSet<business_detail> business_detail
+        {
+            get
+            {
+                if ((_business_detail == null))
+                {
+                    _business_detail = base.CreateObjectSet<business_detail>("business_detail");
+                }
+                return _business_detail;
+            }
+        }
+        private ObjectSet<business_detail> _business_detail;
 
         #endregion
 
@@ -250,51 +302,75 @@ namespace WorkManager
         }
     
         /// <summary>
-        /// work_reports設定 EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
+        /// work_reports EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
         /// </summary>
-        public void AddTowork_reports設定(work_reports work_reports)
+        public void AddTowork_reports(work_reports work_reports)
         {
-            base.AddObject("work_reports設定", work_reports);
+            base.AddObject("work_reports", work_reports);
         }
     
         /// <summary>
-        /// work_detail設定 EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
+        /// work_detail EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
         /// </summary>
-        public void AddTowork_detail設定(work_detail work_detail)
+        public void AddTowork_detail(work_detail work_detail)
         {
-            base.AddObject("work_detail設定", work_detail);
+            base.AddObject("work_detail", work_detail);
         }
     
         /// <summary>
-        /// projects設定 EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
+        /// projects EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
         /// </summary>
-        public void AddToprojects設定(projects projects)
+        public void AddToprojects(projects projects)
         {
-            base.AddObject("projects設定", projects);
+            base.AddObject("projects", projects);
         }
     
         /// <summary>
-        /// tasks設定 EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
+        /// tasks EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
         /// </summary>
-        public void AddTotasks設定(tasks tasks)
+        public void AddTotasks(tasks tasks)
         {
-            base.AddObject("tasks設定", tasks);
+            base.AddObject("tasks", tasks);
         }
     
         /// <summary>
-        /// customers設定 EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
+        /// customers EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
         /// </summary>
-        public void AddTocustomers設定(customers customers)
+        public void AddTocustomers(customers customers)
         {
-            base.AddObject("customers設定", customers);
+            base.AddObject("customers", customers);
         }
     
         /// <summary>
-        /// holidays設定 EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
+        /// holidays EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
         /// </summary>
-        public void AddToholidays設定(holidays holidays)
+        public void AddToholidays(holidays holidays)
         {
-            base.AddObject("holidays設定", holidays);
+            base.AddObject("holidays", holidays);
+        }
+    
+        /// <summary>
+        /// businnes_segments EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
+        /// </summary>
+        public void AddTobusinnes_segments(business_segments business_segments)
+        {
+            base.AddObject("businnes_segments", business_segments);
+        }
+    
+        /// <summary>
+        /// business_type EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
+        /// </summary>
+        public void AddTobusiness_type(business_type business_type)
+        {
+            base.AddObject("business_type", business_type);
+        }
+    
+        /// <summary>
+        /// business_detail EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
+        /// </summary>
+        public void AddTobusiness_detail(business_detail business_detail)
+        {
+            base.AddObject("business_detail", business_detail);
         }
 
         #endregion
@@ -306,8 +382,11 @@ namespace WorkManager
     #region エンティティ
     
     /// <summary>
-    /// 使用できるメタデータ ドキュメントはありません。
+    /// 権限
     /// </summary>
+    /// <LongDescription>
+    /// ユーザの権限情報を保存する
+    /// </LongDescription>
     [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="authorities")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -319,16 +398,12 @@ namespace WorkManager
         /// 新しい authorities オブジェクトを作成します。
         /// </summary>
         /// <param name="id">ID プロパティの初期値。</param>
-        /// <param name="master">master プロパティの初期値。</param>
-        /// <param name="project_management">project_management プロパティの初期値。</param>
         /// <param name="list_viewer">list_viewer プロパティの初期値。</param>
         /// <param name="input">input プロパティの初期値。</param>
-        public static authorities Createauthorities(global::System.Int32 id, global::System.String master, global::System.String project_management, global::System.String list_viewer, global::System.String input)
+        public static authorities Createauthorities(global::System.Int32 id, global::System.String list_viewer, global::System.String input)
         {
             authorities authorities = new authorities();
             authorities.ID = id;
-            authorities.master = master;
-            authorities.project_management = project_management;
             authorities.list_viewer = list_viewer;
             authorities.input = input;
             return authorities;
@@ -370,7 +445,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String master
+        public global::System.Boolean master
         {
             get
             {
@@ -380,13 +455,13 @@ namespace WorkManager
             {
                 OnmasterChanging(value);
                 ReportPropertyChanging("master");
-                _master = StructuralObject.SetValidValue(value, false);
+                _master = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("master");
                 OnmasterChanged();
             }
         }
-        private global::System.String _master;
-        partial void OnmasterChanging(global::System.String value);
+        private global::System.Boolean _master = false;
+        partial void OnmasterChanging(global::System.Boolean value);
         partial void OnmasterChanged();
     
         /// <summary>
@@ -394,7 +469,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String project_management
+        public global::System.Boolean project_management
         {
             get
             {
@@ -404,13 +479,13 @@ namespace WorkManager
             {
                 Onproject_managementChanging(value);
                 ReportPropertyChanging("project_management");
-                _project_management = StructuralObject.SetValidValue(value, false);
+                _project_management = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("project_management");
                 Onproject_managementChanged();
             }
         }
-        private global::System.String _project_management;
-        partial void Onproject_managementChanging(global::System.String value);
+        private global::System.Boolean _project_management = false;
+        partial void Onproject_managementChanging(global::System.Boolean value);
         partial void Onproject_managementChanged();
     
         /// <summary>
@@ -511,6 +586,1175 @@ namespace WorkManager
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="business_detail")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class business_detail : EntityObject
+    {
+        #region ファクトリ メソッド
+    
+        /// <summary>
+        /// 新しい business_detail オブジェクトを作成します。
+        /// </summary>
+        /// <param name="id">ID プロパティの初期値。</param>
+        /// <param name="fY">FY プロパティの初期値。</param>
+        /// <param name="code">code プロパティの初期値。</param>
+        /// <param name="name">name プロパティの初期値。</param>
+        /// <param name="created_at">created_at プロパティの初期値。</param>
+        /// <param name="created_by">created_by プロパティの初期値。</param>
+        public static business_detail Createbusiness_detail(global::System.Int32 id, global::System.Int16 fY, global::System.Int16 code, global::System.String name, global::System.DateTime created_at, global::System.String created_by)
+        {
+            business_detail business_detail = new business_detail();
+            business_detail.ID = id;
+            business_detail.FY = fY;
+            business_detail.code = code;
+            business_detail.name = name;
+            business_detail.created_at = created_at;
+            business_detail.created_by = created_by;
+            return business_detail;
+        }
+
+        #endregion
+
+        #region プリミティブ プロパティ
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 FY
+        {
+            get
+            {
+                return _FY;
+            }
+            set
+            {
+                OnFYChanging(value);
+                ReportPropertyChanging("FY");
+                _FY = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FY");
+                OnFYChanged();
+            }
+        }
+        private global::System.Int16 _FY;
+        partial void OnFYChanging(global::System.Int16 value);
+        partial void OnFYChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 code
+        {
+            get
+            {
+                return _code;
+            }
+            set
+            {
+                OncodeChanging(value);
+                ReportPropertyChanging("code");
+                _code = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("code");
+                OncodeChanged();
+            }
+        }
+        private global::System.Int16 _code;
+        partial void OncodeChanging(global::System.Int16 value);
+        partial void OncodeChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String alias
+        {
+            get
+            {
+                return _alias;
+            }
+            set
+            {
+                OnaliasChanging(value);
+                ReportPropertyChanging("alias");
+                _alias = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("alias");
+                OnaliasChanged();
+            }
+        }
+        private global::System.String _alias;
+        partial void OnaliasChanging(global::System.String value);
+        partial void OnaliasChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean delete_flag
+        {
+            get
+            {
+                return _delete_flag;
+            }
+            set
+            {
+                Ondelete_flagChanging(value);
+                ReportPropertyChanging("delete_flag");
+                _delete_flag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("delete_flag");
+                Ondelete_flagChanged();
+            }
+        }
+        private global::System.Boolean _delete_flag = false;
+        partial void Ondelete_flagChanging(global::System.Boolean value);
+        partial void Ondelete_flagChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime created_at
+        {
+            get
+            {
+                return _created_at;
+            }
+            set
+            {
+                Oncreated_atChanging(value);
+                ReportPropertyChanging("created_at");
+                _created_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("created_at");
+                Oncreated_atChanged();
+            }
+        }
+        private global::System.DateTime _created_at;
+        partial void Oncreated_atChanging(global::System.DateTime value);
+        partial void Oncreated_atChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String created_by
+        {
+            get
+            {
+                return _created_by;
+            }
+            set
+            {
+                Oncreated_byChanging(value);
+                ReportPropertyChanging("created_by");
+                _created_by = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("created_by");
+                Oncreated_byChanged();
+            }
+        }
+        private global::System.String _created_by;
+        partial void Oncreated_byChanging(global::System.String value);
+        partial void Oncreated_byChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> updated_at
+        {
+            get
+            {
+                return _updated_at;
+            }
+            set
+            {
+                Onupdated_atChanging(value);
+                ReportPropertyChanging("updated_at");
+                _updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("updated_at");
+                Onupdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _updated_at;
+        partial void Onupdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void Onupdated_atChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String updated_by
+        {
+            get
+            {
+                return _updated_by;
+            }
+            set
+            {
+                Onupdated_byChanging(value);
+                ReportPropertyChanging("updated_by");
+                _updated_by = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("updated_by");
+                Onupdated_byChanged();
+            }
+        }
+        private global::System.String _updated_by;
+        partial void Onupdated_byChanging(global::System.String value);
+        partial void Onupdated_byChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> deleted_at
+        {
+            get
+            {
+                return _deleted_at;
+            }
+            set
+            {
+                Ondeleted_atChanging(value);
+                ReportPropertyChanging("deleted_at");
+                _deleted_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("deleted_at");
+                Ondeleted_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _deleted_at;
+        partial void Ondeleted_atChanging(Nullable<global::System.DateTime> value);
+        partial void Ondeleted_atChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String deleted_by
+        {
+            get
+            {
+                return _deleted_by;
+            }
+            set
+            {
+                Ondeleted_byChanging(value);
+                ReportPropertyChanging("deleted_by");
+                _deleted_by = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("deleted_by");
+                Ondeleted_byChanged();
+            }
+        }
+        private global::System.String _deleted_by;
+        partial void Ondeleted_byChanging(global::System.String value);
+        partial void Ondeleted_byChanged();
+
+        #endregion
+
+    
+        #region ナビゲーション プロパティ
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "business_typebusiness_detail", "business_type")]
+        public business_type business_type
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.business_typebusiness_detail", "business_type").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.business_typebusiness_detail", "business_type").Value = value;
+            }
+        }
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<business_type> business_typeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.business_typebusiness_detail", "business_type");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_type>("WorkManagerDB.business_typebusiness_detail", "business_type", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "projectsbusiness_detail", "projects")]
+        public EntityCollection<projects> projects
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<projects>("WorkManagerDB.projectsbusiness_detail", "projects");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<projects>("WorkManagerDB.projectsbusiness_detail", "projects", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// 使用できるメタデータ ドキュメントはありません。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="business_segments")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class business_segments : EntityObject
+    {
+        #region ファクトリ メソッド
+    
+        /// <summary>
+        /// 新しい business_segments オブジェクトを作成します。
+        /// </summary>
+        /// <param name="id">ID プロパティの初期値。</param>
+        /// <param name="fY">FY プロパティの初期値。</param>
+        /// <param name="code">code プロパティの初期値。</param>
+        /// <param name="name">name プロパティの初期値。</param>
+        /// <param name="created_at">created_at プロパティの初期値。</param>
+        /// <param name="created_by">created_by プロパティの初期値。</param>
+        public static business_segments Createbusiness_segments(global::System.Int32 id, global::System.Int16 fY, global::System.Int16 code, global::System.String name, global::System.DateTime created_at, global::System.String created_by)
+        {
+            business_segments business_segments = new business_segments();
+            business_segments.ID = id;
+            business_segments.FY = fY;
+            business_segments.code = code;
+            business_segments.name = name;
+            business_segments.created_at = created_at;
+            business_segments.created_by = created_by;
+            return business_segments;
+        }
+
+        #endregion
+
+        #region プリミティブ プロパティ
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 FY
+        {
+            get
+            {
+                return _FY;
+            }
+            set
+            {
+                OnFYChanging(value);
+                ReportPropertyChanging("FY");
+                _FY = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FY");
+                OnFYChanged();
+            }
+        }
+        private global::System.Int16 _FY;
+        partial void OnFYChanging(global::System.Int16 value);
+        partial void OnFYChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 code
+        {
+            get
+            {
+                return _code;
+            }
+            set
+            {
+                OncodeChanging(value);
+                ReportPropertyChanging("code");
+                _code = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("code");
+                OncodeChanged();
+            }
+        }
+        private global::System.Int16 _code;
+        partial void OncodeChanging(global::System.Int16 value);
+        partial void OncodeChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String alias
+        {
+            get
+            {
+                return _alias;
+            }
+            set
+            {
+                OnaliasChanging(value);
+                ReportPropertyChanging("alias");
+                _alias = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("alias");
+                OnaliasChanged();
+            }
+        }
+        private global::System.String _alias;
+        partial void OnaliasChanging(global::System.String value);
+        partial void OnaliasChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean delete_flag
+        {
+            get
+            {
+                return _delete_flag;
+            }
+            set
+            {
+                Ondelete_flagChanging(value);
+                ReportPropertyChanging("delete_flag");
+                _delete_flag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("delete_flag");
+                Ondelete_flagChanged();
+            }
+        }
+        private global::System.Boolean _delete_flag = false;
+        partial void Ondelete_flagChanging(global::System.Boolean value);
+        partial void Ondelete_flagChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime created_at
+        {
+            get
+            {
+                return _created_at;
+            }
+            set
+            {
+                Oncreated_atChanging(value);
+                ReportPropertyChanging("created_at");
+                _created_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("created_at");
+                Oncreated_atChanged();
+            }
+        }
+        private global::System.DateTime _created_at;
+        partial void Oncreated_atChanging(global::System.DateTime value);
+        partial void Oncreated_atChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String created_by
+        {
+            get
+            {
+                return _created_by;
+            }
+            set
+            {
+                Oncreated_byChanging(value);
+                ReportPropertyChanging("created_by");
+                _created_by = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("created_by");
+                Oncreated_byChanged();
+            }
+        }
+        private global::System.String _created_by;
+        partial void Oncreated_byChanging(global::System.String value);
+        partial void Oncreated_byChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> updated_at
+        {
+            get
+            {
+                return _updated_at;
+            }
+            set
+            {
+                Onupdated_atChanging(value);
+                ReportPropertyChanging("updated_at");
+                _updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("updated_at");
+                Onupdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _updated_at;
+        partial void Onupdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void Onupdated_atChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String updated_by
+        {
+            get
+            {
+                return _updated_by;
+            }
+            set
+            {
+                Onupdated_byChanging(value);
+                ReportPropertyChanging("updated_by");
+                _updated_by = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("updated_by");
+                Onupdated_byChanged();
+            }
+        }
+        private global::System.String _updated_by;
+        partial void Onupdated_byChanging(global::System.String value);
+        partial void Onupdated_byChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> deleted_at
+        {
+            get
+            {
+                return _deleted_at;
+            }
+            set
+            {
+                Ondeleted_atChanging(value);
+                ReportPropertyChanging("deleted_at");
+                _deleted_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("deleted_at");
+                Ondeleted_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _deleted_at;
+        partial void Ondeleted_atChanging(Nullable<global::System.DateTime> value);
+        partial void Ondeleted_atChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String deleted_by
+        {
+            get
+            {
+                return _deleted_by;
+            }
+            set
+            {
+                Ondeleted_byChanging(value);
+                ReportPropertyChanging("deleted_by");
+                _deleted_by = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("deleted_by");
+                Ondeleted_byChanged();
+            }
+        }
+        private global::System.String _deleted_by;
+        partial void Ondeleted_byChanging(global::System.String value);
+        partial void Ondeleted_byChanged();
+
+        #endregion
+
+    
+        #region ナビゲーション プロパティ
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "business_segmentsbusiness_type", "business_type")]
+        public EntityCollection<business_type> business_type
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<business_type>("WorkManagerDB.business_segmentsbusiness_type", "business_type");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<business_type>("WorkManagerDB.business_segmentsbusiness_type", "business_type", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// 使用できるメタデータ ドキュメントはありません。
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="business_type")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class business_type : EntityObject
+    {
+        #region ファクトリ メソッド
+    
+        /// <summary>
+        /// 新しい business_type オブジェクトを作成します。
+        /// </summary>
+        /// <param name="id">ID プロパティの初期値。</param>
+        /// <param name="fY">FY プロパティの初期値。</param>
+        /// <param name="code">code プロパティの初期値。</param>
+        /// <param name="name">name プロパティの初期値。</param>
+        /// <param name="created_at">created_at プロパティの初期値。</param>
+        /// <param name="created_by">created_by プロパティの初期値。</param>
+        public static business_type Createbusiness_type(global::System.Int32 id, global::System.Int16 fY, global::System.Int16 code, global::System.String name, global::System.DateTime created_at, global::System.String created_by)
+        {
+            business_type business_type = new business_type();
+            business_type.ID = id;
+            business_type.FY = fY;
+            business_type.code = code;
+            business_type.name = name;
+            business_type.created_at = created_at;
+            business_type.created_by = created_by;
+            return business_type;
+        }
+
+        #endregion
+
+        #region プリミティブ プロパティ
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Int32 _ID;
+        partial void OnIDChanging(global::System.Int32 value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 FY
+        {
+            get
+            {
+                return _FY;
+            }
+            set
+            {
+                OnFYChanging(value);
+                ReportPropertyChanging("FY");
+                _FY = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FY");
+                OnFYChanged();
+            }
+        }
+        private global::System.Int16 _FY;
+        partial void OnFYChanging(global::System.Int16 value);
+        partial void OnFYChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int16 code
+        {
+            get
+            {
+                return _code;
+            }
+            set
+            {
+                OncodeChanging(value);
+                ReportPropertyChanging("code");
+                _code = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("code");
+                OncodeChanged();
+            }
+        }
+        private global::System.Int16 _code;
+        partial void OncodeChanging(global::System.Int16 value);
+        partial void OncodeChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String name
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                OnnameChanging(value);
+                ReportPropertyChanging("name");
+                _name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("name");
+                OnnameChanged();
+            }
+        }
+        private global::System.String _name;
+        partial void OnnameChanging(global::System.String value);
+        partial void OnnameChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String alias
+        {
+            get
+            {
+                return _alias;
+            }
+            set
+            {
+                OnaliasChanging(value);
+                ReportPropertyChanging("alias");
+                _alias = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("alias");
+                OnaliasChanged();
+            }
+        }
+        private global::System.String _alias;
+        partial void OnaliasChanging(global::System.String value);
+        partial void OnaliasChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Boolean delete_flag
+        {
+            get
+            {
+                return _delete_flag;
+            }
+            set
+            {
+                Ondelete_flagChanging(value);
+                ReportPropertyChanging("delete_flag");
+                _delete_flag = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("delete_flag");
+                Ondelete_flagChanged();
+            }
+        }
+        private global::System.Boolean _delete_flag = false;
+        partial void Ondelete_flagChanging(global::System.Boolean value);
+        partial void Ondelete_flagChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.DateTime created_at
+        {
+            get
+            {
+                return _created_at;
+            }
+            set
+            {
+                Oncreated_atChanging(value);
+                ReportPropertyChanging("created_at");
+                _created_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("created_at");
+                Oncreated_atChanged();
+            }
+        }
+        private global::System.DateTime _created_at;
+        partial void Oncreated_atChanging(global::System.DateTime value);
+        partial void Oncreated_atChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String created_by
+        {
+            get
+            {
+                return _created_by;
+            }
+            set
+            {
+                Oncreated_byChanging(value);
+                ReportPropertyChanging("created_by");
+                _created_by = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("created_by");
+                Oncreated_byChanged();
+            }
+        }
+        private global::System.String _created_by;
+        partial void Oncreated_byChanging(global::System.String value);
+        partial void Oncreated_byChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> updated_at
+        {
+            get
+            {
+                return _updated_at;
+            }
+            set
+            {
+                Onupdated_atChanging(value);
+                ReportPropertyChanging("updated_at");
+                _updated_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("updated_at");
+                Onupdated_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _updated_at;
+        partial void Onupdated_atChanging(Nullable<global::System.DateTime> value);
+        partial void Onupdated_atChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String updated_by
+        {
+            get
+            {
+                return _updated_by;
+            }
+            set
+            {
+                Onupdated_byChanging(value);
+                ReportPropertyChanging("updated_by");
+                _updated_by = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("updated_by");
+                Onupdated_byChanged();
+            }
+        }
+        private global::System.String _updated_by;
+        partial void Onupdated_byChanging(global::System.String value);
+        partial void Onupdated_byChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> deleted_at
+        {
+            get
+            {
+                return _deleted_at;
+            }
+            set
+            {
+                Ondeleted_atChanging(value);
+                ReportPropertyChanging("deleted_at");
+                _deleted_at = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("deleted_at");
+                Ondeleted_atChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _deleted_at;
+        partial void Ondeleted_atChanging(Nullable<global::System.DateTime> value);
+        partial void Ondeleted_atChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String deleted_by
+        {
+            get
+            {
+                return _deleted_by;
+            }
+            set
+            {
+                Ondeleted_byChanging(value);
+                ReportPropertyChanging("deleted_by");
+                _deleted_by = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("deleted_by");
+                Ondeleted_byChanged();
+            }
+        }
+        private global::System.String _deleted_by;
+        partial void Ondeleted_byChanging(global::System.String value);
+        partial void Ondeleted_byChanged();
+
+        #endregion
+
+    
+        #region ナビゲーション プロパティ
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "business_segmentsbusiness_type", "business_segments")]
+        public business_segments business_segments
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_segments>("WorkManagerDB.business_segmentsbusiness_type", "business_segments").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_segments>("WorkManagerDB.business_segmentsbusiness_type", "business_segments").Value = value;
+            }
+        }
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<business_segments> business_segmentsReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_segments>("WorkManagerDB.business_segmentsbusiness_type", "business_segments");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_segments>("WorkManagerDB.business_segmentsbusiness_type", "business_segments", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "business_typebusiness_detail", "business_detail")]
+        public EntityCollection<business_detail> business_detail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<business_detail>("WorkManagerDB.business_typebusiness_detail", "business_detail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<business_detail>("WorkManagerDB.business_typebusiness_detail", "business_detail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "projectsbusiness_type", "projects")]
+        public EntityCollection<projects> projects
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<projects>("WorkManagerDB.projectsbusiness_type", "projects");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<projects>("WorkManagerDB.projectsbusiness_type", "projects", value);
+                }
+            }
+        }
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// 使用できるメタデータ ドキュメントはありません。
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="customers")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -524,28 +1768,12 @@ namespace WorkManager
         /// <param name="id">ID プロパティの初期値。</param>
         /// <param name="code">code プロパティの初期値。</param>
         /// <param name="name">name プロパティの初期値。</param>
-        /// <param name="alias">alias プロパティの初期値。</param>
-        /// <param name="delete_flag">delete_flag プロパティの初期値。</param>
-        /// <param name="created_at">created_at プロパティの初期値。</param>
-        /// <param name="created_by">created_by プロパティの初期値。</param>
-        /// <param name="updated_at">updated_at プロパティの初期値。</param>
-        /// <param name="updated_by">updated_by プロパティの初期値。</param>
-        /// <param name="deleted_at">deleted_at プロパティの初期値。</param>
-        /// <param name="deleted_by">deleted_by プロパティの初期値。</param>
-        public static customers Createcustomers(global::System.Int32 id, global::System.String code, global::System.String name, global::System.String alias, global::System.String delete_flag, global::System.String created_at, global::System.String created_by, global::System.String updated_at, global::System.String updated_by, global::System.String deleted_at, global::System.String deleted_by)
+        public static customers Createcustomers(global::System.Int32 id, global::System.Int16 code, global::System.String name)
         {
             customers customers = new customers();
             customers.ID = id;
             customers.code = code;
             customers.name = name;
-            customers.alias = alias;
-            customers.delete_flag = delete_flag;
-            customers.created_at = created_at;
-            customers.created_by = created_by;
-            customers.updated_at = updated_at;
-            customers.updated_by = updated_by;
-            customers.deleted_at = deleted_at;
-            customers.deleted_by = deleted_by;
             return customers;
         }
 
@@ -585,7 +1813,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String code
+        public global::System.Int16 code
         {
             get
             {
@@ -595,13 +1823,13 @@ namespace WorkManager
             {
                 OncodeChanging(value);
                 ReportPropertyChanging("code");
-                _code = StructuralObject.SetValidValue(value, false);
+                _code = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("code");
                 OncodeChanged();
             }
         }
-        private global::System.String _code;
-        partial void OncodeChanging(global::System.String value);
+        private global::System.Int16 _code;
+        partial void OncodeChanging(global::System.Int16 value);
         partial void OncodeChanged();
     
         /// <summary>
@@ -631,7 +1859,7 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String alias
         {
@@ -643,7 +1871,7 @@ namespace WorkManager
             {
                 OnaliasChanging(value);
                 ReportPropertyChanging("alias");
-                _alias = StructuralObject.SetValidValue(value, false);
+                _alias = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("alias");
                 OnaliasChanged();
             }
@@ -657,7 +1885,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String delete_flag
+        public global::System.Boolean delete_flag
         {
             get
             {
@@ -667,21 +1895,21 @@ namespace WorkManager
             {
                 Ondelete_flagChanging(value);
                 ReportPropertyChanging("delete_flag");
-                _delete_flag = StructuralObject.SetValidValue(value, false);
+                _delete_flag = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("delete_flag");
                 Ondelete_flagChanged();
             }
         }
-        private global::System.String _delete_flag;
-        partial void Ondelete_flagChanging(global::System.String value);
+        private global::System.Boolean _delete_flag = false;
+        partial void Ondelete_flagChanging(global::System.Boolean value);
         partial void Ondelete_flagChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String created_at
+        public Nullable<global::System.DateTime> created_at
         {
             get
             {
@@ -691,19 +1919,19 @@ namespace WorkManager
             {
                 Oncreated_atChanging(value);
                 ReportPropertyChanging("created_at");
-                _created_at = StructuralObject.SetValidValue(value, false);
+                _created_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("created_at");
                 Oncreated_atChanged();
             }
         }
-        private global::System.String _created_at;
-        partial void Oncreated_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _created_at;
+        partial void Oncreated_atChanging(Nullable<global::System.DateTime> value);
         partial void Oncreated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String created_by
         {
@@ -715,7 +1943,7 @@ namespace WorkManager
             {
                 Oncreated_byChanging(value);
                 ReportPropertyChanging("created_by");
-                _created_by = StructuralObject.SetValidValue(value, false);
+                _created_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("created_by");
                 Oncreated_byChanged();
             }
@@ -727,9 +1955,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String updated_at
+        public Nullable<global::System.DateTime> updated_at
         {
             get
             {
@@ -739,19 +1967,19 @@ namespace WorkManager
             {
                 Onupdated_atChanging(value);
                 ReportPropertyChanging("updated_at");
-                _updated_at = StructuralObject.SetValidValue(value, false);
+                _updated_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("updated_at");
                 Onupdated_atChanged();
             }
         }
-        private global::System.String _updated_at;
-        partial void Onupdated_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _updated_at;
+        partial void Onupdated_atChanging(Nullable<global::System.DateTime> value);
         partial void Onupdated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String updated_by
         {
@@ -763,7 +1991,7 @@ namespace WorkManager
             {
                 Onupdated_byChanging(value);
                 ReportPropertyChanging("updated_by");
-                _updated_by = StructuralObject.SetValidValue(value, false);
+                _updated_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("updated_by");
                 Onupdated_byChanged();
             }
@@ -775,9 +2003,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String deleted_at
+        public Nullable<global::System.DateTime> deleted_at
         {
             get
             {
@@ -787,19 +2015,19 @@ namespace WorkManager
             {
                 Ondeleted_atChanging(value);
                 ReportPropertyChanging("deleted_at");
-                _deleted_at = StructuralObject.SetValidValue(value, false);
+                _deleted_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("deleted_at");
                 Ondeleted_atChanged();
             }
         }
-        private global::System.String _deleted_at;
-        partial void Ondeleted_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _deleted_at;
+        partial void Ondeleted_atChanging(Nullable<global::System.DateTime> value);
         partial void Ondeleted_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String deleted_by
         {
@@ -811,7 +2039,7 @@ namespace WorkManager
             {
                 Ondeleted_byChanging(value);
                 ReportPropertyChanging("deleted_by");
-                _deleted_by = StructuralObject.SetValidValue(value, false);
+                _deleted_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("deleted_by");
                 Ondeleted_byChanged();
             }
@@ -868,8 +2096,11 @@ namespace WorkManager
     }
     
     /// <summary>
-    /// 使用できるメタデータ ドキュメントはありません。
+    /// 休日
     /// </summary>
+    /// <LongDescription>
+    /// 休日情報を保存する。休日指定はマスタ管理者が行う
+    /// </LongDescription>
     [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="holidays")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -885,7 +2116,7 @@ namespace WorkManager
         /// <param name="month">month プロパティの初期値。</param>
         /// <param name="day">day プロパティの初期値。</param>
         /// <param name="name">name プロパティの初期値。</param>
-        public static holidays Createholidays(global::System.Int32 id, global::System.String year, global::System.String month, global::System.String day, global::System.String name)
+        public static holidays Createholidays(global::System.Int32 id, global::System.Decimal year, global::System.Decimal month, global::System.Decimal day, global::System.String name)
         {
             holidays holidays = new holidays();
             holidays.ID = id;
@@ -932,7 +2163,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String year
+        public global::System.Decimal year
         {
             get
             {
@@ -942,13 +2173,13 @@ namespace WorkManager
             {
                 OnyearChanging(value);
                 ReportPropertyChanging("year");
-                _year = StructuralObject.SetValidValue(value, false);
+                _year = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("year");
                 OnyearChanged();
             }
         }
-        private global::System.String _year;
-        partial void OnyearChanging(global::System.String value);
+        private global::System.Decimal _year;
+        partial void OnyearChanging(global::System.Decimal value);
         partial void OnyearChanged();
     
         /// <summary>
@@ -956,7 +2187,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String month
+        public global::System.Decimal month
         {
             get
             {
@@ -966,13 +2197,13 @@ namespace WorkManager
             {
                 OnmonthChanging(value);
                 ReportPropertyChanging("month");
-                _month = StructuralObject.SetValidValue(value, false);
+                _month = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("month");
                 OnmonthChanged();
             }
         }
-        private global::System.String _month;
-        partial void OnmonthChanging(global::System.String value);
+        private global::System.Decimal _month;
+        partial void OnmonthChanging(global::System.Decimal value);
         partial void OnmonthChanged();
     
         /// <summary>
@@ -980,7 +2211,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String day
+        public global::System.Decimal day
         {
             get
             {
@@ -990,13 +2221,13 @@ namespace WorkManager
             {
                 OndayChanging(value);
                 ReportPropertyChanging("day");
-                _day = StructuralObject.SetValidValue(value, false);
+                _day = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("day");
                 OndayChanged();
             }
         }
-        private global::System.String _day;
-        partial void OndayChanging(global::System.String value);
+        private global::System.Decimal _day;
+        partial void OndayChanging(global::System.Decimal value);
         partial void OndayChanged();
     
         /// <summary>
@@ -1045,41 +2276,13 @@ namespace WorkManager
         /// <param name="fY">FY プロパティの初期値。</param>
         /// <param name="num">num プロパティの初期値。</param>
         /// <param name="name">name プロパティの初期値。</param>
-        /// <param name="alias">alias プロパティの初期値。</param>
-        /// <param name="start_date">start_date プロパティの初期値。</param>
-        /// <param name="end_date">end_date プロパティの初期値。</param>
-        /// <param name="project_code">project_code プロパティの初期値。</param>
-        /// <param name="delete_flag">delete_flag プロパティの初期値。</param>
-        /// <param name="created_at">created_at プロパティの初期値。</param>
-        /// <param name="created_by">created_by プロパティの初期値。</param>
-        /// <param name="updated_at">updated_at プロパティの初期値。</param>
-        /// <param name="updated_by">updated_by プロパティの初期値。</param>
-        /// <param name="deleted_at">deleted_at プロパティの初期値。</param>
-        /// <param name="deleted_by">deleted_by プロパティの初期値。</param>
-        /// <param name="share_flag">share_flag プロパティの初期値。</param>
-        /// <param name="tentative_flag">tentative_flag プロパティの初期値。</param>
-        /// <param name="tentative_created_by">tentative_created_by プロパティの初期値。</param>
-        public static projects Createprojects(global::System.Int32 id, global::System.String fY, global::System.String num, global::System.String name, global::System.String alias, global::System.String start_date, global::System.String end_date, global::System.String project_code, global::System.String delete_flag, global::System.String created_at, global::System.String created_by, global::System.String updated_at, global::System.String updated_by, global::System.String deleted_at, global::System.String deleted_by, global::System.String share_flag, global::System.String tentative_flag, global::System.String tentative_created_by)
+        public static projects Createprojects(global::System.Int32 id, global::System.Int16 fY, global::System.Int16 num, global::System.String name)
         {
             projects projects = new projects();
             projects.ID = id;
             projects.FY = fY;
             projects.num = num;
             projects.name = name;
-            projects.alias = alias;
-            projects.start_date = start_date;
-            projects.end_date = end_date;
-            projects.project_code = project_code;
-            projects.delete_flag = delete_flag;
-            projects.created_at = created_at;
-            projects.created_by = created_by;
-            projects.updated_at = updated_at;
-            projects.updated_by = updated_by;
-            projects.deleted_at = deleted_at;
-            projects.deleted_by = deleted_by;
-            projects.share_flag = share_flag;
-            projects.tentative_flag = tentative_flag;
-            projects.tentative_created_by = tentative_created_by;
             return projects;
         }
 
@@ -1119,7 +2322,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String FY
+        public global::System.Int16 FY
         {
             get
             {
@@ -1129,13 +2332,13 @@ namespace WorkManager
             {
                 OnFYChanging(value);
                 ReportPropertyChanging("FY");
-                _FY = StructuralObject.SetValidValue(value, false);
+                _FY = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("FY");
                 OnFYChanged();
             }
         }
-        private global::System.String _FY;
-        partial void OnFYChanging(global::System.String value);
+        private global::System.Int16 _FY;
+        partial void OnFYChanging(global::System.Int16 value);
         partial void OnFYChanged();
     
         /// <summary>
@@ -1143,7 +2346,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String num
+        public global::System.Int16 num
         {
             get
             {
@@ -1153,13 +2356,13 @@ namespace WorkManager
             {
                 OnnumChanging(value);
                 ReportPropertyChanging("num");
-                _num = StructuralObject.SetValidValue(value, false);
+                _num = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("num");
                 OnnumChanged();
             }
         }
-        private global::System.String _num;
-        partial void OnnumChanging(global::System.String value);
+        private global::System.Int16 _num;
+        partial void OnnumChanging(global::System.Int16 value);
         partial void OnnumChanged();
     
         /// <summary>
@@ -1189,7 +2392,7 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String alias
         {
@@ -1201,7 +2404,7 @@ namespace WorkManager
             {
                 OnaliasChanging(value);
                 ReportPropertyChanging("alias");
-                _alias = StructuralObject.SetValidValue(value, false);
+                _alias = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("alias");
                 OnaliasChanged();
             }
@@ -1213,7 +2416,7 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String start_date
         {
@@ -1225,7 +2428,7 @@ namespace WorkManager
             {
                 Onstart_dateChanging(value);
                 ReportPropertyChanging("start_date");
-                _start_date = StructuralObject.SetValidValue(value, false);
+                _start_date = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("start_date");
                 Onstart_dateChanged();
             }
@@ -1237,9 +2440,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String end_date
+        public Nullable<global::System.DateTime> end_date
         {
             get
             {
@@ -1249,21 +2452,21 @@ namespace WorkManager
             {
                 Onend_dateChanging(value);
                 ReportPropertyChanging("end_date");
-                _end_date = StructuralObject.SetValidValue(value, false);
+                _end_date = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("end_date");
                 Onend_dateChanged();
             }
         }
-        private global::System.String _end_date;
-        partial void Onend_dateChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _end_date;
+        partial void Onend_dateChanging(Nullable<global::System.DateTime> value);
         partial void Onend_dateChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String project_code
+        public Nullable<global::System.Int16> project_code
         {
             get
             {
@@ -1273,13 +2476,13 @@ namespace WorkManager
             {
                 Onproject_codeChanging(value);
                 ReportPropertyChanging("project_code");
-                _project_code = StructuralObject.SetValidValue(value, false);
+                _project_code = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("project_code");
                 Onproject_codeChanged();
             }
         }
-        private global::System.String _project_code;
-        partial void Onproject_codeChanging(global::System.String value);
+        private Nullable<global::System.Int16> _project_code;
+        partial void Onproject_codeChanging(Nullable<global::System.Int16> value);
         partial void Onproject_codeChanged();
     
         /// <summary>
@@ -1287,7 +2490,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String delete_flag
+        public global::System.Boolean delete_flag
         {
             get
             {
@@ -1297,19 +2500,19 @@ namespace WorkManager
             {
                 Ondelete_flagChanging(value);
                 ReportPropertyChanging("delete_flag");
-                _delete_flag = StructuralObject.SetValidValue(value, false);
+                _delete_flag = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("delete_flag");
                 Ondelete_flagChanged();
             }
         }
-        private global::System.String _delete_flag;
-        partial void Ondelete_flagChanging(global::System.String value);
+        private global::System.Boolean _delete_flag = false;
+        partial void Ondelete_flagChanging(global::System.Boolean value);
         partial void Ondelete_flagChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String created_at
         {
@@ -1321,7 +2524,7 @@ namespace WorkManager
             {
                 Oncreated_atChanging(value);
                 ReportPropertyChanging("created_at");
-                _created_at = StructuralObject.SetValidValue(value, false);
+                _created_at = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("created_at");
                 Oncreated_atChanged();
             }
@@ -1333,7 +2536,7 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String created_by
         {
@@ -1345,7 +2548,7 @@ namespace WorkManager
             {
                 Oncreated_byChanging(value);
                 ReportPropertyChanging("created_by");
-                _created_by = StructuralObject.SetValidValue(value, false);
+                _created_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("created_by");
                 Oncreated_byChanged();
             }
@@ -1357,7 +2560,7 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String updated_at
         {
@@ -1369,7 +2572,7 @@ namespace WorkManager
             {
                 Onupdated_atChanging(value);
                 ReportPropertyChanging("updated_at");
-                _updated_at = StructuralObject.SetValidValue(value, false);
+                _updated_at = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("updated_at");
                 Onupdated_atChanged();
             }
@@ -1381,7 +2584,7 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String updated_by
         {
@@ -1393,7 +2596,7 @@ namespace WorkManager
             {
                 Onupdated_byChanging(value);
                 ReportPropertyChanging("updated_by");
-                _updated_by = StructuralObject.SetValidValue(value, false);
+                _updated_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("updated_by");
                 Onupdated_byChanged();
             }
@@ -1405,7 +2608,7 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String deleted_at
         {
@@ -1417,7 +2620,7 @@ namespace WorkManager
             {
                 Ondeleted_atChanging(value);
                 ReportPropertyChanging("deleted_at");
-                _deleted_at = StructuralObject.SetValidValue(value, false);
+                _deleted_at = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("deleted_at");
                 Ondeleted_atChanged();
             }
@@ -1429,7 +2632,7 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String deleted_by
         {
@@ -1441,7 +2644,7 @@ namespace WorkManager
             {
                 Ondeleted_byChanging(value);
                 ReportPropertyChanging("deleted_by");
-                _deleted_by = StructuralObject.SetValidValue(value, false);
+                _deleted_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("deleted_by");
                 Ondeleted_byChanged();
             }
@@ -1455,7 +2658,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String share_flag
+        public global::System.Boolean share_flag
         {
             get
             {
@@ -1465,13 +2668,13 @@ namespace WorkManager
             {
                 Onshare_flagChanging(value);
                 ReportPropertyChanging("share_flag");
-                _share_flag = StructuralObject.SetValidValue(value, false);
+                _share_flag = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("share_flag");
                 Onshare_flagChanged();
             }
         }
-        private global::System.String _share_flag;
-        partial void Onshare_flagChanging(global::System.String value);
+        private global::System.Boolean _share_flag = false;
+        partial void Onshare_flagChanging(global::System.Boolean value);
         partial void Onshare_flagChanged();
     
         /// <summary>
@@ -1479,7 +2682,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String tentative_flag
+        public global::System.Boolean tentative_flag
         {
             get
             {
@@ -1489,19 +2692,19 @@ namespace WorkManager
             {
                 Ontentative_flagChanging(value);
                 ReportPropertyChanging("tentative_flag");
-                _tentative_flag = StructuralObject.SetValidValue(value, false);
+                _tentative_flag = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("tentative_flag");
                 Ontentative_flagChanged();
             }
         }
-        private global::System.String _tentative_flag;
-        partial void Ontentative_flagChanging(global::System.String value);
+        private global::System.Boolean _tentative_flag = false;
+        partial void Ontentative_flagChanging(global::System.Boolean value);
         partial void Ontentative_flagChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String tentative_created_by
         {
@@ -1513,7 +2716,7 @@ namespace WorkManager
             {
                 Ontentative_created_byChanging(value);
                 ReportPropertyChanging("tentative_created_by");
-                _tentative_created_by = StructuralObject.SetValidValue(value, false);
+                _tentative_created_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("tentative_created_by");
                 Ontentative_created_byChanged();
             }
@@ -1570,6 +2773,82 @@ namespace WorkManager
                 }
             }
         }
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "projectsbusiness_type", "business_type")]
+        public business_type business_type
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.projectsbusiness_type", "business_type").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.projectsbusiness_type", "business_type").Value = value;
+            }
+        }
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<business_type> business_typeReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.projectsbusiness_type", "business_type");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_type>("WorkManagerDB.projectsbusiness_type", "business_type", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "projectsbusiness_detail", "business_detail")]
+        public business_detail business_detail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_detail>("WorkManagerDB.projectsbusiness_detail", "business_detail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_detail>("WorkManagerDB.projectsbusiness_detail", "business_detail").Value = value;
+            }
+        }
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<business_detail> business_detailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_detail>("WorkManagerDB.projectsbusiness_detail", "business_detail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_detail>("WorkManagerDB.projectsbusiness_detail", "business_detail", value);
+                }
+            }
+        }
 
         #endregion
 
@@ -1581,43 +2860,8 @@ namespace WorkManager
     [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="sections")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class sections : EntityObject
+    public abstract partial class sections : EntityObject
     {
-        #region ファクトリ メソッド
-    
-        /// <summary>
-        /// 新しい sections オブジェクトを作成します。
-        /// </summary>
-        /// <param name="id">ID プロパティの初期値。</param>
-        /// <param name="code">code プロパティの初期値。</param>
-        /// <param name="name">name プロパティの初期値。</param>
-        /// <param name="alias">alias プロパティの初期値。</param>
-        /// <param name="delete_flag">delete_flag プロパティの初期値。</param>
-        /// <param name="created_at">created_at プロパティの初期値。</param>
-        /// <param name="created_by">created_by プロパティの初期値。</param>
-        /// <param name="updated_at">updated_at プロパティの初期値。</param>
-        /// <param name="updated_by">updated_by プロパティの初期値。</param>
-        /// <param name="deleted_at">deleted_at プロパティの初期値。</param>
-        /// <param name="deleted_by">deleted_by プロパティの初期値。</param>
-        public static sections Createsections(global::System.Int32 id, global::System.String code, global::System.String name, global::System.String alias, global::System.String delete_flag, global::System.String created_at, global::System.String created_by, global::System.String updated_at, global::System.String updated_by, global::System.String deleted_at, global::System.String deleted_by)
-        {
-            sections sections = new sections();
-            sections.ID = id;
-            sections.code = code;
-            sections.name = name;
-            sections.alias = alias;
-            sections.delete_flag = delete_flag;
-            sections.created_at = created_at;
-            sections.created_by = created_by;
-            sections.updated_at = updated_at;
-            sections.updated_by = updated_by;
-            sections.deleted_at = deleted_at;
-            sections.deleted_by = deleted_by;
-            return sections;
-        }
-
-        #endregion
-
         #region プリミティブ プロパティ
     
         /// <summary>
@@ -1652,7 +2896,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String code
+        public global::System.Int16 code
         {
             get
             {
@@ -1662,13 +2906,13 @@ namespace WorkManager
             {
                 OncodeChanging(value);
                 ReportPropertyChanging("code");
-                _code = StructuralObject.SetValidValue(value, false);
+                _code = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("code");
                 OncodeChanged();
             }
         }
-        private global::System.String _code;
-        partial void OncodeChanging(global::System.String value);
+        private global::System.Int16 _code;
+        partial void OncodeChanging(global::System.Int16 value);
         partial void OncodeChanged();
     
         /// <summary>
@@ -1698,7 +2942,7 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String alias
         {
@@ -1710,7 +2954,7 @@ namespace WorkManager
             {
                 OnaliasChanging(value);
                 ReportPropertyChanging("alias");
-                _alias = StructuralObject.SetValidValue(value, false);
+                _alias = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("alias");
                 OnaliasChanged();
             }
@@ -1724,7 +2968,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String delete_flag
+        public global::System.Boolean delete_flag
         {
             get
             {
@@ -1734,21 +2978,21 @@ namespace WorkManager
             {
                 Ondelete_flagChanging(value);
                 ReportPropertyChanging("delete_flag");
-                _delete_flag = StructuralObject.SetValidValue(value, false);
+                _delete_flag = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("delete_flag");
                 Ondelete_flagChanged();
             }
         }
-        private global::System.String _delete_flag;
-        partial void Ondelete_flagChanging(global::System.String value);
+        private global::System.Boolean _delete_flag = false;
+        partial void Ondelete_flagChanging(global::System.Boolean value);
         partial void Ondelete_flagChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String created_at
+        public Nullable<global::System.DateTime> created_at
         {
             get
             {
@@ -1758,19 +3002,19 @@ namespace WorkManager
             {
                 Oncreated_atChanging(value);
                 ReportPropertyChanging("created_at");
-                _created_at = StructuralObject.SetValidValue(value, false);
+                _created_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("created_at");
                 Oncreated_atChanged();
             }
         }
-        private global::System.String _created_at;
-        partial void Oncreated_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _created_at;
+        partial void Oncreated_atChanging(Nullable<global::System.DateTime> value);
         partial void Oncreated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String created_by
         {
@@ -1782,7 +3026,7 @@ namespace WorkManager
             {
                 Oncreated_byChanging(value);
                 ReportPropertyChanging("created_by");
-                _created_by = StructuralObject.SetValidValue(value, false);
+                _created_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("created_by");
                 Oncreated_byChanged();
             }
@@ -1794,9 +3038,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String updated_at
+        public Nullable<global::System.DateTime> updated_at
         {
             get
             {
@@ -1806,19 +3050,19 @@ namespace WorkManager
             {
                 Onupdated_atChanging(value);
                 ReportPropertyChanging("updated_at");
-                _updated_at = StructuralObject.SetValidValue(value, false);
+                _updated_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("updated_at");
                 Onupdated_atChanged();
             }
         }
-        private global::System.String _updated_at;
-        partial void Onupdated_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _updated_at;
+        partial void Onupdated_atChanging(Nullable<global::System.DateTime> value);
         partial void Onupdated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String updated_by
         {
@@ -1830,7 +3074,7 @@ namespace WorkManager
             {
                 Onupdated_byChanging(value);
                 ReportPropertyChanging("updated_by");
-                _updated_by = StructuralObject.SetValidValue(value, false);
+                _updated_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("updated_by");
                 Onupdated_byChanged();
             }
@@ -1842,9 +3086,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String deleted_at
+        public Nullable<global::System.DateTime> deleted_at
         {
             get
             {
@@ -1854,19 +3098,19 @@ namespace WorkManager
             {
                 Ondeleted_atChanging(value);
                 ReportPropertyChanging("deleted_at");
-                _deleted_at = StructuralObject.SetValidValue(value, false);
+                _deleted_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("deleted_at");
                 Ondeleted_atChanged();
             }
         }
-        private global::System.String _deleted_at;
-        partial void Ondeleted_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _deleted_at;
+        partial void Ondeleted_atChanging(Nullable<global::System.DateTime> value);
         partial void Ondeleted_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String deleted_by
         {
@@ -1878,7 +3122,7 @@ namespace WorkManager
             {
                 Ondeleted_byChanging(value);
                 ReportPropertyChanging("deleted_by");
-                _deleted_by = StructuralObject.SetValidValue(value, false);
+                _deleted_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("deleted_by");
                 Ondeleted_byChanged();
             }
@@ -1934,28 +3178,12 @@ namespace WorkManager
         /// <param name="id">ID プロパティの初期値。</param>
         /// <param name="code">code プロパティの初期値。</param>
         /// <param name="name">name プロパティの初期値。</param>
-        /// <param name="alias">alias プロパティの初期値。</param>
-        /// <param name="delete_flag">delete_flag プロパティの初期値。</param>
-        /// <param name="created_at">created_at プロパティの初期値。</param>
-        /// <param name="created_by">created_by プロパティの初期値。</param>
-        /// <param name="updated_at">updated_at プロパティの初期値。</param>
-        /// <param name="updated_by">updated_by プロパティの初期値。</param>
-        /// <param name="deleted_at">deleted_at プロパティの初期値。</param>
-        /// <param name="deleted_by">deleted_by プロパティの初期値。</param>
-        public static tasks Createtasks(global::System.Int32 id, global::System.String code, global::System.String name, global::System.String alias, global::System.String delete_flag, global::System.String created_at, global::System.String created_by, global::System.String updated_at, global::System.String updated_by, global::System.String deleted_at, global::System.String deleted_by)
+        public static tasks Createtasks(global::System.Int32 id, global::System.Int16 code, global::System.String name)
         {
             tasks tasks = new tasks();
             tasks.ID = id;
             tasks.code = code;
             tasks.name = name;
-            tasks.alias = alias;
-            tasks.delete_flag = delete_flag;
-            tasks.created_at = created_at;
-            tasks.created_by = created_by;
-            tasks.updated_at = updated_at;
-            tasks.updated_by = updated_by;
-            tasks.deleted_at = deleted_at;
-            tasks.deleted_by = deleted_by;
             return tasks;
         }
 
@@ -1995,7 +3223,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String code
+        public global::System.Int16 code
         {
             get
             {
@@ -2005,13 +3233,13 @@ namespace WorkManager
             {
                 OncodeChanging(value);
                 ReportPropertyChanging("code");
-                _code = StructuralObject.SetValidValue(value, false);
+                _code = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("code");
                 OncodeChanged();
             }
         }
-        private global::System.String _code;
-        partial void OncodeChanging(global::System.String value);
+        private global::System.Int16 _code;
+        partial void OncodeChanging(global::System.Int16 value);
         partial void OncodeChanged();
     
         /// <summary>
@@ -2041,7 +3269,7 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String alias
         {
@@ -2053,7 +3281,7 @@ namespace WorkManager
             {
                 OnaliasChanging(value);
                 ReportPropertyChanging("alias");
-                _alias = StructuralObject.SetValidValue(value, false);
+                _alias = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("alias");
                 OnaliasChanged();
             }
@@ -2067,7 +3295,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String delete_flag
+        public global::System.Boolean delete_flag
         {
             get
             {
@@ -2077,21 +3305,21 @@ namespace WorkManager
             {
                 Ondelete_flagChanging(value);
                 ReportPropertyChanging("delete_flag");
-                _delete_flag = StructuralObject.SetValidValue(value, false);
+                _delete_flag = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("delete_flag");
                 Ondelete_flagChanged();
             }
         }
-        private global::System.String _delete_flag;
-        partial void Ondelete_flagChanging(global::System.String value);
+        private global::System.Boolean _delete_flag = false;
+        partial void Ondelete_flagChanging(global::System.Boolean value);
         partial void Ondelete_flagChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String created_at
+        public Nullable<global::System.DateTime> created_at
         {
             get
             {
@@ -2101,19 +3329,19 @@ namespace WorkManager
             {
                 Oncreated_atChanging(value);
                 ReportPropertyChanging("created_at");
-                _created_at = StructuralObject.SetValidValue(value, false);
+                _created_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("created_at");
                 Oncreated_atChanged();
             }
         }
-        private global::System.String _created_at;
-        partial void Oncreated_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _created_at;
+        partial void Oncreated_atChanging(Nullable<global::System.DateTime> value);
         partial void Oncreated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String created_by
         {
@@ -2125,7 +3353,7 @@ namespace WorkManager
             {
                 Oncreated_byChanging(value);
                 ReportPropertyChanging("created_by");
-                _created_by = StructuralObject.SetValidValue(value, false);
+                _created_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("created_by");
                 Oncreated_byChanged();
             }
@@ -2137,9 +3365,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String updated_at
+        public Nullable<global::System.DateTime> updated_at
         {
             get
             {
@@ -2149,19 +3377,19 @@ namespace WorkManager
             {
                 Onupdated_atChanging(value);
                 ReportPropertyChanging("updated_at");
-                _updated_at = StructuralObject.SetValidValue(value, false);
+                _updated_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("updated_at");
                 Onupdated_atChanged();
             }
         }
-        private global::System.String _updated_at;
-        partial void Onupdated_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _updated_at;
+        partial void Onupdated_atChanging(Nullable<global::System.DateTime> value);
         partial void Onupdated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String updated_by
         {
@@ -2173,7 +3401,7 @@ namespace WorkManager
             {
                 Onupdated_byChanging(value);
                 ReportPropertyChanging("updated_by");
-                _updated_by = StructuralObject.SetValidValue(value, false);
+                _updated_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("updated_by");
                 Onupdated_byChanged();
             }
@@ -2185,9 +3413,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String deleted_at
+        public Nullable<global::System.DateTime> deleted_at
         {
             get
             {
@@ -2197,19 +3425,19 @@ namespace WorkManager
             {
                 Ondeleted_atChanging(value);
                 ReportPropertyChanging("deleted_at");
-                _deleted_at = StructuralObject.SetValidValue(value, false);
+                _deleted_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("deleted_at");
                 Ondeleted_atChanged();
             }
         }
-        private global::System.String _deleted_at;
-        partial void Ondeleted_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _deleted_at;
+        partial void Ondeleted_atChanging(Nullable<global::System.DateTime> value);
         partial void Ondeleted_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String deleted_by
         {
@@ -2221,7 +3449,7 @@ namespace WorkManager
             {
                 Ondeleted_byChanging(value);
                 ReportPropertyChanging("deleted_by");
-                _deleted_by = StructuralObject.SetValidValue(value, false);
+                _deleted_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("deleted_by");
                 Ondeleted_byChanged();
             }
@@ -2279,14 +3507,7 @@ namespace WorkManager
         /// <param name="password">password プロパティの初期値。</param>
         /// <param name="lastname">lastname プロパティの初期値。</param>
         /// <param name="firstname">firstname プロパティの初期値。</param>
-        /// <param name="created_at">created_at プロパティの初期値。</param>
-        /// <param name="created_by">created_by プロパティの初期値。</param>
-        /// <param name="updated_at">updated_at プロパティの初期値。</param>
-        /// <param name="updated_by">updated_by プロパティの初期値。</param>
-        /// <param name="deleted_at">deleted_at プロパティの初期値。</param>
-        /// <param name="deleted_by">deleted_by プロパティの初期値。</param>
-        /// <param name="delete_flag">delete_flag プロパティの初期値。</param>
-        public static users Createusers(global::System.Int32 id, global::System.String login, global::System.String password, global::System.String lastname, global::System.String firstname, global::System.String created_at, global::System.String created_by, global::System.String updated_at, global::System.String updated_by, global::System.String deleted_at, global::System.String deleted_by, global::System.String delete_flag)
+        public static users Createusers(global::System.Int32 id, global::System.String login, global::System.String password, global::System.String lastname, global::System.String firstname)
         {
             users users = new users();
             users.ID = id;
@@ -2294,13 +3515,6 @@ namespace WorkManager
             users.password = password;
             users.lastname = lastname;
             users.firstname = firstname;
-            users.created_at = created_at;
-            users.created_by = created_by;
-            users.updated_at = updated_at;
-            users.updated_by = updated_by;
-            users.deleted_at = deleted_at;
-            users.deleted_by = deleted_by;
-            users.delete_flag = delete_flag;
             return users;
         }
 
@@ -2434,9 +3648,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String created_at
+        public Nullable<global::System.DateTime> created_at
         {
             get
             {
@@ -2446,19 +3660,19 @@ namespace WorkManager
             {
                 Oncreated_atChanging(value);
                 ReportPropertyChanging("created_at");
-                _created_at = StructuralObject.SetValidValue(value, false);
+                _created_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("created_at");
                 Oncreated_atChanged();
             }
         }
-        private global::System.String _created_at;
-        partial void Oncreated_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _created_at;
+        partial void Oncreated_atChanging(Nullable<global::System.DateTime> value);
         partial void Oncreated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String created_by
         {
@@ -2470,7 +3684,7 @@ namespace WorkManager
             {
                 Oncreated_byChanging(value);
                 ReportPropertyChanging("created_by");
-                _created_by = StructuralObject.SetValidValue(value, false);
+                _created_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("created_by");
                 Oncreated_byChanged();
             }
@@ -2482,9 +3696,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String updated_at
+        public Nullable<global::System.DateTime> updated_at
         {
             get
             {
@@ -2494,19 +3708,19 @@ namespace WorkManager
             {
                 Onupdated_atChanging(value);
                 ReportPropertyChanging("updated_at");
-                _updated_at = StructuralObject.SetValidValue(value, false);
+                _updated_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("updated_at");
                 Onupdated_atChanged();
             }
         }
-        private global::System.String _updated_at;
-        partial void Onupdated_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _updated_at;
+        partial void Onupdated_atChanging(Nullable<global::System.DateTime> value);
         partial void Onupdated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String updated_by
         {
@@ -2518,7 +3732,7 @@ namespace WorkManager
             {
                 Onupdated_byChanging(value);
                 ReportPropertyChanging("updated_by");
-                _updated_by = StructuralObject.SetValidValue(value, false);
+                _updated_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("updated_by");
                 Onupdated_byChanged();
             }
@@ -2530,9 +3744,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String deleted_at
+        public Nullable<global::System.DateTime> deleted_at
         {
             get
             {
@@ -2542,19 +3756,19 @@ namespace WorkManager
             {
                 Ondeleted_atChanging(value);
                 ReportPropertyChanging("deleted_at");
-                _deleted_at = StructuralObject.SetValidValue(value, false);
+                _deleted_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("deleted_at");
                 Ondeleted_atChanged();
             }
         }
-        private global::System.String _deleted_at;
-        partial void Ondeleted_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _deleted_at;
+        partial void Ondeleted_atChanging(Nullable<global::System.DateTime> value);
         partial void Ondeleted_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String deleted_by
         {
@@ -2566,7 +3780,7 @@ namespace WorkManager
             {
                 Ondeleted_byChanging(value);
                 ReportPropertyChanging("deleted_by");
-                _deleted_by = StructuralObject.SetValidValue(value, false);
+                _deleted_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("deleted_by");
                 Ondeleted_byChanged();
             }
@@ -2580,7 +3794,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String delete_flag
+        public global::System.Boolean delete_flag
         {
             get
             {
@@ -2590,13 +3804,13 @@ namespace WorkManager
             {
                 Ondelete_flagChanging(value);
                 ReportPropertyChanging("delete_flag");
-                _delete_flag = StructuralObject.SetValidValue(value, false);
+                _delete_flag = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("delete_flag");
                 Ondelete_flagChanged();
             }
         }
-        private global::System.String _delete_flag;
-        partial void Ondelete_flagChanging(global::System.String value);
+        private global::System.Boolean _delete_flag = false;
+        partial void Ondelete_flagChanging(global::System.Boolean value);
         partial void Ondelete_flagChanged();
 
         #endregion
@@ -2721,13 +3935,11 @@ namespace WorkManager
         /// </summary>
         /// <param name="id">ID プロパティの初期値。</param>
         /// <param name="times">times プロパティの初期値。</param>
-        /// <param name="note">note プロパティの初期値。</param>
-        public static work_detail Creatework_detail(global::System.Int32 id, global::System.String times, global::System.String note)
+        public static work_detail Creatework_detail(global::System.Int32 id, global::System.DateTimeOffset times)
         {
             work_detail work_detail = new work_detail();
             work_detail.ID = id;
             work_detail.times = times;
-            work_detail.note = note;
             return work_detail;
         }
 
@@ -2767,7 +3979,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String times
+        public global::System.DateTimeOffset times
         {
             get
             {
@@ -2777,19 +3989,19 @@ namespace WorkManager
             {
                 OntimesChanging(value);
                 ReportPropertyChanging("times");
-                _times = StructuralObject.SetValidValue(value, false);
+                _times = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("times");
                 OntimesChanged();
             }
         }
-        private global::System.String _times;
-        partial void OntimesChanging(global::System.String value);
+        private global::System.DateTimeOffset _times;
+        partial void OntimesChanging(global::System.DateTimeOffset value);
         partial void OntimesChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String note
         {
@@ -2801,7 +4013,7 @@ namespace WorkManager
             {
                 OnnoteChanging(value);
                 ReportPropertyChanging("note");
-                _note = StructuralObject.SetValidValue(value, false);
+                _note = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("note");
                 OnnoteChanged();
             }
@@ -2951,20 +4163,7 @@ namespace WorkManager
         /// <param name="month">month プロパティの初期値。</param>
         /// <param name="day">day プロパティの初期値。</param>
         /// <param name="fY">FY プロパティの初期値。</param>
-        /// <param name="start_time">start_time プロパティの初期値。</param>
-        /// <param name="end_time">end_time プロパティの初期値。</param>
-        /// <param name="work_times">work_times プロパティの初期値。</param>
-        /// <param name="overtime125">overtime125 プロパティの初期値。</param>
-        /// <param name="overtime150">overtime150 プロパティの初期値。</param>
-        /// <param name="holiday_work_times">holiday_work_times プロパティの初期値。</param>
-        /// <param name="note">note プロパティの初期値。</param>
-        /// <param name="created_at">created_at プロパティの初期値。</param>
-        /// <param name="created_by">created_by プロパティの初期値。</param>
-        /// <param name="updated_at">updated_at プロパティの初期値。</param>
-        /// <param name="updated_by">updated_by プロパティの初期値。</param>
-        /// <param name="deleted_at">deleted_at プロパティの初期値。</param>
-        /// <param name="deleted_by">deleted_by プロパティの初期値。</param>
-        public static work_reports Creatework_reports(global::System.Int32 id, global::System.String year, global::System.String month, global::System.String day, global::System.String fY, global::System.String start_time, global::System.String end_time, global::System.String work_times, global::System.String overtime125, global::System.String overtime150, global::System.String holiday_work_times, global::System.String note, global::System.String created_at, global::System.String created_by, global::System.String updated_at, global::System.String updated_by, global::System.String deleted_at, global::System.String deleted_by)
+        public static work_reports Creatework_reports(global::System.Int32 id, global::System.Int16 year, global::System.Int16 month, global::System.Int16 day, global::System.Int16 fY)
         {
             work_reports work_reports = new work_reports();
             work_reports.ID = id;
@@ -2972,19 +4171,6 @@ namespace WorkManager
             work_reports.month = month;
             work_reports.day = day;
             work_reports.FY = fY;
-            work_reports.start_time = start_time;
-            work_reports.end_time = end_time;
-            work_reports.work_times = work_times;
-            work_reports.overtime125 = overtime125;
-            work_reports.overtime150 = overtime150;
-            work_reports.holiday_work_times = holiday_work_times;
-            work_reports.note = note;
-            work_reports.created_at = created_at;
-            work_reports.created_by = created_by;
-            work_reports.updated_at = updated_at;
-            work_reports.updated_by = updated_by;
-            work_reports.deleted_at = deleted_at;
-            work_reports.deleted_by = deleted_by;
             return work_reports;
         }
 
@@ -3024,7 +4210,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String year
+        public global::System.Int16 year
         {
             get
             {
@@ -3034,13 +4220,13 @@ namespace WorkManager
             {
                 OnyearChanging(value);
                 ReportPropertyChanging("year");
-                _year = StructuralObject.SetValidValue(value, false);
+                _year = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("year");
                 OnyearChanged();
             }
         }
-        private global::System.String _year;
-        partial void OnyearChanging(global::System.String value);
+        private global::System.Int16 _year;
+        partial void OnyearChanging(global::System.Int16 value);
         partial void OnyearChanged();
     
         /// <summary>
@@ -3048,7 +4234,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String month
+        public global::System.Int16 month
         {
             get
             {
@@ -3058,13 +4244,13 @@ namespace WorkManager
             {
                 OnmonthChanging(value);
                 ReportPropertyChanging("month");
-                _month = StructuralObject.SetValidValue(value, false);
+                _month = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("month");
                 OnmonthChanged();
             }
         }
-        private global::System.String _month;
-        partial void OnmonthChanging(global::System.String value);
+        private global::System.Int16 _month;
+        partial void OnmonthChanging(global::System.Int16 value);
         partial void OnmonthChanged();
     
         /// <summary>
@@ -3072,7 +4258,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String day
+        public global::System.Int16 day
         {
             get
             {
@@ -3082,13 +4268,13 @@ namespace WorkManager
             {
                 OndayChanging(value);
                 ReportPropertyChanging("day");
-                _day = StructuralObject.SetValidValue(value, false);
+                _day = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("day");
                 OndayChanged();
             }
         }
-        private global::System.String _day;
-        partial void OndayChanging(global::System.String value);
+        private global::System.Int16 _day;
+        partial void OndayChanging(global::System.Int16 value);
         partial void OndayChanged();
     
         /// <summary>
@@ -3096,7 +4282,7 @@ namespace WorkManager
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String FY
+        public global::System.Int16 FY
         {
             get
             {
@@ -3106,21 +4292,21 @@ namespace WorkManager
             {
                 OnFYChanging(value);
                 ReportPropertyChanging("FY");
-                _FY = StructuralObject.SetValidValue(value, false);
+                _FY = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("FY");
                 OnFYChanged();
             }
         }
-        private global::System.String _FY;
-        partial void OnFYChanging(global::System.String value);
+        private global::System.Int16 _FY;
+        partial void OnFYChanging(global::System.Int16 value);
         partial void OnFYChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String start_time
+        public Nullable<global::System.DateTime> start_time
         {
             get
             {
@@ -3130,21 +4316,21 @@ namespace WorkManager
             {
                 Onstart_timeChanging(value);
                 ReportPropertyChanging("start_time");
-                _start_time = StructuralObject.SetValidValue(value, false);
+                _start_time = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("start_time");
                 Onstart_timeChanged();
             }
         }
-        private global::System.String _start_time;
-        partial void Onstart_timeChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _start_time;
+        partial void Onstart_timeChanging(Nullable<global::System.DateTime> value);
         partial void Onstart_timeChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String end_time
+        public Nullable<global::System.DateTime> end_time
         {
             get
             {
@@ -3154,21 +4340,21 @@ namespace WorkManager
             {
                 Onend_timeChanging(value);
                 ReportPropertyChanging("end_time");
-                _end_time = StructuralObject.SetValidValue(value, false);
+                _end_time = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("end_time");
                 Onend_timeChanged();
             }
         }
-        private global::System.String _end_time;
-        partial void Onend_timeChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _end_time;
+        partial void Onend_timeChanging(Nullable<global::System.DateTime> value);
         partial void Onend_timeChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String work_times
+        public Nullable<global::System.Int16> work_times
         {
             get
             {
@@ -3178,21 +4364,21 @@ namespace WorkManager
             {
                 Onwork_timesChanging(value);
                 ReportPropertyChanging("work_times");
-                _work_times = StructuralObject.SetValidValue(value, false);
+                _work_times = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("work_times");
                 Onwork_timesChanged();
             }
         }
-        private global::System.String _work_times;
-        partial void Onwork_timesChanging(global::System.String value);
+        private Nullable<global::System.Int16> _work_times;
+        partial void Onwork_timesChanging(Nullable<global::System.Int16> value);
         partial void Onwork_timesChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String overtime125
+        public Nullable<global::System.Int16> overtime125
         {
             get
             {
@@ -3202,21 +4388,21 @@ namespace WorkManager
             {
                 Onovertime125Changing(value);
                 ReportPropertyChanging("overtime125");
-                _overtime125 = StructuralObject.SetValidValue(value, false);
+                _overtime125 = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("overtime125");
                 Onovertime125Changed();
             }
         }
-        private global::System.String _overtime125;
-        partial void Onovertime125Changing(global::System.String value);
+        private Nullable<global::System.Int16> _overtime125;
+        partial void Onovertime125Changing(Nullable<global::System.Int16> value);
         partial void Onovertime125Changed();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String overtime150
+        public Nullable<global::System.Int16> overtime150
         {
             get
             {
@@ -3226,21 +4412,21 @@ namespace WorkManager
             {
                 Onovertime150Changing(value);
                 ReportPropertyChanging("overtime150");
-                _overtime150 = StructuralObject.SetValidValue(value, false);
+                _overtime150 = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("overtime150");
                 Onovertime150Changed();
             }
         }
-        private global::System.String _overtime150;
-        partial void Onovertime150Changing(global::System.String value);
+        private Nullable<global::System.Int16> _overtime150;
+        partial void Onovertime150Changing(Nullable<global::System.Int16> value);
         partial void Onovertime150Changed();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String holiday_work_times
+        public Nullable<global::System.Int16> holiday_work_times
         {
             get
             {
@@ -3250,19 +4436,19 @@ namespace WorkManager
             {
                 Onholiday_work_timesChanging(value);
                 ReportPropertyChanging("holiday_work_times");
-                _holiday_work_times = StructuralObject.SetValidValue(value, false);
+                _holiday_work_times = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("holiday_work_times");
                 Onholiday_work_timesChanged();
             }
         }
-        private global::System.String _holiday_work_times;
-        partial void Onholiday_work_timesChanging(global::System.String value);
+        private Nullable<global::System.Int16> _holiday_work_times;
+        partial void Onholiday_work_timesChanging(Nullable<global::System.Int16> value);
         partial void Onholiday_work_timesChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String note
         {
@@ -3274,7 +4460,7 @@ namespace WorkManager
             {
                 OnnoteChanging(value);
                 ReportPropertyChanging("note");
-                _note = StructuralObject.SetValidValue(value, false);
+                _note = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("note");
                 OnnoteChanged();
             }
@@ -3286,9 +4472,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String created_at
+        public Nullable<global::System.DateTime> created_at
         {
             get
             {
@@ -3298,19 +4484,19 @@ namespace WorkManager
             {
                 Oncreated_atChanging(value);
                 ReportPropertyChanging("created_at");
-                _created_at = StructuralObject.SetValidValue(value, false);
+                _created_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("created_at");
                 Oncreated_atChanged();
             }
         }
-        private global::System.String _created_at;
-        partial void Oncreated_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _created_at;
+        partial void Oncreated_atChanging(Nullable<global::System.DateTime> value);
         partial void Oncreated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String created_by
         {
@@ -3322,7 +4508,7 @@ namespace WorkManager
             {
                 Oncreated_byChanging(value);
                 ReportPropertyChanging("created_by");
-                _created_by = StructuralObject.SetValidValue(value, false);
+                _created_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("created_by");
                 Oncreated_byChanged();
             }
@@ -3334,9 +4520,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String updated_at
+        public Nullable<global::System.DateTime> updated_at
         {
             get
             {
@@ -3346,19 +4532,19 @@ namespace WorkManager
             {
                 Onupdated_atChanging(value);
                 ReportPropertyChanging("updated_at");
-                _updated_at = StructuralObject.SetValidValue(value, false);
+                _updated_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("updated_at");
                 Onupdated_atChanged();
             }
         }
-        private global::System.String _updated_at;
-        partial void Onupdated_atChanging(global::System.String value);
+        private Nullable<global::System.DateTime> _updated_at;
+        partial void Onupdated_atChanging(Nullable<global::System.DateTime> value);
         partial void Onupdated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String updated_by
         {
@@ -3370,7 +4556,7 @@ namespace WorkManager
             {
                 Onupdated_byChanging(value);
                 ReportPropertyChanging("updated_by");
-                _updated_by = StructuralObject.SetValidValue(value, false);
+                _updated_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("updated_by");
                 Onupdated_byChanged();
             }
@@ -3382,9 +4568,9 @@ namespace WorkManager
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String deleted_at
+        public Nullable<global::System.Int16> deleted_at
         {
             get
             {
@@ -3394,19 +4580,19 @@ namespace WorkManager
             {
                 Ondeleted_atChanging(value);
                 ReportPropertyChanging("deleted_at");
-                _deleted_at = StructuralObject.SetValidValue(value, false);
+                _deleted_at = StructuralObject.SetValidValue(value);
                 ReportPropertyChanged("deleted_at");
                 Ondeleted_atChanged();
             }
         }
-        private global::System.String _deleted_at;
-        partial void Ondeleted_atChanging(global::System.String value);
+        private Nullable<global::System.Int16> _deleted_at;
+        partial void Ondeleted_atChanging(Nullable<global::System.Int16> value);
         partial void Ondeleted_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String deleted_by
         {
@@ -3418,7 +4604,7 @@ namespace WorkManager
             {
                 Ondeleted_byChanging(value);
                 ReportPropertyChanging("deleted_by");
-                _deleted_by = StructuralObject.SetValidValue(value, false);
+                _deleted_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("deleted_by");
                 Ondeleted_byChanged();
             }
