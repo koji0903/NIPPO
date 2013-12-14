@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/14/2013 17:03:08
+-- Date Created: 12/14/2013 23:43:10
 -- Generated from EDMX file: C:\Users\koji\Documents\Visual Studio 2010\Projects\NIPPO\NIPPO\NIPPO_DB.edmx
 -- --------------------------------------------------
 
@@ -18,7 +18,7 @@ GO
 -- --------------------------------------------------
 
 IF OBJECT_ID(N'[dbo].[FK_authoritiesusers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[authorities] DROP CONSTRAINT [FK_authoritiesusers];
+    ALTER TABLE [dbo].[users] DROP CONSTRAINT [FK_authoritiesusers];
 GO
 IF OBJECT_ID(N'[dbo].[FK_userssections]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[users] DROP CONSTRAINT [FK_userssections];
@@ -27,13 +27,13 @@ IF OBJECT_ID(N'[dbo].[FK_userswork_reports]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[work_reports] DROP CONSTRAINT [FK_userswork_reports];
 GO
 IF OBJECT_ID(N'[dbo].[FK_work_reportswork_detail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[work_reports] DROP CONSTRAINT [FK_work_reportswork_detail];
+    ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_reportswork_detail];
 GO
 IF OBJECT_ID(N'[dbo].[FK_work_detailprojects]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_detailprojects];
 GO
 IF OBJECT_ID(N'[dbo].[FK_work_detailtasks]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_detailtasks];
+    ALTER TABLE [dbo].[tasks] DROP CONSTRAINT [FK_work_detailtasks];
 GO
 IF OBJECT_ID(N'[dbo].[FK_projectscustomers]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[customers] DROP CONSTRAINT [FK_projectscustomers];
@@ -82,8 +82,8 @@ GO
 IF OBJECT_ID(N'[dbo].[holidays]', 'U') IS NOT NULL
     DROP TABLE [dbo].[holidays];
 GO
-IF OBJECT_ID(N'[dbo].[businnes_segments]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[businnes_segments];
+IF OBJECT_ID(N'[dbo].[business_segments]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[business_segments];
 GO
 IF OBJECT_ID(N'[dbo].[business_type]', 'U') IS NOT NULL
     DROP TABLE [dbo].[business_type];
@@ -99,7 +99,7 @@ GO
 -- Creating table 'users'
 CREATE TABLE [dbo].[users] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [login] nvarchar(max)  NOT NULL,
+    [login] nvarchar(max)  NULL,
     [password] nvarchar(max)  NOT NULL,
     [lastname] nvarchar(max)  NOT NULL,
     [firstname] nvarchar(max)  NOT NULL,
@@ -168,7 +168,7 @@ GO
 -- Creating table 'work_detail'
 CREATE TABLE [dbo].[work_detail] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [times] datetimeoffset  NOT NULL,
+    [times] time  NOT NULL,
     [note] nvarchar(max)  NULL,
     [work_reports_ID] int  NULL,
     [projects_ID] int  NULL
@@ -244,16 +244,16 @@ CREATE TABLE [dbo].[holidays] (
 );
 GO
 
--- Creating table 'businnes_segments'
-CREATE TABLE [dbo].[businnes_segments] (
+-- Creating table 'business_segments'
+CREATE TABLE [dbo].[business_segments] (
     [ID] int IDENTITY(1,1) NOT NULL,
     [FY] smallint  NOT NULL,
     [code] smallint  NOT NULL,
     [name] nvarchar(max)  NOT NULL,
     [alias] nvarchar(max)  NULL,
     [delete_flag] bit  NOT NULL,
-    [created_at] datetime  NOT NULL,
-    [created_by] nvarchar(max)  NOT NULL,
+    [created_at] datetime  NULL,
+    [created_by] nvarchar(max)  NULL,
     [updated_at] datetime  NULL,
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] datetime  NULL,
@@ -269,8 +269,8 @@ CREATE TABLE [dbo].[business_type] (
     [name] nvarchar(max)  NOT NULL,
     [alias] nvarchar(max)  NULL,
     [delete_flag] bit  NOT NULL,
-    [created_at] datetime  NOT NULL,
-    [created_by] nvarchar(max)  NOT NULL,
+    [created_at] datetime  NULL,
+    [created_by] nvarchar(max)  NULL,
     [updated_at] datetime  NULL,
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] datetime  NULL,
@@ -287,8 +287,8 @@ CREATE TABLE [dbo].[business_detail] (
     [name] nvarchar(max)  NOT NULL,
     [alias] nvarchar(max)  NULL,
     [delete_flag] bit  NOT NULL,
-    [created_at] datetime  NOT NULL,
-    [created_by] nvarchar(max)  NOT NULL,
+    [created_at] datetime  NULL,
+    [created_by] nvarchar(max)  NULL,
     [updated_at] datetime  NULL,
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] datetime  NULL,
@@ -355,9 +355,9 @@ ADD CONSTRAINT [PK_holidays]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
--- Creating primary key on [ID] in table 'businnes_segments'
-ALTER TABLE [dbo].[businnes_segments]
-ADD CONSTRAINT [PK_businnes_segments]
+-- Creating primary key on [ID] in table 'business_segments'
+ALTER TABLE [dbo].[business_segments]
+ADD CONSTRAINT [PK_business_segments]
     PRIMARY KEY CLUSTERED ([ID] ASC);
 GO
 
@@ -479,7 +479,7 @@ GO
 ALTER TABLE [dbo].[business_type]
 ADD CONSTRAINT [FK_business_segmentsbusiness_type]
     FOREIGN KEY ([business_segments_ID])
-    REFERENCES [dbo].[businnes_segments]
+    REFERENCES [dbo].[business_segments]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 

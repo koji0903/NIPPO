@@ -19,17 +19,17 @@ using System.Xml.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM リレーションシップのメタデータ
 
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "authoritiesusers", "authorities", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.authorities), "users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.users))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "userssections", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.users), "sections", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.sections))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "userswork_reports", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.users), "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_reports))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_reportswork_detail", "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_reports), "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_detail))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_detailprojects", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_detail), "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.projects))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "work_detailtasks", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_detail), "tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.tasks))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectscustomers", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.projects), "customers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.customers))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "business_segmentsbusiness_type", "business_segments", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_segments), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_type))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "business_typebusiness_detail", "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_type), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_detail))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectsbusiness_type", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.projects), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_type))]
-[assembly: EdmRelationshipAttribute("WorkManagerDB", "projectsbusiness_detail", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.projects), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_detail))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "authoritiesusers", "authorities", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.authorities), "users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.users))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "userssections", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.users), "sections", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.sections))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "userswork_reports", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.users), "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_reports))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "work_reportswork_detail", "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_reports), "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_detail))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "work_detailprojects", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_detail), "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.projects))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "work_detailtasks", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_detail), "tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.tasks))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "projectscustomers", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.projects), "customers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.customers))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "business_segmentsbusiness_type", "business_segments", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_segments), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_type))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "business_typebusiness_detail", "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_type), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_detail))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "projectsbusiness_type", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.projects), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_type))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "projectsbusiness_detail", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.projects), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_detail))]
 
 #endregion
 
@@ -40,32 +40,32 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    public partial class WorkManagerDBContainer : ObjectContext
+    public partial class NIPPO_DBContainer : ObjectContext
     {
         #region コンストラクター
     
         /// <summary>
-        /// アプリケーション構成ファイルの 'WorkManagerDBContainer' セクションにある接続文字列を使用して新しい WorkManagerDBContainer オブジェクトを初期化します。
+        /// アプリケーション構成ファイルの 'NIPPO_DBContainer' セクションにある接続文字列を使用して新しい NIPPO_DBContainer オブジェクトを初期化します。
         /// </summary>
-        public WorkManagerDBContainer() : base("name=WorkManagerDBContainer", "WorkManagerDBContainer")
+        public NIPPO_DBContainer() : base("name=NIPPO_DBContainer", "NIPPO_DBContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// 新しい WorkManagerDBContainer オブジェクトを初期化します。
+        /// 新しい NIPPO_DBContainer オブジェクトを初期化します。
         /// </summary>
-        public WorkManagerDBContainer(string connectionString) : base(connectionString, "WorkManagerDBContainer")
+        public NIPPO_DBContainer(string connectionString) : base(connectionString, "NIPPO_DBContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
         }
     
         /// <summary>
-        /// 新しい WorkManagerDBContainer オブジェクトを初期化します。
+        /// 新しい NIPPO_DBContainer オブジェクトを初期化します。
         /// </summary>
-        public WorkManagerDBContainer(EntityConnection connection) : base(connection, "WorkManagerDBContainer")
+        public NIPPO_DBContainer(EntityConnection connection) : base(connection, "NIPPO_DBContainer")
         {
             this.ContextOptions.LazyLoadingEnabled = true;
             OnContextCreated();
@@ -228,18 +228,18 @@ namespace NIPPO
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        public ObjectSet<business_segments> businnes_segments
+        public ObjectSet<business_segments> business_segments
         {
             get
             {
-                if ((_businnes_segments == null))
+                if ((_business_segments == null))
                 {
-                    _businnes_segments = base.CreateObjectSet<business_segments>("businnes_segments");
+                    _business_segments = base.CreateObjectSet<business_segments>("business_segments");
                 }
-                return _businnes_segments;
+                return _business_segments;
             }
         }
-        private ObjectSet<business_segments> _businnes_segments;
+        private ObjectSet<business_segments> _business_segments;
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
@@ -350,11 +350,11 @@ namespace NIPPO
         }
     
         /// <summary>
-        /// businnes_segments EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
+        /// business_segments EntitySet に新しいオブジェクトを追加するための非推奨のメソッドです。代わりに、関連付けられている ObjectSet&lt;T&gt; プロパティの .Add メソッドを使用してください。
         /// </summary>
-        public void AddTobusinnes_segments(business_segments business_segments)
+        public void AddTobusiness_segments(business_segments business_segments)
         {
-            base.AddObject("businnes_segments", business_segments);
+            base.AddObject("business_segments", business_segments);
         }
     
         /// <summary>
@@ -387,7 +387,7 @@ namespace NIPPO
     /// <LongDescription>
     /// ユーザの権限情報を保存する
     /// </LongDescription>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="authorities")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="authorities")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class authorities : EntityObject
@@ -547,16 +547,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "authoritiesusers", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "authoritiesusers", "users")]
         public users users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("WorkManagerDB.authoritiesusers", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("NIPPO_DB.authoritiesusers", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("WorkManagerDB.authoritiesusers", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("NIPPO_DB.authoritiesusers", "users").Value = value;
             }
         }
         /// <summary>
@@ -568,13 +568,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("WorkManagerDB.authoritiesusers", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("NIPPO_DB.authoritiesusers", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<users>("WorkManagerDB.authoritiesusers", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<users>("NIPPO_DB.authoritiesusers", "users", value);
                 }
             }
         }
@@ -586,7 +586,7 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="business_detail")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="business_detail")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class business_detail : EntityObject
@@ -600,17 +600,13 @@ namespace NIPPO
         /// <param name="fY">FY プロパティの初期値。</param>
         /// <param name="code">code プロパティの初期値。</param>
         /// <param name="name">name プロパティの初期値。</param>
-        /// <param name="created_at">created_at プロパティの初期値。</param>
-        /// <param name="created_by">created_by プロパティの初期値。</param>
-        public static business_detail Createbusiness_detail(global::System.Int32 id, global::System.Int16 fY, global::System.Int16 code, global::System.String name, global::System.DateTime created_at, global::System.String created_by)
+        public static business_detail Createbusiness_detail(global::System.Int32 id, global::System.Int16 fY, global::System.Int16 code, global::System.String name)
         {
             business_detail business_detail = new business_detail();
             business_detail.ID = id;
             business_detail.FY = fY;
             business_detail.code = code;
             business_detail.name = name;
-            business_detail.created_at = created_at;
-            business_detail.created_by = created_by;
             return business_detail;
         }
 
@@ -768,9 +764,9 @@ namespace NIPPO
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime created_at
+        public Nullable<global::System.DateTime> created_at
         {
             get
             {
@@ -785,14 +781,14 @@ namespace NIPPO
                 Oncreated_atChanged();
             }
         }
-        private global::System.DateTime _created_at;
-        partial void Oncreated_atChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _created_at;
+        partial void Oncreated_atChanging(Nullable<global::System.DateTime> value);
         partial void Oncreated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String created_by
         {
@@ -804,7 +800,7 @@ namespace NIPPO
             {
                 Oncreated_byChanging(value);
                 ReportPropertyChanging("created_by");
-                _created_by = StructuralObject.SetValidValue(value, false);
+                _created_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("created_by");
                 Oncreated_byChanged();
             }
@@ -920,16 +916,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "business_typebusiness_detail", "business_type")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "business_typebusiness_detail", "business_type")]
         public business_type business_type
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.business_typebusiness_detail", "business_type").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("NIPPO_DB.business_typebusiness_detail", "business_type").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.business_typebusiness_detail", "business_type").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("NIPPO_DB.business_typebusiness_detail", "business_type").Value = value;
             }
         }
         /// <summary>
@@ -941,13 +937,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.business_typebusiness_detail", "business_type");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("NIPPO_DB.business_typebusiness_detail", "business_type");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_type>("WorkManagerDB.business_typebusiness_detail", "business_type", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_type>("NIPPO_DB.business_typebusiness_detail", "business_type", value);
                 }
             }
         }
@@ -958,18 +954,18 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "projectsbusiness_detail", "projects")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "projectsbusiness_detail", "projects")]
         public EntityCollection<projects> projects
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<projects>("WorkManagerDB.projectsbusiness_detail", "projects");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<projects>("NIPPO_DB.projectsbusiness_detail", "projects");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<projects>("WorkManagerDB.projectsbusiness_detail", "projects", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<projects>("NIPPO_DB.projectsbusiness_detail", "projects", value);
                 }
             }
         }
@@ -981,7 +977,7 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="business_segments")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="business_segments")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class business_segments : EntityObject
@@ -995,17 +991,13 @@ namespace NIPPO
         /// <param name="fY">FY プロパティの初期値。</param>
         /// <param name="code">code プロパティの初期値。</param>
         /// <param name="name">name プロパティの初期値。</param>
-        /// <param name="created_at">created_at プロパティの初期値。</param>
-        /// <param name="created_by">created_by プロパティの初期値。</param>
-        public static business_segments Createbusiness_segments(global::System.Int32 id, global::System.Int16 fY, global::System.Int16 code, global::System.String name, global::System.DateTime created_at, global::System.String created_by)
+        public static business_segments Createbusiness_segments(global::System.Int32 id, global::System.Int16 fY, global::System.Int16 code, global::System.String name)
         {
             business_segments business_segments = new business_segments();
             business_segments.ID = id;
             business_segments.FY = fY;
             business_segments.code = code;
             business_segments.name = name;
-            business_segments.created_at = created_at;
-            business_segments.created_by = created_by;
             return business_segments;
         }
 
@@ -1163,9 +1155,9 @@ namespace NIPPO
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime created_at
+        public Nullable<global::System.DateTime> created_at
         {
             get
             {
@@ -1180,14 +1172,14 @@ namespace NIPPO
                 Oncreated_atChanged();
             }
         }
-        private global::System.DateTime _created_at;
-        partial void Oncreated_atChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _created_at;
+        partial void Oncreated_atChanging(Nullable<global::System.DateTime> value);
         partial void Oncreated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String created_by
         {
@@ -1199,7 +1191,7 @@ namespace NIPPO
             {
                 Oncreated_byChanging(value);
                 ReportPropertyChanging("created_by");
-                _created_by = StructuralObject.SetValidValue(value, false);
+                _created_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("created_by");
                 Oncreated_byChanged();
             }
@@ -1315,18 +1307,18 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "business_segmentsbusiness_type", "business_type")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "business_segmentsbusiness_type", "business_type")]
         public EntityCollection<business_type> business_type
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<business_type>("WorkManagerDB.business_segmentsbusiness_type", "business_type");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<business_type>("NIPPO_DB.business_segmentsbusiness_type", "business_type");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<business_type>("WorkManagerDB.business_segmentsbusiness_type", "business_type", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<business_type>("NIPPO_DB.business_segmentsbusiness_type", "business_type", value);
                 }
             }
         }
@@ -1338,7 +1330,7 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="business_type")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="business_type")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class business_type : EntityObject
@@ -1352,17 +1344,13 @@ namespace NIPPO
         /// <param name="fY">FY プロパティの初期値。</param>
         /// <param name="code">code プロパティの初期値。</param>
         /// <param name="name">name プロパティの初期値。</param>
-        /// <param name="created_at">created_at プロパティの初期値。</param>
-        /// <param name="created_by">created_by プロパティの初期値。</param>
-        public static business_type Createbusiness_type(global::System.Int32 id, global::System.Int16 fY, global::System.Int16 code, global::System.String name, global::System.DateTime created_at, global::System.String created_by)
+        public static business_type Createbusiness_type(global::System.Int32 id, global::System.Int16 fY, global::System.Int16 code, global::System.String name)
         {
             business_type business_type = new business_type();
             business_type.ID = id;
             business_type.FY = fY;
             business_type.code = code;
             business_type.name = name;
-            business_type.created_at = created_at;
-            business_type.created_by = created_by;
             return business_type;
         }
 
@@ -1520,9 +1508,9 @@ namespace NIPPO
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.DateTime created_at
+        public Nullable<global::System.DateTime> created_at
         {
             get
             {
@@ -1537,14 +1525,14 @@ namespace NIPPO
                 Oncreated_atChanged();
             }
         }
-        private global::System.DateTime _created_at;
-        partial void Oncreated_atChanging(global::System.DateTime value);
+        private Nullable<global::System.DateTime> _created_at;
+        partial void Oncreated_atChanging(Nullable<global::System.DateTime> value);
         partial void Oncreated_atChanged();
     
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String created_by
         {
@@ -1556,7 +1544,7 @@ namespace NIPPO
             {
                 Oncreated_byChanging(value);
                 ReportPropertyChanging("created_by");
-                _created_by = StructuralObject.SetValidValue(value, false);
+                _created_by = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("created_by");
                 Oncreated_byChanged();
             }
@@ -1672,16 +1660,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "business_segmentsbusiness_type", "business_segments")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "business_segmentsbusiness_type", "business_segments")]
         public business_segments business_segments
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_segments>("WorkManagerDB.business_segmentsbusiness_type", "business_segments").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_segments>("NIPPO_DB.business_segmentsbusiness_type", "business_segments").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_segments>("WorkManagerDB.business_segmentsbusiness_type", "business_segments").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_segments>("NIPPO_DB.business_segmentsbusiness_type", "business_segments").Value = value;
             }
         }
         /// <summary>
@@ -1693,13 +1681,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_segments>("WorkManagerDB.business_segmentsbusiness_type", "business_segments");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_segments>("NIPPO_DB.business_segmentsbusiness_type", "business_segments");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_segments>("WorkManagerDB.business_segmentsbusiness_type", "business_segments", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_segments>("NIPPO_DB.business_segmentsbusiness_type", "business_segments", value);
                 }
             }
         }
@@ -1710,18 +1698,18 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "business_typebusiness_detail", "business_detail")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "business_typebusiness_detail", "business_detail")]
         public EntityCollection<business_detail> business_detail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<business_detail>("WorkManagerDB.business_typebusiness_detail", "business_detail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<business_detail>("NIPPO_DB.business_typebusiness_detail", "business_detail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<business_detail>("WorkManagerDB.business_typebusiness_detail", "business_detail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<business_detail>("NIPPO_DB.business_typebusiness_detail", "business_detail", value);
                 }
             }
         }
@@ -1732,18 +1720,18 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "projectsbusiness_type", "projects")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "projectsbusiness_type", "projects")]
         public EntityCollection<projects> projects
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<projects>("WorkManagerDB.projectsbusiness_type", "projects");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<projects>("NIPPO_DB.projectsbusiness_type", "projects");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<projects>("WorkManagerDB.projectsbusiness_type", "projects", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<projects>("NIPPO_DB.projectsbusiness_type", "projects", value);
                 }
             }
         }
@@ -1755,7 +1743,7 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="customers")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="customers")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class customers : EntityObject
@@ -2059,16 +2047,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "projectscustomers", "projects")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "projectscustomers", "projects")]
         public projects projects
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("WorkManagerDB.projectscustomers", "projects").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("NIPPO_DB.projectscustomers", "projects").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("WorkManagerDB.projectscustomers", "projects").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("NIPPO_DB.projectscustomers", "projects").Value = value;
             }
         }
         /// <summary>
@@ -2080,13 +2068,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("WorkManagerDB.projectscustomers", "projects");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("NIPPO_DB.projectscustomers", "projects");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<projects>("WorkManagerDB.projectscustomers", "projects", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<projects>("NIPPO_DB.projectscustomers", "projects", value);
                 }
             }
         }
@@ -2101,7 +2089,7 @@ namespace NIPPO
     /// <LongDescription>
     /// 休日情報を保存する。休日指定はマスタ管理者が行う
     /// </LongDescription>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="holidays")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="holidays")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class holidays : EntityObject
@@ -2262,7 +2250,7 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="projects")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="projects")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class projects : EntityObject
@@ -2736,18 +2724,18 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "work_detailprojects", "work_detail")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "work_detailprojects", "work_detail")]
         public EntityCollection<work_detail> work_detail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<work_detail>("WorkManagerDB.work_detailprojects", "work_detail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<work_detail>("NIPPO_DB.work_detailprojects", "work_detail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<work_detail>("WorkManagerDB.work_detailprojects", "work_detail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<work_detail>("NIPPO_DB.work_detailprojects", "work_detail", value);
                 }
             }
         }
@@ -2758,18 +2746,18 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "projectscustomers", "customers")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "projectscustomers", "customers")]
         public EntityCollection<customers> customers
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<customers>("WorkManagerDB.projectscustomers", "customers");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<customers>("NIPPO_DB.projectscustomers", "customers");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<customers>("WorkManagerDB.projectscustomers", "customers", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<customers>("NIPPO_DB.projectscustomers", "customers", value);
                 }
             }
         }
@@ -2780,16 +2768,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "projectsbusiness_type", "business_type")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "projectsbusiness_type", "business_type")]
         public business_type business_type
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.projectsbusiness_type", "business_type").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("NIPPO_DB.projectsbusiness_type", "business_type").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.projectsbusiness_type", "business_type").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("NIPPO_DB.projectsbusiness_type", "business_type").Value = value;
             }
         }
         /// <summary>
@@ -2801,13 +2789,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("WorkManagerDB.projectsbusiness_type", "business_type");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_type>("NIPPO_DB.projectsbusiness_type", "business_type");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_type>("WorkManagerDB.projectsbusiness_type", "business_type", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_type>("NIPPO_DB.projectsbusiness_type", "business_type", value);
                 }
             }
         }
@@ -2818,16 +2806,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "projectsbusiness_detail", "business_detail")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "projectsbusiness_detail", "business_detail")]
         public business_detail business_detail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_detail>("WorkManagerDB.projectsbusiness_detail", "business_detail").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_detail>("NIPPO_DB.projectsbusiness_detail", "business_detail").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_detail>("WorkManagerDB.projectsbusiness_detail", "business_detail").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_detail>("NIPPO_DB.projectsbusiness_detail", "business_detail").Value = value;
             }
         }
         /// <summary>
@@ -2839,13 +2827,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_detail>("WorkManagerDB.projectsbusiness_detail", "business_detail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<business_detail>("NIPPO_DB.projectsbusiness_detail", "business_detail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_detail>("WorkManagerDB.projectsbusiness_detail", "business_detail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<business_detail>("NIPPO_DB.projectsbusiness_detail", "business_detail", value);
                 }
             }
         }
@@ -2857,7 +2845,7 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="sections")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="sections")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class sections : EntityObject
@@ -3161,18 +3149,18 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "userssections", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "userssections", "users")]
         public EntityCollection<users> users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<users>("WorkManagerDB.userssections", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<users>("NIPPO_DB.userssections", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<users>("WorkManagerDB.userssections", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<users>("NIPPO_DB.userssections", "users", value);
                 }
             }
         }
@@ -3184,7 +3172,7 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="tasks")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="tasks")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class tasks : EntityObject
@@ -3488,16 +3476,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "work_detailtasks", "work_detail")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "work_detailtasks", "work_detail")]
         public work_detail work_detail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("WorkManagerDB.work_detailtasks", "work_detail").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_detailtasks", "work_detail").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("WorkManagerDB.work_detailtasks", "work_detail").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_detailtasks", "work_detail").Value = value;
             }
         }
         /// <summary>
@@ -3509,13 +3497,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("WorkManagerDB.work_detailtasks", "work_detail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_detailtasks", "work_detail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<work_detail>("WorkManagerDB.work_detailtasks", "work_detail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<work_detail>("NIPPO_DB.work_detailtasks", "work_detail", value);
                 }
             }
         }
@@ -3527,7 +3515,7 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="users")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="users")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class users : EntityObject
@@ -3538,15 +3526,13 @@ namespace NIPPO
         /// 新しい users オブジェクトを作成します。
         /// </summary>
         /// <param name="id">ID プロパティの初期値。</param>
-        /// <param name="login">login プロパティの初期値。</param>
         /// <param name="password">password プロパティの初期値。</param>
         /// <param name="lastname">lastname プロパティの初期値。</param>
         /// <param name="firstname">firstname プロパティの初期値。</param>
-        public static users Createusers(global::System.Int32 id, global::System.String login, global::System.String password, global::System.String lastname, global::System.String firstname)
+        public static users Createusers(global::System.Int32 id, global::System.String password, global::System.String lastname, global::System.String firstname)
         {
             users users = new users();
             users.ID = id;
-            users.login = login;
             users.password = password;
             users.lastname = lastname;
             users.firstname = firstname;
@@ -3587,7 +3573,7 @@ namespace NIPPO
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
         public global::System.String login
         {
@@ -3599,7 +3585,7 @@ namespace NIPPO
             {
                 OnloginChanging(value);
                 ReportPropertyChanging("login");
-                _login = StructuralObject.SetValidValue(value, false);
+                _login = StructuralObject.SetValidValue(value, true);
                 ReportPropertyChanged("login");
                 OnloginChanged();
             }
@@ -3859,16 +3845,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "authoritiesusers", "authorities")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "authoritiesusers", "authorities")]
         public authorities authorities
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<authorities>("WorkManagerDB.authoritiesusers", "authorities").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<authorities>("NIPPO_DB.authoritiesusers", "authorities").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<authorities>("WorkManagerDB.authoritiesusers", "authorities").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<authorities>("NIPPO_DB.authoritiesusers", "authorities").Value = value;
             }
         }
         /// <summary>
@@ -3880,13 +3866,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<authorities>("WorkManagerDB.authoritiesusers", "authorities");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<authorities>("NIPPO_DB.authoritiesusers", "authorities");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<authorities>("WorkManagerDB.authoritiesusers", "authorities", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<authorities>("NIPPO_DB.authoritiesusers", "authorities", value);
                 }
             }
         }
@@ -3897,16 +3883,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "userssections", "sections")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "userssections", "sections")]
         public sections sections
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sections>("WorkManagerDB.userssections", "sections").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sections>("NIPPO_DB.userssections", "sections").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sections>("WorkManagerDB.userssections", "sections").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sections>("NIPPO_DB.userssections", "sections").Value = value;
             }
         }
         /// <summary>
@@ -3918,13 +3904,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sections>("WorkManagerDB.userssections", "sections");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<sections>("NIPPO_DB.userssections", "sections");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<sections>("WorkManagerDB.userssections", "sections", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<sections>("NIPPO_DB.userssections", "sections", value);
                 }
             }
         }
@@ -3935,18 +3921,18 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "userswork_reports", "work_reports")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "userswork_reports", "work_reports")]
         public EntityCollection<work_reports> work_reports
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<work_reports>("WorkManagerDB.userswork_reports", "work_reports");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<work_reports>("NIPPO_DB.userswork_reports", "work_reports");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<work_reports>("WorkManagerDB.userswork_reports", "work_reports", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<work_reports>("NIPPO_DB.userswork_reports", "work_reports", value);
                 }
             }
         }
@@ -3958,7 +3944,7 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="work_detail")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="work_detail")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class work_detail : EntityObject
@@ -3970,7 +3956,7 @@ namespace NIPPO
         /// </summary>
         /// <param name="id">ID プロパティの初期値。</param>
         /// <param name="times">times プロパティの初期値。</param>
-        public static work_detail Creatework_detail(global::System.Int32 id, global::System.DateTimeOffset times)
+        public static work_detail Creatework_detail(global::System.Int32 id, global::System.TimeSpan times)
         {
             work_detail work_detail = new work_detail();
             work_detail.ID = id;
@@ -4014,7 +4000,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.DateTimeOffset times
+        public global::System.TimeSpan times
         {
             get
             {
@@ -4029,8 +4015,8 @@ namespace NIPPO
                 OntimesChanged();
             }
         }
-        private global::System.DateTimeOffset _times;
-        partial void OntimesChanging(global::System.DateTimeOffset value);
+        private global::System.TimeSpan _times;
+        partial void OntimesChanging(global::System.TimeSpan value);
         partial void OntimesChanged();
     
         /// <summary>
@@ -4068,16 +4054,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "work_reportswork_detail", "work_reports")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "work_reportswork_detail", "work_reports")]
         public work_reports work_reports
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_reports>("WorkManagerDB.work_reportswork_detail", "work_reports").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_reports>("NIPPO_DB.work_reportswork_detail", "work_reports").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_reports>("WorkManagerDB.work_reportswork_detail", "work_reports").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_reports>("NIPPO_DB.work_reportswork_detail", "work_reports").Value = value;
             }
         }
         /// <summary>
@@ -4089,13 +4075,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_reports>("WorkManagerDB.work_reportswork_detail", "work_reports");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_reports>("NIPPO_DB.work_reportswork_detail", "work_reports");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<work_reports>("WorkManagerDB.work_reportswork_detail", "work_reports", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<work_reports>("NIPPO_DB.work_reportswork_detail", "work_reports", value);
                 }
             }
         }
@@ -4106,16 +4092,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "work_detailprojects", "projects")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "work_detailprojects", "projects")]
         public projects projects
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("WorkManagerDB.work_detailprojects", "projects").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("NIPPO_DB.work_detailprojects", "projects").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("WorkManagerDB.work_detailprojects", "projects").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("NIPPO_DB.work_detailprojects", "projects").Value = value;
             }
         }
         /// <summary>
@@ -4127,13 +4113,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("WorkManagerDB.work_detailprojects", "projects");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<projects>("NIPPO_DB.work_detailprojects", "projects");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<projects>("WorkManagerDB.work_detailprojects", "projects", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<projects>("NIPPO_DB.work_detailprojects", "projects", value);
                 }
             }
         }
@@ -4144,16 +4130,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "work_detailtasks", "tasks")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "work_detailtasks", "tasks")]
         public tasks tasks
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tasks>("WorkManagerDB.work_detailtasks", "tasks").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tasks>("NIPPO_DB.work_detailtasks", "tasks").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tasks>("WorkManagerDB.work_detailtasks", "tasks").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tasks>("NIPPO_DB.work_detailtasks", "tasks").Value = value;
             }
         }
         /// <summary>
@@ -4165,13 +4151,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tasks>("WorkManagerDB.work_detailtasks", "tasks");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<tasks>("NIPPO_DB.work_detailtasks", "tasks");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tasks>("WorkManagerDB.work_detailtasks", "tasks", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<tasks>("NIPPO_DB.work_detailtasks", "tasks", value);
                 }
             }
         }
@@ -4183,7 +4169,7 @@ namespace NIPPO
     /// <summary>
     /// 使用できるメタデータ ドキュメントはありません。
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="WorkManagerDB", Name="work_reports")]
+    [EdmEntityTypeAttribute(NamespaceName="NIPPO_DB", Name="work_reports")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
     public partial class work_reports : EntityObject
@@ -4659,16 +4645,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "userswork_reports", "users")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "userswork_reports", "users")]
         public users users
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("WorkManagerDB.userswork_reports", "users").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("NIPPO_DB.userswork_reports", "users").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("WorkManagerDB.userswork_reports", "users").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("NIPPO_DB.userswork_reports", "users").Value = value;
             }
         }
         /// <summary>
@@ -4680,13 +4666,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("WorkManagerDB.userswork_reports", "users");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<users>("NIPPO_DB.userswork_reports", "users");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<users>("WorkManagerDB.userswork_reports", "users", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<users>("NIPPO_DB.userswork_reports", "users", value);
                 }
             }
         }
@@ -4697,16 +4683,16 @@ namespace NIPPO
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("WorkManagerDB", "work_reportswork_detail", "work_detail")]
+        [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "work_reportswork_detail", "work_detail")]
         public work_detail work_detail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("WorkManagerDB.work_reportswork_detail", "work_detail").Value;
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_reportswork_detail", "work_detail").Value;
             }
             set
             {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("WorkManagerDB.work_reportswork_detail", "work_detail").Value = value;
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_reportswork_detail", "work_detail").Value = value;
             }
         }
         /// <summary>
@@ -4718,13 +4704,13 @@ namespace NIPPO
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("WorkManagerDB.work_reportswork_detail", "work_detail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_reportswork_detail", "work_detail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<work_detail>("WorkManagerDB.work_reportswork_detail", "work_detail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<work_detail>("NIPPO_DB.work_reportswork_detail", "work_detail", value);
                 }
             }
         }
