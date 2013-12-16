@@ -28,11 +28,91 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.id_textbox = new System.Windows.Forms.TextBox();
+            this.pw_textbox = new System.Windows.Forms.TextBox();
+            this.login_button = new System.Windows.Forms.Button();
+            this.clear_bottun = new System.Windows.Forms.Button();
+            this.ID_label = new System.Windows.Forms.Label();
+            this.PW_label = new System.Windows.Forms.Label();
+            this.SuspendLayout();
+            // 
+            // id_textbox
+            // 
+            this.id_textbox.Location = new System.Drawing.Point(80, 34);
+            this.id_textbox.Name = "id_textbox";
+            this.id_textbox.Size = new System.Drawing.Size(134, 19);
+            this.id_textbox.TabIndex = 0;
+            // 
+            // pw_textbox
+            // 
+            this.pw_textbox.Location = new System.Drawing.Point(80, 71);
+            this.pw_textbox.Name = "pw_textbox";
+            this.pw_textbox.PasswordChar = '*';
+            this.pw_textbox.Size = new System.Drawing.Size(134, 19);
+            this.pw_textbox.TabIndex = 1;
+            // 
+            // login_button
+            // 
+            this.login_button.Location = new System.Drawing.Point(80, 113);
+            this.login_button.Name = "login_button";
+            this.login_button.Size = new System.Drawing.Size(55, 21);
+            this.login_button.TabIndex = 2;
+            this.login_button.Text = "Login";
+            this.login_button.UseVisualStyleBackColor = true;
+            // 
+            // clear_bottun
+            // 
+            this.clear_bottun.Location = new System.Drawing.Point(159, 113);
+            this.clear_bottun.Name = "clear_bottun";
+            this.clear_bottun.Size = new System.Drawing.Size(55, 21);
+            this.clear_bottun.TabIndex = 3;
+            this.clear_bottun.Text = "Clear";
+            this.clear_bottun.UseVisualStyleBackColor = true;
+            // 
+            // ID_label
+            // 
+            this.ID_label.AutoSize = true;
+            this.ID_label.Location = new System.Drawing.Point(31, 37);
+            this.ID_label.Name = "ID_label";
+            this.ID_label.Size = new System.Drawing.Size(40, 12);
+            this.ID_label.TabIndex = 4;
+            this.ID_label.Text = "社員ID";
+            this.ID_label.Click += new System.EventHandler(this.label1_Click);
+            // 
+            // PW_label
+            // 
+            this.PW_label.AutoSize = true;
+            this.PW_label.Location = new System.Drawing.Point(19, 74);
+            this.PW_label.Name = "PW_label";
+            this.PW_label.Size = new System.Drawing.Size(52, 12);
+            this.PW_label.TabIndex = 5;
+            this.PW_label.Text = "パスワード";
+            // 
+            // Login
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(284, 162);
+            this.Controls.Add(this.PW_label);
+            this.Controls.Add(this.ID_label);
+            this.Controls.Add(this.clear_bottun);
+            this.Controls.Add(this.login_button);
+            this.Controls.Add(this.pw_textbox);
+            this.Controls.Add(this.id_textbox);
+            this.Name = "Login";
             this.Text = "Login";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.TextBox id_textbox;
+        private System.Windows.Forms.TextBox pw_textbox;
+        private System.Windows.Forms.Button login_button;
+        private System.Windows.Forms.Button clear_bottun;
+        private System.Windows.Forms.Label ID_label;
+        private System.Windows.Forms.Label PW_label;
     }
 }
