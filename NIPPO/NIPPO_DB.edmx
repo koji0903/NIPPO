@@ -1,0 +1,1111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NIPPO_DB.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+  <EntityContainer Name="NIPPO_DBStoreContainer">
+    <EntitySet Name="users" EntityType="NIPPO_DB.Store.users" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="authorities" EntityType="NIPPO_DB.Store.authorities" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="sections" EntityType="NIPPO_DB.Store.sections" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="work_reports" EntityType="NIPPO_DB.Store.work_reports" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="work_detail" EntityType="NIPPO_DB.Store.work_detail" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="projects" EntityType="NIPPO_DB.Store.projects" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="tasks" EntityType="NIPPO_DB.Store.tasks" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="customers" EntityType="NIPPO_DB.Store.customers" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="holidays" EntityType="NIPPO_DB.Store.holidays" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="business_segments" EntityType="NIPPO_DB.Store.business_segments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="business_type" EntityType="NIPPO_DB.Store.business_type" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="business_detail" EntityType="NIPPO_DB.Store.business_detail" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="authoritiesusers" Association="NIPPO_DB.Store.authoritiesusers">
+      <End Role="authorities" EntitySet="authorities" />
+      <End Role="users" EntitySet="users" />
+    </AssociationSet>
+    <AssociationSet Name="userssections" Association="NIPPO_DB.Store.userssections">
+      <End Role="users" EntitySet="users" />
+      <End Role="sections" EntitySet="sections" />
+    </AssociationSet>
+    <AssociationSet Name="userswork_reports" Association="NIPPO_DB.Store.userswork_reports">
+      <End Role="users" EntitySet="users" />
+      <End Role="work_reports" EntitySet="work_reports" />
+    </AssociationSet>
+    <AssociationSet Name="work_reportswork_detail" Association="NIPPO_DB.Store.work_reportswork_detail">
+      <End Role="work_reports" EntitySet="work_reports" />
+      <End Role="work_detail" EntitySet="work_detail" />
+    </AssociationSet>
+    <AssociationSet Name="work_detailprojects" Association="NIPPO_DB.Store.work_detailprojects">
+      <End Role="work_detail" EntitySet="work_detail" />
+      <End Role="projects" EntitySet="projects" />
+    </AssociationSet>
+    <AssociationSet Name="work_detailtasks" Association="NIPPO_DB.Store.work_detailtasks">
+      <End Role="work_detail" EntitySet="work_detail" />
+      <End Role="tasks" EntitySet="tasks" />
+    </AssociationSet>
+    <AssociationSet Name="projectscustomers" Association="NIPPO_DB.Store.projectscustomers">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="customers" EntitySet="customers" />
+    </AssociationSet>
+    <AssociationSet Name="business_segmentsbusiness_type" Association="NIPPO_DB.Store.business_segmentsbusiness_type">
+      <End Role="business_segments" EntitySet="business_segments" />
+      <End Role="business_type" EntitySet="business_type" />
+    </AssociationSet>
+    <AssociationSet Name="business_typebusiness_detail" Association="NIPPO_DB.Store.business_typebusiness_detail">
+      <End Role="business_type" EntitySet="business_type" />
+      <End Role="business_detail" EntitySet="business_detail" />
+    </AssociationSet>
+    <AssociationSet Name="projectsbusiness_type" Association="NIPPO_DB.Store.projectsbusiness_type">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="business_type" EntitySet="business_type" />
+    </AssociationSet>
+    <AssociationSet Name="projectsbusiness_detail" Association="NIPPO_DB.Store.projectsbusiness_detail">
+      <End Role="projects" EntitySet="projects" />
+      <End Role="business_detail" EntitySet="business_detail" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="users">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="login" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="lastname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="firstname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="authorities_ID" Type="int" Nullable="true" />
+    <Property Name="sections_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="authorities">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="master" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="project_management" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="list_viewer" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="input" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sections">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="work_reports">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="year" Type="smallint" Nullable="false" />
+    <Property Name="month" Type="smallint" Nullable="false" />
+    <Property Name="day" Type="smallint" Nullable="false" />
+    <Property Name="FY" Type="smallint" Nullable="false" />
+    <Property Name="start_time" Type="datetime" Nullable="true" />
+    <Property Name="end_time" Type="datetime" Nullable="true" />
+    <Property Name="work_times" Type="smallint" Nullable="true" />
+    <Property Name="overtime125" Type="smallint" Nullable="true" />
+    <Property Name="overtime150" Type="smallint" Nullable="true" />
+    <Property Name="holiday_work_times" Type="smallint" Nullable="true" />
+    <Property Name="note" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="smallint" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="users_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="work_detail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="times" Type="time" Nullable="false" />
+    <Property Name="note" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="work_reports_ID" Type="int" Nullable="true" />
+    <Property Name="projects_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="projects">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FY" Type="smallint" Nullable="false" />
+    <Property Name="num" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="start_date" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="end_date" Type="datetime" Nullable="true" />
+    <Property Name="project_code" Type="smallint" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_at" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="share_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="tentative_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="tentative_created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="business_type_ID" Type="int" Nullable="true" />
+    <Property Name="business_detail_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="tasks">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="work_detail_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="projects_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="holidays">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="year" Type="decimal" Nullable="false" />
+    <Property Name="month" Type="decimal" Nullable="false" />
+    <Property Name="day" Type="decimal" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="business_segments">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FY" Type="smallint" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="business_type">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FY" Type="smallint" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="business_segments_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <EntityType Name="business_detail">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FY" Type="smallint" Nullable="false" />
+    <Property Name="code" Type="smallint" Nullable="false" />
+    <Property Name="name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="alias" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="delete_flag" Type="bit" Nullable="false" DefaultValue="false" />
+    <Property Name="created_at" Type="datetime" Nullable="true" />
+    <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="updated_at" Type="datetime" Nullable="true" />
+    <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="deleted_at" Type="datetime" Nullable="true" />
+    <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="business_type_ID" Type="int" Nullable="true" />
+  </EntityType>
+  <Association Name="authoritiesusers">
+    <End Role="authorities" Type="NIPPO_DB.Store.authorities" Multiplicity="0..1" />
+    <End Role="users" Type="NIPPO_DB.Store.users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="authorities">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="authorities_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="userssections">
+    <End Role="users" Type="NIPPO_DB.Store.users" Multiplicity="*" />
+    <End Role="sections" Type="NIPPO_DB.Store.sections" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="sections">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="users">
+        <PropertyRef Name="sections_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="userswork_reports">
+    <End Role="users" Type="NIPPO_DB.Store.users" Multiplicity="0..1" />
+    <End Role="work_reports" Type="NIPPO_DB.Store.work_reports" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="work_reports">
+        <PropertyRef Name="users_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="work_reportswork_detail">
+    <End Role="work_reports" Type="NIPPO_DB.Store.work_reports" Multiplicity="0..1" />
+    <End Role="work_detail" Type="NIPPO_DB.Store.work_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="work_reports">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="work_detail">
+        <PropertyRef Name="work_reports_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="work_detailprojects">
+    <End Role="work_detail" Type="NIPPO_DB.Store.work_detail" Multiplicity="*" />
+    <End Role="projects" Type="NIPPO_DB.Store.projects" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="work_detail">
+        <PropertyRef Name="projects_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="work_detailtasks">
+    <End Role="work_detail" Type="NIPPO_DB.Store.work_detail" Multiplicity="0..1" />
+    <End Role="tasks" Type="NIPPO_DB.Store.tasks" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="work_detail">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="tasks">
+        <PropertyRef Name="work_detail_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projectscustomers">
+    <End Role="projects" Type="NIPPO_DB.Store.projects" Multiplicity="0..1" />
+    <End Role="customers" Type="NIPPO_DB.Store.customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="projects">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="customers">
+        <PropertyRef Name="projects_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="business_segmentsbusiness_type">
+    <End Role="business_segments" Type="NIPPO_DB.Store.business_segments" Multiplicity="0..1" />
+    <End Role="business_type" Type="NIPPO_DB.Store.business_type" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_segments">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="business_type">
+        <PropertyRef Name="business_segments_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="business_typebusiness_detail">
+    <End Role="business_type" Type="NIPPO_DB.Store.business_type" Multiplicity="0..1" />
+    <End Role="business_detail" Type="NIPPO_DB.Store.business_detail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="business_type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="business_detail">
+        <PropertyRef Name="business_type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projectsbusiness_type">
+    <End Role="projects" Type="NIPPO_DB.Store.projects" Multiplicity="*" />
+    <End Role="business_type" Type="NIPPO_DB.Store.business_type" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="business_type">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="projects">
+        <PropertyRef Name="business_type_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="projectsbusiness_detail">
+    <End Role="projects" Type="NIPPO_DB.Store.projects" Multiplicity="*" />
+    <End Role="business_detail" Type="NIPPO_DB.Store.business_detail" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="business_detail">
+        <PropertyRef Name="ID" />
+      </Principal>
+      <Dependent Role="projects">
+        <PropertyRef Name="business_detail_ID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="NIPPO_DB" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="NIPPO_DBContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="users" EntityType="NIPPO_DB.users" />
+          <EntitySet Name="authorities" EntityType="NIPPO_DB.authorities" />
+          <AssociationSet Name="authoritiesusers" Association="NIPPO_DB.authoritiesusers">
+            <End Role="authorities" EntitySet="authorities" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
+          <EntitySet Name="sections" EntityType="NIPPO_DB.sections" />
+          <AssociationSet Name="userssections" Association="NIPPO_DB.userssections">
+            <End Role="users" EntitySet="users" />
+            <End Role="sections" EntitySet="sections" />
+          </AssociationSet>
+          <EntitySet Name="work_reports" EntityType="NIPPO_DB.work_reports" />
+          <AssociationSet Name="userswork_reports" Association="NIPPO_DB.userswork_reports">
+            <End Role="users" EntitySet="users" />
+            <End Role="work_reports" EntitySet="work_reports" />
+          </AssociationSet>
+          <EntitySet Name="work_detail" EntityType="NIPPO_DB.work_detail" />
+          <AssociationSet Name="work_reportswork_detail" Association="NIPPO_DB.work_reportswork_detail">
+            <End Role="work_reports" EntitySet="work_reports" />
+            <End Role="work_detail" EntitySet="work_detail" />
+          </AssociationSet>
+          <EntitySet Name="projects" EntityType="NIPPO_DB.projects" />
+          <AssociationSet Name="work_detailprojects" Association="NIPPO_DB.work_detailprojects">
+            <End Role="work_detail" EntitySet="work_detail" />
+            <End Role="projects" EntitySet="projects" />
+          </AssociationSet>
+          <EntitySet Name="tasks" EntityType="NIPPO_DB.tasks" />
+          <AssociationSet Name="work_detailtasks" Association="NIPPO_DB.work_detailtasks">
+            <End Role="work_detail" EntitySet="work_detail" />
+            <End Role="tasks" EntitySet="tasks" />
+          </AssociationSet>
+          <EntitySet Name="customers" EntityType="NIPPO_DB.customers" />
+          <AssociationSet Name="projectscustomers" Association="NIPPO_DB.projectscustomers">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="customers" EntitySet="customers" />
+          </AssociationSet>
+          <EntitySet Name="holidays" EntityType="NIPPO_DB.holidays" />
+          <EntitySet Name="business_segments" EntityType="NIPPO_DB.business_segments" />
+          <EntitySet Name="business_type" EntityType="NIPPO_DB.business_type" />
+          <EntitySet Name="business_detail" EntityType="NIPPO_DB.business_detail" />
+          <AssociationSet Name="business_segmentsbusiness_type" Association="NIPPO_DB.business_segmentsbusiness_type">
+            <End Role="business_segments" EntitySet="business_segments" />
+            <End Role="business_type" EntitySet="business_type" />
+          </AssociationSet>
+          <AssociationSet Name="business_typebusiness_detail" Association="NIPPO_DB.business_typebusiness_detail">
+            <End Role="business_type" EntitySet="business_type" />
+            <End Role="business_detail" EntitySet="business_detail" />
+          </AssociationSet>
+          <AssociationSet Name="projectsbusiness_type" Association="NIPPO_DB.projectsbusiness_type">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="business_type" EntitySet="business_type" />
+          </AssociationSet>
+          <AssociationSet Name="projectsbusiness_detail" Association="NIPPO_DB.projectsbusiness_detail">
+            <End Role="projects" EntitySet="projects" />
+            <End Role="business_detail" EntitySet="business_detail" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="login" annotation:StoreGeneratedPattern="None" />
+          <Property Type="String" Name="password" Nullable="false" />
+          <Property Type="String" Name="lastname" Nullable="false" />
+          <Property Type="String" Name="firstname" Nullable="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="authorities" Relationship="NIPPO_DB.authoritiesusers" FromRole="users" ToRole="authorities" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <NavigationProperty Name="sections" Relationship="NIPPO_DB.userssections" FromRole="users" ToRole="sections" />
+          <NavigationProperty Name="work_reports" Relationship="NIPPO_DB.userswork_reports" FromRole="users" ToRole="work_reports" />
+        </EntityType>
+        <EntityType Name="authorities">
+          <Documentation>
+            <Summary>権限</Summary>
+            <LongDescription>ユーザの権限情報を保存する</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Boolean" Name="master" Nullable="false" DefaultValue="false" ConcurrencyMode="None" />
+          <Property Type="Boolean" Name="project_management" Nullable="false" DefaultValue="false" />
+          <Property Type="String" Name="list_viewer" Nullable="false" />
+          <Property Type="String" Name="input" Nullable="false" />
+          <NavigationProperty Name="users" Relationship="NIPPO_DB.authoritiesusers" FromRole="authorities" ToRole="users" />
+        </EntityType>
+        <Association Name="authoritiesusers">
+          <End Type="NIPPO_DB.authorities" Role="authorities" Multiplicity="0..1" />
+          <End Type="NIPPO_DB.users" Role="users" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="sections" Abstract="false">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="code" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="users" Relationship="NIPPO_DB.userssections" FromRole="sections" ToRole="users" />
+        </EntityType>
+        <Association Name="userssections">
+          <End Type="NIPPO_DB.users" Role="users" Multiplicity="*" />
+          <End Type="NIPPO_DB.sections" Role="sections" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="work_reports">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="year" Nullable="false" />
+          <Property Type="Int16" Name="month" Nullable="false" />
+          <Property Type="Int16" Name="day" Nullable="false" />
+          <Property Type="Int16" Name="FY" Nullable="false" />
+          <Property Type="DateTime" Name="start_time" Nullable="true" />
+          <Property Type="DateTime" Name="end_time" Nullable="true" />
+          <Property Type="Int16" Name="work_times" Nullable="true" />
+          <Property Type="Int16" Name="overtime125" Nullable="true" />
+          <Property Type="Int16" Name="overtime150" Nullable="true" />
+          <Property Type="Int16" Name="holiday_work_times" Nullable="true" />
+          <Property Type="String" Name="note" Nullable="true" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="Int16" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="users" Relationship="NIPPO_DB.userswork_reports" FromRole="work_reports" ToRole="users" />
+          <NavigationProperty Name="work_detail" Relationship="NIPPO_DB.work_reportswork_detail" FromRole="work_reports" ToRole="work_detail" />
+        </EntityType>
+        <Association Name="userswork_reports">
+          <End Type="NIPPO_DB.users" Role="users" Multiplicity="0..1" />
+          <End Type="NIPPO_DB.work_reports" Role="work_reports" Multiplicity="*" />
+        </Association>
+        <EntityType Name="work_detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Time" Name="times" Nullable="false" />
+          <Property Type="String" Name="note" Nullable="true" />
+          <NavigationProperty Name="work_reports" Relationship="NIPPO_DB.work_reportswork_detail" FromRole="work_detail" ToRole="work_reports" />
+          <NavigationProperty Name="projects" Relationship="NIPPO_DB.work_detailprojects" FromRole="work_detail" ToRole="projects" />
+          <NavigationProperty Name="tasks" Relationship="NIPPO_DB.work_detailtasks" FromRole="work_detail" ToRole="tasks" />
+        </EntityType>
+        <Association Name="work_reportswork_detail">
+          <End Type="NIPPO_DB.work_reports" Role="work_reports" Multiplicity="0..1" />
+          <End Type="NIPPO_DB.work_detail" Role="work_detail" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="projects">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="FY" Nullable="false" />
+          <Property Type="Int16" Name="num" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="String" Name="start_date" Nullable="true" />
+          <Property Type="DateTime" Name="end_date" Nullable="true" />
+          <Property Type="Int16" Name="project_code" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="String" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="String" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="String" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <Property Type="Boolean" Name="share_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="Boolean" Name="tentative_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="String" Name="tentative_created_by" Nullable="true" />
+          <NavigationProperty Name="work_detail" Relationship="NIPPO_DB.work_detailprojects" FromRole="projects" ToRole="work_detail" />
+          <NavigationProperty Name="customers" Relationship="NIPPO_DB.projectscustomers" FromRole="projects" ToRole="customers" />
+          <NavigationProperty Name="business_type" Relationship="NIPPO_DB.projectsbusiness_type" FromRole="projects" ToRole="business_type" />
+          <NavigationProperty Name="business_detail" Relationship="NIPPO_DB.projectsbusiness_detail" FromRole="projects" ToRole="business_detail" />
+        </EntityType>
+        <Association Name="work_detailprojects">
+          <End Type="NIPPO_DB.work_detail" Role="work_detail" Multiplicity="*" />
+          <End Type="NIPPO_DB.projects" Role="projects" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="tasks">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="code" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="work_detail" Relationship="NIPPO_DB.work_detailtasks" FromRole="tasks" ToRole="work_detail" />
+        </EntityType>
+        <Association Name="work_detailtasks">
+          <End Type="NIPPO_DB.work_detail" Role="work_detail" Multiplicity="0..1" />
+          <End Type="NIPPO_DB.tasks" Role="tasks" Multiplicity="0..1" />
+        </Association>
+        <EntityType Name="customers">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="code" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="projects" Relationship="NIPPO_DB.projectscustomers" FromRole="customers" ToRole="projects" />
+        </EntityType>
+        <Association Name="projectscustomers">
+          <End Type="NIPPO_DB.projects" Role="projects" Multiplicity="0..1" />
+          <End Type="NIPPO_DB.customers" Role="customers" Multiplicity="*" />
+        </Association>
+        <EntityType Name="holidays">
+          <Documentation>
+            <Summary>休日</Summary>
+            <LongDescription>休日情報を保存する。休日指定はマスタ管理者が行う</LongDescription>
+          </Documentation>
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Decimal" Name="year" Nullable="false" />
+          <Property Type="Decimal" Name="month" Nullable="false" />
+          <Property Type="Decimal" Name="day" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+        </EntityType>
+        <EntityType Name="business_segments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="FY" Nullable="false" />
+          <Property Type="Int16" Name="code" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="business_type" Relationship="NIPPO_DB.business_segmentsbusiness_type" FromRole="business_segments" ToRole="business_type" />
+        </EntityType>
+        <EntityType Name="business_type">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="FY" Nullable="false" />
+          <Property Type="Int16" Name="code" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="business_segments" Relationship="NIPPO_DB.business_segmentsbusiness_type" FromRole="business_type" ToRole="business_segments" />
+          <NavigationProperty Name="business_detail" Relationship="NIPPO_DB.business_typebusiness_detail" FromRole="business_type" ToRole="business_detail" />
+          <NavigationProperty Name="projects" Relationship="NIPPO_DB.projectsbusiness_type" FromRole="business_type" ToRole="projects" />
+        </EntityType>
+        <EntityType Name="business_detail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int16" Name="FY" Nullable="false" />
+          <Property Type="Int16" Name="code" Nullable="false" />
+          <Property Type="String" Name="name" Nullable="false" />
+          <Property Type="String" Name="alias" Nullable="true" />
+          <Property Type="Boolean" Name="delete_flag" Nullable="false" DefaultValue="false" />
+          <Property Type="DateTime" Name="created_at" Nullable="true" />
+          <Property Type="String" Name="created_by" Nullable="true" />
+          <Property Type="DateTime" Name="updated_at" Nullable="true" />
+          <Property Type="String" Name="updated_by" Nullable="true" />
+          <Property Type="DateTime" Name="deleted_at" Nullable="true" />
+          <Property Type="String" Name="deleted_by" Nullable="true" />
+          <NavigationProperty Name="business_type" Relationship="NIPPO_DB.business_typebusiness_detail" FromRole="business_detail" ToRole="business_type" />
+          <NavigationProperty Name="projects" Relationship="NIPPO_DB.projectsbusiness_detail" FromRole="business_detail" ToRole="projects" />
+        </EntityType>
+        <Association Name="business_segmentsbusiness_type">
+          <End Type="NIPPO_DB.business_segments" Role="business_segments" Multiplicity="0..1" />
+          <End Type="NIPPO_DB.business_type" Role="business_type" Multiplicity="*" />
+        </Association>
+        <Association Name="business_typebusiness_detail">
+          <End Type="NIPPO_DB.business_type" Role="business_type" Multiplicity="0..1" />
+          <End Type="NIPPO_DB.business_detail" Role="business_detail" Multiplicity="*" />
+        </Association>
+        <Association Name="projectsbusiness_type">
+          <End Type="NIPPO_DB.projects" Role="projects" Multiplicity="*" />
+          <End Type="NIPPO_DB.business_type" Role="business_type" Multiplicity="0..1" />
+        </Association>
+        <Association Name="projectsbusiness_detail">
+          <End Type="NIPPO_DB.projects" Role="projects" Multiplicity="*" />
+          <End Type="NIPPO_DB.business_detail" Role="business_detail" Multiplicity="0..1" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="NIPPO_DBStoreContainer" CdmEntityContainer="NIPPO_DBContainer">
+    <EntitySetMapping Name="users">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.users)">
+        <MappingFragment StoreEntitySet="users">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="login" ColumnName="login" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="lastname" ColumnName="lastname" />
+          <ScalarProperty Name="firstname" ColumnName="firstname" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="authorities">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.authorities)">
+        <MappingFragment StoreEntitySet="authorities">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="master" ColumnName="master" />
+          <ScalarProperty Name="project_management" ColumnName="project_management" />
+          <ScalarProperty Name="list_viewer" ColumnName="list_viewer" />
+          <ScalarProperty Name="input" ColumnName="input" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sections">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.sections)">
+        <MappingFragment StoreEntitySet="sections">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="work_reports">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.work_reports)">
+        <MappingFragment StoreEntitySet="work_reports">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="month" ColumnName="month" />
+          <ScalarProperty Name="day" ColumnName="day" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="start_time" ColumnName="start_time" />
+          <ScalarProperty Name="end_time" ColumnName="end_time" />
+          <ScalarProperty Name="work_times" ColumnName="work_times" />
+          <ScalarProperty Name="overtime125" ColumnName="overtime125" />
+          <ScalarProperty Name="overtime150" ColumnName="overtime150" />
+          <ScalarProperty Name="holiday_work_times" ColumnName="holiday_work_times" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="work_detail">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.work_detail)">
+        <MappingFragment StoreEntitySet="work_detail">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="times" ColumnName="times" />
+          <ScalarProperty Name="note" ColumnName="note" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="projects">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.projects)">
+        <MappingFragment StoreEntitySet="projects">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="num" ColumnName="num" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="project_code" ColumnName="project_code" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+          <ScalarProperty Name="share_flag" ColumnName="share_flag" />
+          <ScalarProperty Name="tentative_flag" ColumnName="tentative_flag" />
+          <ScalarProperty Name="tentative_created_by" ColumnName="tentative_created_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tasks">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.tasks)">
+        <MappingFragment StoreEntitySet="tasks">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="customers">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.customers)">
+        <MappingFragment StoreEntitySet="customers">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="holidays">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.holidays)">
+        <MappingFragment StoreEntitySet="holidays">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="year" ColumnName="year" />
+          <ScalarProperty Name="month" ColumnName="month" />
+          <ScalarProperty Name="day" ColumnName="day" />
+          <ScalarProperty Name="name" ColumnName="name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="business_segments">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.business_segments)">
+        <MappingFragment StoreEntitySet="business_segments">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="business_type">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.business_type)">
+        <MappingFragment StoreEntitySet="business_type">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="business_detail">
+      <EntityTypeMapping TypeName="IsTypeOf(NIPPO_DB.business_detail)">
+        <MappingFragment StoreEntitySet="business_detail">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="FY" ColumnName="FY" />
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="delete_flag" ColumnName="delete_flag" />
+          <ScalarProperty Name="created_at" ColumnName="created_at" />
+          <ScalarProperty Name="created_by" ColumnName="created_by" />
+          <ScalarProperty Name="updated_at" ColumnName="updated_at" />
+          <ScalarProperty Name="updated_by" ColumnName="updated_by" />
+          <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
+          <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="authoritiesusers" TypeName="NIPPO_DB.authoritiesusers" StoreEntitySet="users">
+      <EndProperty Name="authorities">
+        <ScalarProperty Name="ID" ColumnName="authorities_ID" />
+      </EndProperty>
+      <EndProperty Name="users">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="authorities_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="userssections" TypeName="NIPPO_DB.userssections" StoreEntitySet="users">
+      <EndProperty Name="sections">
+        <ScalarProperty Name="ID" ColumnName="sections_ID" />
+      </EndProperty>
+      <EndProperty Name="users">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="sections_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="userswork_reports" TypeName="NIPPO_DB.userswork_reports" StoreEntitySet="work_reports">
+      <EndProperty Name="users">
+        <ScalarProperty Name="ID" ColumnName="users_ID" />
+      </EndProperty>
+      <EndProperty Name="work_reports">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="users_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="work_reportswork_detail" TypeName="NIPPO_DB.work_reportswork_detail" StoreEntitySet="work_detail">
+      <EndProperty Name="work_reports">
+        <ScalarProperty Name="ID" ColumnName="work_reports_ID" />
+      </EndProperty>
+      <EndProperty Name="work_detail">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="work_reports_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="work_detailprojects" TypeName="NIPPO_DB.work_detailprojects" StoreEntitySet="work_detail">
+      <EndProperty Name="projects">
+        <ScalarProperty Name="ID" ColumnName="projects_ID" />
+      </EndProperty>
+      <EndProperty Name="work_detail">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="projects_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="work_detailtasks" TypeName="NIPPO_DB.work_detailtasks" StoreEntitySet="tasks">
+      <EndProperty Name="work_detail">
+        <ScalarProperty Name="ID" ColumnName="work_detail_ID" />
+      </EndProperty>
+      <EndProperty Name="tasks">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="work_detail_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="projectscustomers" TypeName="NIPPO_DB.projectscustomers" StoreEntitySet="customers">
+      <EndProperty Name="projects">
+        <ScalarProperty Name="ID" ColumnName="projects_ID" />
+      </EndProperty>
+      <EndProperty Name="customers">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="projects_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="business_segmentsbusiness_type" TypeName="NIPPO_DB.business_segmentsbusiness_type" StoreEntitySet="business_type">
+      <EndProperty Name="business_segments">
+        <ScalarProperty Name="ID" ColumnName="business_segments_ID" />
+      </EndProperty>
+      <EndProperty Name="business_type">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="business_segments_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="business_typebusiness_detail" TypeName="NIPPO_DB.business_typebusiness_detail" StoreEntitySet="business_detail">
+      <EndProperty Name="business_type">
+        <ScalarProperty Name="ID" ColumnName="business_type_ID" />
+      </EndProperty>
+      <EndProperty Name="business_detail">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="business_type_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="projectsbusiness_type" TypeName="NIPPO_DB.projectsbusiness_type" StoreEntitySet="projects">
+      <EndProperty Name="business_type">
+        <ScalarProperty Name="ID" ColumnName="business_type_ID" />
+      </EndProperty>
+      <EndProperty Name="projects">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="business_type_ID" IsNull="false" />
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="projectsbusiness_detail" TypeName="NIPPO_DB.projectsbusiness_detail" StoreEntitySet="projects">
+      <EndProperty Name="business_detail">
+        <ScalarProperty Name="ID" ColumnName="business_detail_ID" />
+      </EndProperty>
+      <EndProperty Name="projects">
+        <ScalarProperty Name="ID" ColumnName="ID" />
+      </EndProperty>
+      <Condition ColumnName="business_detail_ID" IsNull="false" />
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="NIPPO_DB" ZoomLevel="114" >
+        <EntityTypeShape EntityType="NIPPO_DB.users" Width="1.5" PointX="6" PointY="3.375" Height="4.285625" />
+        <EntityTypeShape EntityType="NIPPO_DB.authorities" Width="1.5" PointX="3.875" PointY="3.375" Height="2.36375" />
+        <AssociationConnector Association="NIPPO_DB.authoritiesusers">
+          <ConnectorPoint PointX="5.375" PointY="4.556875" />
+          <ConnectorPoint PointX="6" PointY="4.556875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="NIPPO_DB.sections" Width="1.5" PointX="6" PointY="8.25" Height="3.6449999999999996" />
+        <AssociationConnector Association="NIPPO_DB.userssections">
+          <ConnectorPoint PointX="6.75" PointY="7.660625" />
+          <ConnectorPoint PointX="6.75" PointY="8.25" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="NIPPO_DB.work_reports" Width="1.5" PointX="8" PointY="3.375" Height="5.3533333333333335" />
+        <AssociationConnector Association="NIPPO_DB.userswork_reports">
+          <ConnectorPoint PointX="7.5" PointY="5.5178125" />
+          <ConnectorPoint PointX="8" PointY="5.5178125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="NIPPO_DB.work_detail" Width="1.5" PointX="10.125" PointY="3.375" Height="2.3637499999999996" />
+        <AssociationConnector Association="NIPPO_DB.work_reportswork_detail">
+          <ConnectorPoint PointX="9.5" PointY="4.556875" />
+          <ConnectorPoint PointX="10.125" PointY="4.556875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="NIPPO_DB.projects" Width="1.5" PointX="12.375" PointY="3.375" Height="5.7804166666666656" />
+        <AssociationConnector Association="NIPPO_DB.work_detailprojects">
+          <ConnectorPoint PointX="11.625" PointY="4.556875" />
+          <ConnectorPoint PointX="12.375" PointY="4.556875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="NIPPO_DB.tasks" Width="1.5" PointX="10" PointY="6.25" Height="3.6449999999999996" />
+        <AssociationConnector Association="NIPPO_DB.work_detailtasks">
+          <ConnectorPoint PointX="10.8125" PointY="5.73875" />
+          <ConnectorPoint PointX="10.8125" PointY="6.25" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="NIPPO_DB.customers" Width="1.5" PointX="14.625" PointY="5.5" Height="3.6449999999999996" />
+        <AssociationConnector Association="NIPPO_DB.projectscustomers">
+          <ConnectorPoint PointX="13.875" PointY="7.3225" />
+          <ConnectorPoint PointX="14.625" PointY="7.3225" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="NIPPO_DB.holidays" Width="1.5" PointX="4.125" PointY="8" Height="2.1502083333333335" />
+        <EntityTypeShape EntityType="NIPPO_DB.business_segments" Width="1.5" PointX="14.75" PointY="0.75" Height="3.8585416666666656" />
+        <EntityTypeShape EntityType="NIPPO_DB.business_type" Width="1.5" PointX="16.625" PointY="0.75" Height="4.0720833333333326" />
+        <EntityTypeShape EntityType="NIPPO_DB.business_detail" Width="1.5" PointX="18.5" PointY="0.75" Height="3.8585416666666656" />
+        <AssociationConnector Association="NIPPO_DB.business_segmentsbusiness_type">
+          <ConnectorPoint PointX="16.25" PointY="2.6792708333333328" />
+          <ConnectorPoint PointX="16.625" PointY="2.6792708333333328" />
+        </AssociationConnector>
+        <AssociationConnector Association="NIPPO_DB.business_typebusiness_detail">
+          <ConnectorPoint PointX="18.125" PointY="2.6792708333333328" />
+          <ConnectorPoint PointX="18.5" PointY="2.6792708333333328" />
+        </AssociationConnector>
+        <AssociationConnector Association="NIPPO_DB.projectsbusiness_type">
+          <ConnectorPoint PointX="13.875" PointY="4.8533333333333335" />
+          <ConnectorPoint PointX="16.625" PointY="4.8533333333333335" />
+        </AssociationConnector>
+        <AssociationConnector Association="NIPPO_DB.projectsbusiness_detail">
+          <ConnectorPoint PointX="13.875" PointY="5.2678125000000007" />
+          <ConnectorPoint PointX="19.25" PointY="5.2678125000000007" />
+          <ConnectorPoint PointX="19.25" PointY="4.8220833333333326" />
+        </AssociationConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
