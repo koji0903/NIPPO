@@ -26,9 +26,11 @@ namespace NIPPO
 
         }
 
-        private void DalyReport_Click(object sender, EventArgs e)
+        private void DailyReport_Click(object sender, EventArgs e)
         {
-
+            DailyReportWindow daily_report_window = new DailyReportWindow();
+            daily_report_window.ShowDialog(this);
+            daily_report_window.Dispose();
         }
     }
 }

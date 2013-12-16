@@ -30,13 +30,13 @@
         {
             this.MainFunctionTab = new System.Windows.Forms.TabControl();
             this.Report_tab = new System.Windows.Forms.TabPage();
+            this.DailyReport_button = new System.Windows.Forms.Button();
             this.View_tab = new System.Windows.Forms.TabPage();
+            this.ViewWorkRecord_button = new System.Windows.Forms.Button();
             this.Collect_tab = new System.Windows.Forms.TabPage();
+            this.OutputCSV_button = new System.Windows.Forms.Button();
             this.ProjectManage_tab = new System.Windows.Forms.TabPage();
             this.MasterManage_tab = new System.Windows.Forms.TabPage();
-            this.DalyReport_button = new System.Windows.Forms.Button();
-            this.ViewWorkRecord_button = new System.Windows.Forms.Button();
-            this.OutputCSV_button = new System.Windows.Forms.Button();
             this.MainFunctionTab.SuspendLayout();
             this.Report_tab.SuspendLayout();
             this.View_tab.SuspendLayout();
@@ -58,7 +58,7 @@
             // 
             // Report_tab
             // 
-            this.Report_tab.Controls.Add(this.DalyReport_button);
+            this.Report_tab.Controls.Add(this.DailyReport_button);
             this.Report_tab.Location = new System.Drawing.Point(4, 22);
             this.Report_tab.Name = "Report_tab";
             this.Report_tab.Padding = new System.Windows.Forms.Padding(3);
@@ -66,6 +66,16 @@
             this.Report_tab.TabIndex = 0;
             this.Report_tab.Text = "日報入力";
             this.Report_tab.UseVisualStyleBackColor = true;
+            // 
+            // DailyReport_button
+            // 
+            this.DailyReport_button.Location = new System.Drawing.Point(30, 20);
+            this.DailyReport_button.Name = "DailyReport_button";
+            this.DailyReport_button.Size = new System.Drawing.Size(100, 40);
+            this.DailyReport_button.TabIndex = 0;
+            this.DailyReport_button.Text = "勤務日報";
+            this.DailyReport_button.UseVisualStyleBackColor = true;
+            this.DailyReport_button.Click += new System.EventHandler(this.DailyReport_Click);
             // 
             // View_tab
             // 
@@ -78,6 +88,15 @@
             this.View_tab.Text = "一覧表示";
             this.View_tab.UseVisualStyleBackColor = true;
             // 
+            // ViewWorkRecord_button
+            // 
+            this.ViewWorkRecord_button.Location = new System.Drawing.Point(30, 20);
+            this.ViewWorkRecord_button.Name = "ViewWorkRecord_button";
+            this.ViewWorkRecord_button.Size = new System.Drawing.Size(100, 40);
+            this.ViewWorkRecord_button.TabIndex = 0;
+            this.ViewWorkRecord_button.Text = "勤務一覧表示";
+            this.ViewWorkRecord_button.UseVisualStyleBackColor = true;
+            // 
             // Collect_tab
             // 
             this.Collect_tab.Controls.Add(this.OutputCSV_button);
@@ -88,6 +107,15 @@
             this.Collect_tab.TabIndex = 2;
             this.Collect_tab.Text = "集計";
             this.Collect_tab.UseVisualStyleBackColor = true;
+            // 
+            // OutputCSV_button
+            // 
+            this.OutputCSV_button.Location = new System.Drawing.Point(30, 20);
+            this.OutputCSV_button.Name = "OutputCSV_button";
+            this.OutputCSV_button.Size = new System.Drawing.Size(100, 40);
+            this.OutputCSV_button.TabIndex = 0;
+            this.OutputCSV_button.Text = "データ出力";
+            this.OutputCSV_button.UseVisualStyleBackColor = true;
             // 
             // ProjectManage_tab
             // 
@@ -109,34 +137,6 @@
             this.MasterManage_tab.TabIndex = 4;
             this.MasterManage_tab.Text = "マスタ管理";
             this.MasterManage_tab.UseVisualStyleBackColor = true;
-            // 
-            // DalyReport_button
-            // 
-            this.DalyReport_button.Location = new System.Drawing.Point(30, 20);
-            this.DalyReport_button.Name = "DalyReport_button";
-            this.DalyReport_button.Size = new System.Drawing.Size(100, 40);
-            this.DalyReport_button.TabIndex = 0;
-            this.DalyReport_button.Text = "勤務日報";
-            this.DalyReport_button.UseVisualStyleBackColor = true;
-            this.DalyReport_button.Click += new System.EventHandler(this.DalyReport_Click);
-            // 
-            // ViewWorkRecord_button
-            // 
-            this.ViewWorkRecord_button.Location = new System.Drawing.Point(30, 20);
-            this.ViewWorkRecord_button.Name = "ViewWorkRecord_button";
-            this.ViewWorkRecord_button.Size = new System.Drawing.Size(100, 40);
-            this.ViewWorkRecord_button.TabIndex = 0;
-            this.ViewWorkRecord_button.Text = "勤務一覧表示";
-            this.ViewWorkRecord_button.UseVisualStyleBackColor = true;
-            // 
-            // OutputCSV_button
-            // 
-            this.OutputCSV_button.Location = new System.Drawing.Point(30, 20);
-            this.OutputCSV_button.Name = "OutputCSV_button";
-            this.OutputCSV_button.Size = new System.Drawing.Size(100, 40);
-            this.OutputCSV_button.TabIndex = 0;
-            this.OutputCSV_button.Text = "データ出力";
-            this.OutputCSV_button.UseVisualStyleBackColor = true;
             // 
             // MainWindow
             // 
@@ -163,7 +163,7 @@
         private System.Windows.Forms.TabPage Collect_tab;
         private System.Windows.Forms.TabPage ProjectManage_tab;
         private System.Windows.Forms.TabPage MasterManage_tab;
-        private System.Windows.Forms.Button DalyReport_button;
+        private System.Windows.Forms.Button DailyReport_button;
         private System.Windows.Forms.Button ViewWorkRecord_button;
         private System.Windows.Forms.Button OutputCSV_button;
     }
