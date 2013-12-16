@@ -55,6 +55,7 @@
     <Compile Include="DailyReportWindow.Designer.cs">
       <DependentUpon>DailyReportWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataAccessClass.cs" />
     <Compile Include="Login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -107,6 +108,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="NIPPO_DB.edmx.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

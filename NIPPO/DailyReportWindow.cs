@@ -18,6 +18,21 @@ namespace NIPPO
 
         private void DailyReportWindow_Load(object sender, EventArgs e)
         {
+            try
+            {
+                using (DataAccessClass _proc = new DataAccessClass())
+                {
+                    this.dataGridView1.AutoGenerateColumns = false;
+                    this.dataGridView1.DataSource = null;
+                    // DataGridViewオブジェクトにデータセットを入れている処理
+                    this.dataGridView1.DataSource = _proc.GetTitleDs("dummy","dummy","");
+                    this.dataGridView1.DataMember = @"UserList";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text);
+            }
 
         }
     }
