@@ -22,14 +22,17 @@ namespace NIPPO
             {
                 //_cn.ConnectionString = String.Format(NIPPO.Properties.Settings.Default.ConnectionString,
                 //    userID, password);
-                _cn.ConnectionString = String.Format(NIPPO.Properties.Settings.Default.ConnectionString);
+                _cn.ConnectionString = String.Format(NIPPO.Properties.Settings.Default.ConnectionString,userID,password);
                 _cn.Open();
+                _cn.Close();
+
+
                 using (SqlCommand _cmd = new SqlCommand())
                 //using (MySqlCommand _cmd = new MySqlCommand())
                 {
                     _cmd.Connection = _cn;
                     _cmd.CommandText = @"SELECT * " +
-                                        "FROM dbo.users";
+                                        "FROM users";
                     using (SqlDataAdapter _da = new SqlDataAdapter())
                     {
                         _da.SelectCommand = _cmd;
@@ -43,9 +46,11 @@ namespace NIPPO
 
         // 追加 これがないとエラーになる（よく分からん）
         #region IDisposable メンバー
+
         public void Dispose()
         {
         }
+
         #endregion
     }
 }
