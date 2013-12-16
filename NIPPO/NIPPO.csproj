@@ -71,7 +71,7 @@
       <DependentUpon>DailyReportWindow.cs</DependentUpon>
     </Compile>
     <Compile Include="DataAccessClass.cs" />
-    <Compile Include="Login.cs">
+    <Compile Include="LoginWindow.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="LoginWindow.Designer.cs">
@@ -92,6 +92,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DailyReportWindow.resx">
       <DependentUpon>DailyReportWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="LoginWindow.resx">
+      <DependentUpon>LoginWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
