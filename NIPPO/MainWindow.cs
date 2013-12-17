@@ -28,7 +28,7 @@ namespace NIPPO
 
         private void DailyReport_Click(object sender, EventArgs e)
         {
-            DailyReportWindow daily_report_window = new DailyReportWindow();
+            DailyReportWindow daily_report_window = new DailyReportWindow(2013,"0001");
             daily_report_window.ShowDialog(this);
             daily_report_window.Dispose();
         }
