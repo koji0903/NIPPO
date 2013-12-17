@@ -58,6 +58,7 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
+    <Compile Include="MonthlyReport.cs" />
     <Compile Include="MonthlyReportWindow.cs">
       <SubType>Form</SubType>
     </Compile>
