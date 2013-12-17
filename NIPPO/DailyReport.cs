@@ -6,11 +6,13 @@ using System.Text;
 
 namespace NIPPO
 {
-    class DailyReport : IDisposable
+    public class DailyReport : IDisposable
     {
-        internal String GetCalender(int year, int month, int day)
+        public String GetCalender(int year, int month, int day)
         {
-            return "AAA";
+            DateTime dateValue = new DateTime(year,month,day);
+            string str = String.Format("{0}年{1:D2}月{2:D2}日({3})", year, month, day, dateValue.ToString("ddd"));
+            return str;
         }
 
         // IDisposable対応（ガベージコレクション対策みたい）
