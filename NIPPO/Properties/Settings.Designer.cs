@@ -25,8 +25,8 @@ namespace NIPPO.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=nippo_db;User ID={0};password={1" +
-            "}")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=localhost\\SQLEXPRESS;Initial Catalog=nippo_db;User ID=nippo;password=" +
+            "KSK1217")]
         public string ConnectionString {
             get {
                 return ((string)(this["ConnectionString"]));
