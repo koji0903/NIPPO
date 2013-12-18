@@ -11,6 +11,8 @@ namespace NIPPO
 {
     public partial class MainWindow : Form
     {
+        private string userID;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -18,6 +20,17 @@ namespace NIPPO
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            using (LoginWindow _lw = new LoginWindow())
+            {
+                if (_lw.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.userID = _lw.userID;
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
 
         }
 

@@ -59,6 +59,7 @@
             this.login_button.TabIndex = 2;
             this.login_button.Text = "Login";
             this.login_button.UseVisualStyleBackColor = true;
+            this.login_button.Click += new System.EventHandler(this.login_button_Click);
             // 
             // clear_button
             // 
@@ -77,7 +78,6 @@
             this.ID_label.Size = new System.Drawing.Size(40, 12);
             this.ID_label.TabIndex = 4;
             this.ID_label.Text = "社員ID";
-            this.ID_label.Click += new System.EventHandler(this.label1_Click);
             // 
             // PW_label
             // 
