@@ -32,18 +32,18 @@ namespace NIPPO
 
         private void DalyReport_Click(object sender, EventArgs e)
         {
-            //using (MonthlyReportWindow _form = new MonthlyReportWindow())
-            //{
-            //    _form.ShowDialog(2013); // とりあえず
-            //}
+            using (MonthlyReportWindow _form = new MonthlyReportWindow())
+            {
+                _form.ShowDialog(_year);
+            }
         }
 
         private void ViewWorkRecord_button_Click(object sender, EventArgs e)
         {
-            //using (MonthlyReportWindow _form = new MonthlyReportWindow())
-            //{
-            //    _form.ShowDialog(2013); // とりあえず
-            //}
+            using (MonthlyReportWindow _form = new MonthlyReportWindow())
+            {
+                _form.ShowDialog(_year);
+            }
         }
 
         private void FY_numericUpDown_ValueChanged(object sender, EventArgs e)

@@ -79,6 +79,7 @@
             this.prevMonth_button.TabIndex = 1;
             this.prevMonth_button.Text = "<";
             this.prevMonth_button.UseVisualStyleBackColor = true;
+            this.prevMonth_button.Click += new System.EventHandler(this.prevMonth_button_Click);
             // 
             // list_dataGridView
             // 
@@ -247,6 +248,7 @@
             this.Controls.Add(this.FYMonth_label);
             this.Name = "MonthlyReportWindow";
             this.Text = "MonthlyReportWindow";
+            this.Shown += new System.EventHandler(this.Me_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.list_dataGridView)).EndInit();
             this.summary_groupBox.ResumeLayout(false);
             this.summary_groupBox.PerformLayout();
