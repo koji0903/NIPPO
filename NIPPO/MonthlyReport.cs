@@ -5,11 +5,10 @@ using System.Text;
 
 namespace NIPPO
 {
-    class MonthlyReport
+    public class MonthlyReport
     {
         // 変数
-        //private int _FY; // 年度
-        public int _FY; // 年度
+        private int _FY; // 年度
         private int _month; // 月
 
         /// <summary>
@@ -23,6 +22,15 @@ namespace NIPPO
         }
 
         /// <summary>
+        /// 設定値の「月」を強制的に指定する。テスト用。
+        /// </summary>
+        /// <param name="month"></param>
+        public void setMonth(int month)
+        {
+            _month = month;
+        }
+
+        /// <summary>
         /// 設定値の「カレンダーイヤー」を返す。
         /// </summary>
         /// <returns></returns>
@@ -33,7 +41,7 @@ namespace NIPPO
                 return this._FY + 1;
             else
                 return this._FY;
-       }
+        }
 
         /// <summary>
         /// 設定値の「カレンダーイヤー/月」を"YYYY年MM年"形式で返す
@@ -42,7 +50,7 @@ namespace NIPPO
         public string getStringYearMonth()
         {
             return this.getCalYear() + "年" +
-                   this._month.ToString() + "月";
+                   this._month.ToString("D2") + "月";
         }
         /// <summary>
         /// 月をカウントアップする。年度なので12の次は1で、3が最大値。
