@@ -10,7 +10,7 @@ using System.Windows.Forms;
 namespace NIPPO
 {
     public partial class MainWindow : Form
-    {
+    {   
         private int _year;
 
         public MainWindow()
