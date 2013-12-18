@@ -1,4 +1,4 @@
-﻿namespace NIPPO
+namespace NIPPO
 {
     partial class MainWindow
     {
@@ -37,17 +37,18 @@
             this.OutputCSV_button = new System.Windows.Forms.Button();
             this.ProjectManage_tab = new System.Windows.Forms.TabPage();
             this.MasterManage_tab = new System.Windows.Forms.TabPage();
-            this.FY_domainUpDown = new System.Windows.Forms.DomainUpDown();
             this.FY_label = new System.Windows.Forms.Label();
             this.exit_button = new System.Windows.Forms.Button();
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.user_label_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.user_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.FY_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.MainFunctionTab.SuspendLayout();
             this.Report_tab.SuspendLayout();
             this.View_tab.SuspendLayout();
             this.Collect_tab.SuspendLayout();
             this.statusStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FY_numericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // MainFunctionTab
@@ -155,17 +156,6 @@
             this.MasterManage_tab.Text = "マスタ管理";
             this.MasterManage_tab.UseVisualStyleBackColor = true;
             // 
-            // FY_domainUpDown
-            // 
-            this.FY_domainUpDown.Font = new System.Drawing.Font("MS UI Gothic", 12F);
-            this.FY_domainUpDown.Location = new System.Drawing.Point(41, 34);
-            this.FY_domainUpDown.Name = "FY_domainUpDown";
-            this.FY_domainUpDown.ReadOnly = true;
-            this.FY_domainUpDown.Size = new System.Drawing.Size(82, 27);
-            this.FY_domainUpDown.TabIndex = 1;
-            this.FY_domainUpDown.Text = "2013";
-            this.FY_domainUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // FY_label
             // 
             this.FY_label.AutoSize = true;
@@ -184,6 +174,7 @@
             this.exit_button.TabIndex = 3;
             this.exit_button.Text = "終了";
             this.exit_button.UseVisualStyleBackColor = true;
+            this.exit_button.Click += new System.EventHandler(this.exit_button_Click);
             // 
             // statusStrip
             // 
@@ -208,15 +199,31 @@
             this.user_toolStripStatusLabel.Size = new System.Drawing.Size(23, 19);
             this.user_toolStripStatusLabel.Text = "--";
             // 
+            // FY_numericUpDown
+            // 
+            this.FY_numericUpDown.Font = new System.Drawing.Font("MS UI Gothic", 12F);
+            this.FY_numericUpDown.Location = new System.Drawing.Point(41, 36);
+            this.FY_numericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.FY_numericUpDown.Name = "FY_numericUpDown";
+            this.FY_numericUpDown.ReadOnly = true;
+            this.FY_numericUpDown.Size = new System.Drawing.Size(79, 27);
+            this.FY_numericUpDown.TabIndex = 5;
+            this.FY_numericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.FY_numericUpDown.ValueChanged += new System.EventHandler(this.FY_numericUpDown_ValueChanged);
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(647, 420);
+            this.Controls.Add(this.FY_numericUpDown);
             this.Controls.Add(this.statusStrip);
             this.Controls.Add(this.exit_button);
             this.Controls.Add(this.FY_label);
-            this.Controls.Add(this.FY_domainUpDown);
             this.Controls.Add(this.MainFunctionTab);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainWindow";
@@ -228,6 +235,7 @@
             this.Collect_tab.ResumeLayout(false);
             this.statusStrip.ResumeLayout(false);
             this.statusStrip.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.FY_numericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -244,12 +252,12 @@
         private System.Windows.Forms.Button DalyReport_button;
         private System.Windows.Forms.Button ViewWorkRecord_button;
         private System.Windows.Forms.Button OutputCSV_button;
-        private System.Windows.Forms.DomainUpDown FY_domainUpDown;
         private System.Windows.Forms.Label FY_label;
         private System.Windows.Forms.Button exit_button;
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel user_label_toolStripStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel user_toolStripStatusLabel;
+        private System.Windows.Forms.NumericUpDown FY_numericUpDown;
     }
 }
 
