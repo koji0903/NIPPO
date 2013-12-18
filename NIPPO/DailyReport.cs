@@ -42,8 +42,10 @@ namespace NIPPO
         /// <param name="end_hour"></param>
         /// <param name="end_second"></param>
         /// <returns></returns>
-        public String[] GetWorkTime(int year, int month, int day, int start_hour, int start_second, int end_hour, int end_second)
+        public String[] GetWorkTime(int start_hour, int start_second, int end_hour, int end_second)
         {
+            string str;
+
             // [0] : 勤務時間（（勤務終了時間-勤務開始時間）- 休憩時間）
             // [1] : 休憩時間（12:00～13:00, 17:30～18:00）
             // [2] : 普通残業時間 (05:00～08:45, 18:00～22:00)
@@ -51,31 +53,32 @@ namespace NIPPO
             String[] time = new String[4];
 
             // ユーザ入力の勤務時間
-            DateTime start_time = new DateTime(year, month, day, start_hour, start_second, 0);
-            DateTime end_time = new DateTime(year, month, day, end_hour, end_second, 0);
+            str = String.Format("{0:D2}:{1:D2}:00", start_hour, start_second);
+            DateTime start_time = DateTime.Parse(str);
+            str = String.Format("{0:D2}:{1:D2}:00", end_hour, end_second);
+            DateTime end_time = DateTime.Parse(str);
 
-            // 休憩時間1(12:00-13:00)
-            DateTime rest1_start_time = new DateTime(year, month, day, 12, 0, 0);
-            DateTime rest1_end_time = new DateTime(year, month, day, 13, 0, 0);
-
-            // 休憩時間2(17:30-18:00)
-            DateTime rest2_start_time = new DateTime(year, month, day, 17, 30, 0);
-            DateTime rest2_end_time = new DateTime(year, month, day, 18, 0, 0);
 
             // 休憩時間の計算(2つあるのでまずは分で計算する)
-            TimeSpan rt = cal_rest_time(start_time, end_time,rest1_start_time,rest1_end_time);
-            rt += cal_rest_time(start_time, end_time, rest2_start_time, rest2_end_time);
+            TimeSpan rt = cal_target_time(start_time, end_time, DateTime.Parse("12:00:00"), DateTime.Parse("13:00:00"));
+            rt += cal_target_time(start_time, end_time, DateTime.Parse("17:30:00"), DateTime.Parse("18:00:00"));
 
             // 勤務時間
             TimeSpan ts = end_time - start_time - rt;
 
+            // 普通残業時間
+            TimeSpan normal_ot = cal_target_time(start_time, end_time, DateTime.Parse("05:00:00"), DateTime.Parse("08:45:00"));
+            normal_ot += cal_target_time(start_time, end_time, DateTime.Parse("18:00:00"), DateTime.Parse("22:00:00"));
+
+            // 深夜残業時間
+            TimeSpan night_ot = cal_target_time(start_time, end_time, DateTime.Parse("22:00:00"), DateTime.Parse("05:00:00"));
 
             // 各項目の時間を配列にセット
             string work_time, rest_time, normal_overtime, night_overtime;
             work_time = cal_second_to_hour(ts);
             rest_time = cal_second_to_hour(rt);
-            normal_overtime = cal_second_to_hour(ts);
-            night_overtime = cal_second_to_hour(ts);
+            normal_overtime = cal_second_to_hour(normal_ot);
+            night_overtime = cal_second_to_hour(night_ot);
 
 
             time[0] = work_time;
@@ -117,20 +120,20 @@ namespace NIPPO
         }
 
         /// <summary>
-        /// 
+        /// 特定区分（休憩、普通残業、深夜残業）の時間の計算。（区分の割り当て時間定義されており、その範囲に入っていた場合はカウント）
         /// </summary>
-        /// <param name="start_time"></param>
-        /// <param name="end_time"></param>
-        /// <param name="rest_start_time"></param>
-        /// <param name="rest_end_time"></param>
-        /// <returns></returns>
-        private TimeSpan cal_rest_time(DateTime start_time, DateTime end_time, DateTime rest_start_time, DateTime rest_end_time)
+        /// <param name="start_time">勤務開始時間</param>
+        /// <param name="end_time">勤務終了時間</param>
+        /// <param name="rest_start_time">休憩開始時間</param>
+        /// <param name="rest_end_time">休憩終了時間</param>
+        /// <returns>時間範囲</returns>
+        private TimeSpan cal_target_time(DateTime start_time, DateTime end_time, DateTime target_start_time, DateTime target_end_time)
         {
             TimeSpan ts = new TimeSpan();
 
-            if ((start_time < rest_start_time) && ( rest_end_time < end_time ))
+            if ((start_time <= target_start_time) && ( target_end_time <= end_time ))
             {
-                ts = rest_end_time - rest_start_time;
+                ts = target_end_time - target_start_time;
             }
 
             return ts;

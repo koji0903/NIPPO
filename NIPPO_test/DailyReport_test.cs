@@ -38,11 +38,23 @@ namespace NIPPO_test
         {
             DailyReport _daily = new DailyReport();
             // 正常系のテスト
-            string[] work = _daily.GetWorkTime(2013, 12, 17, 8, 45, 17, 30);
-            string[] ary = { "7.75h", "1.00h", "7.75h", "7.75h" };
+
+            // 通常勤務（休憩は昼休みのみ）
+            string[] work = _daily.GetWorkTime(8, 45, 17, 30);
+            string[] ary = { "7.75h", "1.00h", "0.00h", "0.00h" };
             Assert.AreEqual(ary, work);
 
-//            work = _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 0);
+            // 残業（休憩は昼休み＋夕方）
+            work = _daily.GetWorkTime(8, 45, 18, 00);
+            ary[0] = "7.75h";
+            ary[1] = "1.50h";
+            ary[2] = "7.75h";
+            ary[3] = "7.75h";
+            Assert.AreEqual(ary, work);
+
+
+            
+            //            work = _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 0);
 //            ary[0] = "1.00h";
 //            ary[1] = "1.00h";
 //            ary[2] = "1.00h";
