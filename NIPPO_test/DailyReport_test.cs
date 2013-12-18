@@ -13,19 +13,49 @@ namespace NIPPO_test
     [TestFixture]
     public class DailyReport_test
     {
-        // 追加：ここにイチからテストを書く
         [Test]
-        public void GetCalender_test()
+        public void GetDateStr_test()
         {
             DailyReport _daily = new DailyReport();
-            Assert.AreEqual("2013年01月01日(火)", _daily.GetCalender(2013, 1, 1));
-            Assert.AreEqual("2013年01月02日(水)", _daily.GetCalender(2013, 1, 2));
-            Assert.AreEqual("2013年01月03日(木)", _daily.GetCalender(2013, 1, 3));
-            Assert.AreEqual("2013年01月04日(金)", _daily.GetCalender(2013, 1, 4));
-            Assert.AreEqual("2013年01月05日(土)", _daily.GetCalender(2013, 1, 5));
-            Assert.AreEqual("2013年01月06日(日)", _daily.GetCalender(2013, 1, 6));
-            Assert.AreEqual("2013年01月07日(月)", _daily.GetCalender(2013, 1, 7));
-            Assert.AreEqual("2013年12月31日(火)", _daily.GetCalender(2013, 12, 31));
+            // 正常系
+            Assert.AreEqual("2013年01月01日(火)", _daily.GetDateStr(2013, 1, 1));
+            Assert.AreEqual("2013年01月02日(水)", _daily.GetDateStr(2013, 1, 2));
+            Assert.AreEqual("2013年01月03日(木)", _daily.GetDateStr(2013, 1, 3));
+            Assert.AreEqual("2013年01月04日(金)", _daily.GetDateStr(2013, 1, 4));
+            Assert.AreEqual("2013年01月05日(土)", _daily.GetDateStr(2013, 1, 5));
+            Assert.AreEqual("2013年01月06日(日)", _daily.GetDateStr(2013, 1, 6));
+            Assert.AreEqual("2013年01月07日(月)", _daily.GetDateStr(2013, 1, 7));
+            Assert.AreEqual("2011年10月10日(月)", _daily.GetDateStr(2011, 10, 10));
+            Assert.AreEqual("2013年12月31日(火)", _daily.GetDateStr(2013, 12, 31));
+            Assert.AreEqual("2015年03月20日(金)", _daily.GetDateStr(2015, 03, 20));
+            // 異常系
+            Assert.AreEqual("2013年00月00日(無効な年月日)", _daily.GetDateStr(2013, 0, 0));
+            Assert.AreEqual("0000年00月00日(無効な年月日)", _daily.GetDateStr(0, 0, 0));
+        }
+
+        [Test]
+        public void GetWorkTime_test()
+        {
+            DailyReport _daily = new DailyReport();
+            // 正常系のテスト
+            string[] work = _daily.GetWorkTime(2013, 12, 17, 8, 45, 17, 30);
+            string[] ary = { "7.75h", "1.00h", "7.75h", "7.75h" };
+            Assert.AreEqual(ary, work);
+
+//            work = _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 0);
+//            ary[0] = "1.00h";
+//            ary[1] = "1.00h";
+//            ary[2] = "1.00h";
+//            ary[3] = "1.00h";
+//            Assert.AreEqual(ary, work);
+            
+//            Assert.AreEqual("1.25h", _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 15));
+//            Assert.AreEqual("1.50h", _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 30));
+//            Assert.AreEqual("1.75h", _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 45));
+//            Assert.AreEqual("8.00h", _daily.GetWorkTime(2013, 12, 17, 8, 0, 17, 0));
+//            Assert.AreEqual("1.25h", _daily.GetWorkTime(2013, 12, 17, 8, 0, 21, 15));
+//            Assert.AreEqual("1.50h", _daily.GetWorkTime(2013, 12, 17, 8, 0, 22, 30));
+//            Assert.AreEqual("1.75h", _daily.GetWorkTime(2013, 12, 17, 8, 0, 23, 45));
         }
     }
 }

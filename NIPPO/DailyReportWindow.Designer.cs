@@ -51,7 +51,7 @@
             this.EndTime_Second_Combobox = new System.Windows.Forms.ComboBox();
             this.EndTime_Hour_Combobox = new System.Windows.Forms.ComboBox();
             this.StartTime_Second_Combobox = new System.Windows.Forms.ComboBox();
-            this.StartTime_Hour_ComboBox = new System.Windows.Forms.ComboBox();
+            this.StartTime_Hour_Combobox = new System.Windows.Forms.ComboBox();
             this.Add_Button = new System.Windows.Forms.Button();
             this.Delete_Button = new System.Windows.Forms.Button();
             this.TotalWorkTime_Label = new System.Windows.Forms.Label();
@@ -137,7 +137,7 @@
             this.panel1.Controls.Add(this.EndTime_Second_Combobox);
             this.panel1.Controls.Add(this.EndTime_Hour_Combobox);
             this.panel1.Controls.Add(this.StartTime_Second_Combobox);
-            this.panel1.Controls.Add(this.StartTime_Hour_ComboBox);
+            this.panel1.Controls.Add(this.StartTime_Hour_Combobox);
             this.panel1.Location = new System.Drawing.Point(34, 56);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(783, 71);
@@ -151,6 +151,8 @@
             this.NightOverTime_Textbox.ReadOnly = true;
             this.NightOverTime_Textbox.Size = new System.Drawing.Size(100, 23);
             this.NightOverTime_Textbox.TabIndex = 16;
+            this.NightOverTime_Textbox.Text = "0.00h";
+            this.NightOverTime_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // NormalOverTime_Textbox
             // 
@@ -160,6 +162,8 @@
             this.NormalOverTime_Textbox.ReadOnly = true;
             this.NormalOverTime_Textbox.Size = new System.Drawing.Size(100, 23);
             this.NormalOverTime_Textbox.TabIndex = 15;
+            this.NormalOverTime_Textbox.Text = "0.00h";
+            this.NormalOverTime_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // RestTime_Textbox
             // 
@@ -169,6 +173,8 @@
             this.RestTime_Textbox.ReadOnly = true;
             this.RestTime_Textbox.Size = new System.Drawing.Size(100, 23);
             this.RestTime_Textbox.TabIndex = 15;
+            this.RestTime_Textbox.Text = "0.00h";
+            this.RestTime_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // WorkTime_Textbox
             // 
@@ -178,6 +184,8 @@
             this.WorkTime_Textbox.ReadOnly = true;
             this.WorkTime_Textbox.Size = new System.Drawing.Size(100, 23);
             this.WorkTime_Textbox.TabIndex = 14;
+            this.WorkTime_Textbox.Text = "0.00h";
+            this.WorkTime_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // NightOverTime_Label
             // 
@@ -295,6 +303,7 @@
             this.EndTime_Second_Combobox.TabIndex = 3;
             this.EndTime_Second_Combobox.Tag = "";
             this.EndTime_Second_Combobox.Text = "30";
+            this.EndTime_Second_Combobox.SelectedIndexChanged += new System.EventHandler(this.EndTime_Second_Combobox_SelectedIndexChanged);
             // 
             // EndTime_Hour_Combobox
             // 
@@ -339,6 +348,7 @@
             this.EndTime_Hour_Combobox.TabIndex = 2;
             this.EndTime_Hour_Combobox.Tag = "";
             this.EndTime_Hour_Combobox.Text = "17";
+            this.EndTime_Hour_Combobox.SelectedIndexChanged += new System.EventHandler(this.EndTime_Hour_Combobox_SelectedIndexChanged);
             // 
             // StartTime_Second_Combobox
             // 
@@ -356,13 +366,14 @@
             this.StartTime_Second_Combobox.TabIndex = 1;
             this.StartTime_Second_Combobox.Tag = "";
             this.StartTime_Second_Combobox.Text = "45";
+            this.StartTime_Second_Combobox.SelectedIndexChanged += new System.EventHandler(this.StartTime_Second_Combobox_SelectedIndexChanged);
             // 
-            // StartTime_Hour_ComboBox
+            // StartTime_Hour_Combobox
             // 
-            this.StartTime_Hour_ComboBox.Cursor = System.Windows.Forms.Cursors.Arrow;
-            this.StartTime_Hour_ComboBox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.StartTime_Hour_ComboBox.FormattingEnabled = true;
-            this.StartTime_Hour_ComboBox.Items.AddRange(new object[] {
+            this.StartTime_Hour_Combobox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.StartTime_Hour_Combobox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
+            this.StartTime_Hour_Combobox.FormattingEnabled = true;
+            this.StartTime_Hour_Combobox.Items.AddRange(new object[] {
             "0",
             "1",
             "2",
@@ -394,12 +405,13 @@
             "28",
             "29",
             "30"});
-            this.StartTime_Hour_ComboBox.Location = new System.Drawing.Point(153, 12);
-            this.StartTime_Hour_ComboBox.Name = "StartTime_Hour_ComboBox";
-            this.StartTime_Hour_ComboBox.Size = new System.Drawing.Size(41, 24);
-            this.StartTime_Hour_ComboBox.TabIndex = 0;
-            this.StartTime_Hour_ComboBox.Tag = "";
-            this.StartTime_Hour_ComboBox.Text = "8";
+            this.StartTime_Hour_Combobox.Location = new System.Drawing.Point(153, 12);
+            this.StartTime_Hour_Combobox.Name = "StartTime_Hour_Combobox";
+            this.StartTime_Hour_Combobox.Size = new System.Drawing.Size(41, 24);
+            this.StartTime_Hour_Combobox.TabIndex = 0;
+            this.StartTime_Hour_Combobox.Tag = "";
+            this.StartTime_Hour_Combobox.Text = "8";
+            this.StartTime_Hour_Combobox.SelectedIndexChanged += new System.EventHandler(this.StartTime_Hour_Combobox_SelectedIndexChanged);
             // 
             // Add_Button
             // 
@@ -725,7 +737,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn sections_ID_TextBox;
         private System.Windows.Forms.Label Calender_Label;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.ComboBox StartTime_Hour_ComboBox;
+        private System.Windows.Forms.ComboBox StartTime_Hour_Combobox;
         private System.Windows.Forms.Label EndTime_Label;
         private System.Windows.Forms.Label StartTime_Label;
         private System.Windows.Forms.ComboBox EndTime_Second_Combobox;
