@@ -28,7 +28,18 @@ namespace NIPPO
 
         private void DalyReport_Click(object sender, EventArgs e)
         {
+            //using (MonthlyReportWindow _form = new MonthlyReportWindow())
+            //{
+            //    _form.ShowDialog(2013); // とりあえず
+            //}
+        }
 
+        private void ViewWorkRecord_button_Click(object sender, EventArgs e)
+        {
+            //using (MonthlyReportWindow _form = new MonthlyReportWindow())
+            //{
+            //    _form.ShowDialog(2013); // とりあえず
+            //}
         }
     }
 }
