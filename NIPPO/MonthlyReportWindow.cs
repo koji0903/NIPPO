@@ -19,11 +19,21 @@ namespace NIPPO
             InitializeComponent();
         }
 
+        /// <summary>
+        /// 「終了」ボタン押下時の処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void closeWindow_button_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// 「>」ボタン押下時の処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void nextMonth_button_Click(object sender, EventArgs e)
         {
             _mr.incrMonth();
@@ -31,6 +41,11 @@ namespace NIPPO
             this.reloadWindow();
         }
 
+        /// <summary>
+        /// 「<」ボタン押下時の処理
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void prevMonth_button_Click(object sender, EventArgs e)
         {
             _mr.decrMonth();
@@ -38,6 +53,9 @@ namespace NIPPO
             this.reloadWindow();
         }
 
+        /// <summary>
+        /// ウィンドウを再描画する
+        /// </summary>
         private void reloadWindow()
         {
             // 表示する「年度/月」の作成と表示
@@ -52,6 +70,11 @@ namespace NIPPO
 
         }
 
+        /// <summary>
+        /// showDialog()のオーバーロードメソッド
+        /// </summary>
+        /// <param name="FY">事業年度</param>
+        /// <returns></returns>
         public DialogResult ShowDialog(int FY)
         {
             this._FY = FY;
@@ -74,7 +97,11 @@ namespace NIPPO
             return base.ShowDialog();
         }
 
-        // フォーム表示後に発生するイベント
+        /// <summary>
+        /// フォーム表示後に発生するイベント
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Me_Shown(object sender, EventArgs e)
         {
             // リロード時のメソッドを流用
