@@ -37,11 +37,21 @@ namespace NIPPO
             }
             else
             {
-                this.DialogResult = DialogResult.Abort;
+                //this.DialogResult = DialogResult.Abort;
                 MessageBox.Show("IDまたはパスワードが違います。");
                 this.id_textbox.Text = null;
                 this.pw_textbox.Text = null;
             }
         }
+
+        private void clear_button_Click(object sender, EventArgs e)
+        {
+            this.id_textbox.Text = null;
+            this.pw_textbox.Text = null;
+        }
+
+ 
+
+
     }
 }

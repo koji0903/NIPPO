@@ -28,6 +28,7 @@ namespace NIPPO
                 }
                 else
                 {
+                    // LoginWindowが[×]ボタンで閉じられた場合。
                     this.Close();
                 }
             }
