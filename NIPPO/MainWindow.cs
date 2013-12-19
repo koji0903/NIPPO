@@ -37,7 +37,9 @@ namespace NIPPO
                     this.Close();
                 }
             }
-
+            // ステータスバーにログイン名表示（とりあえずIDだけ。氏名の表示は後で。）
+            // （shownイベントでやったほうがいいかも）
+            user_toolStripStatusLabel.Text = this.userID;
         }
 
         private void コード発行_Click(object sender, EventArgs e)
