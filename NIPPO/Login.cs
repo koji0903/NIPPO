@@ -27,7 +27,7 @@ namespace NIPPO
                 try
                 {
                     command.Connection = connection;
-                    command.CommandText = @"SELECT ID,password FROM users WHERE ID='" + userID + "';";
+                    command.CommandText = @"SELECT ID,password FROM users WHERE login='" + userID + "';";
 
                     adapter.SelectCommand = command;
                     adapter.Fill(ds, "user");
