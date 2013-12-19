@@ -45,11 +45,11 @@ namespace NIPPO
 
         }
 
-        private void DalyReport_Click(object sender, EventArgs e)
+        private void DailyReport_Click(object sender, EventArgs e)
         {
-            //using (MonthlyReportWindow _form = new MonthlyReportWindow())
-            //{
-            //    _form.ShowDialog(2013); // とりあえず
+            DailyReportWindow daily_report_window = new DailyReportWindow(2013,"0001",2013,12,17);
+            daily_report_window.ShowDialog(this);
+            daily_report_window.Dispose();
             //}
         }
 
@@ -66,7 +66,6 @@ namespace NIPPO
             _year = (int)FY_numericUpDown.Value;
             // MessageBox.Show(_year.ToString()); // debug
         }
-
         private void exit_button_Click(object sender, EventArgs e)
         {
             this.Close();
