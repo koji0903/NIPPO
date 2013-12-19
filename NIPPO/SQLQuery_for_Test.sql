@@ -117,35 +117,35 @@ INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,note) V
 SET @d = (SELECT ID FROM users WHERE login = '1'); -- USERIDを選んで
 SET @d = (SELECT ID FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
 SET @e = (SELECT ID FROM projects WHERE num = '1');
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','報告書作成',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','会議',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','開発',@d,@e);
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('2.00','報告書作成',@d,@e);
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('2.00','会議',@d,@e);
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('2.00','開発',@d,@e);
 
 SET @d = (SELECT ID FROM users WHERE login = '2'); -- USERIDを選んで
 SET @d = (SELECT ID FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
 SET @e = (SELECT ID FROM projects WHERE num = '2');
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','仕様検討',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','コーディング',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','テスト',@d,@e);
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('2.00','仕様検討',@d,@e);
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('2.00','コーディング',@d,@e);
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('2.00','テスト',@d,@e);
 
 SET @d = (SELECT ID FROM users WHERE login = '3'); -- USERIDを選んで
 SET @d = (SELECT ID FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
 SET @e = (SELECT ID FROM projects WHERE num = '1');
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','セミナー',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','移動',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','報告',@d,@e);
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('2.00','セミナー',@d,@e);
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('2.00','移動',@d,@e);
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('2.00','報告',@d,@e);
 
 
 ---------------------------------------------------------------
 -- 表示
 ---------------------------------------------------------------
-SELECT * FROM users;
-SELECT * FROM sections;
-SELECT users.lastname,users.firstname,sections.name FROM users INNER JOIN sections ON users.sections_ID = sections.ID;
-SELECT * FROM business_segments;
-SELECT * FROM business_type;
-SELECT * FROM business_detail;
-SELECT * FROM customers;
-SELECT * FROM work_reports;
-SELECT * FROM work_detail;
-SELECT * FROM projects;
+--SELECT * FROM users;
+--SELECT * FROM sections;
+--SELECT users.lastname,users.firstname,sections.name FROM users INNER JOIN sections ON users.sections_ID = sections.ID;
+--SELECT * FROM business_segments;
+--SELECT * FROM business_type;
+--SELECT * FROM business_detail;
+--SELECT * FROM customers;
+--SELECT * FROM work_reports;
+SELECT * FROM work_detail INNER JOIN projects ON work_detail.projects_ID = projects.ID;
+--SELECT * FROM projects;

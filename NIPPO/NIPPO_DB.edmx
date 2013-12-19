@@ -137,7 +137,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="times" Type="time" Nullable="false" />
+    <Property Name="times" Type="float" Nullable="false" />
     <Property Name="note" Type="nvarchar(max)" Nullable="true" />
     <Property Name="work_reports_ID" Type="int" Nullable="true" />
     <Property Name="projects_ID" Type="int" Nullable="true" />
@@ -552,7 +552,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Time" Name="times" Nullable="false" />
+          <Property Type="Double" Name="times" Nullable="false" />
           <Property Type="String" Name="note" Nullable="true" />
           <NavigationProperty Name="work_reports" Relationship="NIPPO_DB.work_reportswork_detail" FromRole="work_detail" ToRole="work_reports" />
           <NavigationProperty Name="projects" Relationship="NIPPO_DB.work_detailprojects" FromRole="work_detail" ToRole="projects" />

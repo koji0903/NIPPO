@@ -36,12 +36,23 @@ namespace NIPPO
         /// <param name="e"></param>
         private void DailyReportWindow_Load(object sender, EventArgs e)
         {
+
+        }
+
+
+        private void DailyReportWindow_Shown(object sender, EventArgs e)
+        {
             using (DailyReport _daily = new DailyReport())
             {
                 // 年月日情報の表示
                 this.Calender_Label.Text = _daily.GetDateStr(2013, 12, 13);
             }
 
+                using (DataAccessClass data_access = new DataAccessClass())
+                {
+                    this.WorkDetail_DateGridView.DataSource = data_access.GetWorkDetailDs("0001", 2013, 12, 19, 7.75);
+                    this.WorkDetail_DateGridView.DataMember = @"WorkDetail";
+                }
 
         }
 
@@ -120,10 +131,6 @@ namespace NIPPO
             this.NightOverTime_Textbox.Text = str[3];
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
         private void SerarchProject_Button_Click(object sender, EventArgs e)
         {
@@ -133,26 +140,6 @@ namespace NIPPO
         private void SearchBusiness_Button_Click(object sender, EventArgs e)
         {
             // 業務選択を行うウィンドウを表示
-        }
-
-        private void DailyReportWindow_Shown(object sender, EventArgs e)
-        {
-            // 勤務日報情報一覧表示
-            try
-            {
-                using( DataAccessClass data_access = new DataAccessClass() )
-                {
-                    this.WorkDetail_GridGridView.AutoGenerateColumns = false;
-                    this.WorkDetail_GridGridView.DataSource = null;
-                    this.WorkDetail_GridGridView.DataSource = data_access.GetWorkDetailDs("0001", 2013, 12, 19, 7.75);
-                    this.WorkDetail_GridGridView.DataMember = @"WorkDatail";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text);
-            }
-
         }
 
 

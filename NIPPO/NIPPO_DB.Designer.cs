@@ -3956,7 +3956,7 @@ namespace NIPPO
         /// </summary>
         /// <param name="id">ID プロパティの初期値。</param>
         /// <param name="times">times プロパティの初期値。</param>
-        public static work_detail Creatework_detail(global::System.Int32 id, global::System.TimeSpan times)
+        public static work_detail Creatework_detail(global::System.Int32 id, global::System.Double times)
         {
             work_detail work_detail = new work_detail();
             work_detail.ID = id;
@@ -4000,7 +4000,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.TimeSpan times
+        public global::System.Double times
         {
             get
             {
@@ -4015,8 +4015,8 @@ namespace NIPPO
                 OntimesChanged();
             }
         }
-        private global::System.TimeSpan _times;
-        partial void OntimesChanging(global::System.TimeSpan value);
+        private global::System.Double _times;
+        partial void OntimesChanging(global::System.Double value);
         partial void OntimesChanged();
     
         /// <summary>

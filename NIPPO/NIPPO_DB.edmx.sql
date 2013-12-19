@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/14/2013 23:43:10
+-- Date Created: 12/19/2013 19:57:12
 -- Generated from EDMX file: C:\Users\koji\Documents\Visual Studio 2010\Projects\NIPPO\NIPPO\NIPPO_DB.edmx
 -- --------------------------------------------------
 
@@ -168,7 +168,7 @@ GO
 -- Creating table 'work_detail'
 CREATE TABLE [dbo].[work_detail] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [times] time  NOT NULL,
+    [times] float  NOT NULL,
     [note] nvarchar(max)  NULL,
     [work_reports_ID] int  NULL,
     [projects_ID] int  NULL
