@@ -1,0 +1,19 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="NIPPO.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="ConnectionString" Type="System.String" Scope="User">
+<<<<<<< HEAD
+      <Value Profile="(Default)">Data Source=localhost\SQLEXPRESS;Initial Catalog=nippo_db;User ID=nippo;password=KSK1217</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=localhost\SQLEXPRESS;Initial Catalog=nippo_db;UserID{0};Password{1}</Value>
+=======
+      <Value Profile="(Default)">Data Source=localhost\SQLEXPRESS;Initial Catalog=nippo_db;User ID=koji;password=koji</Value>
+    </Setting>
+    <Setting Name="Setting" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Data Source=localhost\SQLEXPRESS;Initial Catalog=nippo_db;User ID={0};Password={1}</Value>
+>>>>>>> origin/DailyReport
+    </Setting>
+  </Settings>
+</SettingsFile>
