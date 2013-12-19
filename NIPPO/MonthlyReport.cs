@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+//
+using System.Data;
+using System.Data.SqlClient;
 
 namespace NIPPO
 {
@@ -107,7 +110,45 @@ namespace NIPPO
 
         public string getUserName()
         {
-            return this._userID;
+            string str = "";
+            DataSet ds = getUserNameOnStatusBarDs(this._userID);
+            if (ds.Tables["user"].Rows.Count > 0)
+            {
+                str = ds.Tables["user"].Rows[0]["lastname"] + " "
+                    + ds.Tables["user"].Rows[0]["firstname"] + "("
+                    + ds.Tables["user"].Rows[0]["name"] + ")";
+            }
+            
+            return str;
+        }
+
+        internal DataSet getUserNameOnStatusBarDs(string userID)
+        {
+            SqlConnection connection = new SqlConnection();
+            SqlCommand command = new SqlCommand();
+            DataSet ds = new DataSet();
+
+            connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
+
+            using (SqlDataAdapter adapter = new SqlDataAdapter())
+            {
+                try
+                {
+                    command.Connection = connection;
+                    command.CommandText = @"SELECT lastname,firstname,name"
+                        + " FROM users LEFT JOIN sections"
+                        + " ON users.sections_ID = sections.ID"
+                        + " WHERE login='"
+                        + userID + "';";
+                    adapter.SelectCommand = command;
+                    adapter.Fill(ds, "user");
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+            return ds;
         }
     }
 }
