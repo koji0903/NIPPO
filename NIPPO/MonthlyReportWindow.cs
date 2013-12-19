@@ -71,8 +71,8 @@ namespace NIPPO
             this.Cursor = Cursors.WaitCursor;
             try
             {
-                this.list_dataGridView.DataSource = _mr.getMonthlyWorkReport();
-                this.list_dataGridView.DataMember = @"MonthlyReport";
+                this.list_dataGridView.DataSource = _mr.getMonthlyWorkReport("MonthlyReport");
+                this.list_dataGridView.DataMember = "MonthlyReport";
             }
             catch (Exception ex)
             {

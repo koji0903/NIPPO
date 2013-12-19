@@ -97,7 +97,7 @@ namespace NIPPO_test
         {
             MonthlyReport _mr = new MonthlyReport(2013, "1");
             _mr.setMonth(12);
-            DataSet _ds = _mr.getMonthlyWorkReport();
+            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
             
             Assert.AreEqual(true, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
         }

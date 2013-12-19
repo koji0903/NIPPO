@@ -28,7 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
             this.FYMonth_label = new System.Windows.Forms.Label();
             this.nextMonth_button = new System.Windows.Forms.Button();
             this.prevMonth_button = new System.Windows.Forms.Button();
@@ -49,8 +53,8 @@
             this.dailyWork_groupBox = new System.Windows.Forms.GroupBox();
             this.outputExcel_button = new System.Windows.Forms.Button();
             this.closeWindow_button = new System.Windows.Forms.Button();
-            this.nIPPODBContainerBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.day_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.week_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.end_time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.work_times_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,14 +65,13 @@
             this.statusStrip1.SuspendLayout();
             this.summary_groupBox.SuspendLayout();
             this.collection_tabControl.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nIPPODBContainerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // FYMonth_label
             // 
             this.FYMonth_label.AutoSize = true;
             this.FYMonth_label.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.FYMonth_label.Location = new System.Drawing.Point(228, 22);
+            this.FYMonth_label.Location = new System.Drawing.Point(350, 13);
             this.FYMonth_label.Name = "FYMonth_label";
             this.FYMonth_label.Size = new System.Drawing.Size(170, 27);
             this.FYMonth_label.TabIndex = 0;
@@ -76,7 +79,7 @@
             // 
             // nextMonth_button
             // 
-            this.nextMonth_button.Location = new System.Drawing.Point(441, 22);
+            this.nextMonth_button.Location = new System.Drawing.Point(563, 13);
             this.nextMonth_button.Name = "nextMonth_button";
             this.nextMonth_button.Size = new System.Drawing.Size(29, 23);
             this.nextMonth_button.TabIndex = 1;
@@ -86,7 +89,7 @@
             // 
             // prevMonth_button
             // 
-            this.prevMonth_button.Location = new System.Drawing.Point(152, 22);
+            this.prevMonth_button.Location = new System.Drawing.Point(274, 13);
             this.prevMonth_button.Name = "prevMonth_button";
             this.prevMonth_button.Size = new System.Drawing.Size(29, 23);
             this.prevMonth_button.TabIndex = 1;
@@ -98,22 +101,26 @@
             // 
             this.list_dataGridView.AllowUserToAddRows = false;
             this.list_dataGridView.AllowUserToDeleteRows = false;
-            this.list_dataGridView.AutoGenerateColumns = false;
             this.list_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.list_dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.day_TextBox,
+            this.week_TextBox,
             this.start_time_TextBox,
             this.end_time_TextBox,
             this.work_times_TextBox,
             this.overtime125_TextBox,
             this.overtime150_TextBox,
             this.holiday_work_times_TextBox});
-            this.list_dataGridView.DataSource = this.nIPPODBContainerBindingSource;
-            this.list_dataGridView.Location = new System.Drawing.Point(35, 66);
+            this.list_dataGridView.Location = new System.Drawing.Point(35, 51);
+            this.list_dataGridView.MultiSelect = false;
             this.list_dataGridView.Name = "list_dataGridView";
             this.list_dataGridView.ReadOnly = true;
-            this.list_dataGridView.RowTemplate.Height = 24;
-            this.list_dataGridView.Size = new System.Drawing.Size(560, 523);
+            this.list_dataGridView.RowHeadersVisible = false;
+            this.list_dataGridView.RowTemplate.Height = 16;
+            this.list_dataGridView.RowTemplate.ReadOnly = true;
+            this.list_dataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.list_dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.list_dataGridView.Size = new System.Drawing.Size(828, 569);
             this.list_dataGridView.TabIndex = 2;
             // 
             // statusStrip1
@@ -121,9 +128,9 @@
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.editable_toolStripStatusLabel,
             this.user_toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 628);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 663);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1011, 24);
+            this.statusStrip1.Size = new System.Drawing.Size(1295, 24);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -147,7 +154,7 @@
             this.summary_groupBox.Controls.Add(this.totalOverTime150_label);
             this.summary_groupBox.Controls.Add(this.totalOverTime125_label);
             this.summary_groupBox.Controls.Add(this.totalTime_label);
-            this.summary_groupBox.Location = new System.Drawing.Point(613, 33);
+            this.summary_groupBox.Location = new System.Drawing.Point(888, 33);
             this.summary_groupBox.Name = "summary_groupBox";
             this.summary_groupBox.Size = new System.Drawing.Size(254, 140);
             this.summary_groupBox.TabIndex = 4;
@@ -218,7 +225,7 @@
             // 
             this.collection_tabControl.Controls.Add(this.project_tabPage);
             this.collection_tabControl.Controls.Add(this.work_tabPage);
-            this.collection_tabControl.Location = new System.Drawing.Point(613, 200);
+            this.collection_tabControl.Location = new System.Drawing.Point(888, 200);
             this.collection_tabControl.Name = "collection_tabControl";
             this.collection_tabControl.SelectedIndex = 0;
             this.collection_tabControl.Size = new System.Drawing.Size(386, 171);
@@ -246,7 +253,7 @@
             // 
             // dailyWork_groupBox
             // 
-            this.dailyWork_groupBox.Location = new System.Drawing.Point(617, 399);
+            this.dailyWork_groupBox.Location = new System.Drawing.Point(892, 399);
             this.dailyWork_groupBox.Name = "dailyWork_groupBox";
             this.dailyWork_groupBox.Size = new System.Drawing.Size(377, 190);
             this.dailyWork_groupBox.TabIndex = 6;
@@ -255,55 +262,72 @@
             // 
             // outputExcel_button
             // 
-            this.outputExcel_button.Location = new System.Drawing.Point(35, 598);
+            this.outputExcel_button.Location = new System.Drawing.Point(35, 626);
             this.outputExcel_button.Name = "outputExcel_button";
-            this.outputExcel_button.Size = new System.Drawing.Size(101, 23);
+            this.outputExcel_button.Size = new System.Drawing.Size(101, 32);
             this.outputExcel_button.TabIndex = 7;
             this.outputExcel_button.Text = "Excel出力";
             this.outputExcel_button.UseVisualStyleBackColor = true;
             // 
             // closeWindow_button
             // 
-            this.closeWindow_button.Location = new System.Drawing.Point(898, 598);
+            this.closeWindow_button.Location = new System.Drawing.Point(1173, 630);
             this.closeWindow_button.Name = "closeWindow_button";
-            this.closeWindow_button.Size = new System.Drawing.Size(101, 23);
+            this.closeWindow_button.Size = new System.Drawing.Size(101, 28);
             this.closeWindow_button.TabIndex = 7;
             this.closeWindow_button.Text = "閉じる";
             this.closeWindow_button.UseVisualStyleBackColor = true;
             this.closeWindow_button.Click += new System.EventHandler(this.closeWindow_button_Click);
             // 
-            // nIPPODBContainerBindingSource
-            // 
-            this.nIPPODBContainerBindingSource.DataSource = typeof(NIPPO.NIPPO_DBContainer);
-            // 
             // day_TextBox
             // 
             this.day_TextBox.DataPropertyName = "day";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.day_TextBox.DefaultCellStyle = dataGridViewCellStyle1;
             this.day_TextBox.HeaderText = "日";
             this.day_TextBox.Name = "day_TextBox";
             this.day_TextBox.ReadOnly = true;
-            this.day_TextBox.Width = 30;
+            this.day_TextBox.Width = 25;
+            // 
+            // week_TextBox
+            // 
+            this.week_TextBox.DataPropertyName = "week";
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.week_TextBox.DefaultCellStyle = dataGridViewCellStyle2;
+            this.week_TextBox.HeaderText = "曜日";
+            this.week_TextBox.Name = "week_TextBox";
+            this.week_TextBox.ReadOnly = true;
+            this.week_TextBox.Width = 25;
             // 
             // start_time_TextBox
             // 
             this.start_time_TextBox.DataPropertyName = "start_time";
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.start_time_TextBox.DefaultCellStyle = dataGridViewCellStyle3;
             this.start_time_TextBox.HeaderText = "勤務開始時刻";
             this.start_time_TextBox.Name = "start_time_TextBox";
             this.start_time_TextBox.ReadOnly = true;
+            this.start_time_TextBox.Width = 80;
             // 
             // end_time_TextBox
             // 
             this.end_time_TextBox.DataPropertyName = "end_time";
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.end_time_TextBox.DefaultCellStyle = dataGridViewCellStyle4;
             this.end_time_TextBox.HeaderText = "勤務終了時刻";
             this.end_time_TextBox.Name = "end_time_TextBox";
             this.end_time_TextBox.ReadOnly = true;
+            this.end_time_TextBox.Width = 80;
             // 
             // work_times_TextBox
             // 
             this.work_times_TextBox.DataPropertyName = "work_times";
+            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            this.work_times_TextBox.DefaultCellStyle = dataGridViewCellStyle5;
             this.work_times_TextBox.HeaderText = "勤務時間";
             this.work_times_TextBox.Name = "work_times_TextBox";
             this.work_times_TextBox.ReadOnly = true;
+            this.work_times_TextBox.Width = 80;
             // 
             // overtime125_TextBox
             // 
@@ -311,6 +335,7 @@
             this.overtime125_TextBox.HeaderText = "普通残業時間";
             this.overtime125_TextBox.Name = "overtime125_TextBox";
             this.overtime125_TextBox.ReadOnly = true;
+            this.overtime125_TextBox.Width = 80;
             // 
             // overtime150_TextBox
             // 
@@ -318,6 +343,7 @@
             this.overtime150_TextBox.HeaderText = "深夜残業時間";
             this.overtime150_TextBox.Name = "overtime150_TextBox";
             this.overtime150_TextBox.ReadOnly = true;
+            this.overtime150_TextBox.Width = 80;
             // 
             // holiday_work_times_TextBox
             // 
@@ -330,7 +356,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1011, 652);
+            this.ClientSize = new System.Drawing.Size(1295, 687);
             this.Controls.Add(this.closeWindow_button);
             this.Controls.Add(this.outputExcel_button);
             this.Controls.Add(this.dailyWork_groupBox);
@@ -341,6 +367,7 @@
             this.Controls.Add(this.prevMonth_button);
             this.Controls.Add(this.nextMonth_button);
             this.Controls.Add(this.FYMonth_label);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Name = "MonthlyReportWindow";
             this.Text = "MonthlyReportWindow";
             this.Shown += new System.EventHandler(this.Me_Shown);
@@ -350,7 +377,6 @@
             this.summary_groupBox.ResumeLayout(false);
             this.summary_groupBox.PerformLayout();
             this.collection_tabControl.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.nIPPODBContainerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -379,12 +405,12 @@
         private System.Windows.Forms.ToolStripStatusLabel editable_toolStripStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel user_toolStripStatusLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn day_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn week_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn start_time_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn end_time_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn work_times_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn overtime125_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn overtime150_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn holiday_work_times_TextBox;
-        private System.Windows.Forms.BindingSource nIPPODBContainerBindingSource;
     }
 }

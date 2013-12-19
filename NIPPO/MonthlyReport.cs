@@ -151,12 +151,12 @@ namespace NIPPO
             return ds;
         }
 
-        public DataSet getMonthlyWorkReport()
+        public DataSet getMonthlyWorkReport(string dataMember)
         {
             SqlConnection connection = new SqlConnection();
             SqlCommand command = new SqlCommand();
-            DataSet ds = new DataSet();
-            DataSet retDs = new DataSet();
+            DataSet _ds_tmp = new DataSet();
+            DataSet _ds = new DataSet();
 
             connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
 
@@ -172,23 +172,35 @@ namespace NIPPO
                         + " AND month='" + this._month + "'"
                         + ";";
                     adapter.SelectCommand = command;
-                    adapter.Fill(ds, "MonthlyReport0");
+                    adapter.Fill(_ds_tmp, "MonthlyReport_tmp");
                 }
                 catch (Exception ex)
                 {
                     return null;
                 }
             }
+            //
+            DataTable _dt = _ds_tmp.Tables["MonthlyReport_tmp"].Copy();
+            _dt.TableName = dataMember;
+            _dt.Rows.Clear();
             // 1～31までの配列に格納する
-            //_ds.Tables["MonthlyReport"].Rows[0]["day"];
-
-            DataTable _dt = new DataTable("MonthlyReport");
-            _dt.Columns.Add("day");
-            _dt.Rows.Add();
-            _dt.Rows.Add();
-            retDs.Tables.Add(_dt);
-            
-            return retDs;
+            _dt.Columns.Add("week", Type.GetType("System.String"));
+            for (int i = 0;
+                i < DateTime.DaysInMonth(this.getCalYear(), this._month);
+                i++)
+            {
+                DataRow _dr = _dt.NewRow();
+                // 日
+                int day = i + 1;
+                _dr["day"] = day;
+                // 曜日
+                DateTime _date = new DateTime(this.getCalYear(), this._month, day);
+                _dr["week"] = _date.ToString("ddd");
+                // 
+                _dt.Rows.Add(_dr);
+            }
+            _ds.Tables.Add(_dt);
+            return _ds;
         }
     }
 }
