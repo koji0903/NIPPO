@@ -36,8 +36,9 @@ namespace NIPPO
                 }
                 catch (Exception ex)
                 {
+                    //  データベース接続が失敗した場合
                     MessageBox.Show(ex.Message);
-                    //終了処理が必要？
+                    Environment.Exit(Environment.ExitCode);
                 }
             }
 
