@@ -122,7 +122,7 @@ namespace NIPPO
             return str;
         }
 
-        internal DataSet getUserNameOnStatusBarDs(string userID)
+        public DataSet getUserNameOnStatusBarDs(string userID)
         {
             SqlConnection connection = new SqlConnection();
             SqlCommand command = new SqlCommand();
@@ -149,6 +149,46 @@ namespace NIPPO
                 }
             }
             return ds;
+        }
+
+        public DataSet getMonthlyWorkReport()
+        {
+            SqlConnection connection = new SqlConnection();
+            SqlCommand command = new SqlCommand();
+            DataSet ds = new DataSet();
+            DataSet retDs = new DataSet();
+
+            connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
+
+            using (SqlDataAdapter adapter = new SqlDataAdapter())
+            {
+                try
+                {
+                    command.Connection = connection;
+                    command.CommandText = @"SELECT *"
+                        + " FROM work_reports"
+                        + " WHERE users_ID='" + this._userID + "'"
+                        + " AND FY='" + this._FY + "'"
+                        + " AND month='" + this._month + "'"
+                        + ";";
+                    adapter.SelectCommand = command;
+                    adapter.Fill(ds, "MonthlyReport0");
+                }
+                catch (Exception ex)
+                {
+                    return null;
+                }
+            }
+            // 1～31までの配列に格納する
+            //_ds.Tables["MonthlyReport"].Rows[0]["day"];
+
+            DataTable _dt = new DataTable("MonthlyReport");
+            _dt.Columns.Add("day");
+            _dt.Rows.Add();
+            _dt.Rows.Add();
+            retDs.Tables.Add(_dt);
+            
+            return retDs;
         }
     }
 }

@@ -68,6 +68,21 @@ namespace NIPPO
             // 「<」の有効/無効化
             this.prevMonth_button.Enabled = _mr.existsPrevMonth();
             // SQLから情報取得と表示
+            this.Cursor = Cursors.WaitCursor;
+            try
+            {
+                this.list_dataGridView.DataSource = _mr.getMonthlyWorkReport();
+                this.list_dataGridView.DataMember = @"MonthlyReport";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text);
+            }
+            finally
+            {
+                this.Cursor = Cursors.Default;
+            }
+
 
             // 合計時間の計算と、「集計」エリアへの表示
 

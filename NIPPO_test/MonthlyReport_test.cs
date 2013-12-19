@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 using NIPPO;
+using System.Data;
 
 namespace NIPPO_test
 {
@@ -89,6 +90,16 @@ namespace NIPPO_test
             Assert.AreEqual(true, _mr.existsPrevMonth());
             _mr.setMonth(4);
             Assert.AreEqual(false, _mr.existsPrevMonth());
+        }
+
+        [Test]
+        public void とりあえずテスト()
+        {
+            MonthlyReport _mr = new MonthlyReport(2013, "1");
+            _mr.setMonth(12);
+            DataSet _ds = _mr.getMonthlyWorkReport();
+            
+            Assert.AreEqual(true, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
         }
     }
 }

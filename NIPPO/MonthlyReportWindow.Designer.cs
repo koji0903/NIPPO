@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.FYMonth_label = new System.Windows.Forms.Label();
             this.nextMonth_button = new System.Windows.Forms.Button();
             this.prevMonth_button = new System.Windows.Forms.Button();
             this.list_dataGridView = new System.Windows.Forms.DataGridView();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.editable_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.user_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.summary_groupBox = new System.Windows.Forms.GroupBox();
             this.totalOverTime150_textBox = new System.Windows.Forms.TextBox();
             this.totalOverTime125_textBox = new System.Windows.Forms.TextBox();
@@ -46,12 +49,19 @@
             this.dailyWork_groupBox = new System.Windows.Forms.GroupBox();
             this.outputExcel_button = new System.Windows.Forms.Button();
             this.closeWindow_button = new System.Windows.Forms.Button();
-            this.editable_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
-            this.user_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.nIPPODBContainerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.day_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start_time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.end_time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.work_times_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.overtime125_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.overtime150_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.holiday_work_times_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.list_dataGridView)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.summary_groupBox.SuspendLayout();
             this.collection_tabControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nIPPODBContainerBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // FYMonth_label
@@ -86,9 +96,22 @@
             // 
             // list_dataGridView
             // 
+            this.list_dataGridView.AllowUserToAddRows = false;
+            this.list_dataGridView.AllowUserToDeleteRows = false;
+            this.list_dataGridView.AutoGenerateColumns = false;
             this.list_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.list_dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.day_TextBox,
+            this.start_time_TextBox,
+            this.end_time_TextBox,
+            this.work_times_TextBox,
+            this.overtime125_TextBox,
+            this.overtime150_TextBox,
+            this.holiday_work_times_TextBox});
+            this.list_dataGridView.DataSource = this.nIPPODBContainerBindingSource;
             this.list_dataGridView.Location = new System.Drawing.Point(35, 66);
             this.list_dataGridView.Name = "list_dataGridView";
+            this.list_dataGridView.ReadOnly = true;
             this.list_dataGridView.RowTemplate.Height = 24;
             this.list_dataGridView.Size = new System.Drawing.Size(560, 523);
             this.list_dataGridView.TabIndex = 2;
@@ -103,6 +126,18 @@
             this.statusStrip1.Size = new System.Drawing.Size(1011, 24);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
+            // 
+            // editable_toolStripStatusLabel
+            // 
+            this.editable_toolStripStatusLabel.Name = "editable_toolStripStatusLabel";
+            this.editable_toolStripStatusLabel.Size = new System.Drawing.Size(54, 19);
+            this.editable_toolStripStatusLabel.Text = "編集可";
+            // 
+            // user_toolStripStatusLabel
+            // 
+            this.user_toolStripStatusLabel.Name = "user_toolStripStatusLabel";
+            this.user_toolStripStatusLabel.Size = new System.Drawing.Size(132, 19);
+            this.user_toolStripStatusLabel.Text = "表示対象のユーザ名";
             // 
             // summary_groupBox
             // 
@@ -237,17 +272,59 @@
             this.closeWindow_button.UseVisualStyleBackColor = true;
             this.closeWindow_button.Click += new System.EventHandler(this.closeWindow_button_Click);
             // 
-            // editable_toolStripStatusLabel
+            // nIPPODBContainerBindingSource
             // 
-            this.editable_toolStripStatusLabel.Name = "editable_toolStripStatusLabel";
-            this.editable_toolStripStatusLabel.Size = new System.Drawing.Size(54, 19);
-            this.editable_toolStripStatusLabel.Text = "編集可";
+            this.nIPPODBContainerBindingSource.DataSource = typeof(NIPPO.NIPPO_DBContainer);
             // 
-            // user_toolStripStatusLabel
+            // day_TextBox
             // 
-            this.user_toolStripStatusLabel.Name = "user_toolStripStatusLabel";
-            this.user_toolStripStatusLabel.Size = new System.Drawing.Size(132, 19);
-            this.user_toolStripStatusLabel.Text = "表示対象のユーザ名";
+            this.day_TextBox.DataPropertyName = "day";
+            this.day_TextBox.HeaderText = "日";
+            this.day_TextBox.Name = "day_TextBox";
+            this.day_TextBox.ReadOnly = true;
+            this.day_TextBox.Width = 30;
+            // 
+            // start_time_TextBox
+            // 
+            this.start_time_TextBox.DataPropertyName = "start_time";
+            this.start_time_TextBox.HeaderText = "勤務開始時刻";
+            this.start_time_TextBox.Name = "start_time_TextBox";
+            this.start_time_TextBox.ReadOnly = true;
+            // 
+            // end_time_TextBox
+            // 
+            this.end_time_TextBox.DataPropertyName = "end_time";
+            this.end_time_TextBox.HeaderText = "勤務終了時刻";
+            this.end_time_TextBox.Name = "end_time_TextBox";
+            this.end_time_TextBox.ReadOnly = true;
+            // 
+            // work_times_TextBox
+            // 
+            this.work_times_TextBox.DataPropertyName = "work_times";
+            this.work_times_TextBox.HeaderText = "勤務時間";
+            this.work_times_TextBox.Name = "work_times_TextBox";
+            this.work_times_TextBox.ReadOnly = true;
+            // 
+            // overtime125_TextBox
+            // 
+            this.overtime125_TextBox.DataPropertyName = "overtime125";
+            this.overtime125_TextBox.HeaderText = "普通残業時間";
+            this.overtime125_TextBox.Name = "overtime125_TextBox";
+            this.overtime125_TextBox.ReadOnly = true;
+            // 
+            // overtime150_TextBox
+            // 
+            this.overtime150_TextBox.DataPropertyName = "overtime150";
+            this.overtime150_TextBox.HeaderText = "深夜残業時間";
+            this.overtime150_TextBox.Name = "overtime150_TextBox";
+            this.overtime150_TextBox.ReadOnly = true;
+            // 
+            // holiday_work_times_TextBox
+            // 
+            this.holiday_work_times_TextBox.DataPropertyName = "holiday_work_times";
+            this.holiday_work_times_TextBox.HeaderText = "休日出勤";
+            this.holiday_work_times_TextBox.Name = "holiday_work_times_TextBox";
+            this.holiday_work_times_TextBox.ReadOnly = true;
             // 
             // MonthlyReportWindow
             // 
@@ -273,6 +350,7 @@
             this.summary_groupBox.ResumeLayout(false);
             this.summary_groupBox.PerformLayout();
             this.collection_tabControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nIPPODBContainerBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -300,5 +378,13 @@
         private System.Windows.Forms.Button closeWindow_button;
         private System.Windows.Forms.ToolStripStatusLabel editable_toolStripStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel user_toolStripStatusLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn day_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn start_time_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn end_time_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn work_times_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn overtime125_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn overtime150_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn holiday_work_times_TextBox;
+        private System.Windows.Forms.BindingSource nIPPODBContainerBindingSource;
     }
 }
