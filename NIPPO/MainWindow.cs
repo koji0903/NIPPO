@@ -51,7 +51,7 @@ namespace NIPPO
         {
             using (MonthlyReportWindow _form = new MonthlyReportWindow())
             {
-                _form.ShowDialog(_year);
+                _form.ShowDialog(_year, userID);
             }
         }
 
@@ -59,7 +59,7 @@ namespace NIPPO
         {
             using (MonthlyReportWindow _form = new MonthlyReportWindow())
             {
-                _form.ShowDialog(_year);
+                _form.ShowDialog(_year, userID);
             }
         }
 

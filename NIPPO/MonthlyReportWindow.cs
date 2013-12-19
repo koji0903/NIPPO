@@ -13,6 +13,7 @@ namespace NIPPO
     {
         private MonthlyReport _mr;
         private int _FY;
+        private string _userID;
 
         public MonthlyReportWindow()
         {
@@ -58,6 +59,8 @@ namespace NIPPO
         /// </summary>
         private void reloadWindow()
         {
+            // ステータスバー表示
+            user_toolStripStatusLabel.Text = this._userID;
             // 表示する「年度/月」の作成と表示
             FYMonth_label.Text = _mr.getStringYearMonth();
             // 「>」の有効/無効化
@@ -74,24 +77,26 @@ namespace NIPPO
         /// showDialog()のオーバーロードメソッド
         /// </summary>
         /// <param name="FY">事業年度</param>
+        /// <param name="userID">ユーザID</param>
         /// <returns></returns>
-        public DialogResult ShowDialog(int FY)
+        public DialogResult ShowDialog(int FY, string userID)
         {
             this._FY = FY;
+            this._userID = userID;
             // ロジック部のオブジェクト生成
             _mr = new MonthlyReport(this._FY);
             //MessageBox.Show(this._FY.ToString() + "年度で表示します");
             return base.ShowDialog();
         }
 
-        [Obsolete("ShowDialog(FY As Int)を使ってください。", true)]
+        [Obsolete("ShowDialog(FY As Int, userID As Int)を使ってください。", true)]
         public new DialogResult ShowDialog(IWin32Window owner)
         {
             _FY = 2013; // デフォルト値
             return base.ShowDialog(owner);
         }
 
-        [Obsolete("ShowDialog(FY As Int)を使ってください。", true)]
+        [Obsolete("ShowDialog(FY As Int, userID As Int)を使ってください。", true)]
         public new DialogResult ShowDialog()
         {
             return base.ShowDialog();

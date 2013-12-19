@@ -46,7 +46,10 @@
             this.dailyWork_groupBox = new System.Windows.Forms.GroupBox();
             this.outputExcel_button = new System.Windows.Forms.Button();
             this.closeWindow_button = new System.Windows.Forms.Button();
+            this.editable_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
+            this.user_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             ((System.ComponentModel.ISupportInitialize)(this.list_dataGridView)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.summary_groupBox.SuspendLayout();
             this.collection_tabControl.SuspendLayout();
             this.SuspendLayout();
@@ -92,9 +95,12 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 630);
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editable_toolStripStatusLabel,
+            this.user_toolStripStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 628);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1011, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(1011, 24);
             this.statusStrip1.TabIndex = 3;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -231,6 +237,18 @@
             this.closeWindow_button.UseVisualStyleBackColor = true;
             this.closeWindow_button.Click += new System.EventHandler(this.closeWindow_button_Click);
             // 
+            // editable_toolStripStatusLabel
+            // 
+            this.editable_toolStripStatusLabel.Name = "editable_toolStripStatusLabel";
+            this.editable_toolStripStatusLabel.Size = new System.Drawing.Size(54, 19);
+            this.editable_toolStripStatusLabel.Text = "編集可";
+            // 
+            // user_toolStripStatusLabel
+            // 
+            this.user_toolStripStatusLabel.Name = "user_toolStripStatusLabel";
+            this.user_toolStripStatusLabel.Size = new System.Drawing.Size(132, 19);
+            this.user_toolStripStatusLabel.Text = "表示対象のユーザ名";
+            // 
             // MonthlyReportWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -250,6 +268,8 @@
             this.Text = "MonthlyReportWindow";
             this.Shown += new System.EventHandler(this.Me_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.list_dataGridView)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.summary_groupBox.ResumeLayout(false);
             this.summary_groupBox.PerformLayout();
             this.collection_tabControl.ResumeLayout(false);
@@ -278,5 +298,7 @@
         private System.Windows.Forms.GroupBox dailyWork_groupBox;
         private System.Windows.Forms.Button outputExcel_button;
         private System.Windows.Forms.Button closeWindow_button;
+        private System.Windows.Forms.ToolStripStatusLabel editable_toolStripStatusLabel;
+        private System.Windows.Forms.ToolStripStatusLabel user_toolStripStatusLabel;
     }
 }
