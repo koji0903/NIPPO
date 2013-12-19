@@ -29,9 +29,6 @@
         private void InitializeComponent()
         {
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lastname_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sections_ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Calender_Label = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NightOverTime_Textbox = new System.Windows.Forms.TextBox();
@@ -71,6 +68,10 @@
             this.Project_Label = new System.Windows.Forms.Label();
             this.Remark_Label = new System.Windows.Forms.Label();
             this.Remark_Textbox = new System.Windows.Forms.TextBox();
+            this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastname_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sections_ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.panel1.SuspendLayout();
             this.workDetail_groupBox.SuspendLayout();
@@ -82,30 +83,14 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_TextBox,
             this.lastname_TextBox,
-            this.sections_ID_TextBox});
+            this.sections_ID_TextBox,
+            this.time});
             this.dataGridView1.Location = new System.Drawing.Point(34, 159);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 21;
             this.dataGridView1.Size = new System.Drawing.Size(783, 135);
             this.dataGridView1.TabIndex = 0;
-            // 
-            // ID_TextBox
-            // 
-            this.ID_TextBox.DataPropertyName = "ID";
-            this.ID_TextBox.HeaderText = "あいでぃー";
-            this.ID_TextBox.Name = "ID_TextBox";
-            // 
-            // lastname_TextBox
-            // 
-            this.lastname_TextBox.DataPropertyName = "lastname";
-            this.lastname_TextBox.HeaderText = "らすとねーむ";
-            this.lastname_TextBox.Name = "lastname_TextBox";
-            // 
-            // sections_ID_TextBox
-            // 
-            this.sections_ID_TextBox.DataPropertyName = "sections_ID";
-            this.sections_ID_TextBox.HeaderText = "せくしょんずあいでぃー";
-            this.sections_ID_TextBox.Name = "sections_ID_TextBox";
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Calender_Label
             // 
@@ -616,6 +601,7 @@
             this.SearchBusiness_Button.TabIndex = 20;
             this.SearchBusiness_Button.Text = "検索";
             this.SearchBusiness_Button.UseVisualStyleBackColor = true;
+            this.SearchBusiness_Button.Click += new System.EventHandler(this.SearchBusiness_Button_Click);
             // 
             // SerarchProject_Button
             // 
@@ -625,6 +611,7 @@
             this.SerarchProject_Button.TabIndex = 19;
             this.SerarchProject_Button.Text = "検索";
             this.SerarchProject_Button.UseVisualStyleBackColor = true;
+            this.SerarchProject_Button.Click += new System.EventHandler(this.SerarchProject_Button_Click);
             // 
             // BusinessName_TextBox
             // 
@@ -701,6 +688,29 @@
             this.Remark_Textbox.Size = new System.Drawing.Size(741, 19);
             this.Remark_Textbox.TabIndex = 24;
             // 
+            // ID_TextBox
+            // 
+            this.ID_TextBox.DataPropertyName = "ID";
+            this.ID_TextBox.HeaderText = "プロジェクト";
+            this.ID_TextBox.Name = "ID_TextBox";
+            // 
+            // lastname_TextBox
+            // 
+            this.lastname_TextBox.DataPropertyName = "lastname";
+            this.lastname_TextBox.HeaderText = "業務";
+            this.lastname_TextBox.Name = "lastname_TextBox";
+            // 
+            // sections_ID_TextBox
+            // 
+            this.sections_ID_TextBox.DataPropertyName = "sections_ID";
+            this.sections_ID_TextBox.HeaderText = "説明";
+            this.sections_ID_TextBox.Name = "sections_ID_TextBox";
+            // 
+            // time
+            // 
+            this.time.HeaderText = "時間";
+            this.time.Name = "time";
+            // 
             // DailyReportWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -732,9 +742,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID_TextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn lastname_TextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sections_ID_TextBox;
         private System.Windows.Forms.Label Calender_Label;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox StartTime_Hour_Combobox;
@@ -774,5 +781,9 @@
         private System.Windows.Forms.Button SerarchProject_Button;
         private System.Windows.Forms.Label Remark_Label;
         private System.Windows.Forms.TextBox Remark_Textbox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastname_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sections_ID_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn time;
     }
 }

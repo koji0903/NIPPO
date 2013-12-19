@@ -136,6 +136,21 @@ namespace NIPPO
             this.NightOverTime_Textbox.Text = str[3];
         }
 
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        private void SerarchProject_Button_Click(object sender, EventArgs e)
+        {
+            // プロジェクトの選択を行うウィンドウを表示
+        }
+
+        private void SearchBusiness_Button_Click(object sender, EventArgs e)
+        {
+            // 業務選択を行うウィンドウを表示
+        }
+
 
 
     }
