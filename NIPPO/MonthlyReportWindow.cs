@@ -60,7 +60,7 @@ namespace NIPPO
         private void reloadWindow()
         {
             // ステータスバー表示
-            user_toolStripStatusLabel.Text = this._userID;
+            user_toolStripStatusLabel.Text = _mr.getUserName();
             // 表示する「年度/月」の作成と表示
             FYMonth_label.Text = _mr.getStringYearMonth();
             // 「>」の有効/無効化
@@ -84,7 +84,7 @@ namespace NIPPO
             this._FY = FY;
             this._userID = userID;
             // ロジック部のオブジェクト生成
-            _mr = new MonthlyReport(this._FY);
+            _mr = new MonthlyReport(this._FY, this._userID);
             //MessageBox.Show(this._FY.ToString() + "年度で表示します");
             return base.ShowDialog();
         }

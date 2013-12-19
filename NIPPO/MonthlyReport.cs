@@ -10,15 +10,18 @@ namespace NIPPO
         // 変数
         private int _FY; // 年度
         private int _month; // 月
+        private string _userID; // ユーザID
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="FY"></param>
-        public MonthlyReport(int FY)
+        /// <param name="userID"></param>
+        public MonthlyReport(int FY, string userID)
         {
             _FY = FY;
             this._month = DateTime.Now.Month;
+            _userID = userID;
         }
 
         /// <summary>
@@ -100,6 +103,11 @@ namespace NIPPO
                 return false;
             else
                 return true;
+        }
+
+        public string getUserName()
+        {
+            return this._userID;
         }
     }
 }
