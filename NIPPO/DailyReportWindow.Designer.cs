@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.WorkDetail_GridGridView = new System.Windows.Forms.DataGridView();
             this.Calender_Label = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NightOverTime_Textbox = new System.Windows.Forms.TextBox();
@@ -70,27 +70,27 @@
             this.Remark_Textbox = new System.Windows.Forms.TextBox();
             this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lastname_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.sections_ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.WorkDetail_GridGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.workDetail_groupBox.SuspendLayout();
             this.SuspendLayout();
             // 
-            // dataGridView1
+            // WorkDetail_GridGridView
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.WorkDetail_GridGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.WorkDetail_GridGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_TextBox,
             this.lastname_TextBox,
-            this.sections_ID_TextBox,
+            this.note_TextBox,
             this.time});
-            this.dataGridView1.Location = new System.Drawing.Point(34, 159);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowTemplate.Height = 21;
-            this.dataGridView1.Size = new System.Drawing.Size(783, 135);
-            this.dataGridView1.TabIndex = 0;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.WorkDetail_GridGridView.Location = new System.Drawing.Point(34, 159);
+            this.WorkDetail_GridGridView.Name = "WorkDetail_GridGridView";
+            this.WorkDetail_GridGridView.RowTemplate.Height = 21;
+            this.WorkDetail_GridGridView.Size = new System.Drawing.Size(783, 135);
+            this.WorkDetail_GridGridView.TabIndex = 0;
+            this.WorkDetail_GridGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // Calender_Label
             // 
@@ -696,18 +696,19 @@
             // 
             // lastname_TextBox
             // 
-            this.lastname_TextBox.DataPropertyName = "lastname";
+            this.lastname_TextBox.DataPropertyName = "note";
             this.lastname_TextBox.HeaderText = "業務";
             this.lastname_TextBox.Name = "lastname_TextBox";
             // 
-            // sections_ID_TextBox
+            // note_TextBox
             // 
-            this.sections_ID_TextBox.DataPropertyName = "sections_ID";
-            this.sections_ID_TextBox.HeaderText = "説明";
-            this.sections_ID_TextBox.Name = "sections_ID_TextBox";
+            this.note_TextBox.DataPropertyName = "note";
+            this.note_TextBox.HeaderText = "説明";
+            this.note_TextBox.Name = "note_TextBox";
             // 
             // time
             // 
+            this.time.DataPropertyName = "note";
             this.time.HeaderText = "時間";
             this.time.Name = "time";
             // 
@@ -725,11 +726,12 @@
             this.Controls.Add(this.Add_Button);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.Calender_Label);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.WorkDetail_GridGridView);
             this.Name = "DailyReportWindow";
             this.Text = "日報入力";
             this.Load += new System.EventHandler(this.DailyReportWindow_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.Shown += new System.EventHandler(this.DailyReportWindow_Shown);
+            ((System.ComponentModel.ISupportInitialize)(this.WorkDetail_GridGridView)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.workDetail_groupBox.ResumeLayout(false);
@@ -741,7 +743,7 @@
 
         #endregion
 
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView WorkDetail_GridGridView;
         private System.Windows.Forms.Label Calender_Label;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.ComboBox StartTime_Hour_Combobox;
@@ -783,7 +785,7 @@
         private System.Windows.Forms.TextBox Remark_Textbox;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn lastname_TextBox;
-        private System.Windows.Forms.DataGridViewTextBoxColumn sections_ID_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn note_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn time;
     }
 }

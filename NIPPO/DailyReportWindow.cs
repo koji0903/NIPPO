@@ -42,22 +42,6 @@ namespace NIPPO
                 this.Calender_Label.Text = _daily.GetDateStr(2013, 12, 13);
             }
 
-            // 勤務日報情報一覧表示
-            try
-            {
-                using (DataAccessClass _proc = new DataAccessClass())
-                {
-                    this.dataGridView1.AutoGenerateColumns = false;
-                    this.dataGridView1.DataSource = null;
-                    // DataGridViewオブジェクトにデータセットを入れている処理
-                    this.dataGridView1.DataSource = _proc.GetTitleDs("koji","koji","");
-                    this.dataGridView1.DataMember = @"UserList";
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, this.Text);
-            }
 
         }
 
@@ -149,6 +133,26 @@ namespace NIPPO
         private void SearchBusiness_Button_Click(object sender, EventArgs e)
         {
             // 業務選択を行うウィンドウを表示
+        }
+
+        private void DailyReportWindow_Shown(object sender, EventArgs e)
+        {
+            // 勤務日報情報一覧表示
+            try
+            {
+                using( DataAccessClass data_access = new DataAccessClass() )
+                {
+                    this.WorkDetail_GridGridView.AutoGenerateColumns = false;
+                    this.WorkDetail_GridGridView.DataSource = null;
+                    this.WorkDetail_GridGridView.DataSource = data_access.GetWorkDetailDs("0001", 2013, 12, 19, 7.75);
+                    this.WorkDetail_GridGridView.DataMember = @"WorkDatail";
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, this.Text);
+            }
+
         }
 
 

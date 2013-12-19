@@ -5,39 +5,47 @@ using System.Text;
 //
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 
 namespace NIPPO
 {
     class DataAccessClass : IDisposable
     {
-        internal DataSet GetTitleDs(String userID, String password, String keyword)
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <param name="work_time"></param>
+        /// <returns></returns>
+        internal DataSet GetWorkDetailDs(String userID, int year, int month, int day, Double work_time)
         {
-            //(1) SqlConnectionクラスを使ってSQL Serverに接続
-            //(2) SqlCommandクラスを使って、「title LIKE @Title」というLIKE演算子とパラメータ（＝WHERE句）によるあいまい検索を行うSELECT文を作成
-            //(3) SqlParameterクラスで「@Title」に「%＜キーワード＞%」を設定
-            //(4) SqlDataAdapterクラスでSELECT文を実行して、データセットに結果を格納
-            //(5) データセットのテーブルに主キー（＝PrimaryKeyプロパティの値）を設定
+            // データ保存用のDateSet作成
             DataSet ds = new DataSet();
-            using (SqlConnection _cn = new SqlConnection())
+
+            // SQLとの接続
+            using ( SqlConnection connection = new SqlConnection() )
             {
-                //_cn.ConnectionString = String.Format(NIPPO.Properties.Settings.Default.ConnectionString,
-                //    userID, password);
-                _cn.ConnectionString = String.Format(NIPPO.Properties.Settings.Default.ConnectionString,userID,password);
-                _cn.Open();
-                _cn.Close();
-
-
-                using (SqlCommand _cmd = new SqlCommand())
-                //using (MySqlCommand _cmd = new MySqlCommand())
+                // DBとのユーザ認証設定
+                connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
+                using ( SqlCommand command = new SqlCommand() )
                 {
-                    _cmd.Connection = _cn;
-                    _cmd.CommandText = @"SELECT * " +
-                                        "FROM users";
-                    using (SqlDataAdapter _da = new SqlDataAdapter())
+                    using (SqlDataAdapter adapter = new SqlDataAdapter())
                     {
-                        _da.SelectCommand = _cmd;
-                        _da.Fill(ds, "UserList");
-                        ds.Tables["UserList"].PrimaryKey = new DataColumn[] { ds.Tables["UserList"].Columns["ID"] };
+                        try
+                        {
+                            command.Connection = connection;
+                            command.CommandText = @"SELECT * FROM work_detail;";
+
+                            adapter.SelectCommand = command;
+                            adapter.Fill(ds, "WorkDetail");
+                        }
+                        catch ( Exception ex )
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
                     }
                 }
             }
