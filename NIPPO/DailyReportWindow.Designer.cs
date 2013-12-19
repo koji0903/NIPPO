@@ -173,7 +173,7 @@
             this.RestTime_Textbox.ReadOnly = true;
             this.RestTime_Textbox.Size = new System.Drawing.Size(100, 23);
             this.RestTime_Textbox.TabIndex = 15;
-            this.RestTime_Textbox.Text = "0.00h";
+            this.RestTime_Textbox.Text = "1.00h";
             this.RestTime_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // WorkTime_Textbox
@@ -184,7 +184,7 @@
             this.WorkTime_Textbox.ReadOnly = true;
             this.WorkTime_Textbox.Size = new System.Drawing.Size(100, 23);
             this.WorkTime_Textbox.TabIndex = 14;
-            this.WorkTime_Textbox.Text = "0.00h";
+            this.WorkTime_Textbox.Text = "7.75h";
             this.WorkTime_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // NightOverTime_Label

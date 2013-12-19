@@ -39,21 +39,75 @@ namespace NIPPO_test
             DailyReport _daily = new DailyReport();
             // 正常系のテスト
 
-            // 通常勤務（休憩は昼休みのみ）
-            string[] work = _daily.GetWorkTime(8, 45, 17, 30);
+            // 通常勤務（勤務＋昼休み休憩）
+            string[] work = _daily.GetWorkTime(2013, 12, 19, 8, 45, 17, 30);
             string[] ary = { "7.75h", "1.00h", "0.00h", "0.00h" };
             Assert.AreEqual(ary, work);
 
-            // 残業（休憩は昼休み＋夕方）
-            work = _daily.GetWorkTime(8, 45, 18, 00);
+            // 残業（勤務＋昼休み休憩＋夕方休憩）
+            work = _daily.GetWorkTime(2013, 12, 19, 8, 45, 18, 00);
             ary[0] = "7.75h";
             ary[1] = "1.50h";
-            ary[2] = "7.75h";
-            ary[3] = "7.75h";
+            ary[2] = "0.00h";
+            ary[3] = "0.00h";
             Assert.AreEqual(ary, work);
 
+            // 残業（勤務＋昼休み休憩＋夕方休憩＋普通残業）
+            work = _daily.GetWorkTime(2013, 12, 19, 8, 45, 18, 15);
+            ary[0] = "8.00h";
+            ary[1] = "1.50h";
+            ary[2] = "0.25h";
+            ary[3] = "0.00h";
+            Assert.AreEqual(ary, work);
 
-            
+            // 残業（勤務＋昼休み休憩＋夕方休憩＋普通残業＋深夜残業直前まで）
+            work = _daily.GetWorkTime(2013, 12, 19, 8, 45, 22, 00);
+            ary[0] = "11.75h";
+            ary[1] = "1.50h";
+            ary[2] = "4.00h";
+            ary[3] = "0.00h";
+            Assert.AreEqual(ary, work);
+
+            // 残業（勤務＋昼休み休憩＋夕方休憩＋夜勤務＋普通残業＋深夜残業）
+            work = _daily.GetWorkTime(2013, 12, 19, 8, 45, 24, 00);
+            ary[0] = "13.75h";
+            ary[1] = "1.50h";
+            ary[2] = "4.00h";
+            ary[3] = "2.00h";
+            Assert.AreEqual(ary, work);
+
+            // 残業（勤務＋昼休み休憩＋夕方休憩＋夜勤務＋普通残業＋深夜残業翌日）
+            work = _daily.GetWorkTime(2013, 12, 19, 8, 45, 30, 00);
+            ary[0] = "19.75h";
+            ary[1] = "1.50h";
+            ary[2] = "4.00h";
+            ary[3] = "8.00h";
+            Assert.AreEqual(ary, work);
+
+            // 残業（勤務＋昼休み休憩＋夕方休憩＋夜勤務＋普通残業＋深夜残業翌日(MAX)）
+            work = _daily.GetWorkTime(2013, 12, 19, 8, 45, 30, 45);
+            ary[0] = "20.50h";
+            ary[1] = "1.50h";
+            ary[2] = "4.00h";
+            ary[3] = "8.75h";
+            Assert.AreEqual(ary, work);
+
+            // 通常勤務（勤務＋早朝勤務＋昼休み休憩）
+            work = _daily.GetWorkTime(2013, 12, 19, 6, 00, 17, 30);
+            ary[0] = "10.50h";
+            ary[1] = "1.00h";
+            ary[2] = "2.75h";
+            ary[3] = "0.00h";
+            Assert.AreEqual(ary, work);
+
+            // 通常勤務（勤務＋早朝勤務＋昼休み休憩）
+            work = _daily.GetWorkTime(2013, 12, 19, 5, 00, 17, 30);
+            ary[0] = "11.50h";
+            ary[1] = "1.00h";
+            ary[2] = "3.75h";
+            ary[3] = "0.00h";
+            Assert.AreEqual(ary, work);
+
             //            work = _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 0);
 //            ary[0] = "1.00h";
 //            ary[1] = "1.00h";

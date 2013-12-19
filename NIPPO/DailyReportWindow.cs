@@ -120,6 +120,9 @@ namespace NIPPO
 
                 // 勤務時間の計算
                 str = _daily.GetWorkTime(
+                    this.year,
+                    this.month,
+                    this.day,
                     int.Parse(start_hour),
                     int.Parse(start_second),
                     int.Parse(end_hour),
