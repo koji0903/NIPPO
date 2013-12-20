@@ -119,10 +119,10 @@
     <Property Name="FY" Type="smallint" Nullable="false" />
     <Property Name="start_time" Type="datetime" Nullable="true" />
     <Property Name="end_time" Type="datetime" Nullable="true" />
-    <Property Name="work_times" Type="smallint" Nullable="true" />
-    <Property Name="overtime125" Type="smallint" Nullable="true" />
-    <Property Name="overtime150" Type="smallint" Nullable="true" />
-    <Property Name="holiday_work_times" Type="smallint" Nullable="true" />
+    <Property Name="work_times" Type="float" Nullable="true" />
+    <Property Name="overtime125" Type="float" Nullable="true" />
+    <Property Name="overtime150" Type="float" Nullable="true" />
+    <Property Name="holiday_work_times" Type="float" Nullable="true" />
     <Property Name="note" Type="nvarchar(max)" Nullable="true" />
     <Property Name="created_at" Type="datetime" Nullable="true" />
     <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
@@ -130,6 +130,7 @@
     <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="deleted_at" Type="smallint" Nullable="true" />
     <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="rest_time" Type="float" Nullable="false" />
     <Property Name="users_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="work_detail">
@@ -137,7 +138,7 @@
       <PropertyRef Name="ID" />
     </Key>
     <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="times" Type="time" Nullable="false" />
+    <Property Name="times" Type="float" Nullable="false" />
     <Property Name="note" Type="nvarchar(max)" Nullable="true" />
     <Property Name="work_reports_ID" Type="int" Nullable="true" />
     <Property Name="projects_ID" Type="int" Nullable="true" />
@@ -796,6 +797,7 @@
           <ScalarProperty Name="updated_by" ColumnName="updated_by" />
           <ScalarProperty Name="deleted_at" ColumnName="deleted_at" />
           <ScalarProperty Name="deleted_by" ColumnName="deleted_by" />
+          <ScalarProperty Name="rest_time" ColumnName="rest_time" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
