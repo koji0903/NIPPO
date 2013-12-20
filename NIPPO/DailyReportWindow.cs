@@ -103,7 +103,7 @@ namespace NIPPO
         /// </summary>
         private void Set_WorkTime_Textbox()
         {
-            String[] str = new String[] { "0.00h", "0.00h", "0.00h", "0.00h" };
+            Double[] time = new Double[] { 0.00, 0.00, 0.00, 0.00 };
 
             using (DailyReport _daily = new DailyReport())
             {
@@ -114,7 +114,7 @@ namespace NIPPO
                 end_second = this.EndTime_Second_Combobox.Text;
 
                 // 勤務時間の計算
-                str = _daily.GetWorkTime(
+                time = _daily.GetWorkTime(
                     this.year,
                     this.month,
                     this.day,
@@ -123,12 +123,15 @@ namespace NIPPO
                     int.Parse(end_hour),
                     int.Parse(end_second)
                 );
+
             }
             // Textフィールドに値を表示
-            this.WorkTime_Textbox.Text = str[0];
-            this.RestTime_Textbox.Text = str[1];
-            this.NormalOverTime_Textbox.Text = str[2];
-            this.NightOverTime_Textbox.Text = str[3];
+            double tmp;
+            tmp = time[0];
+            this.WorkTime_Textbox.Text = time[0].ToString("F2") + "h";
+            this.RestTime_Textbox.Text = time[1].ToString("F2") + "h";
+            this.NormalOverTime_Textbox.Text = time[2].ToString("F2") + "h";
+            this.NightOverTime_Textbox.Text = time[3].ToString("F2") + "h";
         }
 
 

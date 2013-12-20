@@ -4399,7 +4399,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int16> overtime125
+        public Nullable<global::System.Double> overtime125
         {
             get
             {
@@ -4414,8 +4414,8 @@ namespace NIPPO
                 Onovertime125Changed();
             }
         }
-        private Nullable<global::System.Int16> _overtime125;
-        partial void Onovertime125Changing(Nullable<global::System.Int16> value);
+        private Nullable<global::System.Double> _overtime125;
+        partial void Onovertime125Changing(Nullable<global::System.Double> value);
         partial void Onovertime125Changed();
     
         /// <summary>
@@ -4423,7 +4423,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int16> overtime150
+        public Nullable<global::System.Double> overtime150
         {
             get
             {
@@ -4438,8 +4438,8 @@ namespace NIPPO
                 Onovertime150Changed();
             }
         }
-        private Nullable<global::System.Int16> _overtime150;
-        partial void Onovertime150Changing(Nullable<global::System.Int16> value);
+        private Nullable<global::System.Double> _overtime150;
+        partial void Onovertime150Changing(Nullable<global::System.Double> value);
         partial void Onovertime150Changed();
     
         /// <summary>
@@ -4447,7 +4447,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int16> holiday_work_times
+        public Nullable<global::System.Double> holiday_work_times
         {
             get
             {
@@ -4462,8 +4462,8 @@ namespace NIPPO
                 Onholiday_work_timesChanged();
             }
         }
-        private Nullable<global::System.Int16> _holiday_work_times;
-        partial void Onholiday_work_timesChanging(Nullable<global::System.Int16> value);
+        private Nullable<global::System.Double> _holiday_work_times;
+        partial void Onholiday_work_timesChanging(Nullable<global::System.Double> value);
         partial void Onholiday_work_timesChanged();
     
         /// <summary>
@@ -4633,6 +4633,30 @@ namespace NIPPO
         private global::System.String _deleted_by;
         partial void Ondeleted_byChanging(global::System.String value);
         partial void Ondeleted_byChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Double> rest_time
+        {
+            get
+            {
+                return _rest_time;
+            }
+            set
+            {
+                Onrest_timeChanging(value);
+                ReportPropertyChanging("rest_time");
+                _rest_time = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("rest_time");
+                Onrest_timeChanged();
+            }
+        }
+        private Nullable<global::System.Double> _rest_time;
+        partial void Onrest_timeChanging(Nullable<global::System.Double> value);
+        partial void Onrest_timeChanged();
 
         #endregion
 

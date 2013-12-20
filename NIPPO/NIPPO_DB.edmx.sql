@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/19/2013 19:57:12
--- Generated from EDMX file: C:\Users\koji\Documents\Visual Studio 2010\Projects\NIPPO\NIPPO\NIPPO_DB.edmx
+-- Date Created: 12/20/2013 12:07:44
+-- Generated from EDMX file: D:\Data\NIPPO\NIPPO\NIPPO_DB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -161,6 +161,7 @@ CREATE TABLE [dbo].[work_reports] (
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] smallint  NULL,
     [deleted_by] nvarchar(max)  NULL,
+    [rest_time] time  NULL,
     [users_ID] int  NULL
 );
 GO
