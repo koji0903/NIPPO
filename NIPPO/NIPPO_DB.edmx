@@ -529,10 +529,10 @@
           <Property Type="Int16" Name="FY" Nullable="false" />
           <Property Type="DateTime" Name="start_time" Nullable="true" />
           <Property Type="DateTime" Name="end_time" Nullable="true" />
-          <Property Type="Int16" Name="work_times" Nullable="true" />
-          <Property Type="Int16" Name="overtime125" Nullable="true" />
-          <Property Type="Int16" Name="overtime150" Nullable="true" />
-          <Property Type="Int16" Name="holiday_work_times" Nullable="true" />
+          <Property Type="Double" Name="work_times" Nullable="true" />
+          <Property Type="Double" Name="overtime125" Nullable="true" />
+          <Property Type="Double" Name="overtime150" Nullable="true" />
+          <Property Type="Double" Name="holiday_work_times" Nullable="true" />
           <Property Type="String" Name="note" Nullable="true" />
           <Property Type="DateTime" Name="created_at" Nullable="true" />
           <Property Type="String" Name="created_by" Nullable="true" />
@@ -542,6 +542,7 @@
           <Property Type="String" Name="deleted_by" Nullable="true" />
           <NavigationProperty Name="users" Relationship="NIPPO_DB.userswork_reports" FromRole="work_reports" ToRole="users" />
           <NavigationProperty Name="work_detail" Relationship="NIPPO_DB.work_reportswork_detail" FromRole="work_reports" ToRole="work_detail" />
+          <Property Type="Double" Name="rest_time" Nullable="false" />
         </EntityType>
         <Association Name="userswork_reports">
           <End Type="NIPPO_DB.users" Role="users" Multiplicity="0..1" />
@@ -552,7 +553,7 @@
             <PropertyRef Name="ID" />
           </Key>
           <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="Time" Name="times" Nullable="false" />
+          <Property Type="Double" Name="times" Nullable="false" />
           <Property Type="String" Name="note" Nullable="true" />
           <NavigationProperty Name="work_reports" Relationship="NIPPO_DB.work_reportswork_detail" FromRole="work_detail" ToRole="work_reports" />
           <NavigationProperty Name="projects" Relationship="NIPPO_DB.work_detailprojects" FromRole="work_detail" ToRole="projects" />
@@ -1059,7 +1060,7 @@
           <ConnectorPoint PointX="6.75" PointY="7.660625" />
           <ConnectorPoint PointX="6.75" PointY="8.25" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="NIPPO_DB.work_reports" Width="1.5" PointX="8" PointY="3.375" Height="5.3533333333333335" />
+        <EntityTypeShape EntityType="NIPPO_DB.work_reports" Width="1.5" PointX="8" PointY="3.375" Height="5.5668749999999978" />
         <AssociationConnector Association="NIPPO_DB.userswork_reports">
           <ConnectorPoint PointX="7.5" PointY="5.5178125" />
           <ConnectorPoint PointX="8" PointY="5.5178125" />

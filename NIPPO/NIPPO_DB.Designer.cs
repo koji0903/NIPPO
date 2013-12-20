@@ -3956,7 +3956,7 @@ namespace NIPPO
         /// </summary>
         /// <param name="id">ID プロパティの初期値。</param>
         /// <param name="times">times プロパティの初期値。</param>
-        public static work_detail Creatework_detail(global::System.Int32 id, global::System.TimeSpan times)
+        public static work_detail Creatework_detail(global::System.Int32 id, global::System.Double times)
         {
             work_detail work_detail = new work_detail();
             work_detail.ID = id;
@@ -4000,7 +4000,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.TimeSpan times
+        public global::System.Double times
         {
             get
             {
@@ -4015,8 +4015,8 @@ namespace NIPPO
                 OntimesChanged();
             }
         }
-        private global::System.TimeSpan _times;
-        partial void OntimesChanging(global::System.TimeSpan value);
+        private global::System.Double _times;
+        partial void OntimesChanging(global::System.Double value);
         partial void OntimesChanged();
     
         /// <summary>
@@ -4184,7 +4184,8 @@ namespace NIPPO
         /// <param name="month">month プロパティの初期値。</param>
         /// <param name="day">day プロパティの初期値。</param>
         /// <param name="fY">FY プロパティの初期値。</param>
-        public static work_reports Creatework_reports(global::System.Int32 id, global::System.Int16 year, global::System.Int16 month, global::System.Int16 day, global::System.Int16 fY)
+        /// <param name="rest_time">rest_time プロパティの初期値。</param>
+        public static work_reports Creatework_reports(global::System.Int32 id, global::System.Int16 year, global::System.Int16 month, global::System.Int16 day, global::System.Int16 fY, global::System.Double rest_time)
         {
             work_reports work_reports = new work_reports();
             work_reports.ID = id;
@@ -4192,6 +4193,7 @@ namespace NIPPO
             work_reports.month = month;
             work_reports.day = day;
             work_reports.FY = fY;
+            work_reports.rest_time = rest_time;
             return work_reports;
         }
 
@@ -4375,7 +4377,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int16> work_times
+        public Nullable<global::System.Double> work_times
         {
             get
             {
@@ -4390,8 +4392,8 @@ namespace NIPPO
                 Onwork_timesChanged();
             }
         }
-        private Nullable<global::System.Int16> _work_times;
-        partial void Onwork_timesChanging(Nullable<global::System.Int16> value);
+        private Nullable<global::System.Double> _work_times;
+        partial void Onwork_timesChanging(Nullable<global::System.Double> value);
         partial void Onwork_timesChanged();
     
         /// <summary>
@@ -4399,7 +4401,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int16> overtime125
+        public Nullable<global::System.Double> overtime125
         {
             get
             {
@@ -4414,8 +4416,8 @@ namespace NIPPO
                 Onovertime125Changed();
             }
         }
-        private Nullable<global::System.Int16> _overtime125;
-        partial void Onovertime125Changing(Nullable<global::System.Int16> value);
+        private Nullable<global::System.Double> _overtime125;
+        partial void Onovertime125Changing(Nullable<global::System.Double> value);
         partial void Onovertime125Changed();
     
         /// <summary>
@@ -4423,7 +4425,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int16> overtime150
+        public Nullable<global::System.Double> overtime150
         {
             get
             {
@@ -4438,8 +4440,8 @@ namespace NIPPO
                 Onovertime150Changed();
             }
         }
-        private Nullable<global::System.Int16> _overtime150;
-        partial void Onovertime150Changing(Nullable<global::System.Int16> value);
+        private Nullable<global::System.Double> _overtime150;
+        partial void Onovertime150Changing(Nullable<global::System.Double> value);
         partial void Onovertime150Changed();
     
         /// <summary>
@@ -4447,7 +4449,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int16> holiday_work_times
+        public Nullable<global::System.Double> holiday_work_times
         {
             get
             {
@@ -4462,8 +4464,8 @@ namespace NIPPO
                 Onholiday_work_timesChanged();
             }
         }
-        private Nullable<global::System.Int16> _holiday_work_times;
-        partial void Onholiday_work_timesChanging(Nullable<global::System.Int16> value);
+        private Nullable<global::System.Double> _holiday_work_times;
+        partial void Onholiday_work_timesChanging(Nullable<global::System.Double> value);
         partial void Onholiday_work_timesChanged();
     
         /// <summary>
@@ -4633,6 +4635,30 @@ namespace NIPPO
         private global::System.String _deleted_by;
         partial void Ondeleted_byChanging(global::System.String value);
         partial void Ondeleted_byChanged();
+    
+        /// <summary>
+        /// 使用できるメタデータ ドキュメントはありません。
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double rest_time
+        {
+            get
+            {
+                return _rest_time;
+            }
+            set
+            {
+                Onrest_timeChanging(value);
+                ReportPropertyChanging("rest_time");
+                _rest_time = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("rest_time");
+                Onrest_timeChanged();
+            }
+        }
+        private global::System.Double _rest_time;
+        partial void Onrest_timeChanging(global::System.Double value);
+        partial void Onrest_timeChanged();
 
         #endregion
 
