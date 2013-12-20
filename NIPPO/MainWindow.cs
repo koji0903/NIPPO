@@ -11,7 +11,7 @@ namespace NIPPO
 {
     public partial class MainWindow : Form
     {
-        private string userID;
+        private int id;
         private int _year;
 
         public MainWindow()
@@ -29,7 +29,7 @@ namespace NIPPO
             {
                 if (_lw.ShowDialog(this) == DialogResult.OK)
                 {
-                    this.userID = _lw.userID;
+                    this.id = _lw.id;
                 }
                 else
                 {
