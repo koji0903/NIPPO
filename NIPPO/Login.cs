@@ -9,58 +9,42 @@ using System.Drawing;
 
 namespace NIPPO
 {
+    /// <summary>
+    ///  ログイン機能
+    /// </summary>
     class Login : IDisposable
     {
 
-        internal static Boolean login(string userID,string userPW)
+        internal static int login(string login,string pw)
         {
-            //Login認証
-            SqlConnection connection = new SqlConnection();
-            SqlCommand command = new SqlCommand();
-            DataSet ds = new DataSet();
 
-            connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
-            //connection.ConnectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=nippo_db;User Id=nippo;Password=KSK1217;";
+            // ログインエラーコード
+            int iderror = -1;
+            int pwerror = -2;
 
-            using (SqlDataAdapter adapter = new SqlDataAdapter())
-            {
-                try
-                {
-                    command.Connection = connection;
-                    command.CommandText = @"SELECT ID,password FROM users WHERE login='" + userID + "';";
-
-                    adapter.SelectCommand = command;
-                    adapter.Fill(ds, "user");
-                    // IDが間違っていた場合の処理
-
-                }
-                catch (Exception ex)
-                {
-                    //  データベース接続が失敗した場合
-                    MessageBox.Show(ex.Message);
-                    Environment.Exit(Environment.ExitCode);
-                }
-            }
+            string SqlCommand = "SELECT ID,password FROM users WHERE login='" + login + "';";
+            DataSet ds = new DataSet(); 
+            ds = DataAccess.ReadData( SqlCommand );
 
             // IDの存在、およびパスワード一致の確認。
-            if ( ds.Tables["user"].Rows.Count == 1 )
+            if ( ds.Tables[0].Rows.Count == 1 )
             {
-                string str = ds.Tables["user"].Rows[0]["password"].ToString();
-                if ( str == userPW )
+                string str = ds.Tables[0].Rows[0]["password"].ToString();
+                if ( str == pw )
                 {
-                    //ログイン成功
-                    return true;
+                    //ログイン成功 ID(primary key)を返す。
+                    return (int)ds.Tables[0].Rows[0]["ID"];
                 }
                 else
                 {
                     //パスワードが間違っている場合。
-                    return false;
+                    return iderror;
                 }
             }
             else
             {
                 // IDが間違っている場合。
-                return false;
+                return pwerror;
             }
         }
 
