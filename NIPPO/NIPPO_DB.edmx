@@ -1050,7 +1050,7 @@
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram Name="NIPPO_DB" ZoomLevel="114" >
+      <Diagram Name="NIPPO_DB" ZoomLevel="85" >
         <EntityTypeShape EntityType="NIPPO_DB.users" Width="1.5" PointX="6" PointY="3.375" Height="4.285625" />
         <EntityTypeShape EntityType="NIPPO_DB.authorities" Width="1.5" PointX="3.875" PointY="3.375" Height="2.36375" />
         <AssociationConnector Association="NIPPO_DB.authoritiesusers">

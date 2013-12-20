@@ -182,7 +182,7 @@ namespace NIPPO
         }
 
         /// <summary>
-        /// 特定区分（休憩、普通残業、深夜残業）の時間の計算。（区分の割り当て時間定義されており、その範囲に入っていた場合はカウント）
+        /// 特定区分（普通残業、深夜残業）の時間の計算。（区分の割り当て時間定義されており、その範囲に入っていた場合はカウント）
         /// </summary>
         /// <param name="start_time">勤務開始時間</param>
         /// <param name="end_time">勤務終了時間</param>
@@ -196,23 +196,25 @@ namespace NIPPO
             TimeSpan normal_ts = new TimeSpan();
             TimeSpan night_ts = new TimeSpan();
 
+            TimeSpan offset = new TimeSpan(1, 15, 0); // 1:15時間
+            TimeSpan zero_time = new TimeSpan(0, 0, 0); // 1:15時間
+
+            // 普通残業だけで終了
             if (end_time <= target_end_time)
             {
-                // 普通残業だけで終了
                 if (target_start_time <= end_time)
                 {
                     // 終了時刻 - 普通残業開始時刻(18:00)
-                    normal_ts = end_time - target_start_time - lost_time;
+                    normal_ts = (end_time - target_start_time) - lost_time;
                 }
             }
-            else
+            else // 深夜残業まで
             {
-                // 次の日まで残業
-                // 普通残業は、夜すべて
+                // 普通残業と深夜残業
                 normal_ts = target_end_time - target_start_time - lost_time;
-                // 深夜残業は、22:00 以降＋０時から終わりまで。
-                TimeSpan night_time = new TimeSpan(22,0,0);
-                night_ts = night_time + (end_time - next_day_start) - lost_time;
+                // 深夜残業は、22:00 以降＋0時から終わりまで。
+                TimeSpan night_time = new TimeSpan(2, 0, 0); // 2時間
+                night_ts = night_time + (end_time - next_day_start);
             }
 
             ts[0] = normal_ts;
