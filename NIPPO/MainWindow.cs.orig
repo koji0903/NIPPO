@@ -46,11 +46,11 @@ namespace NIPPO
 
         }
 
-        private void DalyReport_Click(object sender, EventArgs e)
+        private void DailyReport_Click(object sender, EventArgs e)
         {
-            //using (MonthlyReportWindow _form = new MonthlyReportWindow())
-            //{
-            //    _form.ShowDialog(2013); // とりあえず
+            DailyReportWindow daily_report_window = new DailyReportWindow(2013,"0001",2013,12,17);
+            daily_report_window.ShowDialog(this);
+            daily_report_window.Dispose();
             //}
         }
 
@@ -67,7 +67,6 @@ namespace NIPPO
             _year = (int)FY_numericUpDown.Value;
             // MessageBox.Show(_year.ToString()); // debug
         }
-
         private void exit_button_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -75,7 +74,7 @@ namespace NIPPO
     }
 }
 =======
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -88,6 +87,9 @@ namespace NIPPO
 {
     public partial class MainWindow : Form
     {
+        private int id;
+        private int _year;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -95,6 +97,22 @@ namespace NIPPO
 
         private void MainWindow_Load(object sender, EventArgs e)
         {
+            // 現在の年度を設定
+            _year = DateTime.Now.Year;
+            FY_numericUpDown.Value = _year;
+            
+            using (LoginWindow _lw = new LoginWindow())
+            {
+                if (_lw.ShowDialog(this) == DialogResult.OK)
+                {
+                    this.id = _lw.id;
+                }
+                else
+                {
+                    // LoginWindowが[×]ボタンで閉じられた場合。
+                    this.Close();
+                }
+            }
 
         }
 
@@ -103,12 +121,32 @@ namespace NIPPO
 
         }
 
-        private void DailyReport_Click(object sender, EventArgs e)
+        private void DalyReport_Click(object sender, EventArgs e)
         {
-            DailyReportWindow daily_report_window = new DailyReportWindow(2013,"0001",2013,12,17);
-            daily_report_window.ShowDialog(this);
-            daily_report_window.Dispose();
+            using (MonthlyReportWindow _form = new MonthlyReportWindow())
+            {
+                _form.ShowDialog(_year);
+            }
+        }
+
+        private void ViewWorkRecord_button_Click(object sender, EventArgs e)
+        {
+            using (MonthlyReportWindow _form = new MonthlyReportWindow())
+            {
+                _form.ShowDialog(_year);
+            }
+        }
+
+        private void FY_numericUpDown_ValueChanged(object sender, EventArgs e)
+        {
+            _year = (int)FY_numericUpDown.Value;
+            // MessageBox.Show(_year.ToString()); // debug
+        }
+
+        private void exit_button_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }
->>>>>>> origin/DailyReport
+>>>>>>> origin/master

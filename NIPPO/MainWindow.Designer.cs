@@ -1,4 +1,4 @@
-﻿namespace NIPPO
+namespace NIPPO
 {
     partial class MainWindow
     {

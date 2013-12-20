@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,7 +11,7 @@ namespace NIPPO
 {
     public partial class MainWindow : Form
     {
-        private string userID;
+        private int id;
         private int _year;
 
         public MainWindow()
@@ -29,7 +29,7 @@ namespace NIPPO
             {
                 if (_lw.ShowDialog(this) == DialogResult.OK)
                 {
-                    this.userID = _lw.userID;
+                    this.id = _lw.id;
                 }
                 else
                 {
@@ -50,15 +50,15 @@ namespace NIPPO
             DailyReportWindow daily_report_window = new DailyReportWindow(2013,"0001",2013,12,17);
             daily_report_window.ShowDialog(this);
             daily_report_window.Dispose();
-            //}
+            }
         }
 
         private void ViewWorkRecord_button_Click(object sender, EventArgs e)
         {
-            //using (MonthlyReportWindow _form = new MonthlyReportWindow())
-            //{
-            //    _form.ShowDialog(2013); // とりあえず
-            //}
+            using (MonthlyReportWindow _form = new MonthlyReportWindow())
+            {
+                _form.ShowDialog(_year);
+            }
         }
 
         private void FY_numericUpDown_ValueChanged(object sender, EventArgs e)
