@@ -37,6 +37,15 @@ namespace NIPPO
         }
 
         /// <summary>
+        /// 設定値の「月」を返す。
+        /// </summary>
+        /// <returns></returns>
+        public int getMonth()
+        {
+            return _month;
+        }
+
+        /// <summary>
         /// 設定値の「カレンダーイヤー」を返す。
         /// </summary>
         /// <returns></returns>
@@ -165,7 +174,8 @@ namespace NIPPO
                 try
                 {
                     command.Connection = connection;
-                    command.CommandText = @"SELECT *"
+                    command.CommandText = @"SELECT day,start_time,end_time,work_times,"
+                        + " overtime125,overtime150,holiday_work_times,note"
                         + " FROM work_reports"
                         + " WHERE users_ID='" + this._userID + "'"
                         + " AND FY='" + this._FY + "'"
@@ -179,7 +189,9 @@ namespace NIPPO
                     return null;
                 }
             }
-            //
+            // データテーブル作成
+            //DataTable _dt = new DataTable(dataMember);
+            // カラムをコピーするやり方
             DataTable _dt = _ds_tmp.Tables["MonthlyReport_tmp"].Copy();
             _dt.TableName = dataMember;
             _dt.Rows.Clear();
@@ -199,8 +211,21 @@ namespace NIPPO
                 // 
                 _dt.Rows.Add(_dr);
             }
+            // SQLに入ってた情報を取り込む
+            for (int i = 0; i < _ds_tmp.Tables["MonthlyReport_tmp"].Rows.Count; i++)
+            {
+                DataRow _dr_from = _ds_tmp.Tables["MonthlyReport_tmp"].Rows[i];
+                int index = int.Parse(_dr_from["day"].ToString()) - 1;
+                _dt.Rows[index].ItemArray = _dr_from.ItemArray;
+            }
+            // データセットに入れる
             _ds.Tables.Add(_dt);
             return _ds;
+        }
+
+        public int getDayValue(DataSet _ds, string dataMember, int index)
+        {
+            return int.Parse(_ds.Tables[dataMember].Rows[index]["day"].ToString());
         }
     }
 }

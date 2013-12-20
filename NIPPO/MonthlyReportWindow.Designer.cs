@@ -33,6 +33,9 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             this.FYMonth_label = new System.Windows.Forms.Label();
             this.nextMonth_button = new System.Windows.Forms.Button();
             this.prevMonth_button = new System.Windows.Forms.Button();
@@ -54,6 +57,7 @@
             this.outputExcel_button = new System.Windows.Forms.Button();
             this.closeWindow_button = new System.Windows.Forms.Button();
             this.day_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.week_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.start_time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.end_time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -61,6 +65,7 @@
             this.overtime125_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.overtime150_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.holiday_work_times_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.list_dataGridView)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.summary_groupBox.SuspendLayout();
@@ -104,13 +109,15 @@
             this.list_dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.list_dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.day_TextBox,
+            this.ID_TextBox,
             this.week_TextBox,
             this.start_time_TextBox,
             this.end_time_TextBox,
             this.work_times_TextBox,
             this.overtime125_TextBox,
             this.overtime150_TextBox,
-            this.holiday_work_times_TextBox});
+            this.holiday_work_times_TextBox,
+            this.note_TextBox});
             this.list_dataGridView.Location = new System.Drawing.Point(35, 51);
             this.list_dataGridView.MultiSelect = false;
             this.list_dataGridView.Name = "list_dataGridView";
@@ -122,6 +129,7 @@
             this.list_dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.list_dataGridView.Size = new System.Drawing.Size(828, 569);
             this.list_dataGridView.TabIndex = 2;
+            this.list_dataGridView.DoubleClick += new System.EventHandler(this.list_dataGridView_DoubleClick);
             // 
             // statusStrip1
             // 
@@ -287,7 +295,17 @@
             this.day_TextBox.HeaderText = "日";
             this.day_TextBox.Name = "day_TextBox";
             this.day_TextBox.ReadOnly = true;
+            this.day_TextBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.day_TextBox.Width = 25;
+            // 
+            // ID_TextBox
+            // 
+            this.ID_TextBox.DataPropertyName = "ID";
+            this.ID_TextBox.HeaderText = "ID";
+            this.ID_TextBox.Name = "ID_TextBox";
+            this.ID_TextBox.ReadOnly = true;
+            this.ID_TextBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.ID_TextBox.Visible = false;
             // 
             // week_TextBox
             // 
@@ -297,60 +315,93 @@
             this.week_TextBox.HeaderText = "曜日";
             this.week_TextBox.Name = "week_TextBox";
             this.week_TextBox.ReadOnly = true;
+            this.week_TextBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
             this.week_TextBox.Width = 25;
             // 
             // start_time_TextBox
             // 
             this.start_time_TextBox.DataPropertyName = "start_time";
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "t";
+            dataGridViewCellStyle3.NullValue = null;
             this.start_time_TextBox.DefaultCellStyle = dataGridViewCellStyle3;
             this.start_time_TextBox.HeaderText = "勤務開始時刻";
             this.start_time_TextBox.Name = "start_time_TextBox";
             this.start_time_TextBox.ReadOnly = true;
-            this.start_time_TextBox.Width = 80;
+            this.start_time_TextBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.start_time_TextBox.Width = 75;
             // 
             // end_time_TextBox
             // 
             this.end_time_TextBox.DataPropertyName = "end_time";
             dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "t";
+            dataGridViewCellStyle4.NullValue = null;
             this.end_time_TextBox.DefaultCellStyle = dataGridViewCellStyle4;
             this.end_time_TextBox.HeaderText = "勤務終了時刻";
             this.end_time_TextBox.Name = "end_time_TextBox";
             this.end_time_TextBox.ReadOnly = true;
-            this.end_time_TextBox.Width = 80;
+            this.end_time_TextBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.end_time_TextBox.Width = 75;
             // 
             // work_times_TextBox
             // 
             this.work_times_TextBox.DataPropertyName = "work_times";
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle5.Format = "N2";
+            dataGridViewCellStyle5.NullValue = null;
             this.work_times_TextBox.DefaultCellStyle = dataGridViewCellStyle5;
             this.work_times_TextBox.HeaderText = "勤務時間";
             this.work_times_TextBox.Name = "work_times_TextBox";
             this.work_times_TextBox.ReadOnly = true;
-            this.work_times_TextBox.Width = 80;
+            this.work_times_TextBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.work_times_TextBox.Width = 75;
             // 
             // overtime125_TextBox
             // 
             this.overtime125_TextBox.DataPropertyName = "overtime125";
+            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle6.Format = "N2";
+            dataGridViewCellStyle6.NullValue = null;
+            this.overtime125_TextBox.DefaultCellStyle = dataGridViewCellStyle6;
             this.overtime125_TextBox.HeaderText = "普通残業時間";
             this.overtime125_TextBox.Name = "overtime125_TextBox";
             this.overtime125_TextBox.ReadOnly = true;
-            this.overtime125_TextBox.Width = 80;
+            this.overtime125_TextBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.overtime125_TextBox.Width = 75;
             // 
             // overtime150_TextBox
             // 
             this.overtime150_TextBox.DataPropertyName = "overtime150";
+            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle7.Format = "N2";
+            this.overtime150_TextBox.DefaultCellStyle = dataGridViewCellStyle7;
             this.overtime150_TextBox.HeaderText = "深夜残業時間";
             this.overtime150_TextBox.Name = "overtime150_TextBox";
             this.overtime150_TextBox.ReadOnly = true;
-            this.overtime150_TextBox.Width = 80;
+            this.overtime150_TextBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.overtime150_TextBox.Width = 75;
             // 
             // holiday_work_times_TextBox
             // 
             this.holiday_work_times_TextBox.DataPropertyName = "holiday_work_times";
+            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle8.Format = "N2";
+            dataGridViewCellStyle8.NullValue = null;
+            this.holiday_work_times_TextBox.DefaultCellStyle = dataGridViewCellStyle8;
             this.holiday_work_times_TextBox.HeaderText = "休日出勤";
             this.holiday_work_times_TextBox.Name = "holiday_work_times_TextBox";
             this.holiday_work_times_TextBox.ReadOnly = true;
+            this.holiday_work_times_TextBox.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.NotSortable;
+            this.holiday_work_times_TextBox.Width = 75;
+            // 
+            // note_TextBox
+            // 
+            this.note_TextBox.DataPropertyName = "note";
+            this.note_TextBox.HeaderText = "備考";
+            this.note_TextBox.Name = "note_TextBox";
+            this.note_TextBox.ReadOnly = true;
+            this.note_TextBox.Width = 250;
             // 
             // MonthlyReportWindow
             // 
@@ -405,6 +456,7 @@
         private System.Windows.Forms.ToolStripStatusLabel editable_toolStripStatusLabel;
         private System.Windows.Forms.ToolStripStatusLabel user_toolStripStatusLabel;
         private System.Windows.Forms.DataGridViewTextBoxColumn day_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn week_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn start_time_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn end_time_TextBox;
@@ -412,5 +464,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn overtime125_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn overtime150_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn holiday_work_times_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn note_TextBox;
     }
 }

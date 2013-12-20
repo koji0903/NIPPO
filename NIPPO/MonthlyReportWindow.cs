@@ -128,5 +128,20 @@ namespace NIPPO
             this.reloadWindow();
         }
 
+        private void list_dataGridView_DoubleClick(object sender, EventArgs e)
+        {
+            if (list_dataGridView.Rows.Count > 0 &&
+                list_dataGridView.SelectedRows.Count > 0)
+            {
+                int index = list_dataGridView.SelectedRows[0].Index;
+
+                MessageBox.Show("DailyReportWindow.showDialog(" + _mr.getCalYear()
+                    + "," + _mr.getMonth()
+                    + "," + (index + 1)
+                    + "," + this._userID + ")");
+            }
+        }
+
+
     }
 }
