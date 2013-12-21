@@ -71,7 +71,8 @@ namespace NIPPO
             this.Cursor = Cursors.WaitCursor;
             try
             {
-                this.list_dataGridView.DataSource = _mr.getMonthlyWorkReport("MonthlyReport");
+                DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+                this.list_dataGridView.DataSource = _ds;
                 this.list_dataGridView.DataMember = "MonthlyReport";
             }
             catch (Exception ex)
@@ -82,10 +83,9 @@ namespace NIPPO
             {
                 this.Cursor = Cursors.Default;
             }
-
-
             // 合計時間の計算と、「集計」エリアへの表示
-
+            //this.totalTime_textBox.Text = 
+            //    _mr.getTotalTime("MonthlyReport");
         }
 
         /// <summary>

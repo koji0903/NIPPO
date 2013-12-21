@@ -14,6 +14,7 @@ namespace NIPPO
         private int _FY; // 年度
         private int _month; // 月
         private string _userID; // ユーザID
+        private DataSet _monthDs;
 
         /// <summary>
         /// コンストラクタ
@@ -25,6 +26,7 @@ namespace NIPPO
             _FY = FY;
             this._month = DateTime.Now.Month;
             _userID = userID;
+            _monthDs = new DataSet();
         }
 
         /// <summary>
@@ -165,7 +167,6 @@ namespace NIPPO
             SqlConnection connection = new SqlConnection();
             SqlCommand command = new SqlCommand();
             DataSet _ds_tmp = new DataSet();
-            DataSet _ds = new DataSet();
 
             connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
 
@@ -219,13 +220,16 @@ namespace NIPPO
                 _dt.Rows[index].ItemArray = _dr_from.ItemArray;
             }
             // データセットに入れる
-            _ds.Tables.Add(_dt);
-            return _ds;
+            this._monthDs = new DataSet();
+            this._monthDs.Tables.Add(_dt);
+            return this._monthDs;
         }
 
-        public int getDayValue(DataSet _ds, string dataMember, int index)
-        {
-            return int.Parse(_ds.Tables[dataMember].Rows[index]["day"].ToString());
-        }
+
+        //public int getTotalTime(string dataMember)
+        //{
+            
+
+        //}
     }
 }
