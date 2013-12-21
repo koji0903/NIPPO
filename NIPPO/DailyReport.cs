@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Data;
 
 namespace NIPPO
 {
@@ -97,7 +97,7 @@ namespace NIPPO
 //            TimeSpan night_ot = cal_target_time(start_time, end_time, DateTime.Parse("05:00:00"), DateTime.Parse("22:00:00"));
 
             // 各項目の時間を配列にセット
-            float work_time, rest_time, normal_overtime, night_overtime;
+            double work_time, rest_time, normal_overtime, night_overtime;
             work_time = cal_second_to_hour(wt);
             rest_time = cal_second_to_hour(rt);
             normal_overtime = cal_second_to_hour(early_ot[0] + late_ot[0]);
@@ -115,11 +115,11 @@ namespace NIPPO
         /// </summary>
         /// <param name="time">分情報</param>
         /// <returns>時間の割合</returns>
-        private float cal_second_to_hour( TimeSpan ts )
+        private double cal_second_to_hour( TimeSpan ts )
         {
             String hour = ts.ToString("%h");
             String second = ts.ToString(@"mm");
-            return float.Parse(hour) + float.Parse(second) / 60;
+            return double.Parse(hour) + double.Parse(second) / 60;
         }
 
         /// <summary>
@@ -196,8 +196,8 @@ namespace NIPPO
             TimeSpan normal_ts = new TimeSpan();
             TimeSpan night_ts = new TimeSpan();
 
-            TimeSpan offset = new TimeSpan(1, 15, 0); // 1:15
-            TimeSpan zero_time = new TimeSpan(0, 0, 0);
+            //TimeSpan offset = new TimeSpan(1, 15, 0); // 1:15
+            //TimeSpan zero_time = new TimeSpan(0, 0, 0);
             TimeSpan work_base = new TimeSpan(7, 45, 0); // 7:45時間
 
             // 普通残業だけで終了
@@ -257,6 +257,23 @@ namespace NIPPO
             }
 
             return ts;
+        }
+
+        /// <summary>
+        /// 業務詳細に設定された集合時間の合計時間を計算する
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <returns></returns>
+        public double getTotalWorkTime(DataSet ds)
+        {
+            Double total_work_time;
+            total_work_time = 0;
+            DataTable work_detail = ds.Tables["WorkDetail"];
+            foreach (DataRow drCurrent in work_detail.Rows)
+            {
+                total_work_time += (double)drCurrent["times"];
+            }
+            return total_work_time;
         }
 
 

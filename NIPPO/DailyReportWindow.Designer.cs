@@ -28,7 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.WorkDetail_DateGridView = new System.Windows.Forms.DataGridView();
+            this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.task_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Calender_Label = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NightOverTime_Textbox = new System.Windows.Forms.TextBox();
@@ -68,7 +74,6 @@
             this.Project_Label = new System.Windows.Forms.Label();
             this.Remark_Label = new System.Windows.Forms.Label();
             this.Remark_Textbox = new System.Windows.Forms.TextBox();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.WorkDetail_DateGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.workDetail_groupBox.SuspendLayout();
@@ -76,24 +81,75 @@
             // 
             // WorkDetail_DateGridView
             // 
+            this.WorkDetail_DateGridView.AllowUserToAddRows = false;
+            this.WorkDetail_DateGridView.AllowUserToDeleteRows = false;
             this.WorkDetail_DateGridView.AllowUserToOrderColumns = true;
-            this.WorkDetail_DateGridView.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.AllCells;
-            this.WorkDetail_DateGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.WorkDetail_DateGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.WorkDetail_DateGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.name});
-            this.WorkDetail_DateGridView.Location = new System.Drawing.Point(34, 159);
+            this.ID_TextBox,
+            this.name,
+            this.task_TextBox,
+            this.note_TextBox,
+            this.time_TextBox});
+            this.WorkDetail_DateGridView.Location = new System.Drawing.Point(34, 146);
             this.WorkDetail_DateGridView.Name = "WorkDetail_DateGridView";
+            this.WorkDetail_DateGridView.ReadOnly = true;
+            this.WorkDetail_DateGridView.RowHeadersVisible = false;
             this.WorkDetail_DateGridView.RowTemplate.Height = 21;
-            this.WorkDetail_DateGridView.Size = new System.Drawing.Size(783, 135);
+            this.WorkDetail_DateGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.WorkDetail_DateGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.WorkDetail_DateGridView.Size = new System.Drawing.Size(780, 135);
             this.WorkDetail_DateGridView.TabIndex = 0;
             this.WorkDetail_DateGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WorkDetail_DateGridView_CellContentClick);
+            // 
+            // ID_TextBox
+            // 
+            this.ID_TextBox.HeaderText = "ID";
+            this.ID_TextBox.Name = "ID_TextBox";
+            this.ID_TextBox.ReadOnly = true;
+            this.ID_TextBox.Visible = false;
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "プロジェクト名";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 200;
+            // 
+            // task_TextBox
+            // 
+            this.task_TextBox.DataPropertyName = "name1";
+            this.task_TextBox.HeaderText = "業務名";
+            this.task_TextBox.Name = "task_TextBox";
+            this.task_TextBox.ReadOnly = true;
+            this.task_TextBox.Width = 300;
+            // 
+            // note_TextBox
+            // 
+            this.note_TextBox.DataPropertyName = "note";
+            this.note_TextBox.HeaderText = "備考";
+            this.note_TextBox.Name = "note_TextBox";
+            this.note_TextBox.ReadOnly = true;
+            this.note_TextBox.Width = 200;
+            // 
+            // time_TextBox
+            // 
+            this.time_TextBox.DataPropertyName = "times";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle1;
+            this.time_TextBox.HeaderText = "時間";
+            this.time_TextBox.Name = "time_TextBox";
+            this.time_TextBox.ReadOnly = true;
+            this.time_TextBox.Width = 80;
             // 
             // Calender_Label
             // 
             this.Calender_Label.AutoSize = true;
             this.Calender_Label.Font = new System.Drawing.Font("MS UI Gothic", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
-            this.Calender_Label.Location = new System.Drawing.Point(251, 9);
+            this.Calender_Label.Location = new System.Drawing.Point(286, 9);
             this.Calender_Label.Name = "Calender_Label";
             this.Calender_Label.Size = new System.Drawing.Size(341, 33);
             this.Calender_Label.TabIndex = 1;
@@ -122,7 +178,7 @@
             this.panel1.Controls.Add(this.StartTime_Hour_Combobox);
             this.panel1.Location = new System.Drawing.Point(34, 56);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(783, 71);
+            this.panel1.Size = new System.Drawing.Size(780, 71);
             this.panel1.TabIndex = 4;
             // 
             // NightOverTime_Textbox
@@ -428,8 +484,9 @@
             this.TotalWorkTime_Textbox.Location = new System.Drawing.Point(717, 305);
             this.TotalWorkTime_Textbox.Name = "TotalWorkTime_Textbox";
             this.TotalWorkTime_Textbox.ReadOnly = true;
-            this.TotalWorkTime_Textbox.Size = new System.Drawing.Size(100, 19);
+            this.TotalWorkTime_Textbox.Size = new System.Drawing.Size(97, 19);
             this.TotalWorkTime_Textbox.TabIndex = 15;
+            this.TotalWorkTime_Textbox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // workDetail_groupBox
             // 
@@ -445,9 +502,9 @@
             this.workDetail_groupBox.Controls.Add(this.Time_Label);
             this.workDetail_groupBox.Controls.Add(this.Business_Label);
             this.workDetail_groupBox.Controls.Add(this.Project_Label);
-            this.workDetail_groupBox.Location = new System.Drawing.Point(34, 334);
+            this.workDetail_groupBox.Location = new System.Drawing.Point(34, 330);
             this.workDetail_groupBox.Name = "workDetail_groupBox";
-            this.workDetail_groupBox.Size = new System.Drawing.Size(783, 100);
+            this.workDetail_groupBox.Size = new System.Drawing.Size(780, 104);
             this.workDetail_groupBox.TabIndex = 16;
             this.workDetail_groupBox.TabStop = false;
             this.workDetail_groupBox.Text = "業務詳細入力";
@@ -682,22 +739,14 @@
             // 
             this.Remark_Textbox.Location = new System.Drawing.Point(76, 440);
             this.Remark_Textbox.Name = "Remark_Textbox";
-            this.Remark_Textbox.Size = new System.Drawing.Size(741, 19);
+            this.Remark_Textbox.Size = new System.Drawing.Size(738, 19);
             this.Remark_Textbox.TabIndex = 24;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "projects.name";
-            this.name.HeaderText = "プロジェクト名";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 93;
             // 
             // DailyReportWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 473);
+            this.ClientSize = new System.Drawing.Size(845, 476);
             this.Controls.Add(this.Remark_Textbox);
             this.Controls.Add(this.Remark_Label);
             this.Controls.Add(this.workDetail_groupBox);
@@ -764,6 +813,10 @@
         private System.Windows.Forms.Button SerarchProject_Button;
         private System.Windows.Forms.Label Remark_Label;
         private System.Windows.Forms.TextBox Remark_Textbox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ID_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
+        private System.Windows.Forms.DataGridViewTextBoxColumn task_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn note_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn time_TextBox;
     }
 }

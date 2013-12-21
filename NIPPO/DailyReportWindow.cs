@@ -12,6 +12,7 @@ namespace NIPPO
     public partial class DailyReportWindow : Form
     {
         private int year, month, day;
+        private DataSet ds;
 
         /// <summary>
         /// コンストラクタ
@@ -24,6 +25,7 @@ namespace NIPPO
         public DailyReportWindow(int fy, string user_name, int year, int month, int day )
         {
             InitializeComponent();
+            DataSet ds = new DataSet();
             this.year = year;
             this.month = month;
             this.day = day;
@@ -42,18 +44,21 @@ namespace NIPPO
 
         private void DailyReportWindow_Shown(object sender, EventArgs e)
         {
-            using (DailyReport _daily = new DailyReport())
+            using (DailyReport daily = new DailyReport())
             {
                 // 年月日情報の表示
-                this.Calender_Label.Text = _daily.GetDateStr(2013, 12, 13);
-            }
-
+                this.Calender_Label.Text = daily.GetDateStr(2013, 12, 13);
                 using (DataAccessClass data_access = new DataAccessClass())
                 {
-                    this.WorkDetail_DateGridView.DataSource = data_access.GetWorkDetailDs("0001", 2013, 12, 19, 7.75);
+                    // DataGridへの表示
+                    ds = data_access.GetWorkDetailDs("0001", 2013, 12, 19, 7.75);
+                    this.WorkDetail_DateGridView.DataSource = ds;
                     this.WorkDetail_DateGridView.DataMember = "WorkDetail";
-                }
 
+                    // 作業合計時間の表示                    
+                    this.TotalWorkTime_Textbox.Text = daily.getTotalWorkTime(ds).ToString("F2") + "h";                     
+                }
+            }
         }
 
 

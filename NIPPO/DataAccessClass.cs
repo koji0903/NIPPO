@@ -37,7 +37,7 @@ namespace NIPPO
                     {
                         command.Connection = connection;
                         //                           command.CommandText = @"SELECT name,note,times FROM work_detail INNER JOIN projects ON work_detail.projects_ID = projects.ID;";
-                        command.CommandText = @"SELECT projects.name, tasks.name, work_detail.note, work_detail.times " +
+                        command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times " +
                              "FROM work_detail " +
                              "INNER JOIN projects ON work_detail.projects_ID = projects.ID " +
                              "INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID";
