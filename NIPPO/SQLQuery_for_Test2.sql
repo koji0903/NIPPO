@@ -125,29 +125,39 @@ INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,note) V
 --
 -- work_detail　（特殊扱い）
 --
-DECLARE @work_report_id INT;
 DECLARE @project_id INT;
 DECLARE @task_id INT;
---DECLARE @ids INT(100);
+DECLARE @ids INT(100);
 
--- ターゲットのUser ID＋年月日
-SET @d = (SELECT ID FROM users WHERE login = '1'); 
--- そのユーザに該当するワークレポートを抽出
---SET @ids = (SELECT ID, users_ID,note FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
-
-SET @work_report_id = (SELECT ID FROM work_reports WHERE users_ID = @d AND year = '2013' AND MONTH = '12' AND DAY = '14');
+SET @d = (SELECT ID FROM users WHERE login = '1'); -- USERIDを選んで
+SET @ids = (SELECT ID FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
 SET @project_id = (SELECT ID FROM projects WHERE num = '1');
 SET @task_id = (SELECT ID FROM tasks WHERE code = '1');
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ１',@work_report_id,@project_id,@task_id);
-SET @project_id = (SELECT ID FROM projects WHERE num = '2');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ１',@d,@project_id,@task_id);
 SET @task_id = (SELECT ID FROM tasks WHERE code = '2');
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ２',@work_report_id,@project_id,@task_id);
-SET @project_id = (SELECT ID FROM projects WHERE num = '2');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ２',@d,@project_id,@task_id);
 SET @task_id = (SELECT ID FROM tasks WHERE code = '3');
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ３',@work_report_id,@project_id,@task_id);
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ３',@d,@project_id,@task_id);
 
-SELECT projects.name, tasks.name, work_detail.note, work_detail.times FROM work_detail INNER JOIN projects ON work_detail.projects_ID = projects.ID INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID;
+SET @d = (SELECT ID FROM users WHERE login = '1'); -- USERIDを選んで
+SET @d = (SELECT ID FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
+SET @e = (SELECT ID FROM projects WHERE num = '2');
+SET @task_id = (SELECT ID FROM tasks WHERE code = '1');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ４',@d,@project_id,@task_id);
+SET @task_id = (SELECT ID FROM tasks WHERE code = '2');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ５',@d,@project_id,@task_id);
+SET @task_id = (SELECT ID FROM tasks WHERE code = '3');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ６',@d,@project_id,@task_id);
 
+SET @d = (SELECT ID FROM users WHERE login = '1'); -- USERIDを選んで
+SET @d = (SELECT ID FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
+SET @e = (SELECT ID FROM projects WHERE num = '1');
+SET @task_id = (SELECT ID FROM tasks WHERE code = '1');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','セミナー',@d,@project_id,@task_id);
+SET @task_id = (SELECT ID FROM tasks WHERE code = '2');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','移動',@d,@project_id,@task_id);
+SET @task_id = (SELECT ID FROM tasks WHERE code = '3');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','報告',@d,@project_id,@task_id);
 
 
 ---------------------------------------------------------------

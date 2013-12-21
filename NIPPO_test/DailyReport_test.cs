@@ -180,20 +180,6 @@ namespace NIPPO_test
             ary[3] = 2.00;
             Assert.AreEqual(ary, work);
 
-            //            work = _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 0);
-//            ary[0] = "1.00h";
-//            ary[1] = "1.00h";
-//            ary[2] = "1.00h";
-//            ary[3] = "1.00h";
-//            Assert.AreEqual(ary, work);
-            
-//            Assert.AreEqual("1.25h", _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 15));
-//            Assert.AreEqual("1.50h", _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 30));
-//            Assert.AreEqual("1.75h", _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 45));
-//            Assert.AreEqual("8.00h", _daily.GetWorkTime(2013, 12, 17, 8, 0, 17, 0));
-//            Assert.AreEqual("1.25h", _daily.GetWorkTime(2013, 12, 17, 8, 0, 21, 15));
-//            Assert.AreEqual("1.50h", _daily.GetWorkTime(2013, 12, 17, 8, 0, 22, 30));
-//            Assert.AreEqual("1.75h", _daily.GetWorkTime(2013, 12, 17, 8, 0, 23, 45));
         }
     }
 }

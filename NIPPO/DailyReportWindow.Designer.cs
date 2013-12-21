@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.WorkDetail_DateGridView = new System.Windows.Forms.DataGridView();
             this.Calender_Label = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -70,8 +69,6 @@
             this.Remark_Label = new System.Windows.Forms.Label();
             this.Remark_Textbox = new System.Windows.Forms.TextBox();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.note = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Times_DataSetText = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.WorkDetail_DateGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.workDetail_groupBox.SuspendLayout();
@@ -84,14 +81,13 @@
             this.WorkDetail_DateGridView.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.WorkDetail_DateGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.WorkDetail_DateGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.name,
-            this.note,
-            this.Times_DataSetText});
+            this.name});
             this.WorkDetail_DateGridView.Location = new System.Drawing.Point(34, 159);
             this.WorkDetail_DateGridView.Name = "WorkDetail_DateGridView";
             this.WorkDetail_DateGridView.RowTemplate.Height = 21;
             this.WorkDetail_DateGridView.Size = new System.Drawing.Size(783, 135);
             this.WorkDetail_DateGridView.TabIndex = 0;
+            this.WorkDetail_DateGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WorkDetail_DateGridView_CellContentClick);
             // 
             // Calender_Label
             // 
@@ -691,30 +687,11 @@
             // 
             // name
             // 
-            this.name.DataPropertyName = "name";
+            this.name.DataPropertyName = "projects.name";
             this.name.HeaderText = "プロジェクト名";
             this.name.Name = "name";
             this.name.ReadOnly = true;
             this.name.Width = 93;
-            // 
-            // note
-            // 
-            this.note.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.note.DataPropertyName = "note";
-            this.note.HeaderText = "note";
-            this.note.Name = "note";
-            this.note.ReadOnly = true;
-            // 
-            // Times_DataSetText
-            // 
-            this.Times_DataSetText.DataPropertyName = "times";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.Times_DataSetText.DefaultCellStyle = dataGridViewCellStyle1;
-            this.Times_DataSetText.HeaderText = "時間";
-            this.Times_DataSetText.Name = "Times_DataSetText";
-            this.Times_DataSetText.Width = 54;
             // 
             // DailyReportWindow
             // 
@@ -788,7 +765,5 @@
         private System.Windows.Forms.Label Remark_Label;
         private System.Windows.Forms.TextBox Remark_Textbox;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn note;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Times_DataSetText;
     }
 }

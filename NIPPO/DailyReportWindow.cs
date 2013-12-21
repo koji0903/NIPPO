@@ -51,7 +51,7 @@ namespace NIPPO
                 using (DataAccessClass data_access = new DataAccessClass())
                 {
                     this.WorkDetail_DateGridView.DataSource = data_access.GetWorkDetailDs("0001", 2013, 12, 19, 7.75);
-                    this.WorkDetail_DateGridView.DataMember = @"WorkDetail";
+                    this.WorkDetail_DateGridView.DataMember = "WorkDetail";
                 }
 
         }
@@ -143,6 +143,11 @@ namespace NIPPO
         private void SearchBusiness_Button_Click(object sender, EventArgs e)
         {
             // 業務選択を行うウィンドウを表示
+        }
+
+        private void WorkDetail_DateGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
 
 

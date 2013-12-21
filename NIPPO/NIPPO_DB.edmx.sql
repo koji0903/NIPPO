@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/21/2013 13:15:29
+-- Date Created: 12/21/2013 18:12:48
 -- Generated from EDMX file: C:\Users\koji\Documents\Visual Studio 2010\Projects\NIPPO\NIPPO\NIPPO_DB.edmx
 -- --------------------------------------------------
 
@@ -17,11 +17,80 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[FK_authoritiesusers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[users] DROP CONSTRAINT [FK_authoritiesusers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_userssections]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[users] DROP CONSTRAINT [FK_userssections];
+GO
+IF OBJECT_ID(N'[dbo].[FK_userswork_reports]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[work_reports] DROP CONSTRAINT [FK_userswork_reports];
+GO
+IF OBJECT_ID(N'[dbo].[FK_work_reportswork_detail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[work_reports] DROP CONSTRAINT [FK_work_reportswork_detail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_work_detailprojects]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_detailprojects];
+GO
+IF OBJECT_ID(N'[dbo].[FK_work_detailtasks]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_detailtasks];
+GO
+IF OBJECT_ID(N'[dbo].[FK_projectscustomers]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[customers] DROP CONSTRAINT [FK_projectscustomers];
+GO
+IF OBJECT_ID(N'[dbo].[FK_business_segmentsbusiness_type]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[business_type] DROP CONSTRAINT [FK_business_segmentsbusiness_type];
+GO
+IF OBJECT_ID(N'[dbo].[FK_business_typebusiness_detail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[business_detail] DROP CONSTRAINT [FK_business_typebusiness_detail];
+GO
+IF OBJECT_ID(N'[dbo].[FK_projectsbusiness_type]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[projects] DROP CONSTRAINT [FK_projectsbusiness_type];
+GO
+IF OBJECT_ID(N'[dbo].[FK_projectsbusiness_detail]', 'F') IS NOT NULL
+    ALTER TABLE [dbo].[projects] DROP CONSTRAINT [FK_projectsbusiness_detail];
+GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
+IF OBJECT_ID(N'[dbo].[users]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[users];
+GO
+IF OBJECT_ID(N'[dbo].[authorities]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[authorities];
+GO
+IF OBJECT_ID(N'[dbo].[sections]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[sections];
+GO
+IF OBJECT_ID(N'[dbo].[work_reports]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[work_reports];
+GO
+IF OBJECT_ID(N'[dbo].[work_detail]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[work_detail];
+GO
+IF OBJECT_ID(N'[dbo].[projects]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[projects];
+GO
+IF OBJECT_ID(N'[dbo].[tasks]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[tasks];
+GO
+IF OBJECT_ID(N'[dbo].[customers]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[customers];
+GO
+IF OBJECT_ID(N'[dbo].[holidays]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[holidays];
+GO
+IF OBJECT_ID(N'[dbo].[business_segments]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[business_segments];
+GO
+IF OBJECT_ID(N'[dbo].[business_type]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[business_type];
+GO
+IF OBJECT_ID(N'[dbo].[business_detail]', 'U') IS NOT NULL
+    DROP TABLE [dbo].[business_detail];
+GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -103,7 +172,8 @@ CREATE TABLE [dbo].[work_detail] (
     [times] float  NOT NULL,
     [note] nvarchar(max)  NULL,
     [work_reports_ID] int  NULL,
-    [projects_ID] int  NULL
+    [projects_ID] int  NULL,
+    [tasks_ID] int  NULL
 );
 GO
 
@@ -144,8 +214,7 @@ CREATE TABLE [dbo].[tasks] (
     [updated_at] datetime  NULL,
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] datetime  NULL,
-    [deleted_by] nvarchar(max)  NULL,
-    [work_detail_ID] int  NULL
+    [deleted_by] nvarchar(max)  NULL
 );
 GO
 
@@ -379,18 +448,18 @@ ON [dbo].[work_detail]
     ([projects_ID]);
 GO
 
--- Creating foreign key on [work_detail_ID] in table 'tasks'
-ALTER TABLE [dbo].[tasks]
+-- Creating foreign key on [tasks_ID] in table 'work_detail'
+ALTER TABLE [dbo].[work_detail]
 ADD CONSTRAINT [FK_work_detailtasks]
-    FOREIGN KEY ([work_detail_ID])
-    REFERENCES [dbo].[work_detail]
+    FOREIGN KEY ([tasks_ID])
+    REFERENCES [dbo].[tasks]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_work_detailtasks'
 CREATE INDEX [IX_FK_work_detailtasks]
-ON [dbo].[tasks]
-    ([work_detail_ID]);
+ON [dbo].[work_detail]
+    ([tasks_ID]);
 GO
 
 -- Creating foreign key on [projects_ID] in table 'customers'

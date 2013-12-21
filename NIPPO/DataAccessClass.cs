@@ -31,20 +31,26 @@ namespace NIPPO
                 // DBとのユーザ認証設定
                 connection.ConnectionString = String.Format(NIPPO.Properties.Settings.Default.ConnectionString);
                 SqlCommand command = new SqlCommand();
-                SqlDataAdapter adapter = new SqlDataAdapter();
-                        try
-                        {
-                            command.Connection = connection;
-                            command.CommandText = @"SELECT name,note,times FROM work_detail INNER JOIN projects ON work_detail.projects_ID = projects.ID;";
+                using (SqlDataAdapter adapter = new SqlDataAdapter())
+                {
+                    try
+                    {
+                        command.Connection = connection;
+                        //                           command.CommandText = @"SELECT name,note,times FROM work_detail INNER JOIN projects ON work_detail.projects_ID = projects.ID;";
+                        command.CommandText = @"SELECT projects.name, tasks.name, work_detail.note, work_detail.times " +
+                             "FROM work_detail " +
+                             "INNER JOIN projects ON work_detail.projects_ID = projects.ID " +
+                             "INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID";
 
-                            adapter.SelectCommand = command;
-                            adapter.Fill(ds, "WorkDetail");
- //                           ds.Tables["WorkDetail"].PrimaryKey = new DataColumn[] { ds.Tables["WorkDetail"].Columns["ID"] };
-                        }
-                        catch ( Exception ex )
-                        {
-                            MessageBox.Show(ex.Message);
-                        }
+                        adapter.SelectCommand = command;
+                        adapter.Fill(ds, "WorkDetail");
+                        //                           ds.Tables["WorkDetail"].PrimaryKey = new DataColumn[] { ds.Tables["WorkDetail"].Columns["ID"] };
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
             }
             return ds;
         }
