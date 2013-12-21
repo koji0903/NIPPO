@@ -12,6 +12,8 @@ namespace NIPPO_test
     [TestFixture]
     class MonthlyReport_test
     {
+        private string listTableName = "MonthlyReport"; // ここはあえてベタ書きにしておく
+
         // 追加：ここにイチからテストを書く
         [Test]
         public void コンストラクタのテスト()
@@ -30,8 +32,8 @@ namespace NIPPO_test
             Assert.AreEqual("不明なユーザ", _mr.getUserName());
             // 例外を出さずに返ること
             _mr.setMonth(12);
-            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
-            Assert.AreEqual(1, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
+            DataSet _ds = _mr.getMonthlyWorkReport();
+            Assert.AreEqual(1, _ds.Tables[this.listTableName].Rows[0]["day"]);
         }
 
         [Test]
@@ -110,17 +112,17 @@ namespace NIPPO_test
         {
             MonthlyReport _mr = new MonthlyReport(2013, 1);
             _mr.setMonth(12);
-            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");            
-            Assert.AreEqual(1, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
-            Assert.AreEqual("日", _ds.Tables["MonthlyReport"].Rows[0]["week"]);
-            Assert.AreEqual(31, _ds.Tables["MonthlyReport"].Rows[30]["day"]);
-            Assert.AreEqual(31, _ds.Tables["MonthlyReport"].Rows.Count);
+            DataSet _ds = _mr.getMonthlyWorkReport();            
+            Assert.AreEqual(1, _ds.Tables[this.listTableName].Rows[0]["day"]);
+            Assert.AreEqual("日", _ds.Tables[this.listTableName].Rows[0]["week"]);
+            Assert.AreEqual(31, _ds.Tables[this.listTableName].Rows[30]["day"]);
+            Assert.AreEqual(31, _ds.Tables[this.listTableName].Rows.Count);
             _mr.setMonth(2);
-            _ds = _mr.getMonthlyWorkReport("MonthlyReport");
-            Assert.AreEqual(1, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
-            Assert.AreEqual("土", _ds.Tables["MonthlyReport"].Rows[0]["week"]);
-            Assert.AreEqual(28, _ds.Tables["MonthlyReport"].Rows[27]["day"]);
-            Assert.AreEqual(28, _ds.Tables["MonthlyReport"].Rows.Count);
+            _ds = _mr.getMonthlyWorkReport();
+            Assert.AreEqual(1, _ds.Tables[this.listTableName].Rows[0]["day"]);
+            Assert.AreEqual("土", _ds.Tables[this.listTableName].Rows[0]["week"]);
+            Assert.AreEqual(28, _ds.Tables[this.listTableName].Rows[27]["day"]);
+            Assert.AreEqual(28, _ds.Tables[this.listTableName].Rows.Count);
         }
 
         [Test]
@@ -128,8 +130,8 @@ namespace NIPPO_test
         {
             MonthlyReport _mr = new MonthlyReport(2013, 1);
             _mr.setMonth(12);
-            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
-            Assert.AreEqual("通常勤務", _ds.Tables["MonthlyReport"].Rows[13]["note"]);
+            DataSet _ds = _mr.getMonthlyWorkReport();
+            Assert.AreEqual("通常勤務", _ds.Tables[this.listTableName].Rows[13]["note"]);
         }
 
         [Test]
@@ -138,16 +140,16 @@ namespace NIPPO_test
             MonthlyReport _mr = new MonthlyReport(2013, 1);
             // 正しい合計時間か
             _mr.setMonth(12);
-            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            DataSet _ds = _mr.getMonthlyWorkReport();
             Assert.AreEqual("27 h", _mr.getTotalTimeText());
             // 合計が0
             _mr.setMonth(9);
-            _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            _ds = _mr.getMonthlyWorkReport();
             Assert.AreEqual("0 h", _mr.getTotalTimeText());
             // 異常系：SQLから取れない場合
             MonthlyReport _mr_err = new MonthlyReport(2013, -1);
             _mr_err.setMonth(12);
-            _ds = _mr_err.getMonthlyWorkReport("MonthlyReport");
+            _ds = _mr_err.getMonthlyWorkReport();
             Assert.AreEqual("0 h", _mr.getTotalTimeText());
         }
 
@@ -157,16 +159,16 @@ namespace NIPPO_test
             MonthlyReport _mr = new MonthlyReport(2013, 1);
             // 正しい合計時間か
             _mr.setMonth(12);
-            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            DataSet _ds = _mr.getMonthlyWorkReport();
             Assert.AreEqual("5 h", _mr.getTotalOverTime125Text());
             // 合計が0
             _mr.setMonth(9);
-            _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            _ds = _mr.getMonthlyWorkReport();
             Assert.AreEqual("0 h", _mr.getTotalOverTime125Text());
             // 異常系：SQLから取れない場合
             MonthlyReport _mr_err = new MonthlyReport(2013, -1);
             _mr_err.setMonth(12);
-            _ds = _mr_err.getMonthlyWorkReport("MonthlyReport");
+            _ds = _mr_err.getMonthlyWorkReport();
             Assert.AreEqual("0 h", _mr.getTotalOverTime125Text());
         }
 
@@ -176,16 +178,16 @@ namespace NIPPO_test
             MonthlyReport _mr = new MonthlyReport(2013, 1);
             // 正しい合計時間か
             _mr.setMonth(12);
-            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            DataSet _ds = _mr.getMonthlyWorkReport();
             Assert.AreEqual("0 h", _mr.getTotalOverTime150Text());
             // 合計が0
             _mr.setMonth(9);
-            _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            _ds = _mr.getMonthlyWorkReport();
             Assert.AreEqual("0 h", _mr.getTotalOverTime150Text());
             // 異常系：SQLから取れない場合
             MonthlyReport _mr_err = new MonthlyReport(2013, -1);
             _mr_err.setMonth(12);
-            _ds = _mr_err.getMonthlyWorkReport("MonthlyReport");
+            _ds = _mr_err.getMonthlyWorkReport();
             Assert.AreEqual("0 h", _mr.getTotalOverTime150Text());
         }
 

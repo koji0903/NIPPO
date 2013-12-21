@@ -72,9 +72,9 @@ namespace NIPPO
             this.Cursor = Cursors.WaitCursor;
             try
             {
-                DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+                DataSet _ds = _mr.getMonthlyWorkReport();
                 this.list_dataGridView.DataSource = _ds;
-                this.list_dataGridView.DataMember = "MonthlyReport";
+                this.list_dataGridView.DataMember = _mr.getListTableName();
             }
             catch (Exception ex)
             {

@@ -15,6 +15,8 @@ namespace NIPPO
         private int _month; // 月
         private int _userID; // ユーザID
         private DataSet _monthDs;
+        // 定数
+        private string listTableName = "MonthlyReport";
 
         /// <summary>
         /// コンストラクタ
@@ -27,6 +29,11 @@ namespace NIPPO
             this._month = DateTime.Now.Month;
             _userID = userID;
             _monthDs = new DataSet();
+        }
+
+        public string getListTableName()
+        {
+            return this.listTableName;
         }
 
         /// <summary>
@@ -163,7 +170,7 @@ namespace NIPPO
             return ds;
         }
 
-        public DataSet getMonthlyWorkReport(string dataMember)
+        public DataSet getMonthlyWorkReport()
         {
             SqlConnection connection = new SqlConnection();
             SqlCommand command = new SqlCommand();
@@ -195,7 +202,7 @@ namespace NIPPO
             //DataTable _dt = new DataTable(dataMember);
             // カラムをコピーするやり方
             DataTable _dt = _ds_tmp.Tables["MonthlyReport_tmp"].Copy();
-            _dt.TableName = dataMember;
+            _dt.TableName = this.listTableName;
             _dt.Rows.Clear();
             // 1～31までの配列に格納する
             _dt.Columns.Add("week", Type.GetType("System.String"));
@@ -228,9 +235,9 @@ namespace NIPPO
         public int getTotalTimeCommon(string columnName)
         {
             int sum = 0;
-            for (int i = 0; i < this._monthDs.Tables["MonthlyReport"].Rows.Count; i++)
+            for (int i = 0; i < this._monthDs.Tables[this.listTableName].Rows.Count; i++)
             {
-                object workTimes = this._monthDs.Tables["MonthlyReport"].Rows[i][columnName];
+                object workTimes = this._monthDs.Tables[this.listTableName].Rows[i][columnName];
                 if (workTimes != null && workTimes.ToString() != "")
                 {
                     sum += int.Parse(workTimes.ToString());
