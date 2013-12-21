@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/20/2013 12:07:44
--- Generated from EDMX file: D:\Data\NIPPO\NIPPO\NIPPO_DB.edmx
+-- Date Created: 12/21/2013 13:15:29
+-- Generated from EDMX file: C:\Users\koji\Documents\Visual Studio 2010\Projects\NIPPO\NIPPO\NIPPO_DB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -17,80 +17,11 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[FK_authoritiesusers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[users] DROP CONSTRAINT [FK_authoritiesusers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_userssections]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[users] DROP CONSTRAINT [FK_userssections];
-GO
-IF OBJECT_ID(N'[dbo].[FK_userswork_reports]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[work_reports] DROP CONSTRAINT [FK_userswork_reports];
-GO
-IF OBJECT_ID(N'[dbo].[FK_work_reportswork_detail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_reportswork_detail];
-GO
-IF OBJECT_ID(N'[dbo].[FK_work_detailprojects]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_detailprojects];
-GO
-IF OBJECT_ID(N'[dbo].[FK_work_detailtasks]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[tasks] DROP CONSTRAINT [FK_work_detailtasks];
-GO
-IF OBJECT_ID(N'[dbo].[FK_projectscustomers]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[customers] DROP CONSTRAINT [FK_projectscustomers];
-GO
-IF OBJECT_ID(N'[dbo].[FK_business_segmentsbusiness_type]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[business_type] DROP CONSTRAINT [FK_business_segmentsbusiness_type];
-GO
-IF OBJECT_ID(N'[dbo].[FK_business_typebusiness_detail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[business_detail] DROP CONSTRAINT [FK_business_typebusiness_detail];
-GO
-IF OBJECT_ID(N'[dbo].[FK_projectsbusiness_type]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[projects] DROP CONSTRAINT [FK_projectsbusiness_type];
-GO
-IF OBJECT_ID(N'[dbo].[FK_projectsbusiness_detail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[projects] DROP CONSTRAINT [FK_projectsbusiness_detail];
-GO
 
 -- --------------------------------------------------
 -- Dropping existing tables
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[dbo].[users]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[users];
-GO
-IF OBJECT_ID(N'[dbo].[authorities]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[authorities];
-GO
-IF OBJECT_ID(N'[dbo].[sections]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[sections];
-GO
-IF OBJECT_ID(N'[dbo].[work_reports]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[work_reports];
-GO
-IF OBJECT_ID(N'[dbo].[work_detail]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[work_detail];
-GO
-IF OBJECT_ID(N'[dbo].[projects]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[projects];
-GO
-IF OBJECT_ID(N'[dbo].[tasks]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[tasks];
-GO
-IF OBJECT_ID(N'[dbo].[customers]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[customers];
-GO
-IF OBJECT_ID(N'[dbo].[holidays]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[holidays];
-GO
-IF OBJECT_ID(N'[dbo].[business_segments]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[business_segments];
-GO
-IF OBJECT_ID(N'[dbo].[business_type]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[business_type];
-GO
-IF OBJECT_ID(N'[dbo].[business_detail]', 'U') IS NOT NULL
-    DROP TABLE [dbo].[business_detail];
-GO
 
 -- --------------------------------------------------
 -- Creating all tables
@@ -151,9 +82,9 @@ CREATE TABLE [dbo].[work_reports] (
     [start_time] datetime  NULL,
     [end_time] datetime  NULL,
     [work_times] smallint  NULL,
-    [overtime125] smallint  NULL,
-    [overtime150] smallint  NULL,
-    [holiday_work_times] smallint  NULL,
+    [overtime125] float  NULL,
+    [overtime150] float  NULL,
+    [holiday_work_times] float  NULL,
     [note] nvarchar(max)  NULL,
     [created_at] datetime  NULL,
     [created_by] nvarchar(max)  NULL,
@@ -161,7 +92,7 @@ CREATE TABLE [dbo].[work_reports] (
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] smallint  NULL,
     [deleted_by] nvarchar(max)  NULL,
-    [rest_time] time  NULL,
+    [rest_time] float  NULL,
     [users_ID] int  NULL
 );
 GO

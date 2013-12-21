@@ -120,9 +120,9 @@
     <Property Name="start_time" Type="datetime" Nullable="true" />
     <Property Name="end_time" Type="datetime" Nullable="true" />
     <Property Name="work_times" Type="smallint" Nullable="true" />
-    <Property Name="overtime125" Type="smallint" Nullable="true" />
-    <Property Name="overtime150" Type="smallint" Nullable="true" />
-    <Property Name="holiday_work_times" Type="smallint" Nullable="true" />
+    <Property Name="overtime125" Type="float" Nullable="true" />
+    <Property Name="overtime150" Type="float" Nullable="true" />
+    <Property Name="holiday_work_times" Type="float" Nullable="true" />
     <Property Name="note" Type="nvarchar(max)" Nullable="true" />
     <Property Name="created_at" Type="datetime" Nullable="true" />
     <Property Name="created_by" Type="nvarchar(max)" Nullable="true" />
@@ -130,7 +130,7 @@
     <Property Name="updated_by" Type="nvarchar(max)" Nullable="true" />
     <Property Name="deleted_at" Type="smallint" Nullable="true" />
     <Property Name="deleted_by" Type="nvarchar(max)" Nullable="true" />
-    <Property Name="rest_time" Type="time" Nullable="true" />
+    <Property Name="rest_time" Type="float" Nullable="true" />
     <Property Name="users_ID" Type="int" Nullable="true" />
   </EntityType>
   <EntityType Name="work_detail">
@@ -1046,6 +1046,7 @@
       <DesignerInfoPropertySet>
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
       </DesignerInfoPropertySet>
     </edmx:Options>
     <!-- Diagram content (shape and connector positions) -->
