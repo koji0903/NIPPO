@@ -146,7 +146,15 @@ SET @project_id = (SELECT ID FROM projects WHERE num = '2');
 SET @task_id = (SELECT ID FROM tasks WHERE code = '3');
 INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ３',@work_report_id,@project_id,@task_id);
 
-SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times FROM work_detail INNER JOIN projects ON work_detail.projects_ID = projects.ID INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID;
+-- 日報入力ウィンドウに表示する情報
+SET @d = (SELECT ID FROM users WHERE login = '1'); 
+SET @work_report_id = (SELECT ID FROM work_reports WHERE users_ID = @d AND year = '2013' AND month = '12' AND day = '14');
+
+SELECT work_detail.work_reports_ID, projects.name, tasks.name, work_detail.note, work_detail.times
+FROM work_detail INNER JOIN projects 
+ON work_detail.projects_ID = projects.ID INNER JOIN tasks 
+ON work_detail.tasks_ID = tasks.ID
+WHERE work_detail.work_reports_ID = @work_report_id;
 
 
 

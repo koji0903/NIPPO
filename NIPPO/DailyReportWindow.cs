@@ -51,7 +51,7 @@ namespace NIPPO
                 using (DataAccessClass data_access = new DataAccessClass())
                 {
                     // DataGridへの表示
-                    ds = data_access.GetWorkDetailDs("0001", 2013, 12, 19, 7.75);
+                    ds = data_access.GetWorkDetailDs("1", 2013, 12, 19, 7.75);
                     this.WorkDetail_DateGridView.DataSource = ds;
                     this.WorkDetail_DateGridView.DataMember = "WorkDetail";
 
