@@ -148,12 +148,36 @@ namespace NIPPO_test
             ary[3] = 0.00;
             Assert.AreEqual(ary, work);
 
+            // 通常勤務（勤務＋午前休暇＋残業） プリント用紙　ケース（２）
+            work = _daily.GetWorkTime(2013, 12, 19, 9, 45, 20, 30);
+            ary[0] = 9.25;
+            ary[1] = 1.50;
+            ary[2] = 1.50;
+            ary[3] = 0.00;
+            Assert.AreEqual(ary, work);
+
             // 通常勤務（勤務＋午前休暇＋残業） プリント用紙　ケース（３）
             work = _daily.GetWorkTime(2013, 12, 19, 13, 00, 23, 00);
             ary[0] = 9.50;
             ary[1] = 0.50;
             ary[2] = 0.75;
             ary[3] = 1.00;
+            Assert.AreEqual(ary, work);
+
+            // 通常勤務（勤務＋午前休暇＋残業） プリント用紙　ケース（３）
+            work = _daily.GetWorkTime(2013, 12, 19, 13, 00, 23, 30);
+            ary[0] = 10.00;
+            ary[1] = 0.50;
+            ary[2] = 0.75;
+            ary[3] = 1.50;
+            Assert.AreEqual(ary, work);
+
+            // 通常勤務（勤務＋午前休暇＋残業） プリント用紙　ケース（３）
+            work = _daily.GetWorkTime(2013, 12, 19, 13, 00, 24, 00);
+            ary[0] = 10.50;
+            ary[1] = 0.50;
+            ary[2] = 0.75;
+            ary[3] = 2.00;
             Assert.AreEqual(ary, work);
 
             //            work = _daily.GetWorkTime(2013, 12, 17, 1, 0, 2, 0);

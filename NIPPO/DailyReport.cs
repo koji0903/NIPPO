@@ -71,34 +71,34 @@ namespace NIPPO
             rt += cal_rest_time(start_time, end_time, DateTime.Parse(base_day + " 17:30:00"), DateTime.Parse(base_day + " 18:00:00"));
 
             // 勤務時間
-            TimeSpan ts = end_time - start_time - rt;
+            TimeSpan wt = end_time - start_time - rt;
 
             // Lost Time (通常勤務の8:45以降から勤務をスタートした場合）
             TimeSpan lost_time = new TimeSpan(0,0,0);
             if (start_time > DateTime.Parse(base_day + " 08:45:00"))
             {
+                // 12時前出社
                 if (start_time < DateTime.Parse(base_day + " 12:00:00"))
                 {
-                    // 12時前出社
                     lost_time = start_time - DateTime.Parse(base_day + " 08:45:00");
                 }
+                // 12時～13時出社
                 else
                 {
-                    // 12時～13時出社
                     lost_time =  DateTime.Parse(base_day + " 12:00:00")　- DateTime.Parse(base_day + " 08:45:00");
                 }
             }
 
             // 普通・深夜残業時間
             TimeSpan[] early_ot = cal_early_overtime(start_time, end_time, DateTime.Parse(base_day + " 05:00:00"), DateTime.Parse(base_day + " 08:45:00"));
-            TimeSpan[] late_ot = cal_late_overtime(start_time, end_time, DateTime.Parse(base_day + " 18:00:00"), DateTime.Parse(base_day + " 22:00:00"), DateTime.Parse(next_day_start), lost_time);
+            TimeSpan[] late_ot = cal_late_overtime(start_time, end_time, DateTime.Parse(base_day + " 18:00:00"), DateTime.Parse(base_day + " 22:00:00"), DateTime.Parse(next_day_start), wt, lost_time);
 
             // 深夜残業時間
 //            TimeSpan night_ot = cal_target_time(start_time, end_time, DateTime.Parse("05:00:00"), DateTime.Parse("22:00:00"));
 
             // 各項目の時間を配列にセット
             float work_time, rest_time, normal_overtime, night_overtime;
-            work_time = cal_second_to_hour(ts);
+            work_time = cal_second_to_hour(wt);
             rest_time = cal_second_to_hour(rt);
             normal_overtime = cal_second_to_hour(early_ot[0] + late_ot[0]);
             night_overtime = cal_second_to_hour(early_ot[1] + late_ot[1]);
@@ -189,23 +189,30 @@ namespace NIPPO
         /// <param name="rest_start_time">休憩開始時間</param>
         /// <param name="rest_end_time">休憩終了時間</param>
         /// <returns>時間範囲</returns>
-        private TimeSpan[] cal_late_overtime(DateTime start_time, DateTime end_time, DateTime target_start_time, DateTime target_end_time, DateTime next_day_start, TimeSpan lost_time)
+        private TimeSpan[] cal_late_overtime(DateTime start_time, DateTime end_time, DateTime target_start_time, DateTime target_end_time, DateTime next_day_start, TimeSpan wt, TimeSpan lost_time)
         {
             TimeSpan[] ts = new TimeSpan[2];
 
             TimeSpan normal_ts = new TimeSpan();
             TimeSpan night_ts = new TimeSpan();
 
-            TimeSpan offset = new TimeSpan(1, 15, 0); // 1:15時間
-            TimeSpan zero_time = new TimeSpan(0, 0, 0); // 1:15時間
+            TimeSpan offset = new TimeSpan(1, 15, 0); // 1:15
+            TimeSpan zero_time = new TimeSpan(0, 0, 0);
+            TimeSpan work_base = new TimeSpan(7, 45, 0); // 7:45時間
 
             // 普通残業だけで終了
             if (end_time <= target_end_time)
             {
-                if (target_start_time <= end_time)
+                if (end_time >= target_start_time)
                 {
                     // 終了時刻 - 普通残業開始時刻(18:00)
-                    normal_ts = (end_time - target_start_time) - lost_time;
+                    // 勤務時間が7時間45分より多い場合のみカウント
+                    int result = TimeSpan.Compare(wt, work_base);
+                    if (result > 0)
+                    {
+//                        normal_ts = (end_time - target_start_time);
+                        normal_ts = wt - work_base;
+                    }
                 }
             }
             else // 深夜残業まで
