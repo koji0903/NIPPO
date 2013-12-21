@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/14/2013 23:43:10
--- Generated from EDMX file: C:\Users\koji\Documents\Visual Studio 2010\Projects\NIPPO\NIPPO\NIPPO_DB.edmx
+-- Date Created: 12/20/2013 14:29:06
+-- Generated from EDMX file: D:\Data\NIPPO\NIPPO\NIPPO_DB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -150,10 +150,10 @@ CREATE TABLE [dbo].[work_reports] (
     [FY] smallint  NOT NULL,
     [start_time] datetime  NULL,
     [end_time] datetime  NULL,
-    [work_times] smallint  NULL,
-    [overtime125] smallint  NULL,
-    [overtime150] smallint  NULL,
-    [holiday_work_times] smallint  NULL,
+    [work_times] float  NULL,
+    [overtime125] float  NULL,
+    [overtime150] float  NULL,
+    [holiday_work_times] float  NULL,
     [note] nvarchar(max)  NULL,
     [created_at] datetime  NULL,
     [created_by] nvarchar(max)  NULL,
@@ -161,6 +161,7 @@ CREATE TABLE [dbo].[work_reports] (
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] smallint  NULL,
     [deleted_by] nvarchar(max)  NULL,
+    [rest_time] float  NOT NULL,
     [users_ID] int  NULL
 );
 GO
@@ -168,7 +169,7 @@ GO
 -- Creating table 'work_detail'
 CREATE TABLE [dbo].[work_detail] (
     [ID] int IDENTITY(1,1) NOT NULL,
-    [times] time  NOT NULL,
+    [times] float  NOT NULL,
     [note] nvarchar(max)  NULL,
     [work_reports_ID] int  NULL,
     [projects_ID] int  NULL

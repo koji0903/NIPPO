@@ -11,8 +11,9 @@ namespace NIPPO
 {
     public partial class LoginWindow : Form
     {
-        public string userID;
-        private string userPW;
+        private string login;
+        private string pw;
+        public int id;
 
         public LoginWindow()
         {
@@ -27,10 +28,13 @@ namespace NIPPO
 
         private void login_button_Click(object sender, EventArgs e)
         {
-            userID = this.id_textbox.Text;
-            userPW = this.pw_textbox.Text;
+            login = this.id_textbox.Text;
+            pw    = this.pw_textbox.Text;
 
-            if (Login.login(userID, userPW) == true)
+            // login関数は、ログイン成功時ID (primary key)を返し、
+            // ログイン失敗時は負の整数を返す。
+            id    =Login.login(login, pw);
+            if ( id > 0 )
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
