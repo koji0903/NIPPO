@@ -22,6 +22,19 @@ namespace NIPPO_test
         }
 
         [Test]
+        public void ユーザID異常系のテスト()
+        {
+            // コンストラクタで落とす
+            MonthlyReport _mr = new MonthlyReport(2013, -1);
+            // 例外を出さずに返ること
+            Assert.AreEqual("不明なユーザ", _mr.getUserName());
+            // 例外を出さずに返ること
+            _mr.setMonth(12);
+            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual(1, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
+        }
+
+        [Test]
         public void カレンダーイヤー計算のテスト()
         {
             MonthlyReport _mr = new MonthlyReport(2013, 1);
@@ -93,13 +106,30 @@ namespace NIPPO_test
         }
 
         [Test]
-        public void とりあえずテスト()
+        public void DataSetがカレンダーになっているか()
+        {
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            _mr.setMonth(12);
+            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");            
+            Assert.AreEqual(1, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
+            Assert.AreEqual("日", _ds.Tables["MonthlyReport"].Rows[0]["week"]);
+            Assert.AreEqual(31, _ds.Tables["MonthlyReport"].Rows[30]["day"]);
+            Assert.AreEqual(31, _ds.Tables["MonthlyReport"].Rows.Count);
+            _mr.setMonth(2);
+            _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual(1, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
+            Assert.AreEqual("土", _ds.Tables["MonthlyReport"].Rows[0]["week"]);
+            Assert.AreEqual(28, _ds.Tables["MonthlyReport"].Rows[27]["day"]);
+            Assert.AreEqual(28, _ds.Tables["MonthlyReport"].Rows.Count);
+        }
+
+        [Test]
+        public void 正しい日付にセットされているか()
         {
             MonthlyReport _mr = new MonthlyReport(2013, 1);
             _mr.setMonth(12);
             DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
-            
-            Assert.AreEqual(1, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
+            Assert.AreEqual("通常勤務", _ds.Tables["MonthlyReport"].Rows[13]["note"]);
         }
     }
 }
