@@ -13,7 +13,7 @@ namespace NIPPO
         // 変数
         private int _FY; // 年度
         private int _month; // 月
-        private string _userID; // ユーザID
+        private int _userID; // ユーザID
         private DataSet _monthDs;
 
         /// <summary>
@@ -21,7 +21,7 @@ namespace NIPPO
         /// </summary>
         /// <param name="FY"></param>
         /// <param name="userID"></param>
-        public MonthlyReport(int FY, string userID)
+        public MonthlyReport(int FY, int userID)
         {
             _FY = FY;
             this._month = DateTime.Now.Month;
@@ -121,9 +121,10 @@ namespace NIPPO
 
         public string getUserName()
         {
-            string str = "";
+            string str = "不明なユーザ";
             DataSet ds = getUserNameOnStatusBarDs(this._userID);
-            if (ds.Tables["user"].Rows.Count > 0)
+            if (ds.Tables["user"] != null &&
+                ds.Tables["user"].Rows.Count > 0)
             {
                 str = ds.Tables["user"].Rows[0]["lastname"] + " "
                     + ds.Tables["user"].Rows[0]["firstname"] + "("
@@ -133,7 +134,7 @@ namespace NIPPO
             return str;
         }
 
-        public DataSet getUserNameOnStatusBarDs(string userID)
+        public DataSet getUserNameOnStatusBarDs(int userID)
         {
             SqlConnection connection = new SqlConnection();
             SqlCommand command = new SqlCommand();
@@ -149,14 +150,14 @@ namespace NIPPO
                     command.CommandText = @"SELECT lastname,firstname,name"
                         + " FROM users LEFT JOIN sections"
                         + " ON users.sections_ID = sections.ID"
-                        + " WHERE login='"
+                        + " WHERE users.ID='"
                         + userID + "';";
                     adapter.SelectCommand = command;
                     adapter.Fill(ds, "user");
                 }
                 catch (Exception ex)
                 {
-                    return null;
+                    return ds;
                 }
             }
             return ds;

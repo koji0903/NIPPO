@@ -39,7 +39,7 @@ namespace NIPPO
             }
             // ステータスバーにログイン名表示（とりあえずIDだけ。氏名の表示は後で。）
             // （shownイベントでやったほうがいいかも）
-            user_toolStripStatusLabel.Text = this.userID;
+            user_toolStripStatusLabel.Text = this.id.ToString();
         }
 
         private void コード発行_Click(object sender, EventArgs e)
@@ -51,7 +51,7 @@ namespace NIPPO
         {
             using (MonthlyReportWindow _form = new MonthlyReportWindow())
             {
-                _form.ShowDialog(_year, userID);
+                _form.ShowDialog(this._year, this.id);
             }
         }
 
@@ -59,13 +59,13 @@ namespace NIPPO
         {
             using (MonthlyReportWindow _form = new MonthlyReportWindow())
             {
-                _form.ShowDialog(_year, userID);
+                _form.ShowDialog(this._year, this.id);
             }
         }
 
         private void FY_numericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            _year = (int)FY_numericUpDown.Value;
+            this._year = (int)FY_numericUpDown.Value;
             // MessageBox.Show(_year.ToString()); // debug
         }
 

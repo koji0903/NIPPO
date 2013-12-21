@@ -13,7 +13,7 @@ namespace NIPPO
     {
         private MonthlyReport _mr;
         private int _FY;
-        private string _userID;
+        private int _userID;
 
         public MonthlyReportWindow()
         {
@@ -60,6 +60,7 @@ namespace NIPPO
         private void reloadWindow()
         {
             // ステータスバー表示
+            // (月を切り替えるごとにSQL問い合わせは無駄だが...)
             user_toolStripStatusLabel.Text = _mr.getUserName();
             // 表示する「年度/月」の作成と表示
             FYMonth_label.Text = _mr.getStringYearMonth();
@@ -94,7 +95,7 @@ namespace NIPPO
         /// <param name="FY">事業年度</param>
         /// <param name="userID">ユーザID</param>
         /// <returns></returns>
-        public DialogResult ShowDialog(int FY, string userID)
+        public DialogResult ShowDialog(int FY, int userID)
         {
             this._FY = FY;
             this._userID = userID;
@@ -138,7 +139,7 @@ namespace NIPPO
                 MessageBox.Show("DailyReportWindow.showDialog(" + _mr.getCalYear()
                     + "," + _mr.getMonth()
                     + "," + (index + 1)
-                    + "," + this._userID + ")");
+                    + "," + this._userID.ToString() + ")");
             }
         }
 

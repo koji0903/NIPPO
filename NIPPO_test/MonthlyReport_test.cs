@@ -17,14 +17,14 @@ namespace NIPPO_test
         public void コンストラクタのテスト()
         {
             // どうテストすればいいか不明。後で。
-            MonthlyReport _mr = new MonthlyReport(2013,"1");
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
             //Assert.
         }
 
         [Test]
         public void カレンダーイヤー計算のテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, "1");
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
             _mr.setMonth(4);
             Assert.AreEqual(2013, _mr.getCalYear());
             _mr.setMonth(12);
@@ -40,7 +40,7 @@ namespace NIPPO_test
         [Test]
         public void 年月の文字列生成のテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, "1");
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
             _mr.setMonth(4);
             Assert.AreEqual("2013年04月", _mr.getStringYearMonth());
             _mr.setMonth(11);
@@ -52,7 +52,7 @@ namespace NIPPO_test
         [Test]
         public void 月カウントアップのテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, "1");
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
             _mr.setMonth(11);
             _mr.incrMonth();
             Assert.AreEqual("2013年12月", _mr.getStringYearMonth());
@@ -67,7 +67,7 @@ namespace NIPPO_test
         [Test]
         public void 次の月があるかのテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, "1");
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
             _mr.setMonth(4);
             Assert.AreEqual(true, _mr.existsNextMonth());
             _mr.setMonth(12);
@@ -81,7 +81,7 @@ namespace NIPPO_test
         [Test]
         public void 前の月があるかのテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, "1");
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
             _mr.setMonth(3);
             Assert.AreEqual(true, _mr.existsPrevMonth());
             _mr.setMonth(1);
@@ -95,11 +95,11 @@ namespace NIPPO_test
         [Test]
         public void とりあえずテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, "1");
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
             _mr.setMonth(12);
             DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
             
-            Assert.AreEqual(true, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
+            Assert.AreEqual(1, _ds.Tables["MonthlyReport"].Rows[0]["day"]);
         }
     }
 }
