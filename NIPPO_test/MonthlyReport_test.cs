@@ -131,5 +131,63 @@ namespace NIPPO_test
             DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
             Assert.AreEqual("通常勤務", _ds.Tables["MonthlyReport"].Rows[13]["note"]);
         }
+
+        [Test]
+        public void 勤務合計時間のテスト()
+        {
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            // 正しい合計時間か
+            _mr.setMonth(12);
+            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual("27 h", _mr.getTotalTimeText());
+            // 合計が0
+            _mr.setMonth(9);
+            _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual("0 h", _mr.getTotalTimeText());
+            // 異常系：SQLから取れない場合
+            MonthlyReport _mr_err = new MonthlyReport(2013, -1);
+            _mr_err.setMonth(12);
+            _ds = _mr_err.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual("0 h", _mr.getTotalTimeText());
+        }
+
+        [Test]
+        public void 超過勤務合計時間のテスト()
+        {
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            // 正しい合計時間か
+            _mr.setMonth(12);
+            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual("5 h", _mr.getTotalOverTime125Text());
+            // 合計が0
+            _mr.setMonth(9);
+            _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual("0 h", _mr.getTotalOverTime125Text());
+            // 異常系：SQLから取れない場合
+            MonthlyReport _mr_err = new MonthlyReport(2013, -1);
+            _mr_err.setMonth(12);
+            _ds = _mr_err.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual("0 h", _mr.getTotalOverTime125Text());
+        }
+
+        [Test]
+        public void 深夜勤務合計時間のテスト()
+        {
+            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            // 正しい合計時間か
+            _mr.setMonth(12);
+            DataSet _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual("0 h", _mr.getTotalOverTime150Text());
+            // 合計が0
+            _mr.setMonth(9);
+            _ds = _mr.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual("0 h", _mr.getTotalOverTime150Text());
+            // 異常系：SQLから取れない場合
+            MonthlyReport _mr_err = new MonthlyReport(2013, -1);
+            _mr_err.setMonth(12);
+            _ds = _mr_err.getMonthlyWorkReport("MonthlyReport");
+            Assert.AreEqual("0 h", _mr.getTotalOverTime150Text());
+        }
+
     }
 }

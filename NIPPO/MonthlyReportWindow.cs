@@ -85,8 +85,9 @@ namespace NIPPO
                 this.Cursor = Cursors.Default;
             }
             // 合計時間の計算と、「集計」エリアへの表示
-            //this.totalTime_textBox.Text = 
-            //    _mr.getTotalTime("MonthlyReport");
+            this.totalTime_textBox.Text = _mr.getTotalTimeText();
+            this.totalOverTime125_textBox.Text = _mr.getTotalOverTime125Text();
+            this.totalOverTime150_textBox.Text = _mr.getTotalOverTime150Text();
         }
 
         /// <summary>

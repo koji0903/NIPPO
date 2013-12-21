@@ -155,7 +155,7 @@ namespace NIPPO
                     adapter.SelectCommand = command;
                     adapter.Fill(ds, "user");
                 }
-                catch (Exception ex)
+                catch
                 {
                     return ds;
                 }
@@ -186,7 +186,7 @@ namespace NIPPO
                     adapter.SelectCommand = command;
                     adapter.Fill(_ds_tmp, "MonthlyReport_tmp");
                 }
-                catch (Exception ex)
+                catch
                 {
                     return null;
                 }
@@ -225,12 +225,49 @@ namespace NIPPO
             this._monthDs.Tables.Add(_dt);
             return this._monthDs;
         }
+        public int getTotalTimeCommon(string columnName)
+        {
+            int sum = 0;
+            for (int i = 0; i < this._monthDs.Tables["MonthlyReport"].Rows.Count; i++)
+            {
+                object workTimes = this._monthDs.Tables["MonthlyReport"].Rows[i][columnName];
+                if (workTimes != null && workTimes.ToString() != "")
+                {
+                    sum += int.Parse(workTimes.ToString());
+                }
+            }
+            return sum;
+        }
 
+        public string getTotalTimeText()
+        {
+            return(this.getTotalTime().ToString() + " h");
+        }
 
-        //public int getTotalTime(string dataMember)
-        //{
-            
+        public int getTotalTime()
+        {
+            return(this.getTotalTimeCommon("work_times"));
+        }
 
-        //}
+        public string getTotalOverTime125Text()
+        {
+            return (this.getTotalOverTime125().ToString() + " h");
+        }
+
+        public int getTotalOverTime125()
+        {
+            return (this.getTotalTimeCommon("overtime125"));
+        }
+
+        public string getTotalOverTime150Text()
+        {
+            return (this.getTotalOverTime150().ToString() + " h");
+        }
+
+        public int getTotalOverTime150()
+        {
+            return (this.getTotalTimeCommon("overtime150"));
+        }
+
     }
 }
