@@ -8,7 +8,7 @@ using System.Data.SqlClient;
 
 namespace NIPPO
 {
-    class Main
+    public class Main
     {
         private int _userID; // ユーザID
 
@@ -21,13 +21,16 @@ namespace NIPPO
         {
             string str = "不明なユーザ";
             DataSet ds = getUserNameOnStatusBarDs(this._userID);
-            DataRowCollection aaa = ds.Tables["user"].Rows;
             if (ds.Tables["user"] != null &&
                 ds.Tables["user"].Rows.Count > 0)
             {
-                str = ds.Tables["user"].Rows[0]["lastname"] + " "
-                    + ds.Tables["user"].Rows[0]["firstname"] + "("
-                    + ds.Tables["user"].Rows[0]["name"] + ")";
+                string lastname = (ds.Tables["user"].Rows[0]["lastname"] != null)
+                    ? ds.Tables["user"].Rows[0]["lastname"].ToString() : "";
+                string firstname = (ds.Tables["user"].Rows[0]["firstname"] != null)
+                    ? ds.Tables["user"].Rows[0]["firstname"].ToString() : "";
+                string name = (ds.Tables["user"].Rows[0]["name"] != null)
+                    ? ds.Tables["user"].Rows[0]["name"].ToString() : "";
+                str = lastname + " " + firstname + "(" + name + ")";
             }
             return str;
         }
