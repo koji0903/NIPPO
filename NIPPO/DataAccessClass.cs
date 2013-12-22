@@ -86,22 +86,37 @@ namespace NIPPO
                     id = GetUsersID(userID);
                     work_report_id = GetWorkReportID(id, year, month, day);
                     // データ取得
-                    // 始めての登録
-                    if (work_report_id == 0)
+                    ds.Clear();
+                    command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times " +
+                         "FROM work_detail " +
+                         "INNER JOIN projects ON work_detail.projects_ID = projects.ID " +
+                         "INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID " +
+                         "WHERE work_detail.work_reports_ID = '" + work_report_id + "';";
+                    adapter.SelectCommand = command;
+                    adapter.Fill(ds, "WorkDetail");
+                    
+                    // 始めての登録時は空の5行を追加
+                    if (ds.Tables["WorkDetail"].Rows.Count == 0)
                     {
-                  　　　// 現在はGUI上にはナンの表も表示されない状態。初期値として空行を5行入れるケースであればここに初期値設定処理を追加する。
                         DataTable dt = ds.Tables["WorkDetail"];
+                        DataRow dr = dt.NewRow();
+                        dr["name"] = "";
+                        for (int i = 0; i < 5; i++)
+                        {
+                            dr = dt.NewRow();
+                            dt.Rows.Add(dr);
+                        }
                     }
-                    // 既存データ
-                    else
+                    else if (ds.Tables["WorkDetail"].Rows.Count < 5)
                     {
-                        command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times " +
-                             "FROM work_detail " +
-                             "INNER JOIN projects ON work_detail.projects_ID = projects.ID " +
-                             "INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID " +
-                             "WHERE work_detail.work_reports_ID = '" + work_report_id + "';";
-                        adapter.SelectCommand = command;
-                        adapter.Fill(ds, "WorkDetail");
+                        DataTable dt = ds.Tables["WorkDetail"];
+                        DataRow dr = dt.NewRow();
+                        dr["name"] = "";
+                        for (int i = 0; i < 6 - ds.Tables["WorkDetail"].Rows.Count; i++)
+                        {
+                            dr = dt.NewRow();
+                            dt.Rows.Add(dr);
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -169,6 +184,7 @@ namespace NIPPO
             }
             return 0;
         }
+
 
 
         // 追加 これがないとエラーになる（よく分からん）

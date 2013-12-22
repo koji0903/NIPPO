@@ -154,11 +154,17 @@ namespace NIPPO
         private void SerarchProject_Button_Click(object sender, EventArgs e)
         {
             // プロジェクトの選択を行うウィンドウを表示
+            int project_num = 10;
+            this.ProjectCode_Textbox.Text = "1234";
+            this.ProjectName_Textbox.Text = "テスト用プロジェクト";
         }
 
         private void SearchBusiness_Button_Click(object sender, EventArgs e)
         {
             // 業務選択を行うウィンドウを表示
+            int task_code = 10;
+            this.TaskCode_Textbox.Text = "5678";
+            this.TaskName_TextBox.Text = "テスト用業務";
         }
 
         private void WorkDetail_DateGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)

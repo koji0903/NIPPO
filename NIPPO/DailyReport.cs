@@ -276,7 +276,8 @@ namespace NIPPO
             }
             foreach (DataRow drCurrent in work_detail.Rows)
             {
-                if (drCurrent["times"] != null)
+                object tmp = drCurrent["times"];
+                if (tmp != null && tmp.GetType() == typeof(Double))
                 {
                     total_work_time += (double)drCurrent["times"];
                 }

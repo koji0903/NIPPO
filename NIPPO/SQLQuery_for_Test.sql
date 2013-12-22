@@ -88,6 +88,7 @@ INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VA
 INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES (2013,1,'プロジェクトA','false','false','false');
 INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES (2013,2,'プロジェクトB','false','false','false');
 INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES (2013,3,'プロジェクトC','false','false','false');
+INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES (2013,10,'登録テスト用プロジェクト','false','false','false');
 
 --
 -- tasks
@@ -95,15 +96,16 @@ INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES 
 INSERT INTO tasks (code, name, delete_flag ) VALUES (1, '事務処理', 'false' );
 INSERT INTO tasks (code, name, delete_flag ) VALUES (2, '開発', 'false' );
 INSERT INTO tasks (code, name, delete_flag ) VALUES (3, '報告', 'false' );
+INSERT INTO tasks (code, name, delete_flag ) VALUES (10, '登録テスト用タスク', 'false' );
 
 --
 -- customers
 --
-SET @d = (SELECT ID FROM projects WHERE name = 'やるっきゃないプロジェクト');
+SET @d = (SELECT ID FROM projects WHERE name = 'プロジェクトA');
 INSERT INTO customers (code,name,delete_flag,projects_ID) VALUES (0001,'田中薬品','false',@d);
-SET @d = (SELECT ID FROM projects WHERE name = 'WHYから考えよう');
+SET @d = (SELECT ID FROM projects WHERE name = 'プロジェクトB');
 INSERT INTO customers (code,name,delete_flag,projects_ID) VALUES (0002,'山田食品','false',@d);
-SET @d = (SELECT ID FROM projects WHERE name = 'やるっきゃないプロジェクト');
+SET @d = (SELECT ID FROM projects WHERE name = 'プロジェクトC');
 INSERT INTO customers (code,name,delete_flag,projects_ID) VALUES (0003,'佐藤銀行','false',@d);
 
 

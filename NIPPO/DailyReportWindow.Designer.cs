@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             this.WorkDetail_DateGridView = new System.Windows.Forms.DataGridView();
             this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -65,12 +65,12 @@
             this.WokTime_DomainUpDown = new System.Windows.Forms.DomainUpDown();
             this.SearchBusiness_Button = new System.Windows.Forms.Button();
             this.SerarchProject_Button = new System.Windows.Forms.Button();
-            this.BusinessName_TextBox = new System.Windows.Forms.TextBox();
-            this.BusinessCode_Textbox = new System.Windows.Forms.TextBox();
+            this.TaskName_TextBox = new System.Windows.Forms.TextBox();
+            this.TaskCode_Textbox = new System.Windows.Forms.TextBox();
             this.ProjectName_Textbox = new System.Windows.Forms.TextBox();
             this.ProjectCode_Textbox = new System.Windows.Forms.TextBox();
             this.Time_Label = new System.Windows.Forms.Label();
-            this.Business_Label = new System.Windows.Forms.Label();
+            this.Task_Label = new System.Windows.Forms.Label();
             this.Project_Label = new System.Windows.Forms.Label();
             this.Remark_Label = new System.Windows.Forms.Label();
             this.Remark_Textbox = new System.Windows.Forms.TextBox();
@@ -100,7 +100,7 @@
             this.WorkDetail_DateGridView.RowTemplate.Height = 21;
             this.WorkDetail_DateGridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.WorkDetail_DateGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.WorkDetail_DateGridView.Size = new System.Drawing.Size(780, 135);
+            this.WorkDetail_DateGridView.Size = new System.Drawing.Size(780, 127);
             this.WorkDetail_DateGridView.TabIndex = 0;
             this.WorkDetail_DateGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WorkDetail_DateGridView_CellContentClick);
             // 
@@ -138,10 +138,10 @@
             // time_TextBox
             // 
             this.time_TextBox.DataPropertyName = "times";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle4.Format = "N2";
+            dataGridViewCellStyle4.NullValue = null;
+            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle4;
             this.time_TextBox.HeaderText = "時間";
             this.time_TextBox.Name = "time_TextBox";
             this.time_TextBox.ReadOnly = true;
@@ -499,12 +499,12 @@
             this.workDetail_groupBox.Controls.Add(this.WokTime_DomainUpDown);
             this.workDetail_groupBox.Controls.Add(this.SearchBusiness_Button);
             this.workDetail_groupBox.Controls.Add(this.SerarchProject_Button);
-            this.workDetail_groupBox.Controls.Add(this.BusinessName_TextBox);
-            this.workDetail_groupBox.Controls.Add(this.BusinessCode_Textbox);
+            this.workDetail_groupBox.Controls.Add(this.TaskName_TextBox);
+            this.workDetail_groupBox.Controls.Add(this.TaskCode_Textbox);
             this.workDetail_groupBox.Controls.Add(this.ProjectName_Textbox);
             this.workDetail_groupBox.Controls.Add(this.ProjectCode_Textbox);
             this.workDetail_groupBox.Controls.Add(this.Time_Label);
-            this.workDetail_groupBox.Controls.Add(this.Business_Label);
+            this.workDetail_groupBox.Controls.Add(this.Task_Label);
             this.workDetail_groupBox.Controls.Add(this.Project_Label);
             this.workDetail_groupBox.Location = new System.Drawing.Point(34, 330);
             this.workDetail_groupBox.Name = "workDetail_groupBox";
@@ -671,21 +671,21 @@
             this.SerarchProject_Button.UseVisualStyleBackColor = true;
             this.SerarchProject_Button.Click += new System.EventHandler(this.SerarchProject_Button_Click);
             // 
-            // BusinessName_TextBox
+            // TaskName_TextBox
             // 
-            this.BusinessName_TextBox.Location = new System.Drawing.Point(207, 43);
-            this.BusinessName_TextBox.Name = "BusinessName_TextBox";
-            this.BusinessName_TextBox.ReadOnly = true;
-            this.BusinessName_TextBox.Size = new System.Drawing.Size(483, 19);
-            this.BusinessName_TextBox.TabIndex = 18;
+            this.TaskName_TextBox.Location = new System.Drawing.Point(207, 43);
+            this.TaskName_TextBox.Name = "TaskName_TextBox";
+            this.TaskName_TextBox.ReadOnly = true;
+            this.TaskName_TextBox.Size = new System.Drawing.Size(483, 19);
+            this.TaskName_TextBox.TabIndex = 18;
             // 
-            // BusinessCode_Textbox
+            // TaskCode_Textbox
             // 
-            this.BusinessCode_Textbox.Location = new System.Drawing.Point(101, 41);
-            this.BusinessCode_Textbox.Name = "BusinessCode_Textbox";
-            this.BusinessCode_Textbox.ReadOnly = true;
-            this.BusinessCode_Textbox.Size = new System.Drawing.Size(100, 19);
-            this.BusinessCode_Textbox.TabIndex = 17;
+            this.TaskCode_Textbox.Location = new System.Drawing.Point(101, 41);
+            this.TaskCode_Textbox.Name = "TaskCode_Textbox";
+            this.TaskCode_Textbox.ReadOnly = true;
+            this.TaskCode_Textbox.Size = new System.Drawing.Size(100, 19);
+            this.TaskCode_Textbox.TabIndex = 17;
             // 
             // ProjectName_Textbox
             // 
@@ -712,14 +712,14 @@
             this.Time_Label.TabIndex = 2;
             this.Time_Label.Text = "時間";
             // 
-            // Business_Label
+            // Task_Label
             // 
-            this.Business_Label.AutoSize = true;
-            this.Business_Label.Location = new System.Drawing.Point(66, 46);
-            this.Business_Label.Name = "Business_Label";
-            this.Business_Label.Size = new System.Drawing.Size(29, 12);
-            this.Business_Label.TabIndex = 1;
-            this.Business_Label.Text = "業務";
+            this.Task_Label.AutoSize = true;
+            this.Task_Label.Location = new System.Drawing.Point(66, 46);
+            this.Task_Label.Name = "Task_Label";
+            this.Task_Label.Size = new System.Drawing.Size(29, 12);
+            this.Task_Label.TabIndex = 1;
+            this.Task_Label.Text = "業務";
             // 
             // Project_Label
             // 
@@ -823,12 +823,12 @@
         private System.Windows.Forms.Label TotalWorkTime_Label;
         private System.Windows.Forms.TextBox TotalWorkTime_Textbox;
         private System.Windows.Forms.GroupBox workDetail_groupBox;
-        private System.Windows.Forms.TextBox BusinessName_TextBox;
-        private System.Windows.Forms.TextBox BusinessCode_Textbox;
+        private System.Windows.Forms.TextBox TaskName_TextBox;
+        private System.Windows.Forms.TextBox TaskCode_Textbox;
         private System.Windows.Forms.TextBox ProjectName_Textbox;
         private System.Windows.Forms.TextBox ProjectCode_Textbox;
         private System.Windows.Forms.Label Time_Label;
-        private System.Windows.Forms.Label Business_Label;
+        private System.Windows.Forms.Label Task_Label;
         private System.Windows.Forms.Label Project_Label;
         private System.Windows.Forms.TextBox Description_Textbox;
         private System.Windows.Forms.Label Description_Label;
