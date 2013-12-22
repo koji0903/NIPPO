@@ -13,6 +13,7 @@ namespace NIPPO
     {
         private int id;
         private int _year;
+        private Main _mo;
 
         public MainWindow()
         {
@@ -37,9 +38,8 @@ namespace NIPPO
                     this.Close();
                 }
             }
-            // ステータスバーにログイン名表示（とりあえずIDだけ。氏名の表示は後で。）
-            // （shownイベントでやったほうがいいかも）
-            user_toolStripStatusLabel.Text = this.id.ToString();
+            // ロジック部のオブジェクト生成
+            _mo = new Main(this.id);
         }
 
         private void コード発行_Click(object sender, EventArgs e)
@@ -72,6 +72,12 @@ namespace NIPPO
         private void exit_button_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Me_Shown(object sender, EventArgs e)
+        {
+            // ステータスバーにログイン名表示
+            user_toolStripStatusLabel.Text = _mo.getUserName();
         }
     }
 }

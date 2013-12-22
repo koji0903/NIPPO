@@ -229,6 +229,7 @@ namespace NIPPO
             this.Name = "MainWindow";
             this.Text = "日報管理メインメニュー";
             this.Load += new System.EventHandler(this.MainWindow_Load);
+            this.Shown += new System.EventHandler(this.Me_Shown);
             this.MainFunctionTab.ResumeLayout(false);
             this.Report_tab.ResumeLayout(false);
             this.View_tab.ResumeLayout(false);

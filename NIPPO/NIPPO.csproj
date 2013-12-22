@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess.cs" />
+    <Compile Include="Main.cs" />
     <Compile Include="testCalc.cs" />
     <Compile Include="Login.cs" />
     <Compile Include="LoginWindow.cs">
