@@ -11,8 +11,10 @@ namespace NIPPO
 {
     public partial class DailyReportWindow : Form
     {
-        private int year, month, day;
+        private int userID, year, month, day;
         private DataSet ds;
+        // 業務詳細に表示されているプロジェクト、業務のデータベースID
+        private int project_ID, task_ID;
 
         /// <summary>
         /// コンストラクタ
@@ -22,13 +24,17 @@ namespace NIPPO
         /// <param name="year"></param>
         /// <param name="month"></param>
         /// <param name="day"></param>
-        public DailyReportWindow(int fy, string user_name, int year, int month, int day )
+        public DailyReportWindow(int fy, int userID, int year, int month, int day )
         {
             InitializeComponent();
             DataSet ds = new DataSet();
+            this.userID = userID;
             this.year = year;
             this.month = month;
             this.day = day;
+
+            this.project_ID = 0;
+            this.task_ID = 0;
         }
 
         /// <summary>
@@ -38,26 +44,31 @@ namespace NIPPO
         /// <param name="e"></param>
         private void DailyReportWindow_Load(object sender, EventArgs e)
         {
-
+            // 年月日情報の表示
+            using (DailyReport daily = new DailyReport())
+            {
+                this.Calender_Label.Text = daily.GetDateStr(this.year, this.month, this.day);
+            }
+            // データベースへのアクセスはここで
+            using (DataAccessClass data_access = new DataAccessClass())
+            {
+                ds = data_access.GetWorkDetailDs("1", this.year, this.month, this.day);
+            }
         }
 
 
         private void DailyReportWindow_Shown(object sender, EventArgs e)
         {
+               // DataGridへの表示
+               this.WorkDetail_DateGridView.DataSource = ds;
+               if (ds.Tables.Count != 0)
+               {
+                   this.WorkDetail_DateGridView.DataMember = "WorkDetail";
+               }
+               // 作業合計時間の表示                    
             using (DailyReport daily = new DailyReport())
             {
-                // 年月日情報の表示
-                this.Calender_Label.Text = daily.GetDateStr(2013, 12, 13);
-                using (DataAccessClass data_access = new DataAccessClass())
-                {
-                    // DataGridへの表示
-                    ds = data_access.GetWorkDetailDs("1", 2013, 12, 19, 7.75);
-                    this.WorkDetail_DateGridView.DataSource = ds;
-                    this.WorkDetail_DateGridView.DataMember = "WorkDetail";
-
-                    // 作業合計時間の表示                    
-                    this.TotalWorkTime_Textbox.Text = daily.getTotalWorkTime(ds).ToString("F2") + "h";                     
-                }
+               this.TotalWorkTime_Textbox.Text = daily.getTotalWorkTime(ds).ToString("F2") + "h";                     
             }
         }
 
@@ -151,6 +162,26 @@ namespace NIPPO
         }
 
         private void WorkDetail_DateGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// GUI上の"X"ボタンをクリックした時のアクション（テーブル上の選択した行を削除する）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Delete_Button_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        /// <summary>
+        /// GUI上の"↑"ボタンをクリックした時のアクション（”業務詳細入力”に記載された情報をテーブルに追加する）
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Add_Button_Click(object sender, EventArgs e)
         {
 
         }

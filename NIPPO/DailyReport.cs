@@ -269,9 +269,17 @@ namespace NIPPO
             Double total_work_time;
             total_work_time = 0;
             DataTable work_detail = ds.Tables["WorkDetail"];
+            if (work_detail == null)
+            {
+                // 初期登録時は何も登録されていないので0を返す。
+                return 0;
+            }
             foreach (DataRow drCurrent in work_detail.Rows)
             {
-                total_work_time += (double)drCurrent["times"];
+                if (drCurrent["times"] != null)
+                {
+                    total_work_time += (double)drCurrent["times"];
+                }
             }
             return total_work_time;
         }

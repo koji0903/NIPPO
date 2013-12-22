@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.WorkDetail_DateGridView = new System.Windows.Forms.DataGridView();
             this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,6 +74,8 @@
             this.Project_Label = new System.Windows.Forms.Label();
             this.Remark_Label = new System.Windows.Forms.Label();
             this.Remark_Textbox = new System.Windows.Forms.TextBox();
+            this.Regist_Button = new System.Windows.Forms.Button();
+            this.Cancel_Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.WorkDetail_DateGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.workDetail_groupBox.SuspendLayout();
@@ -136,10 +138,10 @@
             // time_TextBox
             // 
             this.time_TextBox.DataPropertyName = "times";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle3;
             this.time_TextBox.HeaderText = "時間";
             this.time_TextBox.Name = "time_TextBox";
             this.time_TextBox.ReadOnly = true;
@@ -459,6 +461,7 @@
             this.Add_Button.TabIndex = 5;
             this.Add_Button.Text = "↑";
             this.Add_Button.UseVisualStyleBackColor = true;
+            this.Add_Button.Click += new System.EventHandler(this.Add_Button_Click);
             // 
             // Delete_Button
             // 
@@ -468,6 +471,7 @@
             this.Delete_Button.TabIndex = 6;
             this.Delete_Button.Text = "×";
             this.Delete_Button.UseVisualStyleBackColor = true;
+            this.Delete_Button.Click += new System.EventHandler(this.Delete_Button_Click);
             // 
             // TotalWorkTime_Label
             // 
@@ -742,11 +746,31 @@
             this.Remark_Textbox.Size = new System.Drawing.Size(738, 19);
             this.Remark_Textbox.TabIndex = 24;
             // 
+            // Regist_Button
+            // 
+            this.Regist_Button.Location = new System.Drawing.Point(658, 466);
+            this.Regist_Button.Name = "Regist_Button";
+            this.Regist_Button.Size = new System.Drawing.Size(75, 23);
+            this.Regist_Button.TabIndex = 25;
+            this.Regist_Button.Text = "登録";
+            this.Regist_Button.UseVisualStyleBackColor = true;
+            // 
+            // Cancel_Button
+            // 
+            this.Cancel_Button.Location = new System.Drawing.Point(739, 465);
+            this.Cancel_Button.Name = "Cancel_Button";
+            this.Cancel_Button.Size = new System.Drawing.Size(75, 23);
+            this.Cancel_Button.TabIndex = 26;
+            this.Cancel_Button.Text = "キャンセル";
+            this.Cancel_Button.UseVisualStyleBackColor = true;
+            // 
             // DailyReportWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(845, 476);
+            this.ClientSize = new System.Drawing.Size(844, 501);
+            this.Controls.Add(this.Cancel_Button);
+            this.Controls.Add(this.Regist_Button);
             this.Controls.Add(this.Remark_Textbox);
             this.Controls.Add(this.Remark_Label);
             this.Controls.Add(this.workDetail_groupBox);
@@ -818,5 +842,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn task_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn note_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn time_TextBox;
+        private System.Windows.Forms.Button Regist_Button;
+        private System.Windows.Forms.Button Cancel_Button;
     }
 }

@@ -11,6 +11,12 @@ namespace NIPPO
 {
     class DataAccessClass : IDisposable
     {
+        /// <summary>
+        /// データベースアクセス用の基本メソッド
+        /// - 接続設定、オープン、データ取得、クローズ処理を行う
+        /// </summary>
+        /// <param name="str">SQL実行コマンド文字列</param>
+        /// <returns>データセット</returns>
         internal static DataSet ReadData(string str)
         {
             SqlConnection connection = new SqlConnection();
@@ -44,7 +50,7 @@ namespace NIPPO
         }
 
         /// <summary>
-        /// SqlCommandを作る関すう
+        /// SqlCommandを作る関数
         /// </summary>
         /// <returns></returns>
         internal SqlCommand ConnectDB()
@@ -63,14 +69,13 @@ namespace NIPPO
         /// <param name="year"></param>
         /// <param name="month"></param>
         /// <param name="day"></param>
-        /// <param name="work_time"></param>
         /// <returns></returns>
-        internal DataSet GetWorkDetailDs(String userID, int year, int month, int day, Double work_time)
+        internal DataSet GetWorkDetailDs(String userID, int year, int month, int day)
         {
             // データ保存用のDateSet作成
             DataSet ds = new DataSet();
 
-            int id;
+            int id, work_report_id;
 
             using (SqlDataAdapter adapter = new SqlDataAdapter())
             {
@@ -79,13 +84,25 @@ namespace NIPPO
                     SqlCommand command = new SqlCommand();
                     command = ConnectDB();
                     id = GetUsersID(userID);
+                    work_report_id = GetWorkReportID(id, year, month, day);
                     // データ取得
-                    command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times " +
-                         "FROM work_detail " +
-                         "INNER JOIN projects ON work_detail.projects_ID = projects.ID " +
-                         "INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID";
-                    adapter.SelectCommand = command;
-                    adapter.Fill(ds, "WorkDetail");
+                    // 始めての登録
+                    if (work_report_id == 0)
+                    {
+                  　　　// 現在はGUI上にはナンの表も表示されない状態。初期値として空行を5行入れるケースであればここに初期値設定処理を追加する。
+                        DataTable dt = ds.Tables["WorkDetail"];
+                    }
+                    // 既存データ
+                    else
+                    {
+                        command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times " +
+                             "FROM work_detail " +
+                             "INNER JOIN projects ON work_detail.projects_ID = projects.ID " +
+                             "INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID " +
+                             "WHERE work_detail.work_reports_ID = '" + work_report_id + "';";
+                        adapter.SelectCommand = command;
+                        adapter.Fill(ds, "WorkDetail");
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -102,23 +119,57 @@ namespace NIPPO
         /// <returns></returns>
         internal int GetUsersID(String login)
         {
-            using (SqlDataAdapter adapter = new SqlDataAdapter())
+            DataSet ds = new DataSet();
+            string SqlCommand = "SELECT ID,password FROM users WHERE login='" + login + "';";
+            try
             {
-                try
-                {
-                    DataSet ds = new DataSet();
-                    string SqlCommand = "SELECT ID,password FROM users WHERE login='" + login + "';";
-                    ds = ReadData(SqlCommand);
-                    return (int)ds.Tables[0].Rows[0]["ID"];
-                }
-                catch( Exception ex )
-                {
-                    // usersテーブルにloginが指定されなかった場合（Loginウィンドウでチェックされているのでこのケースはないはず）
-                    MessageBox.Show(ex.Message);
-                }
+                ds = ReadData(SqlCommand);
+                return (int)ds.Tables[0].Rows[0]["ID"];
+            }
+            catch( Exception ex )
+            {
+                // usersテーブルにloginが指定されなかった場合（Loginウィンドウでチェックされているのでこのケースはないはず）
+                MessageBox.Show(ex.Message);
             }
             return 0;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userID"></param>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        internal int GetWorkReportID(int userID, int year, int month, int day)
+        {
+            DataSet ds = new DataSet();
+            string SqlCommand = "SELECT ID FROM work_reports WHERE users_ID = '" + 
+                userID + "' AND year = '" + 
+                year +"' AND month = '" + 
+                month + "' AND day = '" + 
+                day + "';";
+            try
+            {
+                ds = ReadData(SqlCommand);
+                if ( ds.Tables[0].Rows.Count == 0)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return (int)ds.Tables[0].Rows[0]["ID"];
+                }
+            }
+            catch (Exception ex)
+            {
+                // usersテーブルにloginが指定されなかった場合（Loginウィンドウでチェックされているのでこのケースはないはず）
+                MessageBox.Show(ex.Message);
+            }
+            return 0;
+        }
+
 
         // 追加 これがないとエラーになる（よく分からん）
         #region IDisposable メンバー
