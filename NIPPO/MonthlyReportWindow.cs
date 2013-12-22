@@ -144,6 +144,11 @@ namespace NIPPO
             }
         }
 
+        private void outputExcel_button_Click(object sender, EventArgs e)
+        {
+            _mr.outputExcel();
+        }
+
 
     }
 }

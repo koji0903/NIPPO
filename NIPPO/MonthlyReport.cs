@@ -5,6 +5,11 @@ using System.Text;
 //
 using System.Data;
 using System.Data.SqlClient;
+//
+using Microsoft.Office.Core;
+using Microsoft.Office.Interop.Excel;
+using System.Runtime.InteropServices;
+using System.Reflection;
 
 namespace NIPPO
 {
@@ -204,7 +209,7 @@ namespace NIPPO
             // データテーブル作成
             //DataTable _dt = new DataTable(dataMember);
             // カラムをコピーするやり方
-            DataTable _dt = _ds_tmp.Tables["MonthlyReport_tmp"].Copy();
+            System.Data.DataTable _dt = _ds_tmp.Tables["MonthlyReport_tmp"].Copy();
             _dt.TableName = this.listTableName;
             _dt.Rows.Clear();
             // 1～31までの配列に格納する
@@ -279,5 +284,120 @@ namespace NIPPO
             return (this.getTotalTimeCommon("overtime150"));
         }
 
+        public void outputExcel()
+        {
+            //string excelTempletePath = @"C:\Users\m-sakura\Documents\Visual Studio 2010\Projects\NIPPO\Data\monthlyReport.xlsx";
+            string excelTempletePath = @"..\..\..\Data\monthlyReport.xlsx";
+            int _sheetNo = 1;                        // シートNo.
+            int _col = 2;                            // データ書き込みカラム
+            int _line = 2;                           // データ書き込み開始行
+            Microsoft.Office.Interop.Excel.Application oXls = null;
+            Microsoft.Office.Interop.Excel.Workbooks oBooks = null;
+            Microsoft.Office.Interop.Excel.Workbook oWBook = null;
+            Microsoft.Office.Interop.Excel.Sheets oSheets;
+            Microsoft.Office.Interop.Excel.Worksheet oSheet = null;
+            Microsoft.Office.Interop.Excel.Range oRange = null;
+            object objCell = null;
+
+            try
+            {
+                // EXCEL開始処理
+                try
+                {
+                    oXls = new Microsoft.Office.Interop.Excel.Application();
+                }
+                catch
+                {
+                    throw new Exception(
+                        "Microsoft Office Excelがインストールされていないため\n" +
+                        "印刷できません。");
+                }
+
+                if (System.IO.File.Exists(excelTempletePath) == false)
+                {
+                    throw new Exception(
+                        "エクセルファイルが見つかりませんでした。\n" + excelTempletePath);
+                }
+
+                //oXls.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMinimized;
+                //oXls.Visible = false;
+                oXls.Visible = true;
+                //oXls.DisplayAlerts = false;
+                oXls.DisplayAlerts = true;
+
+                oBooks = oXls.Workbooks;
+                oWBook = oBooks.Open(excelTempletePath,
+                    Type.Missing, Type.Missing, Type.Missing, 
+                    Type.Missing, Type.Missing, Type.Missing, 
+                    Type.Missing, Type.Missing, Type.Missing, 
+                    Type.Missing, Type.Missing, Type.Missing, 
+                    Type.Missing, Type.Missing);
+
+                oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWBook.Sheets[_sheetNo];
+
+                //oSheets = (Microsoft.Office.Interop.Excel.Sheets)oWBook.Worksheets;
+                //oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oSheets.get_Item(1);
+
+                objCell = oSheet.Cells[_line + 0, _col];
+                oRange = oSheet.get_Range(objCell, objCell);
+                oRange.Value2 = "100";
+                Marshal.ReleaseComObject(oRange); 
+                Marshal.ReleaseComObject(objCell);
+
+                objCell = oSheet.Cells[_line + 1, _col];
+                oRange = oSheet.get_Range(objCell, objCell);
+                oRange.Value2 = "200";
+                Marshal.ReleaseComObject(oRange); 
+                Marshal.ReleaseComObject(objCell);
+
+                // ファイル保存
+                Microsoft.Office.Core.FileDialog foDlg;
+                foDlg = oXls.get_FileDialog(
+                    Microsoft.Office.Core.MsoFileDialogType.msoFileDialogSaveAs);
+                foDlg.InitialFileName = "test.xlsx";
+                if (foDlg.Show() != 0)
+                {
+                    foDlg.Execute();
+                }
+            }
+            catch (COMException ex)
+            {
+                Console.WriteLine("A COM error occurred: 0x{0} {1}",
+                    ex.ErrorCode.ToString("x"),
+                    ex.Message);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                // EXCEL終了処理
+                if (oSheet != null)
+                {
+                    Marshal.ReleaseComObject(oSheet);     // オブジェクト参照を解放
+                    oSheet = null;                        // オブジェクト解放
+                }
+                if (oWBook != null)
+                {
+                    oWBook.Close(false,
+                        Type.Missing, Type.Missing);       //ファイルを閉じる
+                    Marshal.ReleaseComObject(oWBook);      // オブジェクト参照を解放
+                    oWBook = null;                         // オブジェクト解放
+                }
+                if (oBooks != null)
+                {
+                    Marshal.ReleaseComObject(oBooks);     // オブジェクト参照を解放
+                    oBooks = null;                        // オブジェクト解放
+                }
+                if (oXls != null)
+                {
+                    oXls.Quit();                            // EXCELを閉じる
+                    Marshal.ReleaseComObject(oXls);
+                    oXls = null;                            // オブジェクト解放
+                }
+                System.GC.Collect();                            // オブジェクトを確実に削除
+            }
+        }
     }
 }
