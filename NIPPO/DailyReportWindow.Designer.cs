@@ -28,13 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.WorkDetail_DateGridView = new System.Windows.Forms.DataGridView();
-            this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.task_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.note_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Calender_Label = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NightOverTime_Textbox = new System.Windows.Forms.TextBox();
@@ -76,6 +71,13 @@
             this.Remark_Textbox = new System.Windows.Forms.TextBox();
             this.Regist_Button = new System.Windows.Forms.Button();
             this.Cancel_Button = new System.Windows.Forms.Button();
+            this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.task_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.projectID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taskID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.WorkDetail_DateGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.workDetail_groupBox.SuspendLayout();
@@ -92,7 +94,9 @@
             this.name,
             this.task_TextBox,
             this.note_TextBox,
-            this.time_TextBox});
+            this.time_TextBox,
+            this.projectID_TextBox,
+            this.taskID_TextBox});
             this.WorkDetail_DateGridView.Location = new System.Drawing.Point(34, 146);
             this.WorkDetail_DateGridView.Name = "WorkDetail_DateGridView";
             this.WorkDetail_DateGridView.ReadOnly = true;
@@ -103,49 +107,6 @@
             this.WorkDetail_DateGridView.Size = new System.Drawing.Size(780, 127);
             this.WorkDetail_DateGridView.TabIndex = 0;
             this.WorkDetail_DateGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WorkDetail_DateGridView_CellContentClick);
-            // 
-            // ID_TextBox
-            // 
-            this.ID_TextBox.HeaderText = "ID";
-            this.ID_TextBox.Name = "ID_TextBox";
-            this.ID_TextBox.ReadOnly = true;
-            this.ID_TextBox.Visible = false;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "プロジェクト名";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 200;
-            // 
-            // task_TextBox
-            // 
-            this.task_TextBox.DataPropertyName = "name1";
-            this.task_TextBox.HeaderText = "業務名";
-            this.task_TextBox.Name = "task_TextBox";
-            this.task_TextBox.ReadOnly = true;
-            this.task_TextBox.Width = 300;
-            // 
-            // note_TextBox
-            // 
-            this.note_TextBox.DataPropertyName = "note";
-            this.note_TextBox.HeaderText = "備考";
-            this.note_TextBox.Name = "note_TextBox";
-            this.note_TextBox.ReadOnly = true;
-            this.note_TextBox.Width = 200;
-            // 
-            // time_TextBox
-            // 
-            this.time_TextBox.DataPropertyName = "times";
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle4.Format = "N2";
-            dataGridViewCellStyle4.NullValue = null;
-            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle4;
-            this.time_TextBox.HeaderText = "時間";
-            this.time_TextBox.Name = "time_TextBox";
-            this.time_TextBox.ReadOnly = true;
-            this.time_TextBox.Width = 80;
             // 
             // Calender_Label
             // 
@@ -764,11 +725,71 @@
             this.Cancel_Button.Text = "キャンセル";
             this.Cancel_Button.UseVisualStyleBackColor = true;
             // 
+            // ID_TextBox
+            // 
+            this.ID_TextBox.DataPropertyName = "ID";
+            this.ID_TextBox.HeaderText = "ID";
+            this.ID_TextBox.Name = "ID_TextBox";
+            this.ID_TextBox.ReadOnly = true;
+            this.ID_TextBox.Visible = false;
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "プロジェクト名";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 200;
+            // 
+            // task_TextBox
+            // 
+            this.task_TextBox.DataPropertyName = "name1";
+            this.task_TextBox.HeaderText = "業務名";
+            this.task_TextBox.Name = "task_TextBox";
+            this.task_TextBox.ReadOnly = true;
+            this.task_TextBox.Width = 300;
+            // 
+            // note_TextBox
+            // 
+            this.note_TextBox.DataPropertyName = "note";
+            this.note_TextBox.HeaderText = "備考";
+            this.note_TextBox.Name = "note_TextBox";
+            this.note_TextBox.ReadOnly = true;
+            this.note_TextBox.Width = 200;
+            // 
+            // time_TextBox
+            // 
+            this.time_TextBox.DataPropertyName = "times";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle1;
+            this.time_TextBox.HeaderText = "時間";
+            this.time_TextBox.Name = "time_TextBox";
+            this.time_TextBox.ReadOnly = true;
+            this.time_TextBox.Width = 80;
+            // 
+            // projectID_TextBox
+            // 
+            this.projectID_TextBox.DataPropertyName = "ID1";
+            this.projectID_TextBox.HeaderText = "プロジェクトID";
+            this.projectID_TextBox.Name = "projectID_TextBox";
+            this.projectID_TextBox.ReadOnly = true;
+            this.projectID_TextBox.Visible = false;
+            // 
+            // taskID_TextBox
+            // 
+            this.taskID_TextBox.DataPropertyName = "ID2";
+            this.taskID_TextBox.HeaderText = "タスクID";
+            this.taskID_TextBox.Name = "taskID_TextBox";
+            this.taskID_TextBox.ReadOnly = true;
+            this.taskID_TextBox.Visible = false;
+            // 
             // DailyReportWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(844, 501);
+            this.ClientSize = new System.Drawing.Size(830, 504);
             this.Controls.Add(this.Cancel_Button);
             this.Controls.Add(this.Regist_Button);
             this.Controls.Add(this.Remark_Textbox);
@@ -837,12 +858,14 @@
         private System.Windows.Forms.Button SerarchProject_Button;
         private System.Windows.Forms.Label Remark_Label;
         private System.Windows.Forms.TextBox Remark_Textbox;
+        private System.Windows.Forms.Button Regist_Button;
+        private System.Windows.Forms.Button Cancel_Button;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn name;
         private System.Windows.Forms.DataGridViewTextBoxColumn task_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn note_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn time_TextBox;
-        private System.Windows.Forms.Button Regist_Button;
-        private System.Windows.Forms.Button Cancel_Button;
+        private System.Windows.Forms.DataGridViewTextBoxColumn projectID_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn taskID_TextBox;
     }
 }

@@ -285,6 +285,32 @@ namespace NIPPO
             return total_work_time;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <param name="delete_num"></param>
+        /// <returns></returns>
+        public DataSet deleteRow(DataSet ds, int delete_num )
+        {
+            int j = 0;
+            for (int i = 0; i < ds.Tables["WorkDetail"].Rows.Count; i++)
+            {
+                // Deletedフラグが立っていない列をサーチ。立っているものは既に削除済みであるのでカウントスキップ
+                if (ds.Tables["WorkDetail"].Rows[i].RowState != DataRowState.Deleted)
+                {
+                    // 削除されていない
+                    if (delete_num == j)
+                    {
+                        // データ削除（実際はデータが消えるのではなくて、Deletedフラグがセットされる）
+                        ds.Tables["WorkDetail"].Rows[i].Delete();
+                        return ds;
+                    }
+                    j++;
+                }
+            }
+            return ds;
+        }
 
         // IDisposable対応（ガベージコレクション対策みたい）
         #region IDisposable メンバー

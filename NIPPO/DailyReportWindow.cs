@@ -15,6 +15,7 @@ namespace NIPPO
         private DataSet ds;
         // 業務詳細に表示されているプロジェクト、業務のデータベースID
         private int project_ID, task_ID;
+        private DailyReport daily;
 
         /// <summary>
         /// コンストラクタ
@@ -180,20 +181,9 @@ namespace NIPPO
         private void Delete_Button_Click(object sender, EventArgs e)
         {
             // カーソル行の行ナンバーを取得
-            int row_num = WorkDetail_DateGridView.CurrentCell.RowIndex;
-            int j = 0;
-            for (int i = 0; i < ds.Tables["WorkDetail"].Rows.Count; i++)
+            using (DailyReport daily = new DailyReport())
             {
-                if (ds.Tables["WorkDetail"].Rows[i].RowState != DataRowState.Deleted)
-                {
-                    // 削除されていない
-                    if (row_num == j)
-                    {
-                        ds.Tables["WorkDetail"].Rows[i].Delete();
-                        break;
-                    }
-                    j++;
-                }
+                ds = daily.deleteRow(ds, WorkDetail_DateGridView.CurrentCell.RowIndex);
             }
         }
 

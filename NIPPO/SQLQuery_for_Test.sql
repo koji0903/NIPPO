@@ -152,7 +152,7 @@ INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES
 SET @d = (SELECT ID FROM users WHERE login = '1'); 
 SET @work_report_id = (SELECT ID FROM work_reports WHERE users_ID = @d AND year = '2013' AND month = '12' AND day = '14');
 
-SELECT work_detail.work_reports_ID, projects.name, tasks.name, work_detail.note, work_detail.times
+SELECT work_detail.work_reports_ID, projects.name, tasks.name, work_detail.note, work_detail.times, projects.ID, tasks.ID
 FROM work_detail INNER JOIN projects 
 ON work_detail.projects_ID = projects.ID INNER JOIN tasks 
 ON work_detail.tasks_ID = tasks.ID
