@@ -179,7 +179,22 @@ namespace NIPPO
         /// <param name="e"></param>
         private void Delete_Button_Click(object sender, EventArgs e)
         {
-
+            // カーソル行の行ナンバーを取得
+            int row_num = WorkDetail_DateGridView.CurrentCell.RowIndex;
+            int j = 0;
+            for (int i = 0; i < ds.Tables["WorkDetail"].Rows.Count; i++)
+            {
+                if (ds.Tables["WorkDetail"].Rows[i].RowState != DataRowState.Deleted)
+                {
+                    // 削除されていない
+                    if (row_num == j)
+                    {
+                        ds.Tables["WorkDetail"].Rows[i].Delete();
+                        break;
+                    }
+                    j++;
+                }
+            }
         }
 
         /// <summary>
@@ -189,7 +204,7 @@ namespace NIPPO
         /// <param name="e"></param>
         private void Add_Button_Click(object sender, EventArgs e)
         {
-            // 業務詳細の枠から必要な情報を修得
+            // 業務詳細の枠から必要な情報を取得して、データセットを更新
             DataTable dt = ds.Tables["WorkDetail"];
             DataRow dr = dt.NewRow();
             dr["name"] = this.ProjectName_Textbox.Text;
