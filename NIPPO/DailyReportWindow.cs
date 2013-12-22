@@ -189,7 +189,14 @@ namespace NIPPO
         /// <param name="e"></param>
         private void Add_Button_Click(object sender, EventArgs e)
         {
-
+            // 業務詳細の枠から必要な情報を修得
+            DataTable dt = ds.Tables["WorkDetail"];
+            DataRow dr = dt.NewRow();
+            dr["name"] = this.ProjectName_Textbox.Text;
+            dr["name1"] = this.TaskName_TextBox.Text;
+            dr["note"] = this.Description_Textbox.Text;
+            dr["times"] = this.WokTime_DomainUpDown.Text;
+            dt.Rows.Add(dr);
         }
 
 

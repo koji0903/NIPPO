@@ -94,7 +94,7 @@ namespace NIPPO
                          "WHERE work_detail.work_reports_ID = '" + work_report_id + "';";
                     adapter.SelectCommand = command;
                     adapter.Fill(ds, "WorkDetail");
-                    
+/*                    
                     // 始めての登録時は空の5行を追加
                     if (ds.Tables["WorkDetail"].Rows.Count == 0)
                     {
@@ -118,6 +118,7 @@ namespace NIPPO
                             dt.Rows.Add(dr);
                         }
                     }
+ */
                 }
                 catch (Exception ex)
                 {
