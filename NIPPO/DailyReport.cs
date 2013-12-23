@@ -348,6 +348,28 @@ namespace NIPPO
             return true;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="t1"></param>
+        /// <param name="t2"></param>
+        /// <returns></returns>
+        public String timeCompare(double t1, double t2)
+        {
+            String message = "";
+            if (t1 == t2)
+            {
+                return message;
+            }
+            else if (t1 > t2)
+            {
+                return "作業時間の割り当てが不足しています";
+            }
+            else
+            {
+                return "作業時間が勤務時間を超えています";
+            }
+        }
 
         // IDisposable対応（ガベージコレクション対策みたい）
         #region IDisposable メンバー

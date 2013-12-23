@@ -17,6 +17,7 @@ namespace NIPPO
         // 業務詳細に表示されているプロジェクト、業務のデータベースID
         private int work_report_ID,project_ID, task_ID;
         private DailyReport daily;
+        private double work_time, regist_time;
 
         /// <summary>
         /// コンストラクタ
@@ -38,6 +39,11 @@ namespace NIPPO
             this.project_ID = 0;
             this.task_ID = 0;
             this.login = "1";
+
+            // 勤務時間（比較用）
+            this.work_time = 0.0;
+            // 作業登録時間（比較用）
+            this.regist_time = 0.0;
         }
 
         /// <summary>
@@ -64,16 +70,17 @@ namespace NIPPO
 
         private void DailyReportWindow_Shown(object sender, EventArgs e)
         {
-               // DataGridへの表示
-               this.WorkDetail_DateGridView.DataSource = ds;
-               if (ds.Tables.Count != 0)
-               {
-                   this.WorkDetail_DateGridView.DataMember = "WorkDetail";
-               }
-               // 作業合計時間の表示                    
+            // DataGridへの表示
+            this.WorkDetail_DateGridView.DataSource = ds;
+            if (ds.Tables.Count != 0)
+            {
+                this.WorkDetail_DateGridView.DataMember = "WorkDetail";
+            }
+            // 作業合計時間の表示                    
             using (DailyReport daily = new DailyReport())
             {
-               this.TotalWorkTime_Textbox.Text = daily.getTotalWorkTime(ds).ToString("F2") + "h";                     
+                this.regist_time = daily.getTotalWorkTime(ds);
+                this.TotalWorkTime_Textbox.Text = this.regist_time.ToString("F2") + "h";                     
             }
         }
 
@@ -147,8 +154,7 @@ namespace NIPPO
 
             }
             // Textフィールドに値を表示
-            double tmp;
-            tmp = time[0];
+            this.work_time = time[0];
             this.WorkTime_Textbox.Text = time[0].ToString("F2") + "h";
             this.RestTime_Textbox.Text = time[1].ToString("F2") + "h";
             this.NormalOverTime_Textbox.Text = time[2].ToString("F2") + "h";
@@ -254,7 +260,30 @@ namespace NIPPO
         /// <param name="e"></param>
         private void Regist_Button_Click(object sender, EventArgs e)
         {
-            // データベースへのアクセスはここで
+            // 勤務時間と、作業割り当て時間の割り振りチェック
+            // データベースへの更新作業
+            using (DailyReport daily = new DailyReport())
+            {
+                String ret = daily.timeCompare(this.work_time, this.regist_time);
+                if (ret != "")
+                {
+                    DialogResult res = MessageBox.Show(
+                      　ret,
+                        "メッセージ",
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button2);
+                    //何が選択されたか調べる
+                    if (res == DialogResult.Cancel)
+                    {
+                        return;
+                    }
+
+                }
+
+            }
+
+            // データベースへの更新作業
             using (DataAccessClass data_access = new DataAccessClass())
             {
                 data_access.Update(ds, "WorkDetail");
