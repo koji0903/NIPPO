@@ -11,6 +11,7 @@ USE [nippo_db];
 DELETE FROM work_detail;
 DELETE FROM customers;
 DELETE FROM projects;
+DELETE FROM tasks;
 DELETE FROM work_reports;
 DELETE FROM users;
 DELETE FROM sections;
@@ -84,17 +85,27 @@ INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VA
 --
 -- projects
 --
-INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES (2013,1,'やるっきゃないプロジェクト','false','false','false');
-INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES (2013,2,'WHYから考えよう','false','false','false');
+INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES (2013,1,'プロジェクトA','false','false','false');
+INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES (2013,2,'プロジェクトB','false','false','false');
+INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES (2013,3,'プロジェクトC','false','false','false');
+INSERT INTO projects (FY,num,name,delete_flag,share_flag,tentative_flag) VALUES (2013,10,'登録テスト用プロジェクト','false','false','false');
+
+--
+-- tasks
+--
+INSERT INTO tasks (code, name, delete_flag ) VALUES (1, '事務処理', 'false' );
+INSERT INTO tasks (code, name, delete_flag ) VALUES (2, '開発', 'false' );
+INSERT INTO tasks (code, name, delete_flag ) VALUES (3, '報告', 'false' );
+INSERT INTO tasks (code, name, delete_flag ) VALUES (10, '登録テスト用タスク', 'false' );
 
 --
 -- customers
 --
-SET @d = (SELECT ID FROM projects WHERE name = 'やるっきゃないプロジェクト');
+SET @d = (SELECT ID FROM projects WHERE name = 'プロジェクトA');
 INSERT INTO customers (code,name,delete_flag,projects_ID) VALUES (0001,'田中薬品','false',@d);
-SET @d = (SELECT ID FROM projects WHERE name = 'WHYから考えよう');
+SET @d = (SELECT ID FROM projects WHERE name = 'プロジェクトB');
 INSERT INTO customers (code,name,delete_flag,projects_ID) VALUES (0002,'山田食品','false',@d);
-SET @d = (SELECT ID FROM projects WHERE name = 'やるっきゃないプロジェクト');
+SET @d = (SELECT ID FROM projects WHERE name = 'プロジェクトC');
 INSERT INTO customers (code,name,delete_flag,projects_ID) VALUES (0003,'佐藤銀行','false',@d);
 
 
@@ -104,6 +115,8 @@ INSERT INTO customers (code,name,delete_flag,projects_ID) VALUES (0003,'佐藤銀行
 --
 SET @d = (SELECT ID FROM users WHERE login = '1');
 INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,note) VALUES (@d,2013,12,14,2013,'2013-12-14 8:45:00','2013-12-14 17:30:00','通常勤務');
+INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,note) VALUES (@d,2013,12,15,2013,'2013-12-15 8:45:00','2013-12-14 17:30:00','通常勤務');
+--INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,note) VALUES (@d,2013,12,16,2013,'2013-12-16 8:45:00','2013-12-14 17:30:00','通常勤務');
 
 SET @d = (SELECT ID FROM users WHERE login = '2');
 INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,note) VALUES (@d,2013,12,14,2013,'2013-12-14 8:45:00','2013-12-14 17:30:00','通常勤務');
@@ -114,38 +127,61 @@ INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,note) V
 --
 -- work_detail　（特殊扱い）
 --
-SET @d = (SELECT ID FROM users WHERE login = '1'); -- USERIDを選んで
-SET @d = (SELECT ID FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
-SET @e = (SELECT ID FROM projects WHERE num = '1');
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','報告書作成',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','会議',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','開発',@d,@e);
+DECLARE @work_report_id INT;
+DECLARE @project_id INT;
+DECLARE @task_id INT;
+--DECLARE @ids INT(100);
 
-SET @d = (SELECT ID FROM users WHERE login = '2'); -- USERIDを選んで
-SET @d = (SELECT ID FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
-SET @e = (SELECT ID FROM projects WHERE num = '2');
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','仕様検討',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','コーディング',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','テスト',@d,@e);
+-- ターゲットのUser ID＋年月日
+SET @d = (SELECT ID FROM users WHERE login = '1'); 
+-- そのユーザに該当するワークレポートを抽出
+--SET @ids = (SELECT ID, users_ID,note FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
 
-SET @d = (SELECT ID FROM users WHERE login = '3'); -- USERIDを選んで
-SET @d = (SELECT ID FROM work_reports WHERE users_ID = @d); -- そのUSERIDから一つをピックアップ（本来は不十分）実際はGUI上で任意のデータを選択 
-SET @e = (SELECT ID FROM projects WHERE num = '1');
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','セミナー',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','移動',@d,@e);
-INSERT INTO work_detail (times,note,work_reports_ID,projects_ID) VALUES ('02:00:00','報告',@d,@e);
+SET @work_report_id = (SELECT ID FROM work_reports WHERE users_ID = @d AND year = '2013' AND MONTH = '12' AND DAY = '14');
+SET @project_id = (SELECT ID FROM projects WHERE num = '1');
+SET @task_id = (SELECT ID FROM tasks WHERE code = '1');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ１',@work_report_id,@project_id,@task_id);
+SET @project_id = (SELECT ID FROM projects WHERE num = '2');
+SET @task_id = (SELECT ID FROM tasks WHERE code = '2');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ２',@work_report_id,@project_id,@task_id);
+SET @project_id = (SELECT ID FROM projects WHERE num = '2');
+SET @task_id = (SELECT ID FROM tasks WHERE code = '3');
+INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES ('2.00','メモ３',@work_report_id,@project_id,@task_id);
+
+-- 日報入力ウィンドウに表示する情報
+SET @d = (SELECT ID FROM users WHERE login = '1'); 
+SET @work_report_id = (SELECT ID FROM work_reports WHERE users_ID = @d AND year = '2013' AND month = '12' AND day = '14');
+
+SELECT work_detail.work_reports_ID, projects.name, tasks.name, work_detail.note, work_detail.times, work_reports_ID, projects.ID, tasks.ID	
+FROM work_detail INNER JOIN projects 
+ON work_detail.projects_ID = projects.ID INNER JOIN tasks 
+ON work_detail.tasks_ID = tasks.ID
+WHERE work_detail.work_reports_ID = @work_report_id;
+
+SELECT work_detail.work_reports_ID, projects.name, tasks.name, work_detail.note, work_detail.times, work_reports_ID, projects_ID, tasks_ID	
+FROM work_detail INNER JOIN projects 
+ON work_detail.projects_ID = projects.ID INNER JOIN tasks 
+ON work_detail.tasks_ID = tasks.ID
+WHERE work_detail.work_reports_ID = @work_report_id;
+
 
 
 ---------------------------------------------------------------
 -- 表示
 ---------------------------------------------------------------
-SELECT * FROM users;
-SELECT * FROM sections;
-SELECT users.lastname,users.firstname,sections.name FROM users INNER JOIN sections ON users.sections_ID = sections.ID;
-SELECT * FROM business_segments;
-SELECT * FROM business_type;
-SELECT * FROM business_detail;
-SELECT * FROM customers;
-SELECT * FROM work_reports;
+--SELECT * FROM users;
+--SELECT * FROM sections;
+--SELECT users.lastname,users.firstname,sections.name FROM users INNER JOIN sections ON users.sections_ID = sections.ID;
+--SELECT * FROM business_segments;
+--SELECT * FROM business_type;
+--SELECT * FROM business_detail;
+--SELECT * FROM customers;
+--SELECT * FROM work_reports;
+--SET @d = (SELECT ID FROM users WHERE login = '1'); -- USERIDを選んで
+--SELECT * FROM work_reports WHERE users_ID = @d;
+--SELECT * FROM work_reports;
 SELECT * FROM work_detail;
-SELECT * FROM projects;
+--SELECT projects.name, tasks.name FROM work_detail INNER JOIN projects ON work_detail.projects_ID = projects.ID INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID;
+--SELECT * FROM projects;
+--SELECT * FROM projects;
+--SELECT * FROM tasks;

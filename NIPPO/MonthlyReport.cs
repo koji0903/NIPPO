@@ -240,15 +240,15 @@ namespace NIPPO
             this._monthDs.Tables.Add(_dt);
             return this._monthDs;
         }
-        public int getTotalTimeCommon(string columnName)
+        public double getTotalTimeCommon(string columnName)
         {
-            int sum = 0;
+            double sum = 0.0;
             for (int i = 0; i < this._monthDs.Tables[this.listTableName].Rows.Count; i++)
             {
                 object workTimes = this._monthDs.Tables[this.listTableName].Rows[i][columnName];
                 if (workTimes != null && workTimes.ToString() != "")
                 {
-                    sum += int.Parse(workTimes.ToString());
+                    sum += double.Parse(workTimes.ToString());
                 }
             }
             return sum;
@@ -259,7 +259,7 @@ namespace NIPPO
             return(this.getTotalTime().ToString() + " h");
         }
 
-        public int getTotalTime()
+        public double getTotalTime()
         {
             return(this.getTotalTimeCommon("work_times"));
         }
@@ -269,7 +269,7 @@ namespace NIPPO
             return (this.getTotalOverTime125().ToString() + " h");
         }
 
-        public int getTotalOverTime125()
+        public double getTotalOverTime125()
         {
             return (this.getTotalTimeCommon("overtime125"));
         }
@@ -279,7 +279,7 @@ namespace NIPPO
             return (this.getTotalOverTime150().ToString() + " h");
         }
 
-        public int getTotalOverTime150()
+        public double getTotalOverTime150()
         {
             return (this.getTotalTimeCommon("overtime150"));
         }

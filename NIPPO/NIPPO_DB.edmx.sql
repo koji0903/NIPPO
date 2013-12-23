@@ -2,8 +2,8 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/20/2013 14:29:06
--- Generated from EDMX file: D:\Data\NIPPO\NIPPO\NIPPO_DB.edmx
+-- Date Created: 12/23/2013 23:44:12
+-- Generated from EDMX file: C:\Users\koji\Documents\Visual Studio 2010\Projects\NIPPO\NIPPO\NIPPO_DB.edmx
 -- --------------------------------------------------
 
 SET QUOTED_IDENTIFIER OFF;
@@ -33,7 +33,7 @@ IF OBJECT_ID(N'[dbo].[FK_work_detailprojects]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_detailprojects];
 GO
 IF OBJECT_ID(N'[dbo].[FK_work_detailtasks]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[tasks] DROP CONSTRAINT [FK_work_detailtasks];
+    ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_detailtasks];
 GO
 IF OBJECT_ID(N'[dbo].[FK_projectscustomers]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[customers] DROP CONSTRAINT [FK_projectscustomers];
@@ -161,7 +161,7 @@ CREATE TABLE [dbo].[work_reports] (
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] smallint  NULL,
     [deleted_by] nvarchar(max)  NULL,
-    [rest_time] float  NOT NULL,
+    [rest_time] float  NULL,
     [users_ID] int  NULL
 );
 GO
@@ -172,7 +172,8 @@ CREATE TABLE [dbo].[work_detail] (
     [times] float  NOT NULL,
     [note] nvarchar(max)  NULL,
     [work_reports_ID] int  NULL,
-    [projects_ID] int  NULL
+    [projects_ID] int  NULL,
+    [tasks_ID] int  NULL
 );
 GO
 
@@ -213,8 +214,7 @@ CREATE TABLE [dbo].[tasks] (
     [updated_at] datetime  NULL,
     [updated_by] nvarchar(max)  NULL,
     [deleted_at] datetime  NULL,
-    [deleted_by] nvarchar(max)  NULL,
-    [work_detail_ID] int  NULL
+    [deleted_by] nvarchar(max)  NULL
 );
 GO
 
@@ -448,18 +448,18 @@ ON [dbo].[work_detail]
     ([projects_ID]);
 GO
 
--- Creating foreign key on [work_detail_ID] in table 'tasks'
-ALTER TABLE [dbo].[tasks]
+-- Creating foreign key on [tasks_ID] in table 'work_detail'
+ALTER TABLE [dbo].[work_detail]
 ADD CONSTRAINT [FK_work_detailtasks]
-    FOREIGN KEY ([work_detail_ID])
-    REFERENCES [dbo].[work_detail]
+    FOREIGN KEY ([tasks_ID])
+    REFERENCES [dbo].[tasks]
         ([ID])
     ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 -- Creating non-clustered index for FOREIGN KEY 'FK_work_detailtasks'
 CREATE INDEX [IX_FK_work_detailtasks]
-ON [dbo].[tasks]
-    ([work_detail_ID]);
+ON [dbo].[work_detail]
+    ([tasks_ID]);
 GO
 
 -- Creating foreign key on [projects_ID] in table 'customers'

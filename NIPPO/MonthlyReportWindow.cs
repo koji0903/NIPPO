@@ -137,10 +137,19 @@ namespace NIPPO
             {
                 int index = list_dataGridView.SelectedRows[0].Index;
 
+                using (DailyReportWindow _form = new DailyReportWindow(_FY, this._userID, _mr.getCalYear(), _mr.getMonth(), index + 1))
+                {
+                    _form.ShowDialog(this);
+                    _form.Dispose();
+                    this.reloadWindow();
+                }
+                /*
                 MessageBox.Show("DailyReportWindow.showDialog(" + _mr.getCalYear()
                     + "," + _mr.getMonth()
                     + "," + (index + 1)
                     + "," + this._userID.ToString() + ")");
+                 */
+
             }
         }
 
