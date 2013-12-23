@@ -22,9 +22,9 @@ using System.Xml.Serialization;
 [assembly: EdmRelationshipAttribute("NIPPO_DB", "authoritiesusers", "authorities", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.authorities), "users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.users))]
 [assembly: EdmRelationshipAttribute("NIPPO_DB", "userssections", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.users), "sections", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.sections))]
 [assembly: EdmRelationshipAttribute("NIPPO_DB", "userswork_reports", "users", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.users), "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_reports))]
-[assembly: EdmRelationshipAttribute("NIPPO_DB", "work_reportswork_detail", "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_reports), "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_detail))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "work_reportswork_detail", "work_reports", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_reports), "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_detail))]
 [assembly: EdmRelationshipAttribute("NIPPO_DB", "work_detailprojects", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_detail), "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.projects))]
-[assembly: EdmRelationshipAttribute("NIPPO_DB", "work_detailtasks", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.work_detail), "tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.tasks))]
+[assembly: EdmRelationshipAttribute("NIPPO_DB", "work_detailtasks", "work_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.work_detail), "tasks", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.tasks))]
 [assembly: EdmRelationshipAttribute("NIPPO_DB", "projectscustomers", "projects", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.projects), "customers", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.customers))]
 [assembly: EdmRelationshipAttribute("NIPPO_DB", "business_segmentsbusiness_type", "business_segments", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_segments), "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_type))]
 [assembly: EdmRelationshipAttribute("NIPPO_DB", "business_typebusiness_detail", "business_type", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(NIPPO.business_type), "business_detail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(NIPPO.business_detail))]
@@ -3477,33 +3477,17 @@ namespace NIPPO
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "work_detailtasks", "work_detail")]
-        public work_detail work_detail
+        public EntityCollection<work_detail> work_detail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_detailtasks", "work_detail").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_detailtasks", "work_detail").Value = value;
-            }
-        }
-        /// <summary>
-        /// 使用できるメタデータ ドキュメントはありません。
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<work_detail> work_detailReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_detailtasks", "work_detail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<work_detail>("NIPPO_DB.work_detailtasks", "work_detail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<work_detail>("NIPPO_DB.work_detailtasks", "work_detail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<work_detail>("NIPPO_DB.work_detailtasks", "work_detail", value);
                 }
             }
         }
@@ -4184,8 +4168,7 @@ namespace NIPPO
         /// <param name="month">month プロパティの初期値。</param>
         /// <param name="day">day プロパティの初期値。</param>
         /// <param name="fY">FY プロパティの初期値。</param>
-        /// <param name="rest_time">rest_time プロパティの初期値。</param>
-        public static work_reports Creatework_reports(global::System.Int32 id, global::System.Int16 year, global::System.Int16 month, global::System.Int16 day, global::System.Int16 fY, global::System.Double rest_time)
+        public static work_reports Creatework_reports(global::System.Int32 id, global::System.Int16 year, global::System.Int16 month, global::System.Int16 day, global::System.Int16 fY)
         {
             work_reports work_reports = new work_reports();
             work_reports.ID = id;
@@ -4193,7 +4176,6 @@ namespace NIPPO
             work_reports.month = month;
             work_reports.day = day;
             work_reports.FY = fY;
-            work_reports.rest_time = rest_time;
             return work_reports;
         }
 
@@ -4377,7 +4359,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Double> work_times
+        public Nullable<global::System.Int16> work_times
         {
             get
             {
@@ -4392,8 +4374,8 @@ namespace NIPPO
                 Onwork_timesChanged();
             }
         }
-        private Nullable<global::System.Double> _work_times;
-        partial void Onwork_timesChanging(Nullable<global::System.Double> value);
+        private Nullable<global::System.Int16> _work_times;
+        partial void Onwork_timesChanging(Nullable<global::System.Int16> value);
         partial void Onwork_timesChanged();
     
         /// <summary>
@@ -4639,9 +4621,9 @@ namespace NIPPO
         /// <summary>
         /// 使用できるメタデータ ドキュメントはありません。
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Double rest_time
+        public Nullable<global::System.Double> rest_time
         {
             get
             {
@@ -4656,8 +4638,8 @@ namespace NIPPO
                 Onrest_timeChanged();
             }
         }
-        private global::System.Double _rest_time;
-        partial void Onrest_timeChanging(global::System.Double value);
+        private Nullable<global::System.Double> _rest_time;
+        partial void Onrest_timeChanging(Nullable<global::System.Double> value);
         partial void Onrest_timeChanged();
 
         #endregion
@@ -4710,33 +4692,17 @@ namespace NIPPO
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("NIPPO_DB", "work_reportswork_detail", "work_detail")]
-        public work_detail work_detail
+        public EntityCollection<work_detail> work_detail
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_reportswork_detail", "work_detail").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_reportswork_detail", "work_detail").Value = value;
-            }
-        }
-        /// <summary>
-        /// 使用できるメタデータ ドキュメントはありません。
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<work_detail> work_detailReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<work_detail>("NIPPO_DB.work_reportswork_detail", "work_detail");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<work_detail>("NIPPO_DB.work_reportswork_detail", "work_detail");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<work_detail>("NIPPO_DB.work_reportswork_detail", "work_detail", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<work_detail>("NIPPO_DB.work_reportswork_detail", "work_detail", value);
                 }
             }
         }

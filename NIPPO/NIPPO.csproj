@@ -64,7 +64,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DailyReport.cs" />
+    <Compile Include="DailyReportWindow.cs" />
+    <Compile Include="DailyReportWindow.Designer.cs">
+      <DependentUpon>DailyReportWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataAccess.cs" />
+    <Compile Include="DataAccessClass.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="testCalc.cs" />
     <Compile Include="Login.cs" />
@@ -94,6 +100,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DailyReportWindow.resx">
+      <DependentUpon>DailyReportWindow.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
     </EmbeddedResource>
