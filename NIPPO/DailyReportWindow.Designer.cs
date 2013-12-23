@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.WorkDetail_DateGridView = new System.Windows.Forms.DataGridView();
             this.Calender_Label = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -724,6 +724,7 @@
             this.Cancel_Button.TabIndex = 26;
             this.Cancel_Button.Text = "キャンセル";
             this.Cancel_Button.UseVisualStyleBackColor = true;
+            this.Cancel_Button.Click += new System.EventHandler(this.Cancel_Button_Click);
             // 
             // ID_TextBox
             // 
@@ -760,10 +761,10 @@
             // time_TextBox
             // 
             this.time_TextBox.DataPropertyName = "times";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle2.Format = "N2";
+            dataGridViewCellStyle2.NullValue = null;
+            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle2;
             this.time_TextBox.HeaderText = "時間";
             this.time_TextBox.Name = "time_TextBox";
             this.time_TextBox.ReadOnly = true;

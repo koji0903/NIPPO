@@ -312,6 +312,43 @@ namespace NIPPO
             return ds;
         }
 
+        /// <summary>
+        /// DataSetの比較を行います。
+        /// </summary>
+        /// <param name="ds1"> DataSet1</param>
+        /// <param name="ds2"> DataSet2</param>
+        /// < returns> true:同じ false:異なる</returns>
+        public bool DataSetCompareaaa(DataSet ds1, DataSet ds2, String table_name)
+        {
+            DataTable dt1, dt2;
+            dt1 = ds1.Tables[table_name];
+            dt2 = ds2.Tables[table_name];
+
+            if (dt1 == null && dt2 != null) { return false; }
+            if (dt1 != null && dt2 == null) { return false; }
+            if (dt1 == null && dt2 == null) { return true; }
+            if (dt1.Rows.Count != dt2.Rows.Count) { return false; }
+
+            for (int row = 0; row < dt2.Rows.Count; row++)
+            {
+                for (int col = 0; col < dt2.Columns.Count; col++)
+                {
+                    // 削除ライン
+                    if (dt1.Rows[row].RowState == DataRowState.Deleted)
+                    {
+                        return false;
+                    }
+
+                    if (!dt1.Rows[row][col].Equals(dt2.Rows[row][col]))
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+
         // IDisposable対応（ガベージコレクション対策みたい）
         #region IDisposable メンバー
         public void Dispose(){}

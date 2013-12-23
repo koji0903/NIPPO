@@ -12,7 +12,7 @@ namespace NIPPO
     public partial class DailyReportWindow : Form
     {
         private int userID, year, month, day;
-        private DataSet ds;
+        private DataSet ds, ds_org;
         // 業務詳細に表示されているプロジェクト、業務のデータベースID
         private int project_ID, task_ID;
         private DailyReport daily;
@@ -33,7 +33,6 @@ namespace NIPPO
             this.year = year;
             this.month = month;
             this.day = day;
-
             this.project_ID = 0;
             this.task_ID = 0;
         }
@@ -50,10 +49,12 @@ namespace NIPPO
             {
                 this.Calender_Label.Text = daily.GetDateStr(this.year, this.month, this.day);
             }
+
             // データベースへのアクセスはここで
             using (DataAccessClass data_access = new DataAccessClass())
             {
                 ds = data_access.GetWorkDetailDs("1", this.year, this.month, this.day);
+                ds_org = ds.Copy();
             }
         }
 
@@ -204,6 +205,40 @@ namespace NIPPO
             dt.Rows.Add(dr);
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Cancel_Button_Click(object sender, EventArgs e)
+        {
+            // 更新データがあるかどうかの確認
+            using (DailyReport daily = new DailyReport())
+            {
+                if (daily.DataSetCompareaaa(ds, ds_org, "WorkDetail"))
+                {
+                    // 同じ場合はWindowクローズ
+                    this.Close();
+                }
+                else
+                {
+                    // 異なる場合はメッセージウィンドウ表示
+                    DialogResult result = MessageBox.Show(
+                        "更新内容は反映されませんが、よろしですか？", 
+                        "確認", 
+                        MessageBoxButtons.OKCancel,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button2);
+
+                    //何が選択されたか調べる
+                    if (result == DialogResult.OK)
+                    {
+                        //「はい」が選択された時、それ以外は戻る
+                        this.Close();
+                    }
+                }
+            }
+        }
 
 
     }
