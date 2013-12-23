@@ -152,19 +152,37 @@ namespace NIPPO
             this.NightOverTime_Textbox.Text = time[3].ToString("F2") + "h";
         }
 
-
+        /// <summary>
+        /// プロジェクト「選択」ボタンクリック時の動作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SerarchProject_Button_Click(object sender, EventArgs e)
         {
-            // プロジェクトの選択を行うウィンドウを表示
-            int project_num = 10;
+            using (DataAccessClass data_access = new DataAccessClass())
+            {
+                int project_num = 10;
+                // Task IDのセット
+                this.project_ID = data_access.getProjectID(project_num);
+            }
             this.ProjectCode_Textbox.Text = "1234";
             this.ProjectName_Textbox.Text = "テスト用プロジェクト";
         }
 
+        /// <summary>
+        /// 業務「選択」ボタンクリック時の動作
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SearchBusiness_Button_Click(object sender, EventArgs e)
         {
             // 業務選択を行うウィンドウを表示
-            int task_code = 10;
+            using (DataAccessClass data_access = new DataAccessClass())
+            {
+                int task_code = 10;
+                // Task IDのセット
+                this.task_ID = data_access.getProjectID(task_code);
+            }
             this.TaskCode_Textbox.Text = "5678";
             this.TaskName_TextBox.Text = "テスト用業務";
         }
@@ -202,11 +220,30 @@ namespace NIPPO
             dr["name1"] = this.TaskName_TextBox.Text;
             dr["note"] = this.Description_Textbox.Text;
             dr["times"] = this.WokTime_DomainUpDown.Text;
+            dr["work_reports_ID"] = 100;
+            dr["projects_ID"] = this.project_ID;
+            dr["tasks_ID"] = this.task_ID;
             dt.Rows.Add(dr);
         }
 
         /// <summary>
-        /// 
+        /// 「登録」ボタンクリック時の動作設定
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Regist_Button_Click(object sender, EventArgs e)
+        {
+            // データベースへのアクセスはここで
+            using (DataAccessClass data_access = new DataAccessClass())
+            {
+                data_access.Update(ds, "WorkDetail");
+            }
+            this.Close();
+        }
+
+        
+        /// <summary>
+        /// 「キャンセル」ボタンクリック時の動作設定
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -215,9 +252,9 @@ namespace NIPPO
             // 更新データがあるかどうかの確認
             using (DailyReport daily = new DailyReport())
             {
-                if (daily.DataSetCompareaaa(ds, ds_org, "WorkDetail"))
+                if (daily.DataSetCompare(ds, ds_org, "WorkDetail"))
                 {
-                    // 同じ場合はWindowクローズ
+                    // 更新がない場合は、確認なしでそのままWindowクローズ
                     this.Close();
                 }
                 else
@@ -233,12 +270,13 @@ namespace NIPPO
                     //何が選択されたか調べる
                     if (result == DialogResult.OK)
                     {
-                        //「はい」が選択された時、それ以外は戻る
+                        //「はい」が選択された時、それ以外の場合は元に戻る
                         this.Close();
                     }
                 }
             }
         }
+
 
 
     }

@@ -17,7 +17,7 @@ namespace NIPPO
         /// </summary>
         /// <param name="str">SQL実行コマンド文字列</param>
         /// <returns>データセット</returns>
-        internal static DataSet ReadData(string str)
+        internal static DataSet ReadData(string str, string table_name = null)
         {
             SqlConnection connection = new SqlConnection();
             SqlCommand command = new SqlCommand();
@@ -35,7 +35,14 @@ namespace NIPPO
                     command.CommandText = @str;
                     //  データ接続(open)、SQLコマンドの実行、切断（close）
                     adapter.SelectCommand = command;
-                    adapter.Fill(ds);
+                    if (table_name == null)
+                    {
+                        adapter.Fill(ds);
+                    }
+                    else
+                    {
+                        adapter.Fill(ds,table_name);
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -48,6 +55,35 @@ namespace NIPPO
             return ds;
 
         }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="str">SQL実行コマンド文字列</param>
+        /// <returns>データセット</returns>
+        internal void Update(DataSet ds, String table_name)
+        {
+            SqlConnection connection = new SqlConnection();
+            SqlCommand command = new SqlCommand();
+
+            connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
+
+            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM work_detail", connection))
+            {
+                try
+                {
+                    SqlCommandBuilder builder =new SqlCommandBuilder(adapter);
+                    String update_cmd = builder.GetUpdateCommand().CommandText;
+                    String delete_cmd = builder.GetDeleteCommand().CommandText;
+                    adapter.Update(ds.Tables[table_name]);
+                }
+                catch (Exception ex)
+                {
+                    //  データベース接続が失敗した場合
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
 
         /// <summary>
         /// SqlCommandを作る関数
@@ -87,7 +123,7 @@ namespace NIPPO
                     work_report_id = GetWorkReportID(id, year, month, day);
                     // データ取得
                     ds.Clear();
-                    command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times, projects.ID, tasks.ID " +
+                    command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times, work_reports_ID, projects_ID, tasks_ID " +
                          "FROM work_detail " +
                          "INNER JOIN projects ON work_detail.projects_ID = projects.ID " +
                          "INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID " +
@@ -151,13 +187,13 @@ namespace NIPPO
         }
 
         /// <summary>
-        /// 
+        /// WorkReport IDをDBから取得するメソッド
         /// </summary>
-        /// <param name="userID"></param>
-        /// <param name="year"></param>
-        /// <param name="month"></param>
-        /// <param name="day"></param>
-        /// <returns></returns>
+        /// <param name="userID">ユーザID</param>
+        /// <param name="year">年</param>
+        /// <param name="month">月</param>
+        /// <param name="day">日</param>
+        /// <returns>WorkReportテーブルのデータベースID</returns>
         internal int GetWorkReportID(int userID, int year, int month, int day)
         {
             DataSet ds = new DataSet();
@@ -187,6 +223,49 @@ namespace NIPPO
         }
 
 
+        /// <summary>
+        /// プロジェクトNoから、projectsテーブルのデータベースIDを取得するメソッド
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        internal int getProjectID(int num)
+        {
+            DataSet ds = new DataSet();
+            string SqlCommand = "SELECT ID FROM projects WHERE num = '" + num + "'";
+            try
+            {
+                ds = ReadData(SqlCommand,"projects");
+                return (int)ds.Tables["projects"].Rows[0]["ID"];
+            }
+            catch (Exception ex)
+            {
+                // usersテーブルにloginが指定されなかった場合（Loginウィンドウでチェックされているのでこのケースはないはず）
+                MessageBox.Show(ex.Message);
+            }
+            return 0;
+        }
+
+        /// <summary>
+        /// タスクCodeから、tasksテーブルのデータベースIDを取得するメソッド
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        internal int getTaskID(int code)
+        {
+            DataSet ds = new DataSet();
+            string SqlCommand = "SELECT ID FROM tasks WHERE code = '" + code + "'";
+            try
+            {
+                ds = ReadData(SqlCommand, "tasks");
+                return (int)ds.Tables["tasks"].Rows[0]["ID"];
+            }
+            catch (Exception ex)
+            {
+                // usersテーブルにloginが指定されなかった場合（Loginウィンドウでチェックされているのでこのケースはないはず）
+                MessageBox.Show(ex.Message);
+            }
+            return 0;
+        }
 
         // 追加 これがないとエラーになる（よく分からん）
         #region IDisposable メンバー

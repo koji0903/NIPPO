@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.WorkDetail_DateGridView = new System.Windows.Forms.DataGridView();
             this.Calender_Label = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
@@ -76,6 +76,7 @@
             this.task_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.note_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wordreportID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.projectID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.taskID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.WorkDetail_DateGridView)).BeginInit();
@@ -95,6 +96,7 @@
             this.task_TextBox,
             this.note_TextBox,
             this.time_TextBox,
+            this.wordreportID_TextBox,
             this.projectID_TextBox,
             this.taskID_TextBox});
             this.WorkDetail_DateGridView.Location = new System.Drawing.Point(34, 146);
@@ -715,6 +717,7 @@
             this.Regist_Button.TabIndex = 25;
             this.Regist_Button.Text = "登録";
             this.Regist_Button.UseVisualStyleBackColor = true;
+            this.Regist_Button.Click += new System.EventHandler(this.Regist_Button_Click);
             // 
             // Cancel_Button
             // 
@@ -761,18 +764,26 @@
             // time_TextBox
             // 
             this.time_TextBox.DataPropertyName = "times";
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle2.Format = "N2";
-            dataGridViewCellStyle2.NullValue = null;
-            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle1;
             this.time_TextBox.HeaderText = "時間";
             this.time_TextBox.Name = "time_TextBox";
             this.time_TextBox.ReadOnly = true;
             this.time_TextBox.Width = 80;
             // 
+            // wordreportID_TextBox
+            // 
+            this.wordreportID_TextBox.DataPropertyName = "work_reports_ID";
+            this.wordreportID_TextBox.HeaderText = "ワークレポートID";
+            this.wordreportID_TextBox.Name = "wordreportID_TextBox";
+            this.wordreportID_TextBox.ReadOnly = true;
+            this.wordreportID_TextBox.Visible = false;
+            // 
             // projectID_TextBox
             // 
-            this.projectID_TextBox.DataPropertyName = "ID1";
+            this.projectID_TextBox.DataPropertyName = "projects_ID";
             this.projectID_TextBox.HeaderText = "プロジェクトID";
             this.projectID_TextBox.Name = "projectID_TextBox";
             this.projectID_TextBox.ReadOnly = true;
@@ -780,7 +791,7 @@
             // 
             // taskID_TextBox
             // 
-            this.taskID_TextBox.DataPropertyName = "ID2";
+            this.taskID_TextBox.DataPropertyName = "tasks_ID";
             this.taskID_TextBox.HeaderText = "タスクID";
             this.taskID_TextBox.Name = "taskID_TextBox";
             this.taskID_TextBox.ReadOnly = true;
@@ -866,6 +877,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn task_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn note_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn time_TextBox;
+        private System.Windows.Forms.DataGridViewTextBoxColumn wordreportID_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn projectID_TextBox;
         private System.Windows.Forms.DataGridViewTextBoxColumn taskID_TextBox;
     }

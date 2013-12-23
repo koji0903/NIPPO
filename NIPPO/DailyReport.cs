@@ -318,7 +318,7 @@ namespace NIPPO
         /// <param name="ds1"> DataSet1</param>
         /// <param name="ds2"> DataSet2</param>
         /// < returns> true:同じ false:異なる</returns>
-        public bool DataSetCompareaaa(DataSet ds1, DataSet ds2, String table_name)
+        public bool DataSetCompare(DataSet ds1, DataSet ds2, String table_name)
         {
             DataTable dt1, dt2;
             dt1 = ds1.Tables[table_name];

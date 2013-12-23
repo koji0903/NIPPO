@@ -152,7 +152,13 @@ INSERT INTO work_detail (times,note,work_reports_ID,projects_ID,tasks_ID) VALUES
 SET @d = (SELECT ID FROM users WHERE login = '1'); 
 SET @work_report_id = (SELECT ID FROM work_reports WHERE users_ID = @d AND year = '2013' AND month = '12' AND day = '14');
 
-SELECT work_detail.work_reports_ID, projects.name, tasks.name, work_detail.note, work_detail.times, projects.ID, tasks.ID
+SELECT work_detail.work_reports_ID, projects.name, tasks.name, work_detail.note, work_detail.times, work_reports_ID, projects.ID, tasks.ID	
+FROM work_detail INNER JOIN projects 
+ON work_detail.projects_ID = projects.ID INNER JOIN tasks 
+ON work_detail.tasks_ID = tasks.ID
+WHERE work_detail.work_reports_ID = @work_report_id;
+
+SELECT work_detail.work_reports_ID, projects.name, tasks.name, work_detail.note, work_detail.times, work_reports_ID, projects_ID, tasks_ID	
 FROM work_detail INNER JOIN projects 
 ON work_detail.projects_ID = projects.ID INNER JOIN tasks 
 ON work_detail.tasks_ID = tasks.ID
@@ -175,5 +181,7 @@ WHERE work_detail.work_reports_ID = @work_report_id;
 --SELECT * FROM work_reports WHERE users_ID = @d;
 --SELECT * FROM work_reports;
 --SELECT * FROM work_detail;
-SELECT projects.name, tasks.name FROM work_detail INNER JOIN projects ON work_detail.projects_ID = projects.ID INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID;
+--SELECT projects.name, tasks.name FROM work_detail INNER JOIN projects ON work_detail.projects_ID = projects.ID INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID;
 --SELECT * FROM projects;
+--SELECT * FROM projects;
+--SELECT * FROM tasks;
