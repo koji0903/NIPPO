@@ -256,6 +256,13 @@ namespace NIPPO
                     MessageBoxIcon.Exclamation,
                     MessageBoxDefaultButton.Button2);
             }
+
+            // 作業合計時間の表示                    
+            using (DailyReport daily = new DailyReport())
+            {
+                this.regist_time = daily.getTotalWorkTime(ds);
+                this.TotalWorkTime_Textbox.Text = this.regist_time.ToString("F2") + "h";
+            }
         }
 
         /// <summary>
