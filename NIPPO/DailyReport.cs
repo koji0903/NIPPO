@@ -31,6 +31,11 @@ namespace NIPPO
             return str;
         }
 
+        public String GetTime(int year, int month, int day, int hour, int second)
+        {
+            return String.Format("{0:D4}/{1:D2}/{2:D2} {3:D2}:{4:D2}:00", year, month, day, hour, second);
+        }
+
         /// <summary>
         /// 開始時間・終了時間から勤務時間を計算する
         /// </summary>
@@ -268,7 +273,7 @@ namespace NIPPO
         {
             Double total_work_time;
             total_work_time = 0;
-            DataTable work_detail = ds.Tables["WorkDetail"];
+            DataTable work_detail = ds.Tables["work_detail"];
             if (work_detail == null)
             {
                 // 初期登録時は何も登録されていないので0を返す。
@@ -294,16 +299,16 @@ namespace NIPPO
         public DataSet deleteRow(DataSet ds, int delete_num )
         {
             int j = 0;
-            for (int i = 0; i < ds.Tables["WorkDetail"].Rows.Count; i++)
+            for (int i = 0; i < ds.Tables["work_detail"].Rows.Count; i++)
             {
                 // Deletedフラグが立っていない列をサーチ。立っているものは既に削除済みであるのでカウントスキップ
-                if (ds.Tables["WorkDetail"].Rows[i].RowState != DataRowState.Deleted)
+                if (ds.Tables["work_detail"].Rows[i].RowState != DataRowState.Deleted)
                 {
                     // 削除されていない
                     if (delete_num == j)
                     {
                         // データ削除（実際はデータが消えるのではなくて、Deletedフラグがセットされる）
-                        ds.Tables["WorkDetail"].Rows[i].Delete();
+                        ds.Tables["work_detail"].Rows[i].Delete();
                         return ds;
                     }
                     j++;
@@ -357,17 +362,17 @@ namespace NIPPO
         public String timeCompare(double t1, double t2)
         {
             String message = "";
-            if (t1 == t2)
-            {
-                return message;
-            }
-            else if (t1 > t2)
+            if (t1 > t2)
             {
                 return "作業時間の割り当てが不足しています";
             }
-            else
+            else if (t2 > t1)
             {
                 return "作業時間が勤務時間を超えています";
+            }
+            else
+            {
+                return message;
             }
         }
 

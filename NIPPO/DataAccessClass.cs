@@ -67,16 +67,14 @@ namespace NIPPO
 
             connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
 
-            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM work_detail", connection))
+            using (SqlDataAdapter adapter = new SqlDataAdapter("SELECT * FROM " + table_name, connection))
             {
                 try
                 {
                     SqlCommandBuilder builder =new SqlCommandBuilder(adapter);
-                    /*
                     String insert_cmd = builder.GetInsertCommand().CommandText;
                     String update_cmd = builder.GetUpdateCommand().CommandText;
                     String delete_cmd = builder.GetDeleteCommand().CommandText;
-                     */
                     adapter.Update(ds.Tables[table_name]);
                 }
                 catch (Exception ex)
@@ -102,7 +100,7 @@ namespace NIPPO
         }
 
         /// <summary>
-        /// WorkDetail情報の取得
+        /// work_detail情報の取得
         /// </summary>
         /// <param name="userID"></param>
         /// <param name="year"></param>
@@ -132,12 +130,12 @@ namespace NIPPO
                          "INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID " +
                          "WHERE work_detail.work_reports_ID = '" + work_report_id + "';";
                     adapter.SelectCommand = command;
-                    adapter.Fill(ds, "WorkDetail");
+                    adapter.Fill(ds, "work_detail");
 /*                    
                     // 始めての登録時は空の5行を追加
-                    if (ds.Tables["WorkDetail"].Rows.Count == 0)
+                    if (ds.Tables["work_detail"].Rows.Count == 0)
                     {
-                        DataTable dt = ds.Tables["WorkDetail"];
+                        DataTable dt = ds.Tables["work_detail"];
                         DataRow dr = dt.NewRow();
                         dr["name"] = "";
                         for (int i = 0; i < 5; i++)
@@ -146,12 +144,12 @@ namespace NIPPO
                             dt.Rows.Add(dr);
                         }
                     }
-                    else if (ds.Tables["WorkDetail"].Rows.Count < 5)
+                    else if (ds.Tables["work_detail"].Rows.Count < 5)
                     {
-                        DataTable dt = ds.Tables["WorkDetail"];
+                        DataTable dt = ds.Tables["work_detail"];
                         DataRow dr = dt.NewRow();
                         dr["name"] = "";
-                        for (int i = 0; i < 6 - ds.Tables["WorkDetail"].Rows.Count; i++)
+                        for (int i = 0; i < 6 - ds.Tables["work_detail"].Rows.Count; i++)
                         {
                             dr = dt.NewRow();
                             dt.Rows.Add(dr);
@@ -165,6 +163,17 @@ namespace NIPPO
                 }
             }
             return ds;
+        }
+
+        /// <summary>
+        /// </summary>
+        /// <param name="login"></param>
+        /// <returns></returns>
+        internal DataSet GetWorkReportsDS(int userID, int year, int month, int day)
+        {
+            DataSet ds = new DataSet();
+            string SqlCommand = "SELECT * FROM work_reports WHERE users_ID = '" + userID + "' AND year = '" + year + "' AND month = '" + month + "' AND day = '" + day + "';";
+            return ReadData(SqlCommand,"work_reports");
         }
 
         /// <summary>
