@@ -2,7 +2,7 @@
 -- --------------------------------------------------
 -- Entity Designer DDL Script for SQL Server 2005, 2008, and Azure
 -- --------------------------------------------------
--- Date Created: 12/21/2013 18:12:48
+-- Date Created: 12/23/2013 23:44:12
 -- Generated from EDMX file: C:\Users\koji\Documents\Visual Studio 2010\Projects\NIPPO\NIPPO\NIPPO_DB.edmx
 -- --------------------------------------------------
 
@@ -27,7 +27,7 @@ IF OBJECT_ID(N'[dbo].[FK_userswork_reports]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[work_reports] DROP CONSTRAINT [FK_userswork_reports];
 GO
 IF OBJECT_ID(N'[dbo].[FK_work_reportswork_detail]', 'F') IS NOT NULL
-    ALTER TABLE [dbo].[work_reports] DROP CONSTRAINT [FK_work_reportswork_detail];
+    ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_reportswork_detail];
 GO
 IF OBJECT_ID(N'[dbo].[FK_work_detailprojects]', 'F') IS NOT NULL
     ALTER TABLE [dbo].[work_detail] DROP CONSTRAINT [FK_work_detailprojects];
@@ -150,7 +150,7 @@ CREATE TABLE [dbo].[work_reports] (
     [FY] smallint  NOT NULL,
     [start_time] datetime  NULL,
     [end_time] datetime  NULL,
-    [work_times] smallint  NULL,
+    [work_times] float  NULL,
     [overtime125] float  NULL,
     [overtime150] float  NULL,
     [holiday_work_times] float  NULL,

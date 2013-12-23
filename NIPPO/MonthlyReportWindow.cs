@@ -141,6 +141,7 @@ namespace NIPPO
                 {
                     _form.ShowDialog(this);
                     _form.Dispose();
+                    this.reloadWindow();
                 }
                 /*
                 MessageBox.Show("DailyReportWindow.showDialog(" + _mr.getCalYear()

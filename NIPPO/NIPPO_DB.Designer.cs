@@ -4359,7 +4359,7 @@ namespace NIPPO
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.Int16> work_times
+        public Nullable<global::System.Double> work_times
         {
             get
             {
@@ -4374,8 +4374,8 @@ namespace NIPPO
                 Onwork_timesChanged();
             }
         }
-        private Nullable<global::System.Int16> _work_times;
-        partial void Onwork_timesChanging(Nullable<global::System.Int16> value);
+        private Nullable<global::System.Double> _work_times;
+        partial void Onwork_timesChanging(Nullable<global::System.Double> value);
         partial void Onwork_timesChanged();
     
         /// <summary>

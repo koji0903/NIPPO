@@ -112,7 +112,7 @@ namespace NIPPO
             // データ保存用のDateSet作成
             DataSet ds = new DataSet();
 
-            int id, work_report_id;
+            int work_report_id;
 
             using (SqlDataAdapter adapter = new SqlDataAdapter())
             {

@@ -119,7 +119,7 @@
     <Property Name="FY" Type="smallint" Nullable="false" />
     <Property Name="start_time" Type="datetime" Nullable="true" />
     <Property Name="end_time" Type="datetime" Nullable="true" />
-    <Property Name="work_times" Type="smallint" Nullable="true" />
+    <Property Name="work_times" Type="float" Nullable="true" />
     <Property Name="overtime125" Type="float" Nullable="true" />
     <Property Name="overtime150" Type="float" Nullable="true" />
     <Property Name="holiday_work_times" Type="float" Nullable="true" />
@@ -530,7 +530,7 @@
           <Property Type="Int16" Name="FY" Nullable="false" />
           <Property Type="DateTime" Name="start_time" Nullable="true" />
           <Property Type="DateTime" Name="end_time" Nullable="true" />
-          <Property Type="Int16" Name="work_times" Nullable="true" />
+          <Property Type="Double" Name="work_times" Nullable="true" />
           <Property Type="Double" Name="overtime125" Nullable="true" />
           <Property Type="Double" Name="overtime150" Nullable="true" />
           <Property Type="Double" Name="holiday_work_times" Nullable="true" />

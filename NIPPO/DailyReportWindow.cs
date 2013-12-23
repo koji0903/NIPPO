@@ -323,20 +323,14 @@ namespace NIPPO
 
             }
 
-            // データベースへの更新作業
+            // データベース（work_detail）への更新作業
             using (DataAccessClass data_access = new DataAccessClass())
             {
                 data_access.Update(ds, "work_detail");
             }
 
-            DialogResult result = MessageBox.Show(
-                "日報情報を更新しました。",
-                "実行完了",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation,
-                MessageBoxDefaultButton.Button2);
 
-            // work_report更新作業
+            // データベース（work_report）更新作業
             using (DailyReport daily = new DailyReport())
             {
                 try
@@ -363,6 +357,13 @@ namespace NIPPO
                 }                    
 
             }
+
+            DialogResult result = MessageBox.Show(
+                "日報情報を更新しました。",
+                "実行完了",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation,
+                MessageBoxDefaultButton.Button2);
 
             //何が選択されたか調べる
             if (result == DialogResult.OK)
