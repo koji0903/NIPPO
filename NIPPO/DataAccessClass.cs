@@ -72,9 +72,11 @@ namespace NIPPO
                 try
                 {
                     SqlCommandBuilder builder =new SqlCommandBuilder(adapter);
+                    /*
                     String insert_cmd = builder.GetInsertCommand().CommandText;
                     String update_cmd = builder.GetUpdateCommand().CommandText;
                     String delete_cmd = builder.GetDeleteCommand().CommandText;
+                     */
                     adapter.Update(ds.Tables[table_name]);
                 }
                 catch (Exception ex)
@@ -124,7 +126,7 @@ namespace NIPPO
                     // データ取得
                     ds.Clear();
 //                    command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times, work_reports_ID, projects_ID, tasks_ID " +
-                    command.CommandText = @"SELECT work_detail.ID, work_detail.times, work_detail.note, work_reports_ID, projects_ID, tasks_ID, projects.ID, projects.name, tasks.name " +
+                    command.CommandText = @"SELECT work_detail.ID, work_detail.note, work_detail.times, work_reports_ID, projects_ID, tasks_ID, projects.ID, projects.name, tasks.name " +
                          "FROM work_detail " +
                          "INNER JOIN projects ON work_detail.projects_ID = projects.ID " +
                          "INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID " +
@@ -208,7 +210,10 @@ namespace NIPPO
                 ds = ReadData(SqlCommand);
                 if ( ds.Tables[0].Rows.Count == 0)
                 {
-                    return 0;
+                    // work_reportsテーブルに新規で列を作成
+                    SqlCommand = "INSERT INTO work_reports (users_ID,year,month,day,FY) VALUES (" + userID + "," + year + "," + month +"," + day + ",2013);";
+                    ds = ReadData(SqlCommand);
+                    return this.GetWorkReportID(userID, year, month, day);
                 }
                 else
                 {
