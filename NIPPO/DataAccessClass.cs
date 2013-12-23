@@ -107,7 +107,7 @@ namespace NIPPO
         /// <param name="month"></param>
         /// <param name="day"></param>
         /// <returns></returns>
-        internal DataSet GetWorkDetailDs(String userID, int year, int month, int day)
+        internal DataSet GetWorkDetailDs(int userID, int year, int month, int day)
         {
             // データ保存用のDateSet作成
             DataSet ds = new DataSet();
@@ -120,8 +120,7 @@ namespace NIPPO
                 {
                     SqlCommand command = new SqlCommand();
                     command = ConnectDB();
-                    id = GetUsersID(userID);
-                    work_report_id = GetWorkReportID(id, year, month, day);
+                    work_report_id = GetWorkReportID(userID, year, month, day);
                     // データ取得
                     ds.Clear();
 //                    command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times, work_reports_ID, projects_ID, tasks_ID " +

@@ -12,8 +12,8 @@ namespace NIPPO
     public partial class DailyReportWindow : Form
     {
         // 前のウィンドウからの引き付き情報
-        private int userID, year, month, day;
-        private string login;
+        private int year, month, day;
+        private int userID;
         // WorkDetailテーブル情報
         private DataSet ds, ds_org;
         // 業務詳細に表示されているプロジェクト、業務のデータベースID
@@ -39,7 +39,6 @@ namespace NIPPO
             this.day = day;
             this.project_ID = 0;
             this.task_ID = 0;
-            this.login = "1";
 
             // 勤務時間（比較用）
             this.work_time = 0.0;
@@ -72,7 +71,7 @@ namespace NIPPO
             // データベースへのアクセスはここで
             using (DataAccessClass data_access = new DataAccessClass())
             {
-                ds = data_access.GetWorkDetailDs(this.login, this.year, this.month, this.day);
+                ds = data_access.GetWorkDetailDs(this.userID, this.year, this.month, this.day);
                 ds_org = ds.Copy();
             }
 
@@ -240,8 +239,7 @@ namespace NIPPO
             dr["tasks_ID"] = this.task_ID;
             using (DataAccessClass data_access = new DataAccessClass())
             {
-                int id = data_access.GetUsersID(this.login);
-                dr["work_reports_ID"] = data_access.GetWorkReportID(id, this.year, this.month, this.day);
+                dr["work_reports_ID"] = data_access.GetWorkReportID(this.userID, this.year, this.month, this.day);
             }
 
             if ((string)dr["name"] != "" && (string)dr["name1"] != "" && (double)dr["times"] > 0.0 )
