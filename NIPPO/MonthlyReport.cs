@@ -286,8 +286,7 @@ namespace NIPPO
 
         public void outputExcel()
         {
-            //string excelTempletePath = @"C:\Users\m-sakura\Documents\Visual Studio 2010\Projects\NIPPO\Data\monthlyReport.xlsx";
-            string excelTempletePath = @"..\..\..\Data\monthlyReport.xlsx";
+            string excelTempletePath = NIPPO.Properties.Settings.Default.ExcelTempletePath;
             int _sheetNo = 1;                        // シートNo.
             int _col = 2;                            // データ書き込みカラム
             int _line = 2;                           // データ書き込み開始行
@@ -334,9 +333,6 @@ namespace NIPPO
                     Type.Missing, Type.Missing);
 
                 oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWBook.Sheets[_sheetNo];
-
-                //oSheets = (Microsoft.Office.Interop.Excel.Sheets)oWBook.Worksheets;
-                //oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oSheets.get_Item(1);
 
                 objCell = oSheet.Cells[_line + 0, _col];
                 oRange = oSheet.get_Range(objCell, objCell);

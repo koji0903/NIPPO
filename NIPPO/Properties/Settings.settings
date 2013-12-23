@@ -8,5 +8,8 @@
     <Setting Name="Setting" Type="System.String" Scope="User">
       <Value Profile="(Default)">Data Source=localhost\SQLEXPRESS;Initial Catalog=nippo_db;UserID{0};Password{1}</Value>
     </Setting>
+    <Setting Name="ExcelTempletePath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Users\m-sakura\Documents\Visual Studio 2010\Projects\NIPPO\Data\monthlyReport.xlt</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
