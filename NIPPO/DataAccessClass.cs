@@ -11,6 +11,7 @@ namespace NIPPO
 {
     class DataAccessClass : IDisposable
     {
+        public int work_report_id;
         /// <summary>
         /// データベースアクセス用の基本メソッド
         /// - 接続設定、オープン、データ取得、クローズ処理を行う
@@ -72,6 +73,7 @@ namespace NIPPO
                 try
                 {
                     SqlCommandBuilder builder =new SqlCommandBuilder(adapter);
+                    String insert_cmd = builder.GetInsertCommand().CommandText;
                     String update_cmd = builder.GetUpdateCommand().CommandText;
                     String delete_cmd = builder.GetDeleteCommand().CommandText;
                     adapter.Update(ds.Tables[table_name]);
@@ -123,7 +125,8 @@ namespace NIPPO
                     work_report_id = GetWorkReportID(id, year, month, day);
                     // データ取得
                     ds.Clear();
-                    command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times, work_reports_ID, projects_ID, tasks_ID " +
+//                    command.CommandText = @"SELECT projects.ID, projects.name, tasks.name, work_detail.note, work_detail.times, work_reports_ID, projects_ID, tasks_ID " +
+                    command.CommandText = @"SELECT work_detail.ID, work_detail.times, work_detail.note, work_reports_ID, projects_ID, tasks_ID, projects.ID, projects.name, tasks.name " +
                          "FROM work_detail " +
                          "INNER JOIN projects ON work_detail.projects_ID = projects.ID " +
                          "INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID " +

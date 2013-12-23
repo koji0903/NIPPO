@@ -12,9 +12,10 @@ namespace NIPPO
     public partial class DailyReportWindow : Form
     {
         private int userID, year, month, day;
+        private string login;
         private DataSet ds, ds_org;
         // 業務詳細に表示されているプロジェクト、業務のデータベースID
-        private int project_ID, task_ID;
+        private int work_report_ID,project_ID, task_ID;
         private DailyReport daily;
 
         /// <summary>
@@ -33,8 +34,10 @@ namespace NIPPO
             this.year = year;
             this.month = month;
             this.day = day;
+            this.work_report_ID = 0;
             this.project_ID = 0;
             this.task_ID = 0;
+            this.login = "1";
         }
 
         /// <summary>
@@ -53,7 +56,7 @@ namespace NIPPO
             // データベースへのアクセスはここで
             using (DataAccessClass data_access = new DataAccessClass())
             {
-                ds = data_access.GetWorkDetailDs("1", this.year, this.month, this.day);
+                ds = data_access.GetWorkDetailDs(this.login, this.year, this.month, this.day);
                 ds_org = ds.Copy();
             }
         }
@@ -220,10 +223,28 @@ namespace NIPPO
             dr["name1"] = this.TaskName_TextBox.Text;
             dr["note"] = this.Description_Textbox.Text;
             dr["times"] = this.WokTime_DomainUpDown.Text;
-            dr["work_reports_ID"] = 100;
             dr["projects_ID"] = this.project_ID;
             dr["tasks_ID"] = this.task_ID;
-            dt.Rows.Add(dr);
+            using (DataAccessClass data_access = new DataAccessClass())
+            {
+                int id = data_access.GetUsersID(this.login);
+                dr["work_reports_ID"] = data_access.GetWorkReportID(id, this.year, this.month, this.day);
+            }
+
+            if ((string)dr["name"] != "" && (string)dr["name1"] != "" && (double)dr["times"] > 0.0 )
+            {
+                // データセット更新
+                dt.Rows.Add(dr);
+            }
+            else
+            {
+                DialogResult result = MessageBox.Show(
+                    "入力情報が不足しています。",
+                    "メッセージ",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button2);
+            }
         }
 
         /// <summary>
@@ -238,7 +259,20 @@ namespace NIPPO
             {
                 data_access.Update(ds, "WorkDetail");
             }
-            this.Close();
+
+            DialogResult result = MessageBox.Show(
+                "日報情報を更新しました。",
+                "実行完了",
+                MessageBoxButtons.OK,
+                MessageBoxIcon.Exclamation,
+                MessageBoxDefaultButton.Button2);
+
+            //何が選択されたか調べる
+            if (result == DialogResult.OK)
+            {
+                //「はい」が選択された時、それ以外の場合は元に戻る
+                this.Close();
+            }
         }
 
         

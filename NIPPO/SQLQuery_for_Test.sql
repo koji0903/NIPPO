@@ -180,7 +180,7 @@ WHERE work_detail.work_reports_ID = @work_report_id;
 --SET @d = (SELECT ID FROM users WHERE login = '1'); -- USERID‚ð‘I‚ñ‚Å
 --SELECT * FROM work_reports WHERE users_ID = @d;
 --SELECT * FROM work_reports;
---SELECT * FROM work_detail;
+SELECT * FROM work_detail;
 --SELECT projects.name, tasks.name FROM work_detail INNER JOIN projects ON work_detail.projects_ID = projects.ID INNER JOIN tasks ON work_detail.tasks_ID = tasks.ID;
 --SELECT * FROM projects;
 --SELECT * FROM projects;
