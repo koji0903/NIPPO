@@ -11,12 +11,14 @@ namespace NIPPO
 {
     public partial class DailyReportWindow : Form
     {
+        // 前のウィンドウからの引き付き情報
         private int userID, year, month, day;
         private string login;
+        // WorkDetailテーブル情報
         private DataSet ds, ds_org;
         // 業務詳細に表示されているプロジェクト、業務のデータベースID
-        private int work_report_ID,project_ID, task_ID;
-        private DailyReport daily;
+        private int project_ID, task_ID;
+        // 時間比較用のデータ
         private double work_time, regist_time;
 
         /// <summary>
@@ -35,7 +37,6 @@ namespace NIPPO
             this.year = year;
             this.month = month;
             this.day = day;
-            this.work_report_ID = 0;
             this.project_ID = 0;
             this.task_ID = 0;
             this.login = "1";
@@ -47,11 +48,20 @@ namespace NIPPO
         }
 
         /// <summary>
-        /// DailyReportウィンドウが表示された際に自動実行
+        /// DailyReportウィンドウのオブジェクト生成時の実行
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void DailyReportWindow_Load(object sender, EventArgs e)
+        {
+        }
+
+        /// <summary>
+        /// DailyReportウィンドウの情報表示時に実行
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DailyReportWindow_Shown(object sender, EventArgs e)
         {
             // 年月日情報の表示
             using (DailyReport daily = new DailyReport())
@@ -65,17 +75,14 @@ namespace NIPPO
                 ds = data_access.GetWorkDetailDs(this.login, this.year, this.month, this.day);
                 ds_org = ds.Copy();
             }
-        }
 
-
-        private void DailyReportWindow_Shown(object sender, EventArgs e)
-        {
             // DataGridへの表示
             this.WorkDetail_DateGridView.DataSource = ds;
             if (ds.Tables.Count != 0)
             {
                 this.WorkDetail_DateGridView.DataMember = "WorkDetail";
             }
+
             // 作業合計時間の表示                    
             using (DailyReport daily = new DailyReport())
             {

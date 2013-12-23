@@ -11,7 +11,6 @@ namespace NIPPO
 {
     class DataAccessClass : IDisposable
     {
-        public int work_report_id;
         /// <summary>
         /// データベースアクセス用の基本メソッド
         /// - 接続設定、オープン、データ取得、クローズ処理を行う
