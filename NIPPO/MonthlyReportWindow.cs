@@ -153,6 +153,11 @@ namespace NIPPO
             }
         }
 
+        private void MonthlyReportWindow_Load(object sender, EventArgs e)
+        {
+
+        }
+
 
     }
 }

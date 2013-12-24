@@ -202,12 +202,19 @@ namespace NIPPO
         /// <param name="e"></param>
         private void SerarchProject_Button_Click(object sender, EventArgs e)
         {
-            using (DataAccessClass data_access = new DataAccessClass())
+
+            using ( SearchProjectsWindow _search = new SearchProjectsWindow() )
             {
-                int project_num = 10;
-                // Task IDのセット
-                this.project_ID = data_access.getProjectID(project_num);
+                _search.ShowDialog(this);
+                //project_ID = _search.id;
             }
+           
+        //    using (DataAccessClass data_access = new DataAccessClass())
+        //    {
+        //        int project_num = 10;
+        //        // Task IDのセット
+        //        this.project_ID = data_access.getProjectID(project_num);
+        //    }
             this.ProjectCode_Textbox.Text = "1234";
             this.ProjectName_Textbox.Text = "テスト用プロジェクト";
         }
@@ -220,12 +227,24 @@ namespace NIPPO
         private void SearchBusiness_Button_Click(object sender, EventArgs e)
         {
             // 業務選択を行うウィンドウを表示
-            using (DataAccessClass data_access = new DataAccessClass())
+            using (SearchTasksWindow _sbw = new SearchTasksWindow() )
             {
-                int task_code = 10;
-                // Task IDのセット
-                this.task_ID = data_access.getProjectID(task_code);
+
+                _sbw.ShowDialog(this);
+                if (this.DialogResult == DialogResult.Yes)
+                {
+                }
+                else
+                {
+                }
             }
+            
+         //  using (DataAccessClass data_access = new DataAccessClass())
+         //  {
+         //      int task_code = 10;
+         //      // Task IDのセット
+         //      this.task_ID = data_access.getProjectID(task_code);
+         //  }
             this.TaskCode_Textbox.Text = "5678";
             this.TaskName_TextBox.Text = "テスト用業務";
         }

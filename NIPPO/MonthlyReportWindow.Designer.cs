@@ -86,7 +86,7 @@
             // nextMonth_button
             // 
             this.nextMonth_button.Location = new System.Drawing.Point(422, 10);
-            this.nextMonth_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.nextMonth_button.Margin = new System.Windows.Forms.Padding(2);
             this.nextMonth_button.Name = "nextMonth_button";
             this.nextMonth_button.Size = new System.Drawing.Size(22, 18);
             this.nextMonth_button.TabIndex = 1;
@@ -97,7 +97,7 @@
             // prevMonth_button
             // 
             this.prevMonth_button.Location = new System.Drawing.Point(206, 10);
-            this.prevMonth_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.prevMonth_button.Margin = new System.Windows.Forms.Padding(2);
             this.prevMonth_button.Name = "prevMonth_button";
             this.prevMonth_button.Size = new System.Drawing.Size(22, 18);
             this.prevMonth_button.TabIndex = 1;
@@ -122,7 +122,7 @@
             this.holiday_work_times_TextBox,
             this.note_TextBox});
             this.list_dataGridView.Location = new System.Drawing.Point(26, 41);
-            this.list_dataGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.list_dataGridView.Margin = new System.Windows.Forms.Padding(2);
             this.list_dataGridView.MultiSelect = false;
             this.list_dataGridView.Name = "list_dataGridView";
             this.list_dataGridView.ReadOnly = true;
@@ -284,9 +284,9 @@
             this.summary_groupBox.Controls.Add(this.totalOverTime125_label);
             this.summary_groupBox.Controls.Add(this.totalTime_label);
             this.summary_groupBox.Location = new System.Drawing.Point(666, 26);
-            this.summary_groupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.summary_groupBox.Margin = new System.Windows.Forms.Padding(2);
             this.summary_groupBox.Name = "summary_groupBox";
-            this.summary_groupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.summary_groupBox.Padding = new System.Windows.Forms.Padding(2);
             this.summary_groupBox.Size = new System.Drawing.Size(190, 112);
             this.summary_groupBox.TabIndex = 4;
             this.summary_groupBox.TabStop = false;
@@ -295,7 +295,7 @@
             // totalOverTime150_textBox
             // 
             this.totalOverTime150_textBox.Location = new System.Drawing.Point(97, 82);
-            this.totalOverTime150_textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.totalOverTime150_textBox.Margin = new System.Windows.Forms.Padding(2);
             this.totalOverTime150_textBox.Name = "totalOverTime150_textBox";
             this.totalOverTime150_textBox.ReadOnly = true;
             this.totalOverTime150_textBox.Size = new System.Drawing.Size(76, 19);
@@ -306,7 +306,7 @@
             // totalOverTime125_textBox
             // 
             this.totalOverTime125_textBox.Location = new System.Drawing.Point(97, 54);
-            this.totalOverTime125_textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.totalOverTime125_textBox.Margin = new System.Windows.Forms.Padding(2);
             this.totalOverTime125_textBox.Name = "totalOverTime125_textBox";
             this.totalOverTime125_textBox.ReadOnly = true;
             this.totalOverTime125_textBox.Size = new System.Drawing.Size(76, 19);
@@ -317,7 +317,7 @@
             // totalTime_textBox
             // 
             this.totalTime_textBox.Location = new System.Drawing.Point(97, 29);
-            this.totalTime_textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.totalTime_textBox.Margin = new System.Windows.Forms.Padding(2);
             this.totalTime_textBox.Name = "totalTime_textBox";
             this.totalTime_textBox.ReadOnly = true;
             this.totalTime_textBox.Size = new System.Drawing.Size(76, 19);
@@ -363,7 +363,7 @@
             this.collection_tabControl.Controls.Add(this.project_tabPage);
             this.collection_tabControl.Controls.Add(this.work_tabPage);
             this.collection_tabControl.Location = new System.Drawing.Point(666, 160);
-            this.collection_tabControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.collection_tabControl.Margin = new System.Windows.Forms.Padding(2);
             this.collection_tabControl.Name = "collection_tabControl";
             this.collection_tabControl.SelectedIndex = 0;
             this.collection_tabControl.Size = new System.Drawing.Size(290, 137);
@@ -372,9 +372,9 @@
             // project_tabPage
             // 
             this.project_tabPage.Location = new System.Drawing.Point(4, 22);
-            this.project_tabPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.project_tabPage.Margin = new System.Windows.Forms.Padding(2);
             this.project_tabPage.Name = "project_tabPage";
-            this.project_tabPage.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.project_tabPage.Padding = new System.Windows.Forms.Padding(2);
             this.project_tabPage.Size = new System.Drawing.Size(282, 111);
             this.project_tabPage.TabIndex = 0;
             this.project_tabPage.Text = "プロジェクト別集計";
@@ -383,9 +383,9 @@
             // work_tabPage
             // 
             this.work_tabPage.Location = new System.Drawing.Point(4, 22);
-            this.work_tabPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.work_tabPage.Margin = new System.Windows.Forms.Padding(2);
             this.work_tabPage.Name = "work_tabPage";
-            this.work_tabPage.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.work_tabPage.Padding = new System.Windows.Forms.Padding(2);
             this.work_tabPage.Size = new System.Drawing.Size(282, 111);
             this.work_tabPage.TabIndex = 1;
             this.work_tabPage.Text = "業務別集計";
@@ -394,9 +394,9 @@
             // dailyWork_groupBox
             // 
             this.dailyWork_groupBox.Location = new System.Drawing.Point(669, 319);
-            this.dailyWork_groupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dailyWork_groupBox.Margin = new System.Windows.Forms.Padding(2);
             this.dailyWork_groupBox.Name = "dailyWork_groupBox";
-            this.dailyWork_groupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dailyWork_groupBox.Padding = new System.Windows.Forms.Padding(2);
             this.dailyWork_groupBox.Size = new System.Drawing.Size(283, 152);
             this.dailyWork_groupBox.TabIndex = 6;
             this.dailyWork_groupBox.TabStop = false;
@@ -405,7 +405,7 @@
             // outputExcel_button
             // 
             this.outputExcel_button.Location = new System.Drawing.Point(26, 501);
-            this.outputExcel_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.outputExcel_button.Margin = new System.Windows.Forms.Padding(2);
             this.outputExcel_button.Name = "outputExcel_button";
             this.outputExcel_button.Size = new System.Drawing.Size(76, 26);
             this.outputExcel_button.TabIndex = 7;
@@ -415,7 +415,7 @@
             // closeWindow_button
             // 
             this.closeWindow_button.Location = new System.Drawing.Point(880, 504);
-            this.closeWindow_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.closeWindow_button.Margin = new System.Windows.Forms.Padding(2);
             this.closeWindow_button.Name = "closeWindow_button";
             this.closeWindow_button.Size = new System.Drawing.Size(76, 22);
             this.closeWindow_button.TabIndex = 7;
@@ -439,9 +439,10 @@
             this.Controls.Add(this.nextMonth_button);
             this.Controls.Add(this.FYMonth_label);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "MonthlyReportWindow";
             this.Text = "MonthlyReportWindow";
+            this.Load += new System.EventHandler(this.MonthlyReportWindow_Load);
             this.Shown += new System.EventHandler(this.Me_Shown);
             ((System.ComponentModel.ISupportInitialize)(this.list_dataGridView)).EndInit();
             this.statusStrip1.ResumeLayout(false);
