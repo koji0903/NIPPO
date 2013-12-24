@@ -293,7 +293,7 @@ namespace NIPPO
             Microsoft.Office.Interop.Excel.Application oXls = null;
             Microsoft.Office.Interop.Excel.Workbooks oBooks = null;
             Microsoft.Office.Interop.Excel.Workbook oWBook = null;
-            Microsoft.Office.Interop.Excel.Sheets oSheets;
+            //Microsoft.Office.Interop.Excel.Sheets oSheets;
             Microsoft.Office.Interop.Excel.Worksheet oSheet = null;
             Microsoft.Office.Interop.Excel.Range oRange = null;
             object objCell = null;
@@ -332,23 +332,28 @@ namespace NIPPO
 
                 oSheet = (Microsoft.Office.Interop.Excel.Worksheet)oWBook.Sheets[_sheetNo];
 
-                objCell = oSheet.Cells[_line + 0, _col];
-                oRange = oSheet.get_Range(objCell, objCell);
-                oRange.Value2 = "100";
-                Marshal.ReleaseComObject(oRange); 
-                Marshal.ReleaseComObject(objCell);
+                this.excelWriteYear(oSheet);    // A1
+                this.excelWriteMonth(oSheet);   // A2
+                this.excelWriteUser(oSheet);    // B3
+                this.excelWriteRowAll(oSheet);    // A8～A38
 
-                objCell = oSheet.Cells[_line + 1, _col];
-                oRange = oSheet.get_Range(objCell, objCell);
-                oRange.Value2 = "200";
-                Marshal.ReleaseComObject(oRange); 
-                Marshal.ReleaseComObject(objCell);
+                //objCell = oSheet.Cells[_line + 0, _col];
+                //oRange = oSheet.get_Range(objCell, objCell);
+                //oRange.Value2 = "100";
+                //Marshal.ReleaseComObject(oRange); 
+                //Marshal.ReleaseComObject(objCell);
+
+                //objCell = oSheet.Cells[_line + 1, _col];
+                //oRange = oSheet.get_Range(objCell, objCell);
+                //oRange.Value2 = "200";
+                //Marshal.ReleaseComObject(oRange); 
+                //Marshal.ReleaseComObject(objCell);
 
                 // ファイル保存
                 Microsoft.Office.Core.FileDialog foDlg;
                 foDlg = oXls.get_FileDialog(
                     Microsoft.Office.Core.MsoFileDialogType.msoFileDialogSaveAs);
-                foDlg.InitialFileName = "test.xlsx";
+                foDlg.InitialFileName = "test.xls";
                 if (foDlg.Show() != 0)
                 {
                     foDlg.Execute();
@@ -393,5 +398,104 @@ namespace NIPPO
                 System.GC.Collect();                            // オブジェクトを確実に削除
             }
         }
+
+        private void excelWriteCommon(Microsoft.Office.Interop.Excel.Worksheet oSheet,
+            int _row, int _col, string _val)
+        {
+            Microsoft.Office.Interop.Excel.Range oRange = null;
+            object objCell = null;
+
+            objCell = oSheet.Cells[_row, _col];
+            oRange = oSheet.get_Range(objCell, objCell);
+            oRange.Value2 = _val;
+            Marshal.ReleaseComObject(oRange);
+            Marshal.ReleaseComObject(objCell);
+            return;
+        }
+
+        private void excelWriteYear(Microsoft.Office.Interop.Excel.Worksheet oSheet)
+        {
+            string str = this.getCalYear() + "年";
+            excelWriteCommon(oSheet, 1, 1, str);
+            return;
+        }
+
+        private void excelWriteMonth(Microsoft.Office.Interop.Excel.Worksheet oSheet)
+        {
+            string str = this._month + "月";
+            excelWriteCommon(oSheet, 2, 1, str);
+            return;
+        }
+
+        private void excelWriteUser(Microsoft.Office.Interop.Excel.Worksheet oSheet)
+        {
+            string str = excelGetUserName(this._userID);
+            excelWriteCommon(oSheet, 3, 2, str);
+            return;
+        }
+
+        public string excelGetUserName(int userID)
+        {
+            SqlConnection connection = new SqlConnection();
+            SqlCommand command = new SqlCommand();
+            DataSet ds = new DataSet();
+
+            connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
+
+            using (SqlDataAdapter adapter = new SqlDataAdapter())
+            {
+                try
+                {
+                    command.Connection = connection;
+                    command.CommandText = @"SELECT lastname,firstname"
+                        + " FROM users"
+                        + " WHERE users.ID='"
+                        + userID + "';";
+                    adapter.SelectCommand = command;
+                    adapter.Fill(ds, "user");
+                }
+                catch
+                {
+                    return "不明なユーザ";
+                }
+            }
+            return ds.Tables["user"].Rows[0]["lastname"] +  " "
+                + ds.Tables["user"].Rows[0]["firstname"];
+        }
+
+        private void excelWriteRowAll(Microsoft.Office.Interop.Excel.Worksheet oSheet)
+        {
+            for (int i = 0;
+                i < DateTime.DaysInMonth(this.getCalYear(), this._month);
+                i++)
+            {
+                excelWriteDay(oSheet,i);
+                excelWriteWeek(oSheet, i);
+                excelWriteHoliday(oSheet, i);
+            }
+            return;
+        }
+
+        private void excelWriteDay(Microsoft.Office.Interop.Excel.Worksheet oSheet, int index)
+        {
+            string str = this.getCalYear() + "/" + this._month + "/" + (index + 1).ToString();
+            excelWriteCommon(oSheet, 8 + index, 1, str);
+            return;
+        }
+
+        private void excelWriteWeek(Microsoft.Office.Interop.Excel.Worksheet oSheet, int index)
+        {
+            DateTime _date = new DateTime(this.getCalYear(), this._month, index + 1);
+            excelWriteCommon(oSheet, 8 + index, 2, _date.ToString("ddd"));
+            return;
+        }
+
+        private void excelWriteHoliday(Microsoft.Office.Interop.Excel.Worksheet oSheet, int index)
+        {
+            string str = "";
+            excelWriteCommon(oSheet, 8 + index, 3, str);
+            return;
+        }
+
     }
 }
