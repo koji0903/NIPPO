@@ -81,6 +81,9 @@ INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VA
 SET @d = (SELECT ID FROM sections WHERE name = '総務部');
 INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES (2,1234,'false','大阿蘇','二郎',@d);
 INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES (3,1234,'false','天草','三郎',@d);
+INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES (4,1234,'false','櫻木','誠',@d);
+INSERT INTO users (login,password,delete_flag,lastname,firstname) VALUES (5,1234,'false','櫻木','ダミー');
+
 
 --
 -- projects
@@ -123,6 +126,20 @@ INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,note) V
 
 SET @d = (SELECT ID FROM users WHERE login = '3');
 INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,note) VALUES (@d,2013,12,14,2013,'2013-12-14 8:45:00','2013-12-14 17:30:00','通常勤務');
+
+SET @d = (SELECT ID FROM users WHERE login = '4');
+INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,work_times,overtime125,overtime150)
+VALUES (@d,2013,12,1,2013,'2013-12-01 8:45:00','2013-12-01 17:30:00',7.75,0.00,0.00);
+INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,work_times,overtime125,overtime150)
+VALUES (@d,2013,12,2,2013,'2013-12-02 8:45:00','2013-12-02 19:00:00',8.75,1.00,0.00);
+INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,work_times,overtime125,overtime150)
+VALUES (@d,2013,12,3,2013,'2013-12-03 8:45:00','2013-12-03 23:00:00',12.75,4.00,1.00);
+INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,work_times,overtime125,overtime150)
+VALUES (@d,2013,12,4,2013,'2013-12-04 8:45:00','2013-12-04 17:30:00',7.75,0.00,0.00);
+INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,work_times,overtime125,overtime150)
+VALUES (@d,2013,12,7,2013,'2013-12-07 8:45:00','2013-12-07 18:30:00',7.75,0.50,0.00);
+INSERT INTO work_reports (users_ID,year,month,day,FY,start_time,end_time,work_times,overtime125,overtime150)
+VALUES (@d,2013,12,14,2013,'2013-12-14 8:45:00','2013-12-14 17:30:00',7.75,0.00,0.00);
 
 --
 -- work_detail　（特殊扱い）

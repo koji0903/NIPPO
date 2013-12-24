@@ -5,6 +5,7 @@ using System.Text;
 using NUnit.Framework;
 using NIPPO;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace NIPPO_test
 {
@@ -13,6 +14,35 @@ namespace NIPPO_test
     class MonthlyReport_test
     {
         private string listTableName = "MonthlyReport"; // ここはあえてベタ書きにしておく
+        private string ConnectionString = @"Data Source=localhost\SQLEXPRESS;Initial Catalog=nippo_db;User ID=nippo;password=KSK1217";
+        private string testLoginNo = "4";
+
+        private int getUserID(string login)
+        {
+            SqlConnection connection = new SqlConnection();
+            SqlCommand command = new SqlCommand();
+            DataSet ds = new DataSet();
+
+            connection.ConnectionString = this.ConnectionString;
+
+            using (SqlDataAdapter adapter = new SqlDataAdapter())
+            {
+                try
+                {
+                    command.Connection = connection;
+                    command.CommandText = @"SELECT ID"
+                        + " FROM users"
+                        + " WHERE login='" + login + "';";
+                    adapter.SelectCommand = command;
+                    adapter.Fill(ds, "user");
+                }
+                catch
+                {
+                    return -1;
+                }
+            }
+            return int.Parse(ds.Tables["user"].Rows[0]["ID"].ToString());
+        }
 
         // 追加：ここにイチからテストを書く
         [Test]
@@ -39,7 +69,8 @@ namespace NIPPO_test
         [Test]
         public void カレンダーイヤー計算のテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
             _mr.setMonth(4);
             Assert.AreEqual(2013, _mr.getCalYear());
             _mr.setMonth(12);
@@ -55,7 +86,8 @@ namespace NIPPO_test
         [Test]
         public void 年月の文字列生成のテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
             _mr.setMonth(4);
             Assert.AreEqual("2013年04月", _mr.getStringYearMonth());
             _mr.setMonth(11);
@@ -67,7 +99,8 @@ namespace NIPPO_test
         [Test]
         public void 月カウントアップのテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
             _mr.setMonth(11);
             _mr.incrMonth();
             Assert.AreEqual("2013年12月", _mr.getStringYearMonth());
@@ -82,7 +115,8 @@ namespace NIPPO_test
         [Test]
         public void 次の月があるかのテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
             _mr.setMonth(4);
             Assert.AreEqual(true, _mr.existsNextMonth());
             _mr.setMonth(12);
@@ -96,7 +130,8 @@ namespace NIPPO_test
         [Test]
         public void 前の月があるかのテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
             _mr.setMonth(3);
             Assert.AreEqual(true, _mr.existsPrevMonth());
             _mr.setMonth(1);
@@ -110,7 +145,8 @@ namespace NIPPO_test
         [Test]
         public void DataSetがカレンダーになっているか()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
             _mr.setMonth(12);
             DataSet _ds = _mr.getMonthlyWorkReport();            
             Assert.AreEqual(1, _ds.Tables[this.listTableName].Rows[0]["day"]);
@@ -128,20 +164,22 @@ namespace NIPPO_test
         [Test]
         public void 正しい日付にセットされているか()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
             _mr.setMonth(12);
             DataSet _ds = _mr.getMonthlyWorkReport();
-            Assert.AreEqual("通常勤務", _ds.Tables[this.listTableName].Rows[13]["note"]);
+            Assert.AreEqual(1.0, _ds.Tables[this.listTableName].Rows[1]["overtime125"]);
         }
 
         [Test]
         public void 勤務合計時間のテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
             // 正しい合計時間か
             _mr.setMonth(12);
             DataSet _ds = _mr.getMonthlyWorkReport();
-            Assert.AreEqual("27 h", _mr.getTotalTimeText());
+            Assert.AreEqual("52.5 h", _mr.getTotalTimeText());
             // 合計が0
             _mr.setMonth(9);
             _ds = _mr.getMonthlyWorkReport();
@@ -156,11 +194,12 @@ namespace NIPPO_test
         [Test]
         public void 超過勤務合計時間のテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
             // 正しい合計時間か
             _mr.setMonth(12);
             DataSet _ds = _mr.getMonthlyWorkReport();
-            Assert.AreEqual("5 h", _mr.getTotalOverTime125Text());
+            Assert.AreEqual("5.5 h", _mr.getTotalOverTime125Text());
             // 合計が0
             _mr.setMonth(9);
             _ds = _mr.getMonthlyWorkReport();
@@ -175,11 +214,12 @@ namespace NIPPO_test
         [Test]
         public void 深夜勤務合計時間のテスト()
         {
-            MonthlyReport _mr = new MonthlyReport(2013, 1);
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
             // 正しい合計時間か
             _mr.setMonth(12);
             DataSet _ds = _mr.getMonthlyWorkReport();
-            Assert.AreEqual("0 h", _mr.getTotalOverTime150Text());
+            Assert.AreEqual("1 h", _mr.getTotalOverTime150Text());
             // 合計が0
             _mr.setMonth(9);
             _ds = _mr.getMonthlyWorkReport();
