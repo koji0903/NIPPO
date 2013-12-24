@@ -231,5 +231,18 @@ namespace NIPPO_test
             Assert.AreEqual("0 h", _mr.getTotalOverTime150Text());
         }
 
+        [Test]
+        public void 祝日のデータセットを取得できるか()
+        {
+            int userID = this.getUserID(testLoginNo);
+            MonthlyReport _mr = new MonthlyReport(2013, userID);
+            _mr.setMonth(12);
+            DataSet _ds = _mr.getHolidayListDs();
+            Assert.AreEqual(1, _ds.Tables[0].Rows[0]["day"]);
+            Assert.AreEqual(7, _ds.Tables[0].Rows[1]["day"]);
+            Assert.AreEqual(8, _ds.Tables[0].Rows[2]["day"]);
+            Assert.AreEqual(12, _ds.Tables[0].Rows.Count);
+        }
+
     }
 }
