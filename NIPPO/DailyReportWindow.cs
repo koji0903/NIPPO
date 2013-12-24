@@ -231,8 +231,17 @@ namespace NIPPO
         /// <param name="e"></param>
         private void Delete_Button_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show(
+                "データを削除します。よろしいですか？",
+                "確認",
+                MessageBoxButtons.OKCancel,
+                MessageBoxIcon.Exclamation,
+                MessageBoxDefaultButton.Button2);
             // カーソル行のデータを削除（フラグたて）し、データセットを更新
-            this.daily.deleteRow(ds, WorkDetail_DateGridView.CurrentCell.RowIndex);
+            if (result == DialogResult.OK)
+            {
+                this.daily.deleteRow(ds, WorkDetail_DateGridView.CurrentCell.RowIndex);
+            }
         }
 
         /// <summary>
