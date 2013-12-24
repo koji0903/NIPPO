@@ -73,13 +73,14 @@ namespace NIPPO
                 this.Calender_Label.Text = daily.GetDateStr(this.year, this.month, this.day);
             }
 
-            // データベースへのアクセスはここで
+            // データベースへのアクセス
             using (DataAccessClass data_access = new DataAccessClass())
             {
-                // work_detail
+                // work_detailテーブルの作成
                 ds = data_access.GetWorkDetailDs(this.userID, this.year, this.month, this.day);
-                // work_reports
+                // work_reportsテーブルの作成
                 ds.Merge(data_access.GetWorkReportsDS(this.userID, this.year, this.month, this.day));
+                // 更新時の比較用に初期時のデータをコピー
                 ds_org = ds.Copy();
             }
 
@@ -302,74 +303,74 @@ namespace NIPPO
         {
             // 勤務時間と、作業割り当て時間の割り振りチェック
             // データベースへの更新作業
+            DialogResult time_cmp = DialogResult.OK;
             using (DailyReport daily = new DailyReport())
             {
                 String ret = daily.timeCompare(this.work_time, this.regist_time);
                 if (ret != "")
                 {
-                    DialogResult res = MessageBox.Show(
+                    time_cmp = MessageBox.Show(
                       　ret,
                         "メッセージ",
                         MessageBoxButtons.OKCancel,
                         MessageBoxIcon.Exclamation,
                         MessageBoxDefaultButton.Button2);
-                    //何が選択されたか調べる
-                    if (res == DialogResult.Cancel)
-                    {
-                        return;
-                    }
-
                 }
 
             }
-
-            // データベース（work_detail）への更新作業
-            using (DataAccessClass data_access = new DataAccessClass())
-            {
-                data_access.Update(ds, "work_detail");
-            }
-
-
-            // データベース（work_report）更新作業
-            using (DailyReport daily = new DailyReport())
-            {
-                try
-                {
-                    // 更新作業
-                    DataTable dt = ds.Tables["work_reports"];
-                    DataRow dr = dt.Rows[0];
-                    dr["start_time"] = daily.GetTime(this.year, this.month, this.day, int.Parse(this.StartTime_Hour_Combobox.Text), int.Parse(this.StartTime_Second_Combobox.Text));
-                    dr["end_time"] = daily.GetTime(this.year, this.month, this.day, int.Parse(this.EndTime_Hour_Combobox.Text), int.Parse(this.EndTime_Second_Combobox.Text));
-                    dr["work_times"] = this.time[0];
-                    dr["overtime125"] = this.time[2];
-                    dr["overtime150"] = this.time[3];
-                    dr["rest_time"] = this.time[1];
-
-                    // データベースへの更新作業
-                    using (DataAccessClass data_access = new DataAccessClass())
-                    {
-                        data_access.Update(ds, "work_reports");
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }                    
-
-            }
-
-            DialogResult result = MessageBox.Show(
-                "日報情報を更新しました。",
-                "実行完了",
-                MessageBoxButtons.OK,
-                MessageBoxIcon.Exclamation,
-                MessageBoxDefaultButton.Button2);
 
             //何が選択されたか調べる
-            if (result == DialogResult.OK)
+            if (time_cmp != DialogResult.Cancel)
             {
-                //「はい」が選択された時、それ以外の場合は元に戻る
-                this.Close();
+
+                // データベース（work_detail）への更新作業
+                using (DataAccessClass data_access = new DataAccessClass())
+                {
+                    data_access.Update(ds, "work_detail");
+                }
+
+
+                // データベース（work_report）更新作業
+                using (DailyReport daily = new DailyReport())
+                {
+                    try
+                    {
+                        // 更新作業
+                        DataTable dt = ds.Tables["work_reports"];
+                        DataRow dr = dt.Rows[0];
+                        dr["start_time"] = daily.GetTime(this.year, this.month, this.day, int.Parse(this.StartTime_Hour_Combobox.Text), int.Parse(this.StartTime_Second_Combobox.Text));
+                        dr["end_time"] = daily.GetTime(this.year, this.month, this.day, int.Parse(this.EndTime_Hour_Combobox.Text), int.Parse(this.EndTime_Second_Combobox.Text));
+                        dr["work_times"] = this.time[0];
+                        dr["overtime125"] = this.time[2];
+                        dr["overtime150"] = this.time[3];
+                        dr["rest_time"] = this.time[1];
+
+                        // データベースへの更新作業
+                        using (DataAccessClass data_access = new DataAccessClass())
+                        {
+                            data_access.Update(ds, "work_reports");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
+                }
+
+                DialogResult result = MessageBox.Show(
+                    "日報情報を更新しました。",
+                    "実行完了",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button2);
+
+                //何が選択されたか調べる
+                if (result == DialogResult.OK)
+                {
+                    //「はい」が選択された時、それ以外の場合は元に戻る
+                    this.Close();
+                }
             }
         }
 

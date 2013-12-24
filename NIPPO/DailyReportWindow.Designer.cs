@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.WorkDetail_DateGridView = new System.Windows.Forms.DataGridView();
             this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -145,10 +145,10 @@
             // time_TextBox
             // 
             this.time_TextBox.DataPropertyName = "times";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle3.Format = "N2";
+            dataGridViewCellStyle3.NullValue = null;
+            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle3;
             this.time_TextBox.HeaderText = "時間";
             this.time_TextBox.Name = "time_TextBox";
             this.time_TextBox.ReadOnly = true;
@@ -779,7 +779,6 @@
             // 
             // Regist_Button
             // 
-            this.Regist_Button.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Regist_Button.Location = new System.Drawing.Point(658, 466);
             this.Regist_Button.Name = "Regist_Button";
             this.Regist_Button.Size = new System.Drawing.Size(75, 23);
