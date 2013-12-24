@@ -8,6 +8,9 @@ namespace NIPPO
 {
     public class DailyReport : IDisposable
     {
+        public DailyReport()
+        {
+        }
         /// <summary>
         /// 表示用の年月日曜日文字列を作成
         /// </summary>

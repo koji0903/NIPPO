@@ -23,6 +23,8 @@ namespace NIPPO
         private double work_time, regist_time;
         // 上部表示用
         Double[] time;
+        private DailyReport daily;
+
 
         /// <summary>
         /// コンストラクタ
@@ -49,6 +51,9 @@ namespace NIPPO
             // 作業登録時間（比較用）
             this.regist_time = 0.0;
             time = new Double[] { 0.00, 0.00, 0.00, 0.00 };
+
+            daily = new DailyReport();
+
         }
 
         /// <summary>
@@ -68,11 +73,8 @@ namespace NIPPO
         private void DailyReportWindow_Shown(object sender, EventArgs e)
         {
             // 年月日情報の表示
-            using (DailyReport daily = new DailyReport())
-            {
-                this.Calender_Label.Text = daily.GetDateStr(this.year, this.month, this.day);
-            }
-
+            this.Calender_Label.Text = daily.GetDateStr(this.year, this.month, this.day);
+ 
             // データベースへのアクセス
             using (DataAccessClass data_access = new DataAccessClass())
             {
@@ -113,11 +115,8 @@ namespace NIPPO
             }
 
             // 作業合計時間の表示                    
-            using (DailyReport daily = new DailyReport())
-            {
-                this.regist_time = daily.getTotalWorkTime(ds);
-                this.TotalWorkTime_Textbox.Text = this.regist_time.ToString("F2") + "h";                     
-            }
+            this.regist_time = this.daily.getTotalWorkTime(ds);
+            this.TotalWorkTime_Textbox.Text = this.regist_time.ToString("F2") + "h";                     
         }
 
 
@@ -167,27 +166,23 @@ namespace NIPPO
         /// </summary>
         private void Set_WorkTime_Textbox()
         {
+            string start_hour, start_second, end_hour, end_second;
+            start_hour = this.StartTime_Hour_Combobox.Text;
+            start_second = this.StartTime_Second_Combobox.Text;
+            end_hour = this.EndTime_Hour_Combobox.Text;
+            end_second = this.EndTime_Second_Combobox.Text;
 
-            using (DailyReport _daily = new DailyReport())
-            {
-                string start_hour, start_second, end_hour, end_second;
-                start_hour = this.StartTime_Hour_Combobox.Text;
-                start_second = this.StartTime_Second_Combobox.Text;
-                end_hour = this.EndTime_Hour_Combobox.Text;
-                end_second = this.EndTime_Second_Combobox.Text;
+            // 勤務時間の計算
+            this.time = daily.GetWorkTime(
+                this.year,
+                this.month,
+                this.day,
+                int.Parse(start_hour),
+                int.Parse(start_second),
+                int.Parse(end_hour),
+                int.Parse(end_second)
+            );
 
-                // 勤務時間の計算
-                this.time = _daily.GetWorkTime(
-                    this.year,
-                    this.month,
-                    this.day,
-                    int.Parse(start_hour),
-                    int.Parse(start_second),
-                    int.Parse(end_hour),
-                    int.Parse(end_second)
-                );
-
-            }
             // Textフィールドに値を表示
             this.work_time = time[0];
             this.WorkTime_Textbox.Text = this.time[0].ToString("F2") + "h";
@@ -243,11 +238,8 @@ namespace NIPPO
         /// <param name="e"></param>
         private void Delete_Button_Click(object sender, EventArgs e)
         {
-            // カーソル行の行ナンバーを取得
-            using (DailyReport daily = new DailyReport())
-            {
-                ds = daily.deleteRow(ds, WorkDetail_DateGridView.CurrentCell.RowIndex);
-            }
+            // カーソル行のデータを削除（フラグたて）し、データセットを更新
+            this.daily.deleteRow(ds, WorkDetail_DateGridView.CurrentCell.RowIndex);
         }
 
         /// <summary>
@@ -287,11 +279,8 @@ namespace NIPPO
             }
 
             // 作業合計時間の表示                    
-            using (DailyReport daily = new DailyReport())
-            {
-                this.regist_time = daily.getTotalWorkTime(ds);
+                this.regist_time = this.daily.getTotalWorkTime(ds);
                 this.TotalWorkTime_Textbox.Text = this.regist_time.ToString("F2") + "h";
-            }
         }
 
         /// <summary>
@@ -304,8 +293,6 @@ namespace NIPPO
             // 勤務時間と、作業割り当て時間の割り振りチェック
             // データベースへの更新作業
             DialogResult time_cmp = DialogResult.OK;
-            using (DailyReport daily = new DailyReport())
-            {
                 String ret = daily.timeCompare(this.work_time, this.regist_time);
                 if (ret != "")
                 {
@@ -315,9 +302,8 @@ namespace NIPPO
                         MessageBoxButtons.OKCancel,
                         MessageBoxIcon.Exclamation,
                         MessageBoxDefaultButton.Button2);
-                }
 
-            }
+               }
 
             //何が選択されたか調べる
             if (time_cmp != DialogResult.Cancel)
@@ -331,8 +317,6 @@ namespace NIPPO
 
 
                 // データベース（work_report）更新作業
-                using (DailyReport daily = new DailyReport())
-                {
                     try
                     {
                         // 更新作業
@@ -356,7 +340,6 @@ namespace NIPPO
                         MessageBox.Show(ex.Message);
                     }
 
-                }
 
                 DialogResult result = MessageBox.Show(
                     "日報情報を更新しました。",
@@ -383,8 +366,6 @@ namespace NIPPO
         private void Cancel_Button_Click(object sender, EventArgs e)
         {
             // 更新データがあるかどうかの確認
-            using (DailyReport daily = new DailyReport())
-            {
                 if (daily.DataSetCompare(ds, ds_org, "work_detail"))
                 {
                     // 更新がない場合は、確認なしでそのままWindowクローズ
@@ -407,7 +388,6 @@ namespace NIPPO
                         this.Close();
                     }
                 }
-            }
         }
 
 
