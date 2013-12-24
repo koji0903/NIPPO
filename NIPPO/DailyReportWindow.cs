@@ -251,35 +251,62 @@ namespace NIPPO
         /// <param name="e"></param>
         private void Add_Button_Click(object sender, EventArgs e)
         {
+            bool same_data = false;
             // 業務詳細の枠から必要な情報を取得して、データセットを更新
             DataTable dt = ds.Tables["work_detail"];
-            DataRow dr = dt.NewRow();
-            dr["name"] = this.ProjectName_Textbox.Text;
-            dr["name1"] = this.TaskName_TextBox.Text;
-            dr["note"] = this.Description_Textbox.Text;
-            dr["times"] = this.WokTime_DomainUpDown.Text;
-            dr["projects_ID"] = this.project_ID;
-            dr["tasks_ID"] = this.task_ID;
-            using (DataAccessClass data_access = new DataAccessClass())
+            // 既存に同じデータがないかどうかをチェック
+            foreach (DataRow drCurrent in dt.Rows)
             {
-                dr["work_reports_ID"] = data_access.GetWorkReportID(this.userID, this.year, this.month, this.day);
+                if (( this.ProjectName_Textbox.Text.ToString() == (string)drCurrent["name"] )
+                    && ( this.TaskName_TextBox.Text.ToString() == (string)drCurrent["name1"] )
+                    )
+                {
+                    same_data = true;
+                }
             }
 
-            if ((string)dr["name"] != "" && (string)dr["name1"] != "" && (double)dr["times"] > 0.0)
+            if (same_data)
             {
-                // データセット更新
-                dt.Rows.Add(dr);
-            }
-            else
-            {
-                // 入力情報不足の場合のワーニングメッセージ出力
-                // 動作としては”OK”ボタンを押して、元の画面に戻る
+                // メッセージウィンドウを表示してアクションキャンセル
                 DialogResult result = MessageBox.Show(
-                    "入力情報が不足しています。",
-                    "ワーニング",
+                    "既に同等の業務詳細(同じプロジェクト、業務）が登録されています。異なる業務詳細を指定してください。",
+                    "メッセージ",
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Exclamation,
                     MessageBoxDefaultButton.Button2);
+
+            }
+            else
+            {
+                // 新規データテーブル作成
+                DataRow dr = dt.NewRow();
+                dr["name"] = this.ProjectName_Textbox.Text;
+                dr["name1"] = this.TaskName_TextBox.Text;
+                dr["note"] = this.Description_Textbox.Text;
+                dr["times"] = this.WokTime_DomainUpDown.Text;
+                dr["projects_ID"] = this.project_ID;
+                dr["tasks_ID"] = this.task_ID;
+                using (DataAccessClass data_access = new DataAccessClass())
+                {
+                    dr["work_reports_ID"] = data_access.GetWorkReportID(this.userID, this.year, this.month, this.day);
+                }
+
+                if ((string)dr["name"] != "" && (string)dr["name1"] != "" && (double)dr["times"] > 0.0)
+                {
+                    // データセット更新
+                    dt.Rows.Add(dr);
+                }
+                else
+                {
+                    // 入力情報不足の場合のワーニングメッセージ出力
+                    // 動作としては”OK”ボタンを押して、元の画面に戻る
+                    DialogResult result = MessageBox.Show(
+                        "入力情報が不足しています。",
+                        "ワーニング",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button2);
+                }
             }
 
             // 作業合計時間の表示                    
