@@ -30,6 +30,14 @@
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.WorkDetail_DateGridView = new System.Windows.Forms.DataGridView();
+            this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.task_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.wordreportID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.projectID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taskID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Calender_Label = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.NightOverTime_Textbox = new System.Windows.Forms.TextBox();
@@ -71,14 +79,6 @@
             this.Remark_Textbox = new System.Windows.Forms.TextBox();
             this.Regist_Button = new System.Windows.Forms.Button();
             this.Cancel_Button = new System.Windows.Forms.Button();
-            this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.task_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.note_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.wordreportID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.projectID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.taskID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.WorkDetail_DateGridView)).BeginInit();
             this.panel1.SuspendLayout();
             this.workDetail_groupBox.SuspendLayout();
@@ -109,6 +109,74 @@
             this.WorkDetail_DateGridView.Size = new System.Drawing.Size(780, 127);
             this.WorkDetail_DateGridView.TabIndex = 0;
             this.WorkDetail_DateGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.WorkDetail_DateGridView_CellContentClick);
+            // 
+            // ID_TextBox
+            // 
+            this.ID_TextBox.DataPropertyName = "ID";
+            this.ID_TextBox.HeaderText = "ID";
+            this.ID_TextBox.Name = "ID_TextBox";
+            this.ID_TextBox.ReadOnly = true;
+            this.ID_TextBox.Visible = false;
+            // 
+            // name
+            // 
+            this.name.DataPropertyName = "name";
+            this.name.HeaderText = "プロジェクト名";
+            this.name.Name = "name";
+            this.name.ReadOnly = true;
+            this.name.Width = 200;
+            // 
+            // task_TextBox
+            // 
+            this.task_TextBox.DataPropertyName = "name1";
+            this.task_TextBox.HeaderText = "業務名";
+            this.task_TextBox.Name = "task_TextBox";
+            this.task_TextBox.ReadOnly = true;
+            this.task_TextBox.Width = 300;
+            // 
+            // note_TextBox
+            // 
+            this.note_TextBox.DataPropertyName = "note";
+            this.note_TextBox.HeaderText = "備考";
+            this.note_TextBox.Name = "note_TextBox";
+            this.note_TextBox.ReadOnly = true;
+            this.note_TextBox.Width = 200;
+            // 
+            // time_TextBox
+            // 
+            this.time_TextBox.DataPropertyName = "times";
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle1;
+            this.time_TextBox.HeaderText = "時間";
+            this.time_TextBox.Name = "time_TextBox";
+            this.time_TextBox.ReadOnly = true;
+            this.time_TextBox.Width = 80;
+            // 
+            // wordreportID_TextBox
+            // 
+            this.wordreportID_TextBox.DataPropertyName = "work_reports_ID";
+            this.wordreportID_TextBox.HeaderText = "ワークレポートID";
+            this.wordreportID_TextBox.Name = "wordreportID_TextBox";
+            this.wordreportID_TextBox.ReadOnly = true;
+            this.wordreportID_TextBox.Visible = false;
+            // 
+            // projectID_TextBox
+            // 
+            this.projectID_TextBox.DataPropertyName = "projects_ID";
+            this.projectID_TextBox.HeaderText = "プロジェクトID";
+            this.projectID_TextBox.Name = "projectID_TextBox";
+            this.projectID_TextBox.ReadOnly = true;
+            this.projectID_TextBox.Visible = false;
+            // 
+            // taskID_TextBox
+            // 
+            this.taskID_TextBox.DataPropertyName = "tasks_ID";
+            this.taskID_TextBox.HeaderText = "タスクID";
+            this.taskID_TextBox.Name = "taskID_TextBox";
+            this.taskID_TextBox.ReadOnly = true;
+            this.taskID_TextBox.Visible = false;
             // 
             // Calender_Label
             // 
@@ -711,6 +779,7 @@
             // 
             // Regist_Button
             // 
+            this.Regist_Button.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.Regist_Button.Location = new System.Drawing.Point(658, 466);
             this.Regist_Button.Name = "Regist_Button";
             this.Regist_Button.Size = new System.Drawing.Size(75, 23);
@@ -721,6 +790,7 @@
             // 
             // Cancel_Button
             // 
+            this.Cancel_Button.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.Cancel_Button.Location = new System.Drawing.Point(739, 465);
             this.Cancel_Button.Name = "Cancel_Button";
             this.Cancel_Button.Size = new System.Drawing.Size(75, 23);
@@ -728,74 +798,6 @@
             this.Cancel_Button.Text = "キャンセル";
             this.Cancel_Button.UseVisualStyleBackColor = true;
             this.Cancel_Button.Click += new System.EventHandler(this.Cancel_Button_Click);
-            // 
-            // ID_TextBox
-            // 
-            this.ID_TextBox.DataPropertyName = "ID";
-            this.ID_TextBox.HeaderText = "ID";
-            this.ID_TextBox.Name = "ID_TextBox";
-            this.ID_TextBox.ReadOnly = true;
-            this.ID_TextBox.Visible = false;
-            // 
-            // name
-            // 
-            this.name.DataPropertyName = "name";
-            this.name.HeaderText = "プロジェクト名";
-            this.name.Name = "name";
-            this.name.ReadOnly = true;
-            this.name.Width = 200;
-            // 
-            // task_TextBox
-            // 
-            this.task_TextBox.DataPropertyName = "name1";
-            this.task_TextBox.HeaderText = "業務名";
-            this.task_TextBox.Name = "task_TextBox";
-            this.task_TextBox.ReadOnly = true;
-            this.task_TextBox.Width = 300;
-            // 
-            // note_TextBox
-            // 
-            this.note_TextBox.DataPropertyName = "note";
-            this.note_TextBox.HeaderText = "備考";
-            this.note_TextBox.Name = "note_TextBox";
-            this.note_TextBox.ReadOnly = true;
-            this.note_TextBox.Width = 200;
-            // 
-            // time_TextBox
-            // 
-            this.time_TextBox.DataPropertyName = "times";
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle1.Format = "N2";
-            dataGridViewCellStyle1.NullValue = null;
-            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle1;
-            this.time_TextBox.HeaderText = "時間";
-            this.time_TextBox.Name = "time_TextBox";
-            this.time_TextBox.ReadOnly = true;
-            this.time_TextBox.Width = 80;
-            // 
-            // wordreportID_TextBox
-            // 
-            this.wordreportID_TextBox.DataPropertyName = "work_reports_ID";
-            this.wordreportID_TextBox.HeaderText = "ワークレポートID";
-            this.wordreportID_TextBox.Name = "wordreportID_TextBox";
-            this.wordreportID_TextBox.ReadOnly = true;
-            this.wordreportID_TextBox.Visible = false;
-            // 
-            // projectID_TextBox
-            // 
-            this.projectID_TextBox.DataPropertyName = "projects_ID";
-            this.projectID_TextBox.HeaderText = "プロジェクトID";
-            this.projectID_TextBox.Name = "projectID_TextBox";
-            this.projectID_TextBox.ReadOnly = true;
-            this.projectID_TextBox.Visible = false;
-            // 
-            // taskID_TextBox
-            // 
-            this.taskID_TextBox.DataPropertyName = "tasks_ID";
-            this.taskID_TextBox.HeaderText = "タスクID";
-            this.taskID_TextBox.Name = "taskID_TextBox";
-            this.taskID_TextBox.ReadOnly = true;
-            this.taskID_TextBox.Visible = false;
             // 
             // DailyReportWindow
             // 
