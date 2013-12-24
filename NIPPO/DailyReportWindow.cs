@@ -105,7 +105,7 @@ namespace NIPPO
                     this.EndTime_Second_Combobox.Text = end_time.ToString("%m");
                 }
             }
-            this.Set_WorkTime_Textbox();
+            this.Set_WorkTime_Textbox("start");
 
             // DataGridへの表示
             this.WorkDetail_DateGridView.DataSource = ds;
@@ -127,8 +127,9 @@ namespace NIPPO
         /// <param name="e"></param>
         private void StartTime_Hour_Combobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Set_WorkTime_Textbox();
+            this.Set_WorkTime_Textbox("start");
         }
+
 
         /// <summary>
         /// "勤務開始時刻"の"分"の指定が変わった時のイベント
@@ -137,7 +138,7 @@ namespace NIPPO
         /// <param name="e"></param>
         private void StartTime_Second_Combobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Set_WorkTime_Textbox();
+            this.Set_WorkTime_Textbox("start");
         }
 
         /// <summary>
@@ -147,7 +148,7 @@ namespace NIPPO
         /// <param name="e"></param>
         private void EndTime_Hour_Combobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Set_WorkTime_Textbox();
+            this.Set_WorkTime_Textbox("end");
         }
 
         /// <summary>
@@ -157,15 +158,40 @@ namespace NIPPO
         /// <param name="e"></param>
         private void EndTime_Second_Combobox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.Set_WorkTime_Textbox();
+            this.Set_WorkTime_Textbox("end");
         }
 
         /// <summary>
         /// 勤務開始時間（時、分）、勤務終了時間（時、分）の値が変わった場合に、データを自動取得して、
         /// 勤務時間を計算
         /// </summary>
-        private void Set_WorkTime_Textbox()
+        private void Set_WorkTime_Textbox(String str)
         {
+            // Textフィールドに値を表示
+            if (!daily.judgementTime(
+                    int.Parse(this.StartTime_Hour_Combobox.Text),
+                    int.Parse(this.StartTime_Second_Combobox.Text),
+                    int.Parse(this.EndTime_Hour_Combobox.Text),
+                    int.Parse(this.EndTime_Second_Combobox.Text)))
+            {
+                // 時間に矛盾が生じている場合は強制的に値を変更する
+                switch (str)
+                {
+                    case "start":
+                        // 終了時間に上書き
+                        this.StartTime_Hour_Combobox.Text = this.EndTime_Hour_Combobox.Text;
+                        this.StartTime_Second_Combobox.Text = this.EndTime_Second_Combobox.Text;
+                        break;
+                    case "end":
+                        // 開始時間に上書き
+                        this.EndTime_Hour_Combobox.Text = this.StartTime_Hour_Combobox.Text;
+                        this.EndTime_Second_Combobox.Text = this.EndTime_Second_Combobox.Text;
+                        break;
+                }
+
+            }
+
+            // 時間の計算
             this.time = daily.calWorkTime(
                 year,
                 month,
@@ -175,8 +201,8 @@ namespace NIPPO
                 this.EndTime_Hour_Combobox.Text,
                 this.EndTime_Second_Combobox.Text
                 );
+   
 
-            // Textフィールドに値を表示
             this.work_time = this.time[0]; // 勤務時間比較用
             this.WorkTime_Textbox.Text = daily.setHourText(this.time[0]);
             this.RestTime_Textbox.Text = daily.setHourText(this.time[1]);

@@ -469,6 +469,28 @@ namespace NIPPO
             return s.ToString("F2") + "h";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sh"></param>
+        /// <param name="ss"></param>
+        /// <param name="eh"></param>
+        /// <param name="es"></param>
+        /// <returns></returns>
+        public bool judgementTime(int sh, int ss, int eh, int es)
+        {
+            double start_time = (double)(sh + ((double)ss / 60));
+            double end_time = (double)(eh + ((double)es / 60));
+            if (start_time < end_time)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
+            }
+        }
+
         // IDisposable対応（ガベージコレクション対策みたい）
         #region IDisposable メンバー
         public void Dispose(){}
