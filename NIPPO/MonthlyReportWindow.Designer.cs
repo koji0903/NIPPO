@@ -40,6 +40,16 @@
             this.nextMonth_button = new System.Windows.Forms.Button();
             this.prevMonth_button = new System.Windows.Forms.Button();
             this.list_dataGridView = new System.Windows.Forms.DataGridView();
+            this.day_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.week_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.start_time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.end_time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.work_times_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.overtime125_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.overtime150_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.holiday_work_times_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.note_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.editable_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.user_toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
@@ -56,16 +66,6 @@
             this.dailyWork_groupBox = new System.Windows.Forms.GroupBox();
             this.outputExcel_button = new System.Windows.Forms.Button();
             this.closeWindow_button = new System.Windows.Forms.Button();
-            this.day_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.week_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.start_time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.end_time_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.work_times_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.overtime125_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.overtime150_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.holiday_work_times_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.note_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.list_dataGridView)).BeginInit();
             this.statusStrip1.SuspendLayout();
             this.summary_groupBox.SuspendLayout();
@@ -76,17 +76,19 @@
             // 
             this.FYMonth_label.AutoSize = true;
             this.FYMonth_label.Font = new System.Drawing.Font("MS UI Gothic", 16F);
-            this.FYMonth_label.Location = new System.Drawing.Point(350, 13);
+            this.FYMonth_label.Location = new System.Drawing.Point(262, 10);
+            this.FYMonth_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.FYMonth_label.Name = "FYMonth_label";
-            this.FYMonth_label.Size = new System.Drawing.Size(170, 27);
+            this.FYMonth_label.Size = new System.Drawing.Size(138, 22);
             this.FYMonth_label.TabIndex = 0;
             this.FYMonth_label.Text = "YYYY年MM月";
             // 
             // nextMonth_button
             // 
-            this.nextMonth_button.Location = new System.Drawing.Point(563, 13);
+            this.nextMonth_button.Location = new System.Drawing.Point(422, 10);
+            this.nextMonth_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.nextMonth_button.Name = "nextMonth_button";
-            this.nextMonth_button.Size = new System.Drawing.Size(29, 23);
+            this.nextMonth_button.Size = new System.Drawing.Size(22, 18);
             this.nextMonth_button.TabIndex = 1;
             this.nextMonth_button.Text = ">";
             this.nextMonth_button.UseVisualStyleBackColor = true;
@@ -94,9 +96,10 @@
             // 
             // prevMonth_button
             // 
-            this.prevMonth_button.Location = new System.Drawing.Point(274, 13);
+            this.prevMonth_button.Location = new System.Drawing.Point(206, 10);
+            this.prevMonth_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.prevMonth_button.Name = "prevMonth_button";
-            this.prevMonth_button.Size = new System.Drawing.Size(29, 23);
+            this.prevMonth_button.Size = new System.Drawing.Size(22, 18);
             this.prevMonth_button.TabIndex = 1;
             this.prevMonth_button.Text = "<";
             this.prevMonth_button.UseVisualStyleBackColor = true;
@@ -118,7 +121,8 @@
             this.overtime150_TextBox,
             this.holiday_work_times_TextBox,
             this.note_TextBox});
-            this.list_dataGridView.Location = new System.Drawing.Point(35, 51);
+            this.list_dataGridView.Location = new System.Drawing.Point(26, 41);
+            this.list_dataGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.list_dataGridView.MultiSelect = false;
             this.list_dataGridView.Name = "list_dataGridView";
             this.list_dataGridView.ReadOnly = true;
@@ -127,165 +131,9 @@
             this.list_dataGridView.RowTemplate.ReadOnly = true;
             this.list_dataGridView.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.list_dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.list_dataGridView.Size = new System.Drawing.Size(828, 569);
+            this.list_dataGridView.Size = new System.Drawing.Size(621, 455);
             this.list_dataGridView.TabIndex = 2;
             this.list_dataGridView.DoubleClick += new System.EventHandler(this.list_dataGridView_DoubleClick);
-            // 
-            // statusStrip1
-            // 
-            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.editable_toolStripStatusLabel,
-            this.user_toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 663);
-            this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(1295, 24);
-            this.statusStrip1.TabIndex = 3;
-            this.statusStrip1.Text = "statusStrip1";
-            // 
-            // editable_toolStripStatusLabel
-            // 
-            this.editable_toolStripStatusLabel.Name = "editable_toolStripStatusLabel";
-            this.editable_toolStripStatusLabel.Size = new System.Drawing.Size(54, 19);
-            this.editable_toolStripStatusLabel.Text = "編集可";
-            // 
-            // user_toolStripStatusLabel
-            // 
-            this.user_toolStripStatusLabel.Name = "user_toolStripStatusLabel";
-            this.user_toolStripStatusLabel.Size = new System.Drawing.Size(132, 19);
-            this.user_toolStripStatusLabel.Text = "表示対象のユーザ名";
-            // 
-            // summary_groupBox
-            // 
-            this.summary_groupBox.Controls.Add(this.totalOverTime150_textBox);
-            this.summary_groupBox.Controls.Add(this.totalOverTime125_textBox);
-            this.summary_groupBox.Controls.Add(this.totalTime_textBox);
-            this.summary_groupBox.Controls.Add(this.totalOverTime150_label);
-            this.summary_groupBox.Controls.Add(this.totalOverTime125_label);
-            this.summary_groupBox.Controls.Add(this.totalTime_label);
-            this.summary_groupBox.Location = new System.Drawing.Point(888, 33);
-            this.summary_groupBox.Name = "summary_groupBox";
-            this.summary_groupBox.Size = new System.Drawing.Size(254, 140);
-            this.summary_groupBox.TabIndex = 4;
-            this.summary_groupBox.TabStop = false;
-            this.summary_groupBox.Text = "集計";
-            // 
-            // totalOverTime150_textBox
-            // 
-            this.totalOverTime150_textBox.Location = new System.Drawing.Point(129, 102);
-            this.totalOverTime150_textBox.Name = "totalOverTime150_textBox";
-            this.totalOverTime150_textBox.ReadOnly = true;
-            this.totalOverTime150_textBox.Size = new System.Drawing.Size(100, 22);
-            this.totalOverTime150_textBox.TabIndex = 1;
-            this.totalOverTime150_textBox.Text = "h";
-            this.totalOverTime150_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // totalOverTime125_textBox
-            // 
-            this.totalOverTime125_textBox.Location = new System.Drawing.Point(129, 67);
-            this.totalOverTime125_textBox.Name = "totalOverTime125_textBox";
-            this.totalOverTime125_textBox.ReadOnly = true;
-            this.totalOverTime125_textBox.Size = new System.Drawing.Size(100, 22);
-            this.totalOverTime125_textBox.TabIndex = 1;
-            this.totalOverTime125_textBox.Text = "h";
-            this.totalOverTime125_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // totalTime_textBox
-            // 
-            this.totalTime_textBox.Location = new System.Drawing.Point(129, 36);
-            this.totalTime_textBox.Name = "totalTime_textBox";
-            this.totalTime_textBox.ReadOnly = true;
-            this.totalTime_textBox.Size = new System.Drawing.Size(100, 22);
-            this.totalTime_textBox.TabIndex = 1;
-            this.totalTime_textBox.Text = "h";
-            this.totalTime_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // totalOverTime150_label
-            // 
-            this.totalOverTime150_label.AutoSize = true;
-            this.totalOverTime150_label.Location = new System.Drawing.Point(17, 105);
-            this.totalOverTime150_label.Name = "totalOverTime150_label";
-            this.totalOverTime150_label.Size = new System.Drawing.Size(97, 15);
-            this.totalOverTime150_label.TabIndex = 0;
-            this.totalOverTime150_label.Text = "深夜勤務時間";
-            this.totalOverTime150_label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // totalOverTime125_label
-            // 
-            this.totalOverTime125_label.AutoSize = true;
-            this.totalOverTime125_label.Location = new System.Drawing.Point(17, 70);
-            this.totalOverTime125_label.Name = "totalOverTime125_label";
-            this.totalOverTime125_label.Size = new System.Drawing.Size(97, 15);
-            this.totalOverTime125_label.TabIndex = 0;
-            this.totalOverTime125_label.Text = "超過勤務時間";
-            this.totalOverTime125_label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // totalTime_label
-            // 
-            this.totalTime_label.AutoSize = true;
-            this.totalTime_label.Location = new System.Drawing.Point(47, 39);
-            this.totalTime_label.Name = "totalTime_label";
-            this.totalTime_label.Size = new System.Drawing.Size(67, 15);
-            this.totalTime_label.TabIndex = 0;
-            this.totalTime_label.Text = "勤務時間";
-            this.totalTime_label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // collection_tabControl
-            // 
-            this.collection_tabControl.Controls.Add(this.project_tabPage);
-            this.collection_tabControl.Controls.Add(this.work_tabPage);
-            this.collection_tabControl.Location = new System.Drawing.Point(888, 200);
-            this.collection_tabControl.Name = "collection_tabControl";
-            this.collection_tabControl.SelectedIndex = 0;
-            this.collection_tabControl.Size = new System.Drawing.Size(386, 171);
-            this.collection_tabControl.TabIndex = 5;
-            // 
-            // project_tabPage
-            // 
-            this.project_tabPage.Location = new System.Drawing.Point(4, 25);
-            this.project_tabPage.Name = "project_tabPage";
-            this.project_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.project_tabPage.Size = new System.Drawing.Size(378, 142);
-            this.project_tabPage.TabIndex = 0;
-            this.project_tabPage.Text = "プロジェクト別集計";
-            this.project_tabPage.UseVisualStyleBackColor = true;
-            // 
-            // work_tabPage
-            // 
-            this.work_tabPage.Location = new System.Drawing.Point(4, 25);
-            this.work_tabPage.Name = "work_tabPage";
-            this.work_tabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.work_tabPage.Size = new System.Drawing.Size(378, 142);
-            this.work_tabPage.TabIndex = 1;
-            this.work_tabPage.Text = "業務別集計";
-            this.work_tabPage.UseVisualStyleBackColor = true;
-            // 
-            // dailyWork_groupBox
-            // 
-            this.dailyWork_groupBox.Location = new System.Drawing.Point(892, 399);
-            this.dailyWork_groupBox.Name = "dailyWork_groupBox";
-            this.dailyWork_groupBox.Size = new System.Drawing.Size(377, 190);
-            this.dailyWork_groupBox.TabIndex = 6;
-            this.dailyWork_groupBox.TabStop = false;
-            this.dailyWork_groupBox.Text = "1日の業務一覧";
-            // 
-            // outputExcel_button
-            // 
-            this.outputExcel_button.Location = new System.Drawing.Point(35, 626);
-            this.outputExcel_button.Name = "outputExcel_button";
-            this.outputExcel_button.Size = new System.Drawing.Size(101, 32);
-            this.outputExcel_button.TabIndex = 7;
-            this.outputExcel_button.Text = "Excel出力";
-            this.outputExcel_button.UseVisualStyleBackColor = true;
-            // 
-            // closeWindow_button
-            // 
-            this.closeWindow_button.Location = new System.Drawing.Point(1173, 630);
-            this.closeWindow_button.Name = "closeWindow_button";
-            this.closeWindow_button.Size = new System.Drawing.Size(101, 28);
-            this.closeWindow_button.TabIndex = 7;
-            this.closeWindow_button.Text = "閉じる";
-            this.closeWindow_button.UseVisualStyleBackColor = true;
-            this.closeWindow_button.Click += new System.EventHandler(this.closeWindow_button_Click);
             // 
             // day_TextBox
             // 
@@ -403,11 +251,183 @@
             this.note_TextBox.ReadOnly = true;
             this.note_TextBox.Width = 250;
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.editable_toolStripStatusLabel,
+            this.user_toolStripStatusLabel});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 527);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 10, 0);
+            this.statusStrip1.Size = new System.Drawing.Size(971, 23);
+            this.statusStrip1.TabIndex = 3;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // editable_toolStripStatusLabel
+            // 
+            this.editable_toolStripStatusLabel.Name = "editable_toolStripStatusLabel";
+            this.editable_toolStripStatusLabel.Size = new System.Drawing.Size(44, 18);
+            this.editable_toolStripStatusLabel.Text = "編集可";
+            // 
+            // user_toolStripStatusLabel
+            // 
+            this.user_toolStripStatusLabel.Name = "user_toolStripStatusLabel";
+            this.user_toolStripStatusLabel.Size = new System.Drawing.Size(116, 18);
+            this.user_toolStripStatusLabel.Text = "表示対象のユーザ名";
+            // 
+            // summary_groupBox
+            // 
+            this.summary_groupBox.Controls.Add(this.totalOverTime150_textBox);
+            this.summary_groupBox.Controls.Add(this.totalOverTime125_textBox);
+            this.summary_groupBox.Controls.Add(this.totalTime_textBox);
+            this.summary_groupBox.Controls.Add(this.totalOverTime150_label);
+            this.summary_groupBox.Controls.Add(this.totalOverTime125_label);
+            this.summary_groupBox.Controls.Add(this.totalTime_label);
+            this.summary_groupBox.Location = new System.Drawing.Point(666, 26);
+            this.summary_groupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.summary_groupBox.Name = "summary_groupBox";
+            this.summary_groupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.summary_groupBox.Size = new System.Drawing.Size(190, 112);
+            this.summary_groupBox.TabIndex = 4;
+            this.summary_groupBox.TabStop = false;
+            this.summary_groupBox.Text = "集計";
+            // 
+            // totalOverTime150_textBox
+            // 
+            this.totalOverTime150_textBox.Location = new System.Drawing.Point(97, 82);
+            this.totalOverTime150_textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.totalOverTime150_textBox.Name = "totalOverTime150_textBox";
+            this.totalOverTime150_textBox.ReadOnly = true;
+            this.totalOverTime150_textBox.Size = new System.Drawing.Size(76, 19);
+            this.totalOverTime150_textBox.TabIndex = 1;
+            this.totalOverTime150_textBox.Text = "h";
+            this.totalOverTime150_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // totalOverTime125_textBox
+            // 
+            this.totalOverTime125_textBox.Location = new System.Drawing.Point(97, 54);
+            this.totalOverTime125_textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.totalOverTime125_textBox.Name = "totalOverTime125_textBox";
+            this.totalOverTime125_textBox.ReadOnly = true;
+            this.totalOverTime125_textBox.Size = new System.Drawing.Size(76, 19);
+            this.totalOverTime125_textBox.TabIndex = 1;
+            this.totalOverTime125_textBox.Text = "h";
+            this.totalOverTime125_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // totalTime_textBox
+            // 
+            this.totalTime_textBox.Location = new System.Drawing.Point(97, 29);
+            this.totalTime_textBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.totalTime_textBox.Name = "totalTime_textBox";
+            this.totalTime_textBox.ReadOnly = true;
+            this.totalTime_textBox.Size = new System.Drawing.Size(76, 19);
+            this.totalTime_textBox.TabIndex = 1;
+            this.totalTime_textBox.Text = "h";
+            this.totalTime_textBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // totalOverTime150_label
+            // 
+            this.totalOverTime150_label.AutoSize = true;
+            this.totalOverTime150_label.Location = new System.Drawing.Point(13, 84);
+            this.totalOverTime150_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.totalOverTime150_label.Name = "totalOverTime150_label";
+            this.totalOverTime150_label.Size = new System.Drawing.Size(77, 12);
+            this.totalOverTime150_label.TabIndex = 0;
+            this.totalOverTime150_label.Text = "深夜勤務時間";
+            this.totalOverTime150_label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // totalOverTime125_label
+            // 
+            this.totalOverTime125_label.AutoSize = true;
+            this.totalOverTime125_label.Location = new System.Drawing.Point(13, 56);
+            this.totalOverTime125_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.totalOverTime125_label.Name = "totalOverTime125_label";
+            this.totalOverTime125_label.Size = new System.Drawing.Size(77, 12);
+            this.totalOverTime125_label.TabIndex = 0;
+            this.totalOverTime125_label.Text = "超過勤務時間";
+            this.totalOverTime125_label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // totalTime_label
+            // 
+            this.totalTime_label.AutoSize = true;
+            this.totalTime_label.Location = new System.Drawing.Point(35, 31);
+            this.totalTime_label.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.totalTime_label.Name = "totalTime_label";
+            this.totalTime_label.Size = new System.Drawing.Size(53, 12);
+            this.totalTime_label.TabIndex = 0;
+            this.totalTime_label.Text = "勤務時間";
+            this.totalTime_label.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // collection_tabControl
+            // 
+            this.collection_tabControl.Controls.Add(this.project_tabPage);
+            this.collection_tabControl.Controls.Add(this.work_tabPage);
+            this.collection_tabControl.Location = new System.Drawing.Point(666, 160);
+            this.collection_tabControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.collection_tabControl.Name = "collection_tabControl";
+            this.collection_tabControl.SelectedIndex = 0;
+            this.collection_tabControl.Size = new System.Drawing.Size(290, 137);
+            this.collection_tabControl.TabIndex = 5;
+            // 
+            // project_tabPage
+            // 
+            this.project_tabPage.Location = new System.Drawing.Point(4, 22);
+            this.project_tabPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.project_tabPage.Name = "project_tabPage";
+            this.project_tabPage.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.project_tabPage.Size = new System.Drawing.Size(282, 111);
+            this.project_tabPage.TabIndex = 0;
+            this.project_tabPage.Text = "プロジェクト別集計";
+            this.project_tabPage.UseVisualStyleBackColor = true;
+            // 
+            // work_tabPage
+            // 
+            this.work_tabPage.Location = new System.Drawing.Point(4, 22);
+            this.work_tabPage.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.work_tabPage.Name = "work_tabPage";
+            this.work_tabPage.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.work_tabPage.Size = new System.Drawing.Size(282, 111);
+            this.work_tabPage.TabIndex = 1;
+            this.work_tabPage.Text = "業務別集計";
+            this.work_tabPage.UseVisualStyleBackColor = true;
+            // 
+            // dailyWork_groupBox
+            // 
+            this.dailyWork_groupBox.Location = new System.Drawing.Point(669, 319);
+            this.dailyWork_groupBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dailyWork_groupBox.Name = "dailyWork_groupBox";
+            this.dailyWork_groupBox.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dailyWork_groupBox.Size = new System.Drawing.Size(283, 152);
+            this.dailyWork_groupBox.TabIndex = 6;
+            this.dailyWork_groupBox.TabStop = false;
+            this.dailyWork_groupBox.Text = "1日の業務一覧";
+            // 
+            // outputExcel_button
+            // 
+            this.outputExcel_button.Location = new System.Drawing.Point(26, 501);
+            this.outputExcel_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.outputExcel_button.Name = "outputExcel_button";
+            this.outputExcel_button.Size = new System.Drawing.Size(76, 26);
+            this.outputExcel_button.TabIndex = 7;
+            this.outputExcel_button.Text = "Excel出力";
+            this.outputExcel_button.UseVisualStyleBackColor = true;
+            // 
+            // closeWindow_button
+            // 
+            this.closeWindow_button.Location = new System.Drawing.Point(880, 504);
+            this.closeWindow_button.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.closeWindow_button.Name = "closeWindow_button";
+            this.closeWindow_button.Size = new System.Drawing.Size(76, 22);
+            this.closeWindow_button.TabIndex = 7;
+            this.closeWindow_button.Text = "閉じる";
+            this.closeWindow_button.UseVisualStyleBackColor = true;
+            this.closeWindow_button.Click += new System.EventHandler(this.closeWindow_button_Click);
+            // 
             // MonthlyReportWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1295, 687);
+            this.ClientSize = new System.Drawing.Size(971, 550);
             this.Controls.Add(this.closeWindow_button);
             this.Controls.Add(this.outputExcel_button);
             this.Controls.Add(this.dailyWork_groupBox);
@@ -419,6 +439,7 @@
             this.Controls.Add(this.nextMonth_button);
             this.Controls.Add(this.FYMonth_label);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "MonthlyReportWindow";
             this.Text = "MonthlyReportWindow";
             this.Shown += new System.EventHandler(this.Me_Shown);
