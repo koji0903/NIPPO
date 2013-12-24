@@ -75,6 +75,8 @@ namespace NIPPO
                 DataSet _ds = _mr.getMonthlyWorkReport();
                 this.list_dataGridView.DataSource = _ds;
                 this.list_dataGridView.DataMember = _mr.getListTableName();
+                // 祝日の色付け
+                fillColorHoridayRows();
             }
             catch (Exception ex)
             {
@@ -88,6 +90,27 @@ namespace NIPPO
             this.totalTime_textBox.Text = _mr.getTotalTimeText();
             this.totalOverTime125_textBox.Text = _mr.getTotalOverTime125Text();
             this.totalOverTime150_textBox.Text = _mr.getTotalOverTime150Text();
+        }
+
+        public void fillColorHoridayRows()
+        {
+            DataSet ds = null;
+            try
+            {
+                ds = _mr.getHolidayListDs();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("holidaysテーブル取得時：" + ex.Message,
+                    "エラー", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            //
+            for (int i=0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int indexDay = int.Parse(ds.Tables[0].Rows[i]["day"].ToString()) - 1;
+                this.list_dataGridView.Rows[indexDay].DefaultCellStyle.BackColor = Color.LightPink;
+            }
         }
 
         /// <summary>

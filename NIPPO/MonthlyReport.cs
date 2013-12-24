@@ -284,6 +284,34 @@ namespace NIPPO
             return (this.getTotalTimeCommon("overtime150"));
         }
 
+        public DataSet getHolidayListDs()
+        {
+            SqlConnection connection = new SqlConnection();
+            SqlCommand command = new SqlCommand();
+            DataSet ds = new DataSet();
+
+            connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
+
+            using (SqlDataAdapter adapter = new SqlDataAdapter())
+            {
+                try
+                {
+                    command.Connection = connection;
+                    command.CommandText = @"SELECT day FROM holidays"
+                        + " WHERE year='" + this.getCalYear() + "'"
+                        + " AND month='" + this._month + "'"
+                        + " ;";
+                    adapter.SelectCommand = command;
+                    adapter.Fill(ds, "holidays");
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            return ds;
+        }
+
         public void outputExcel()
         {
             string excelTempletePath = NIPPO.Properties.Settings.Default.ExcelTempletePath;
@@ -446,7 +474,6 @@ namespace NIPPO
             {
                 try
                 {
-                    command.Connection = connection;
                     command.CommandText = @"SELECT lastname,firstname"
                         + " FROM users"
                         + " WHERE users.ID='"
@@ -496,6 +523,5 @@ namespace NIPPO
             excelWriteCommon(oSheet, 8 + index, 3, str);
             return;
         }
-
     }
 }
