@@ -318,11 +318,9 @@ namespace NIPPO
                         "エクセルファイルが見つかりませんでした。\n" + excelTempletePath);
                 }
 
-                //oXls.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMinimized;
-                //oXls.Visible = false;
-                oXls.Visible = true;
-                //oXls.DisplayAlerts = false;
-                oXls.DisplayAlerts = true;
+                oXls.WindowState = Microsoft.Office.Interop.Excel.XlWindowState.xlMinimized;
+                oXls.Visible = false;
+                oXls.DisplayAlerts = false;
 
                 oBooks = oXls.Workbooks;
                 oWBook = oBooks.Open(excelTempletePath,
