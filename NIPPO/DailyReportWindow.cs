@@ -291,7 +291,17 @@ namespace NIPPO
                     dr["work_reports_ID"] = data_access.GetWorkReportID(this.userID, this.year, this.month, this.day);
                 }
 
-                if ((string)dr["name"] != "" && (string)dr["name1"] != "" && (double)dr["times"] > 0.0)
+                if ( (double)dr["times"] % 0.25 != 0.00 ) 
+                {
+                    // メッセージウィンドウを表示してアクションキャンセル
+                    DialogResult result = MessageBox.Show(
+                        "業務詳細の時間には0.25刻みの値しか入力することができません",
+                        "メッセージ",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Exclamation,
+                        MessageBoxDefaultButton.Button2);
+                }
+                else if ((string)dr["name"] != "" && (string)dr["name1"] != "" && (double)dr["times"] > 0.0)
                 {
                     // データセット更新
                     dt.Rows.Add(dr);
