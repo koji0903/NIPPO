@@ -34,7 +34,7 @@ namespace NIPPO
         /// <param name="year"></param>
         /// <param name="month"></param>
         /// <param name="day"></param>
-        public DailyReportWindow(int fy, int userID, int year, int month, int day )
+        public DailyReportWindow(int fy, int userID, int year, int month, int day)
         {
             InitializeComponent();
             DataSet ds = new DataSet();
@@ -74,7 +74,7 @@ namespace NIPPO
         {
             // 年月日情報の表示
             this.Calender_Label.Text = daily.GetDateStr(this.year, this.month, this.day);
- 
+
             // データベースへのアクセス
             using (DataAccessClass data_access = new DataAccessClass())
             {
@@ -116,7 +116,7 @@ namespace NIPPO
 
             // 作業合計時間の表示                    
             this.regist_time = this.daily.getTotalWorkTime(ds);
-            this.TotalWorkTime_Textbox.Text = this.regist_time.ToString("F2") + "h";                     
+            this.TotalWorkTime_Textbox.Text = this.regist_time.ToString("F2") + "h";
         }
 
 
@@ -173,7 +173,7 @@ namespace NIPPO
                 this.StartTime_Hour_Combobox.Text,
                 this.StartTime_Second_Combobox.Text,
                 this.EndTime_Hour_Combobox.Text,
-                this.EndTime_Second_Combobox.Text                
+                this.EndTime_Second_Combobox.Text
                 );
 
             // Textフィールドに値を表示
@@ -256,7 +256,7 @@ namespace NIPPO
                 dr["work_reports_ID"] = data_access.GetWorkReportID(this.userID, this.year, this.month, this.day);
             }
 
-            if ((string)dr["name"] != "" && (string)dr["name1"] != "" && (double)dr["times"] > 0.0 )
+            if ((string)dr["name"] != "" && (string)dr["name1"] != "" && (double)dr["times"] > 0.0)
             {
                 // データセット更新
                 dt.Rows.Add(dr);
@@ -302,11 +302,12 @@ namespace NIPPO
                     MessageBoxDefaultButton.Button2);
             }
 
-            //何が選択されたか調べる
+
             if (time_cmp != DialogResult.Cancel)
             {
+                // データベース更新
                 daily.updateDailyWork(
-                    ds, 
+                    ds,
                     this.year, this.month, this.day, this.time,
                     this.StartTime_Hour_Combobox.Text,
                     this.StartTime_Second_Combobox.Text,
@@ -331,7 +332,7 @@ namespace NIPPO
             }
         }
 
-        
+
         /// <summary>
         /// 「キャンセル」ボタンクリック時の動作設定
         /// </summary>
@@ -340,28 +341,28 @@ namespace NIPPO
         private void Cancel_Button_Click(object sender, EventArgs e)
         {
             // 更新データがあるかどうかの確認
-                if (daily.DataSetCompare(ds, ds_org, "work_detail"))
+            if (daily.DataSetCompare(ds, ds_org, "work_detail"))
+            {
+                // 更新がない場合は、確認なしでそのままWindowクローズ
+                this.Close();
+            }
+            else
+            {
+                // 異なる場合はメッセージウィンドウ表示
+                DialogResult result = MessageBox.Show(
+                    "更新内容は反映されませんがよろしいですか？",
+                    "確認",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button2);
+
+                //何が選択されたか調べる
+                if (result == DialogResult.OK)
                 {
-                    // 更新がない場合は、確認なしでそのままWindowクローズ
+                    //「はい」が選択された時、それ以外の場合は元に戻る
                     this.Close();
                 }
-                else
-                {
-                    // 異なる場合はメッセージウィンドウ表示
-                    DialogResult result = MessageBox.Show(
-                        "更新内容は反映されませんが、よろしですか？", 
-                        "確認", 
-                        MessageBoxButtons.OKCancel,
-                        MessageBoxIcon.Exclamation,
-                        MessageBoxDefaultButton.Button2);
-
-                    //何が選択されたか調べる
-                    if (result == DialogResult.OK)
-                    {
-                        //「はい」が選択された時、それ以外の場合は元に戻る
-                        this.Close();
-                    }
-                }
+            }
         }
 
 

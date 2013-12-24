@@ -8,6 +8,9 @@ namespace NIPPO
 {
     public class DailyReport : IDisposable
     {
+        /// <summary>
+        /// コンストラクタ
+        /// </summary>
         public DailyReport()
         {
         }
@@ -49,6 +52,18 @@ namespace NIPPO
             return String.Format("{0:D4}/{1:D2}/{2:D2} {3:D2}:{4:D2}:00", year, month, day, hour, second);
         }
 
+        /// <summary>
+        /// work_detail/work_reportsテーブルの更新
+        /// </summary>
+        /// <param name="ds">データセット　</param>
+        /// <param name="year">年</param>
+        /// <param name="month">月</param>
+        /// <param name="day">日</param>
+        /// <param name="time">管理時間</param>
+        /// <param name="sh">開始時</param>
+        /// <param name="ss">開始分</param>
+        /// <param name="eh">終了時</param>
+        /// <param name="es">終了分</param>
         public void updateDailyWork(DataSet ds, int year, int month, int day, double[] time,
             String sh, String ss, String eh, String es)
         {
@@ -129,12 +144,14 @@ namespace NIPPO
             string base_day = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month, day);
             string target_day = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month, day);
             string next_day_start = String.Format("{0:D4}/{1:D2}/{2:D2} 00:00:00", year, month, day + 1);
-            // 残業が次の日まで持ち越した場合
+
+            // 残業が次の日まで持ち越した場合は、日にち、時間調整
             if (end_hour >= 24)
             {
                 target_day = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month, day + 1);
                 end_hour -= 24;
             }
+
             // ユーザ入力の勤務時間
             str = String.Format("{0} {1:D2}:{2:D2}:00", base_day, start_hour, start_second);
             DateTime start_time = DateTime.Parse(str);
@@ -232,9 +249,6 @@ namespace NIPPO
                     // 終了時刻 - 普通残業開始時刻(18:00)
                     normal_ts = end_time - target_start_time;
                 }
-                else
-                {
-                }
             }
             else if ( start_time < target_end_time )
             {
@@ -285,7 +299,6 @@ namespace NIPPO
                     int result = TimeSpan.Compare(wt, work_base);
                     if (result > 0)
                     {
-//                        normal_ts = (end_time - target_start_time);
                         normal_ts = wt - work_base;
                     }
                 }
