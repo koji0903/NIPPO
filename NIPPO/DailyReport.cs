@@ -204,10 +204,10 @@ namespace NIPPO
         /// <summary>
         /// 有効な日であるかどうかの判定
         /// </summary>
-        /// <param name="iYear"></param>
-        /// <param name="iMonth"></param>
-        /// <param name="iDay"></param>
-        /// <returns></returns>
+        /// <param name="iYear">年</param>
+        /// <param name="iMonth">月</param>
+        /// <param name="iDay">日</param>
+        /// <returns>true:有効な日、false:無効な日</returns>
         private bool IsDate(int iYear, int iMonth, int iDay)
         {
             if ((DateTime.MinValue.Year > iYear) || (iYear > DateTime.MaxValue.Year))
@@ -233,11 +233,11 @@ namespace NIPPO
         /// <summary>
         /// 開始時間・終了時間から勤務時間を計算する
         /// </summary>
-        /// <param name="start_hour"></param>
-        /// <param name="start_second"></param>
-        /// <param name="end_hour"></param>
-        /// <param name="end_second"></param>
-        /// <returns></returns>
+        /// <param name="start_hour">開始時</param>
+        /// <param name="start_second">終了分</param>
+        /// <param name="end_hour">終了時</param>
+        /// <param name="end_second">終了分</param>
+        /// <returns>時間郡（勤務時間、休憩時間、通常残業時間、深夜残業時間）</returns>
         public Double[] GetWorkTime(int start_hour, int start_second, int end_hour, int end_second)
         {
             string str;
