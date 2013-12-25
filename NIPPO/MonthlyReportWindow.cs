@@ -184,7 +184,8 @@ namespace NIPPO
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(ex.Message, "Excel出力エラー",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

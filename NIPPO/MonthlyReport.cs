@@ -457,9 +457,16 @@ namespace NIPPO
 
         private void excelWriteUser(Microsoft.Office.Interop.Excel.Worksheet oSheet)
         {
-            string str = excelGetUserName(this._userID);
-            excelWriteCommon(oSheet, 3, 2, str);
-            return;
+            try
+            {
+                string str = excelGetUserName(this._userID);
+                excelWriteCommon(oSheet, 3, 2, str);
+                return;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public string excelGetUserName(int userID)
@@ -474,6 +481,7 @@ namespace NIPPO
             {
                 try
                 {
+                    command.Connection = connection;
                     command.CommandText = @"SELECT lastname,firstname"
                         + " FROM users"
                         + " WHERE users.ID='"
@@ -481,9 +489,9 @@ namespace NIPPO
                     adapter.SelectCommand = command;
                     adapter.Fill(ds, "user");
                 }
-                catch
+                catch (Exception ex)
                 {
-                    return "不明なユーザ";
+                    throw ex;
                 }
             }
             return ds.Tables["user"].Rows[0]["lastname"] +  " "
