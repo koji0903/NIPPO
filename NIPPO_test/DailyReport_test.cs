@@ -236,6 +236,18 @@ namespace NIPPO_test
             Assert.AreEqual("2013/01/02", _dr.getValidNextDate(2013, 1, 1));
             Assert.AreEqual("2013/02/01", _dr.getValidNextDate(2013, 1, 31));
             Assert.AreEqual("2014/01/01", _dr.getValidNextDate(2013, 12, 31));
-        }    
+        }
+
+        [Test]
+        public void judgementTime_test()
+        {
+            DailyReport _dr = new DailyReport(2013, 1, 2013, 12, 8);
+            // 同時刻
+            Assert.AreEqual(false, _dr.judgementTime(8, 0, 8, 0));
+            // 開始時　＞　終了時
+            Assert.AreEqual(false, _dr.judgementTime(8, 15, 8, 0));
+            // 開始時　＜　終了時
+            Assert.AreEqual(true, _dr.judgementTime(8, 15, 8, 30));
+        }
     }
 }

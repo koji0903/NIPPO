@@ -10,7 +10,8 @@ namespace NIPPO
     public class DailyReport : IDisposable
     {
         // 前のウィンドウからの引き付き情報
-        public int fy  { 
+        public int fy
+        { 
             get; 
             private set;
         }
@@ -30,6 +31,7 @@ namespace NIPPO
             get; 
             private set;
         }
+
         // 時間比較用のデータ
         public double work_time {
             get;
@@ -84,7 +86,11 @@ namespace NIPPO
             DataSet ds = new DataSet();
         }
 
-        public DataSet makeDataSet()
+        /// <summary>
+        /// work_detail/work_reportsテーブルのデータセットを作成
+        /// </summary>
+        /// <returns></returns>
+        private DataSet makeDataSet()
         {
             // データベースへのアクセス
             using (DataAccessClass data_access = new DataAccessClass())
@@ -123,68 +129,8 @@ namespace NIPPO
             return str;
         }
 
-        /// <summary>
-        /// DateTime用の文字列を作成
-        /// </summary>
-        /// <param name="year">年</param>
-        /// <param name="month">月</param>
-        /// <param name="day">日</param>
-        /// <param name="hour">時</param>
-        /// <param name="second">分</param>
-        /// <returns>DateTime指定用の文字列</returns>
-        public String getTime(int year, int month, int day, int hour, int second)
-        {
-            if (hour < 24)
-            {
-                // 24時まで
-                return String.Format("{0:D4}/{1:D2}/{2:D2} {3:D2}:{4:D2}:00", year, month, day, hour, second);
-            }
-            else
-            {
-                // 24時以降（次の日）
-                return String.Format("{0:D4}/{1:D2}/{2:D2} {3:D2}:{4:D2}:00", year, month, day+1, hour-24, second);
-            }
-        }
 
-        /// <summary>
-        /// work_detail/work_reportsテーブルの更新
-        /// </summary>
-        /// <param name="ds">データセット　</param>
-        /// <param name="year">年</param>
-        /// <param name="month">月</param>
-        /// <param name="day">日</param>
-        /// <param name="time">管理時間</param>
-        /// <param name="sh">開始時</param>
-        /// <param name="ss">開始分</param>
-        /// <param name="eh">終了時</param>
-        /// <param name="es">終了分</param>
-        public void updateDailyWork(String sh, String ss, String eh, String es)
-        {
-            using (DataAccessClass data_access = new DataAccessClass())
-            {
-                data_access.Update(this.ds, "work_detail");
-                // データベース（work_report）更新作業
-                try
-                {
-                    // データテーブルの作成
-                    DataTable dt = this.ds.Tables["work_reports"];
-                    DataRow dr = dt.Rows[0];
-                    dr["start_time"] = this.getTime(year, month, day, int.Parse(sh), int.Parse(ss));
-                    dr["end_time"] = this.getTime(year, month, day, int.Parse(eh), int.Parse(es));
-                    dr["work_times"] = this.time[0];
-                    dr["overtime125"] = this.time[2];
-                    dr["overtime150"] = this.time[3];
-                    dr["rest_time"] = this.time[1];
-                    // データベースへの更新作業
-                    data_access.Update(this.ds, "work_reports");
-                }
-                catch (Exception ex)
-                {
-                    System.Windows.Forms.MessageBox.Show(ex.Message);
-                }
 
-            }
-        }
 
         /// <summary>
         /// 日報入力ウィンドウの上部右（勤務時間、休憩時間、通常残業、深夜残業）
@@ -617,13 +563,13 @@ namespace NIPPO
         }
 
         /// <summary>
-        /// 
+        /// 時間判定（開始時刻＜終了時刻）
         /// </summary>
-        /// <param name="sh"></param>
-        /// <param name="ss"></param>
-        /// <param name="eh"></param>
-        /// <param name="es"></param>
-        /// <returns></returns>
+        /// <param name="sh">開始時</param>
+        /// <param name="ss">開始分</param>
+        /// <param name="eh">終了時</param>
+        /// <param name="es">終了分</param>
+        /// <returns>True:開始時刻＜終了時刻、false:開始時刻>=終了時刻</returns>
         public bool judgementTime(int sh, int ss, int eh, int es)
         {
             double start_time = (double)(sh + ((double)ss / 60));
@@ -651,7 +597,8 @@ namespace NIPPO
             // 勤務情報の初期値設定
             if (ds.Tables["work_reports"].Rows.Count == 1)
             {
-                object tmp = ds.Tables["work_reports"].Rows[0]["start_time"];
+                object tmp;
+                tmp = ds.Tables["work_reports"].Rows[0]["start_time"];
                 if (tmp != null && tmp.GetType() == typeof(DateTime))
                 {
                     DateTime start_time = (DateTime)ds.Tables["work_reports"].Rows[0]["start_time"];
@@ -670,6 +617,7 @@ namespace NIPPO
             }
             return work_time;
         }
+
 
         /// <summary>
         /// ADDボタンが押された時のアクション
@@ -749,6 +697,14 @@ namespace NIPPO
             }
         }
 
+        /// <summary>
+        /// 「登録」ボダンをおした時のアクション
+        /// </summary>
+        /// <param name="start_hour">開始時</param>
+        /// <param name="start_second">開始分</param>
+        /// <param name="end_hour">終了時</param>
+        /// <param name="end_second">終了分</param>
+        /// <returns></returns>
         public DialogResult regist_action(String start_hour, String start_second, String end_hour, String end_second)
         {
             // データベースへの更新作業
@@ -789,6 +745,69 @@ namespace NIPPO
                     MessageBoxDefaultButton.Button2);
             }
             return result;
+        }
+
+        /// <summary>
+        /// work_detail/work_reportsテーブルの更新
+        /// </summary>
+        /// <param name="ds">データセット　</param>
+        /// <param name="year">年</param>
+        /// <param name="month">月</param>
+        /// <param name="day">日</param>
+        /// <param name="time">管理時間</param>
+        /// <param name="sh">開始時</param>
+        /// <param name="ss">開始分</param>
+        /// <param name="eh">終了時</param>
+        /// <param name="es">終了分</param>
+        private void updateDailyWork(String sh, String ss, String eh, String es)
+        {
+            using (DataAccessClass data_access = new DataAccessClass())
+            {
+                data_access.Update(this.ds, "work_detail");
+                // データベース（work_report）更新作業
+                try
+                {
+                    // データテーブルの作成
+                    DataTable dt = this.ds.Tables["work_reports"];
+                    DataRow dr = dt.Rows[0];
+                    dr["start_time"] = this.getTime(year, month, day, int.Parse(sh), int.Parse(ss));
+                    dr["end_time"] = this.getTime(year, month, day, int.Parse(eh), int.Parse(es));
+                    dr["work_times"] = this.time[0];
+                    dr["overtime125"] = this.time[2];
+                    dr["overtime150"] = this.time[3];
+                    dr["rest_time"] = this.time[1];
+                    // データベースへの更新作業
+                    data_access.Update(this.ds, "work_reports");
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// DateTime用の文字列を作成
+        /// </summary>
+        /// <param name="year">年</param>
+        /// <param name="month">月</param>
+        /// <param name="day">日</param>
+        /// <param name="hour">時</param>
+        /// <param name="second">分</param>
+        /// <returns>DateTime指定用の文字列</returns>
+        public String getTime(int year, int month, int day, int hour, int second)
+        {
+            if (hour < 24)
+            {
+                // 24時まで
+                return String.Format("{0:D4}/{1:D2}/{2:D2} {3:D2}:{4:D2}:00", year, month, day, hour, second);
+            }
+            else
+            {
+                // 24時以降（次の日）
+                return String.Format("{0:D4}/{1:D2}/{2:D2} {3:D2}:{4:D2}:00", year, month, day + 1, hour - 24, second);
+            }
         }
 
         // IDisposable対応（ガベージコレクション対策みたい）
