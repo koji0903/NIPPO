@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Data;
+using System.Windows.Forms;
 
 namespace NIPPO
 {
@@ -43,7 +44,24 @@ namespace NIPPO
             get;
             private set;
         }
-
+        // 業務詳細に表示されているプロジェクト、業務のデータベースID
+        public int project_ID
+        {
+            get;
+            set;
+        }
+        public int task_ID
+        {
+            get;
+            set;
+        }
+        // work_detailテーブル情報
+        public DataSet ds
+        {
+            get;
+            set;
+        }
+        private DataSet ds_org;
 
         /// <summary>
         /// コンストラクタ
@@ -61,8 +79,27 @@ namespace NIPPO
             // 作業登録時間（比較用）
             this.regist_time = 0.0;
             time = new Double[] { 0.00, 0.00, 0.00, 0.00 };
+            this.project_ID = 0;
+            this.task_ID = 0;
+            DataSet ds = new DataSet();
         }
 
+        public DataSet makeDataSet()
+        {
+            // データベースへのアクセス
+            using (DataAccessClass data_access = new DataAccessClass())
+            {
+                // work_detailテーブルの作成
+                this.ds = data_access.GetWorkDetailDs(this.userID, this.year, this.month, this.day);
+                // work_reportsテーブルの作成
+                this.ds.Merge(data_access.GetWorkReportsDS(this.userID, this.year, this.month, this.day));
+                // 更新時の比較用に初期時のデータをコピー
+                this.ds_org = this.ds.Copy();
+            }
+            return this.ds;
+        }
+
+        
         /// <summary>
         /// 表示用の年月日曜日文字列を作成
         /// </summary>
@@ -112,17 +149,16 @@ namespace NIPPO
         /// <param name="ss">開始分</param>
         /// <param name="eh">終了時</param>
         /// <param name="es">終了分</param>
-        public void updateDailyWork(DataSet ds,
-            String sh, String ss, String eh, String es)
+        public void updateDailyWork(String sh, String ss, String eh, String es)
         {
             using (DataAccessClass data_access = new DataAccessClass())
             {
-                data_access.Update(ds, "work_detail");
+                data_access.Update(this.ds, "work_detail");
                 // データベース（work_report）更新作業
                 try
                 {
                     // データテーブルの作成
-                    DataTable dt = ds.Tables["work_reports"];
+                    DataTable dt = this.ds.Tables["work_reports"];
                     DataRow dr = dt.Rows[0];
                     dr["start_time"] = getTime(year, month, day, int.Parse(sh), int.Parse(ss));
                     dr["end_time"] = getTime(year, month, day, int.Parse(eh), int.Parse(es));
@@ -131,7 +167,7 @@ namespace NIPPO
                     dr["overtime150"] = this.time[3];
                     dr["rest_time"] = this.time[1];
                     // データベースへの更新作業
-                    data_access.Update(ds, "work_reports");
+                    data_access.Update(this.ds, "work_reports");
                 }
                 catch (Exception ex)
                 {
@@ -393,11 +429,11 @@ namespace NIPPO
         /// </summary>
         /// <param name="ds"></param>
         /// <returns></returns>
-        public double getTotalWorkTime(DataSet ds)
+        public double getTotalWorkTime()
         {
             Double total_work_time;
             total_work_time = 0;
-            DataTable work_detail = ds.Tables["work_detail"];
+            DataTable work_detail = this.ds.Tables["work_detail"];
             if (work_detail == null)
             {
                 // 初期登録時は何も登録されていないので0を返す。
@@ -421,25 +457,25 @@ namespace NIPPO
         /// <param name="ds"></param>
         /// <param name="delete_num"></param>
         /// <returns></returns>
-        public DataSet deleteRow(DataSet ds, int delete_num )
+        public DataSet deleteRow(int delete_num )
         {
             int j = 0;
-            for (int i = 0; i < ds.Tables["work_detail"].Rows.Count; i++)
+            for (int i = 0; i < this.ds.Tables["work_detail"].Rows.Count; i++)
             {
                 // Deletedフラグが立っていない列をサーチ。立っているものは既に削除済みであるのでカウントスキップ
-                if (ds.Tables["work_detail"].Rows[i].RowState != DataRowState.Deleted)
+                if (this.ds.Tables["work_detail"].Rows[i].RowState != DataRowState.Deleted)
                 {
                     // 削除されていない
                     if (delete_num == j)
                     {
                         // データ削除（実際はデータが消えるのではなくて、Deletedフラグがセットされる）
-                        ds.Tables["work_detail"].Rows[i].Delete();
-                        return ds;
+                        this.ds.Tables["work_detail"].Rows[i].Delete();
+                        return this.ds;
                     }
                     j++;
                 }
             }
-            return ds;
+            return this.ds;
         }
 
         /// <summary>
@@ -448,11 +484,11 @@ namespace NIPPO
         /// <param name="ds1"> DataSet1</param>
         /// <param name="ds2"> DataSet2</param>
         /// < returns> true:同じ false:異なる</returns>
-        public bool DataSetCompare(DataSet ds1, DataSet ds2, String table_name)
+        public bool DataSetCompare(String table_name)
         {
             DataTable dt1, dt2;
-            dt1 = ds1.Tables[table_name];
-            dt2 = ds2.Tables[table_name];
+            dt1 = ds.Tables[table_name];
+            dt2 = ds_org.Tables[table_name];
 
             if (dt1 == null && dt2 != null) { return false; }
             if (dt1 != null && dt2 == null) { return false; }
@@ -531,6 +567,109 @@ namespace NIPPO
             else 
             {
                 return false;
+            }
+        }
+
+        /// <summary>
+        /// 日報ウィンドウに表示する時間（勤務時間、休憩時間、通常残業、深夜残業）
+        /// の初期値を決定するメソッド。初期値は全て０。既に登録済みの場合は、その値を使用
+        /// </summary>
+        /// <returns></returns>
+        public String[] initialWorkTime()
+        {
+            String[] work_time = new String[4] { "8", "45", "17", "30" };
+
+            // 勤務情報の初期値設定
+            if (ds.Tables["work_reports"].Rows.Count == 1)
+            {
+                object tmp = ds.Tables["work_reports"].Rows[0]["start_time"];
+                if (tmp != null && tmp.GetType() == typeof(DateTime))
+                {
+                    DateTime start_time = (DateTime)ds.Tables["work_reports"].Rows[0]["start_time"];
+                    work_time[0] = start_time.ToString("%H");
+                    work_time[1] = start_time.ToString("%m");
+
+                }
+                tmp = ds.Tables["work_reports"].Rows[0]["end_time"];
+                if (tmp != null && tmp.GetType() == typeof(DateTime))
+                {
+                    DateTime end_time = (DateTime)ds.Tables["work_reports"].Rows[0]["end_time"];
+                    work_time[2] = end_time.ToString("%H");
+                    work_time[3] = end_time.ToString("%m");
+
+                }
+            }
+            return work_time;
+        }
+
+        public void add_action(String project_name, String task_name, String description, String worktime )
+        {
+            bool same_data = false;
+            // 業務詳細の枠から必要な情報を取得して、データセットを更新
+            DataTable dt = this.ds.Tables["work_detail"];
+            // 既存に同じデータがないかどうかをチェック
+            foreach (DataRow drCurrent in dt.Rows)
+            {
+                if ((project_name == (string)drCurrent["name"])
+                    && (task_name == (string)drCurrent["name1"])
+                    )
+                {
+                    same_data = true;
+                }
+            }
+
+            if (same_data)
+            {
+                // メッセージウィンドウを表示してアクションキャンセル
+                DialogResult result = MessageBox.Show(
+                    "既に同等の業務詳細(同じプロジェクト、業務）が登録されています。異なる業務詳細を指定してください。",
+                    "メッセージ",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button2);
+
+            }
+            else
+            {
+                // 新規データテーブル作成
+                DataRow dr = dt.NewRow();
+                dr["name"] = project_name;
+                dr["name1"] = task_name;
+                dr["note"] = description;
+                dr["times"] = work_time;
+                dr["projects_ID"] = this.project_ID;
+                dr["tasks_ID"] = this.task_ID;
+                using (DataAccessClass data_access = new DataAccessClass())
+                {
+                    dr["work_reports_ID"] = data_access.GetWorkReportID(this.userID, this.year, this.month, this.day);
+                }
+
+                if ((double)dr["times"] % 0.25 != 0.00)
+                {
+                    // メッセージウィンドウを表示してアクションキャンセル
+                    DialogResult result = MessageBox.Show(
+                        "業務詳細の時間には0.25刻みの値しか入力することができません",
+                        "メッセージ",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error,
+                        MessageBoxDefaultButton.Button2);
+                }
+                else if ((string)dr["name"] != "" && (string)dr["name1"] != "" && (double)dr["times"] > 0.0)
+                {
+                    // データセット更新
+                    dt.Rows.Add(dr);
+                }
+                else
+                {
+                    // 入力情報不足の場合のワーニングメッセージ出力
+                    // 動作としては”OK”ボタンを押して、元の画面に戻る
+                    DialogResult result = MessageBox.Show(
+                        "入力情報が不足しています。",
+                        "ワーニング",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning,
+                        MessageBoxDefaultButton.Button2);
+                }
             }
         }
 
