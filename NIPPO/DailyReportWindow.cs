@@ -203,10 +203,12 @@ namespace NIPPO
         private void SerarchProject_Button_Click(object sender, EventArgs e)
         {
 
-            using ( SearchProjectsWindow _search = new SearchProjectsWindow() )
+            using ( SearchProjectsWindow _spw = new SearchProjectsWindow( year ) )
             {
-                _search.ShowDialog(this);
-                //project_ID = _search.id;
+                _spw.ShowDialog(this);
+                this.project_ID = _spw._project_id;
+                this.ProjectCode_Textbox.Text = _spw._project_code;
+                this.ProjectName_Textbox.Text = _spw._project_name;             
             }
            
         //    using (DataAccessClass data_access = new DataAccessClass())
@@ -215,8 +217,8 @@ namespace NIPPO
         //        // Task IDのセット
         //        this.project_ID = data_access.getProjectID(project_num);
         //    }
-            this.ProjectCode_Textbox.Text = "1234";
-            this.ProjectName_Textbox.Text = "テスト用プロジェクト";
+        //    this.ProjectCode_Textbox.Text = "1234";
+        //    this.ProjectName_Textbox.Text = "テスト用プロジェクト";
         }
 
         /// <summary>
@@ -227,16 +229,12 @@ namespace NIPPO
         private void SearchBusiness_Button_Click(object sender, EventArgs e)
         {
             // 業務選択を行うウィンドウを表示
-            using (SearchTasksWindow _sbw = new SearchTasksWindow() )
+            using (SearchTasksWindow _stw = new SearchTasksWindow() )
             {
-
-                _sbw.ShowDialog(this);
-                if (this.DialogResult == DialogResult.Yes)
-                {
-                }
-                else
-                {
-                }
+                _stw.ShowDialog(this);
+                this.task_ID = _stw._taskid;
+                this.TaskCode_Textbox.Text = _stw._taskcode;
+                this.TaskName_TextBox.Text = _stw._taskname;             
             }
             
          //  using (DataAccessClass data_access = new DataAccessClass())
@@ -245,8 +243,6 @@ namespace NIPPO
          //      // Task IDのセット
          //      this.task_ID = data_access.getProjectID(task_code);
          //  }
-            this.TaskCode_Textbox.Text = "5678";
-            this.TaskName_TextBox.Text = "テスト用業務";
         }
 
         private void WorkDetail_DateGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
