@@ -20,6 +20,7 @@ namespace NIPPO
         private int _month; // 月
         private int _userID; // ユーザID
         private DataSet _monthDs;
+        private DataSet _holidayDs;
         // 定数
         private string listTableName = "MonthlyReport";
 
@@ -288,7 +289,7 @@ namespace NIPPO
         {
             SqlConnection connection = new SqlConnection();
             SqlCommand command = new SqlCommand();
-            DataSet ds = new DataSet();
+            this._holidayDs = new DataSet();
 
             connection.ConnectionString = NIPPO.Properties.Settings.Default.ConnectionString;
 
@@ -302,14 +303,14 @@ namespace NIPPO
                         + " AND month='" + this._month + "'"
                         + " ;";
                     adapter.SelectCommand = command;
-                    adapter.Fill(ds, "holidays");
+                    adapter.Fill(this._holidayDs, "holidays");
                 }
                 catch (Exception ex)
                 {
                     throw new Exception(ex.Message);
                 }
             }
-            return ds;
+            return this._holidayDs;
         }
 
         public void outputExcel()
@@ -527,7 +528,15 @@ namespace NIPPO
 
         private void excelWriteHoliday(Microsoft.Office.Interop.Excel.Worksheet oSheet, int index)
         {
-            string str = "";
+            if (this._holidayDs == null)
+                this._holidayDs = getHolidayListDs();
+            Boolean isHoliday = false;
+            for (int i = 0; i < this._holidayDs.Tables[0].Rows.Count; i++)
+            {
+                if (int.Parse(this._holidayDs.Tables[0].Rows[i]["day"].ToString()) == (index + 1))
+                    isHoliday = true;
+            }
+            string str = (isHoliday) ? "*" : "";
             excelWriteCommon(oSheet, 8 + index, 3, str);
             return;
         }

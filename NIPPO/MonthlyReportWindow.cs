@@ -94,10 +94,10 @@ namespace NIPPO
 
         public void fillColorHoridayRows()
         {
-            DataSet ds = null;
+            DataSet _holidayDs = null;
             try
             {
-                ds = _mr.getHolidayListDs();
+                _holidayDs = _mr.getHolidayListDs();
             }
             catch (Exception ex)
             {
@@ -106,9 +106,9 @@ namespace NIPPO
                 return;
             }
             //
-            for (int i=0; i < ds.Tables[0].Rows.Count; i++)
+            for (int i=0; i < _holidayDs.Tables[0].Rows.Count; i++)
             {
-                int indexDay = int.Parse(ds.Tables[0].Rows[i]["day"].ToString()) - 1;
+                int indexDay = int.Parse(_holidayDs.Tables[0].Rows[i]["day"].ToString()) - 1;
                 this.list_dataGridView.Rows[indexDay].DefaultCellStyle.BackColor = Color.LightPink;
             }
         }
