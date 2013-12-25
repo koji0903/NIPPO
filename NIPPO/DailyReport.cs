@@ -9,6 +9,13 @@ namespace NIPPO
     public class DailyReport : IDisposable
     {
         /// <summary>
+        /// コンストラクタ
+        /// </summary>
+        public DailyReport()
+        {
+        }
+
+        /// <summary>
         /// 表示用の年月日曜日文字列を作成
         /// </summary>
         /// <param name="year">年</param>
@@ -31,9 +38,87 @@ namespace NIPPO
             return str;
         }
 
-        public String GetTime(int year, int month, int day, int hour, int second)
+        /// <summary>
+        /// DateTime用の文字列を作成
+        /// </summary>
+        /// <param name="year">年</param>
+        /// <param name="month">月</param>
+        /// <param name="day">日</param>
+        /// <param name="hour">時</param>
+        /// <param name="second">分</param>
+        /// <returns>DateTime指定用の文字列</returns>
+        public String getTime(int year, int month, int day, int hour, int second)
         {
             return String.Format("{0:D4}/{1:D2}/{2:D2} {3:D2}:{4:D2}:00", year, month, day, hour, second);
+        }
+
+        /// <summary>
+        /// work_detail/work_reportsテーブルの更新
+        /// </summary>
+        /// <param name="ds">データセット　</param>
+        /// <param name="year">年</param>
+        /// <param name="month">月</param>
+        /// <param name="day">日</param>
+        /// <param name="time">管理時間</param>
+        /// <param name="sh">開始時</param>
+        /// <param name="ss">開始分</param>
+        /// <param name="eh">終了時</param>
+        /// <param name="es">終了分</param>
+        public void updateDailyWork(DataSet ds, int year, int month, int day, double[] time,
+            String sh, String ss, String eh, String es)
+        {
+            using (DataAccessClass data_access = new DataAccessClass())
+            {
+                data_access.Update(ds, "work_detail");
+                // データベース（work_report）更新作業
+                try
+                {
+                    // データテーブルの作成
+                    DataTable dt = ds.Tables["work_reports"];
+                    DataRow dr = dt.Rows[0];
+                    dr["start_time"] = getTime(year, month, day, int.Parse(sh), int.Parse(ss));
+                    dr["end_time"] = getTime(year, month, day, int.Parse(eh), int.Parse(es));
+                    dr["work_times"] = time[0];
+                    dr["overtime125"] = time[2];
+                    dr["overtime150"] = time[3];
+                    dr["rest_time"] = time[1];
+                    // データベースへの更新作業
+                    data_access.Update(ds, "work_reports");
+                }
+                catch (Exception ex)
+                {
+                    System.Windows.Forms.MessageBox.Show(ex.Message);
+                }
+
+            }
+        }
+
+        /// <summary>
+        /// 日報入力ウィンドウの上部右（勤務時間、休憩時間、通常残業、深夜残業）
+        /// に表示する値を計算するメソッド
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <param name="sh"></param>
+        /// <param name="ss"></param>
+        /// <param name="eh"></param>
+        /// <param name="es"></param>
+        /// <returns></returns>
+        public Double[] calWorkTime(int year, int month, int day, String sh, String ss, String eh, String es)
+        {
+            Double[] time = new Double[4];
+            // 勤務時間の計算
+            time = this.GetWorkTime(
+                year,
+                month,
+                day,
+                int.Parse(sh),
+                int.Parse(ss),
+                int.Parse(eh),
+                int.Parse(es)
+            );
+            return time;
         }
 
         /// <summary>
@@ -59,12 +144,14 @@ namespace NIPPO
             string base_day = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month, day);
             string target_day = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month, day);
             string next_day_start = String.Format("{0:D4}/{1:D2}/{2:D2} 00:00:00", year, month, day + 1);
-            // 残業が次の日まで持ち越した場合
+
+            // 残業が次の日まで持ち越した場合は、日にち、時間調整
             if (end_hour >= 24)
             {
                 target_day = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month, day + 1);
                 end_hour -= 24;
             }
+
             // ユーザ入力の勤務時間
             str = String.Format("{0} {1:D2}:{2:D2}:00", base_day, start_hour, start_second);
             DateTime start_time = DateTime.Parse(str);
@@ -162,9 +249,6 @@ namespace NIPPO
                     // 終了時刻 - 普通残業開始時刻(18:00)
                     normal_ts = end_time - target_start_time;
                 }
-                else
-                {
-                }
             }
             else if ( start_time < target_end_time )
             {
@@ -215,7 +299,6 @@ namespace NIPPO
                     int result = TimeSpan.Compare(wt, work_base);
                     if (result > 0)
                     {
-//                        normal_ts = (end_time - target_start_time);
                         normal_ts = wt - work_base;
                     }
                 }
@@ -373,6 +456,38 @@ namespace NIPPO
             else
             {
                 return message;
+            }
+        }
+
+        /// <summary>
+        /// Double変数を表示用の文字列に変換(2.00 -> 2.00h)
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
+        public String setHourText(double s)
+        {
+            return s.ToString("F2") + "h";
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sh"></param>
+        /// <param name="ss"></param>
+        /// <param name="eh"></param>
+        /// <param name="es"></param>
+        /// <returns></returns>
+        public bool judgementTime(int sh, int ss, int eh, int es)
+        {
+            double start_time = (double)(sh + ((double)ss / 60));
+            double end_time = (double)(eh + ((double)es / 60));
+            if (start_time < end_time)
+            {
+                return true;
+            }
+            else 
+            {
+                return false;
             }
         }
 

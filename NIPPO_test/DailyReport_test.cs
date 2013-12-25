@@ -181,5 +181,32 @@ namespace NIPPO_test
             Assert.AreEqual(ary, work);
 
         }
+
+
+        [Test]
+        public void setHourText_test()
+        {
+            DailyReport _daily = new DailyReport();
+            // 正常系のテスト
+            Assert.AreEqual("2.00h", _daily.setHourText(2.0));
+            Assert.AreEqual("0.00h", _daily.setHourText(0.0));
+            Assert.AreEqual("0.00h", _daily.setHourText(0));
+        }
+
+        [Test]
+        public void timeCompare_test()
+        {
+            DailyReport _daily = new DailyReport();
+            Assert.AreEqual("", _daily.timeCompare(2.0, 2.0));
+            Assert.AreEqual("作業時間の割り当てが不足しています", _daily.timeCompare(3.0, 2.0));
+            Assert.AreEqual("作業時間が勤務時間を超えています", _daily.timeCompare(3.0, 7.0));
+        }
+
+        [Test]
+        public void getTime_test()
+        {
+            DailyReport _daily = new DailyReport();
+            Assert.AreEqual("2013/12/24 07:15:00", _daily.getTime(2013,12,24,7,15));
+        }
     }
 }
