@@ -181,7 +181,21 @@ ON work_detail.projects_ID = projects.ID INNER JOIN tasks
 ON work_detail.tasks_ID = tasks.ID
 WHERE work_detail.work_reports_ID = @work_report_id;
 
-
+--
+-- holidays
+--
+insert into holidays (year,month,day,name) values (2013,12,1,'“ú')
+insert into holidays (year,month,day,name) values (2013,12,7,'“y')
+insert into holidays (year,month,day,name) values (2013,12,8,'“ú')
+insert into holidays (year,month,day,name) values (2013,12,14,'“y')
+insert into holidays (year,month,day,name) values (2013,12,15,'“ú')
+insert into holidays (year,month,day,name) values (2013,12,21,'“y')
+insert into holidays (year,month,day,name) values (2013,12,22,'“ú')
+insert into holidays (year,month,day,name) values (2013,12,23,'“Vc’a¶“ú')
+insert into holidays (year,month,day,name) values (2013,12,28,'“y')
+insert into holidays (year,month,day,name) values (2013,12,29,'“ú')
+insert into holidays (year,month,day,name) values (2013,12,30,'“~Šú‹x‰É')
+insert into holidays (year,month,day,name) values (2013,12,31,'“~Šú‹x‰É')
 
 ---------------------------------------------------------------
 -- •\¦
