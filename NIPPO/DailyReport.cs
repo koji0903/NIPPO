@@ -8,11 +8,59 @@ namespace NIPPO
 {
     public class DailyReport : IDisposable
     {
+        // 前のウィンドウからの引き付き情報
+        public int fy  { 
+            get; 
+            private set;
+        }
+        public int year { 
+            get; 
+            private set;
+        }
+        public int month { 
+            get; 
+            private set;
+        }
+        public int day { 
+            get; 
+            private set;
+        }
+        public int userID { 
+            get; 
+            private set;
+        }
+        // 時間比較用のデータ
+        public double work_time {
+            get;
+            set;
+        }
+        public double regist_time{
+            get;
+            set;
+        }
+        // 上部表示用
+        public Double[] time{
+            get;
+            private set;
+        }
+
+
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public DailyReport()
+        public DailyReport(int fy, int userID, int year, int month, int day)
         {
+            this.fy = year;
+            this.userID = userID;
+            this.year = year;
+            this.month = month;
+            this.day = day;
+
+            // 勤務時間（比較用）
+            this.work_time = 7.75;
+            // 作業登録時間（比較用）
+            this.regist_time = 0.0;
+            time = new Double[] { 0.00, 0.00, 0.00, 0.00 };
         }
 
         /// <summary>
@@ -22,18 +70,18 @@ namespace NIPPO
         /// <param name="month">月</param>
         /// <param name="day">日</param>
         /// <returns>YYYY年MM月DD日(曜日)</returns>
-        public String GetDateStr(int year, int month, int day)
+        public String GetDateStr()
         {
             string str;
             // 無効な数値が入力された場合の例外処理対策
             try
             {
-                DateTime dateValue = new DateTime(year, month, day);
-                str = String.Format("{0:D4}年{1:D2}月{2:D2}日({3})", year, month, day, dateValue.ToString("ddd"));
+                DateTime dateValue = new DateTime(this.year, this.month, this.day);
+                str = String.Format("{0:D4}年{1:D2}月{2:D2}日({3})", this.year, this.month, this.day, dateValue.ToString("ddd"));
             }
             catch
             {
-                str = String.Format("{0:D4}年{1:D2}月{2:D2}日({3})", year, month, day, "無効な年月日");
+                str = String.Format("{0:D4}年{1:D2}月{2:D2}日({3})", this.year, this.month, this.day, "無効な年月日");
             }
             return str;
         }
@@ -64,7 +112,7 @@ namespace NIPPO
         /// <param name="ss">開始分</param>
         /// <param name="eh">終了時</param>
         /// <param name="es">終了分</param>
-        public void updateDailyWork(DataSet ds, int year, int month, int day, double[] time,
+        public void updateDailyWork(DataSet ds,
             String sh, String ss, String eh, String es)
         {
             using (DataAccessClass data_access = new DataAccessClass())
@@ -78,10 +126,10 @@ namespace NIPPO
                     DataRow dr = dt.Rows[0];
                     dr["start_time"] = getTime(year, month, day, int.Parse(sh), int.Parse(ss));
                     dr["end_time"] = getTime(year, month, day, int.Parse(eh), int.Parse(es));
-                    dr["work_times"] = time[0];
-                    dr["overtime125"] = time[2];
-                    dr["overtime150"] = time[3];
-                    dr["rest_time"] = time[1];
+                    dr["work_times"] = this.time[0];
+                    dr["overtime125"] = this.time[2];
+                    dr["overtime150"] = this.time[3];
+                    dr["rest_time"] = this.time[1];
                     // データベースへの更新作業
                     data_access.Update(ds, "work_reports");
                 }
@@ -105,14 +153,10 @@ namespace NIPPO
         /// <param name="eh"></param>
         /// <param name="es"></param>
         /// <returns></returns>
-        public Double[] calWorkTime(int year, int month, int day, String sh, String ss, String eh, String es)
+        public Double[] calWorkTime(String sh, String ss, String eh, String es)
         {
-            Double[] time = new Double[4];
             // 勤務時間の計算
-            time = this.GetWorkTime(
-                year,
-                month,
-                day,
+            this.time = this.GetWorkTime(
                 int.Parse(sh),
                 int.Parse(ss),
                 int.Parse(eh),
@@ -124,15 +168,12 @@ namespace NIPPO
         /// <summary>
         /// 開始時間・終了時間から勤務時間を計算する
         /// </summary>
-        /// <param name="year"></param>
-        /// <param name="month"></param>
-        /// <param name="day"></param>
         /// <param name="start_hour"></param>
         /// <param name="start_second"></param>
         /// <param name="end_hour"></param>
         /// <param name="end_second"></param>
         /// <returns></returns>
-        public Double[] GetWorkTime(int year, int month, int day, int start_hour, int start_second, int end_hour, int end_second)
+        public Double[] GetWorkTime(int start_hour, int start_second, int end_hour, int end_second)
         {
             string str;
 
@@ -141,9 +182,9 @@ namespace NIPPO
             // [2] : 普通残業時間 (05:00～08:45, 18:00～22:00)
             // [3] : 深夜残業時間 (22:00～05:00)
             double[] time = new double[4];
-            string base_day = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month, day);
-            string target_day = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month, day);
-            string next_day_start = String.Format("{0:D4}/{1:D2}/{2:D2} 00:00:00", year, month, day + 1);
+            string base_day = String.Format("{0:D4}/{1:D2}/{2:D2}", this.year, this.month, this.day);
+            string target_day = String.Format("{0:D4}/{1:D2}/{2:D2}", this.year, this.month, this.day);
+            string next_day_start = String.Format("{0:D4}/{1:D2}/{2:D2} 00:00:00", this.year, this.month, this.day + 1);
 
             // 残業が次の日まで持ち越した場合は、日にち、時間調整
             if (end_hour >= 24)
@@ -370,7 +411,8 @@ namespace NIPPO
                     total_work_time += (double)drCurrent["times"];
                 }
             }
-            return total_work_time;
+            this.regist_time = total_work_time;
+            return regist_time;
         }
 
         /// <summary>
@@ -439,11 +481,12 @@ namespace NIPPO
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="t1"></param>
-        /// <param name="t2"></param>
         /// <returns></returns>
-        public String timeCompare(double t1, double t2)
+        public String timeCompare()
         {
+            double t1 = this.work_time;
+            double t2 = this.regist_time;
+
             String message = "";
             if (t1 > t2)
             {
