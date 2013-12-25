@@ -52,6 +52,8 @@ namespace NIPPO_test
             // 正常系のテスト
 
             // 通常勤務（勤務＋昼休み休憩）
+
+            
             double[] work = _dr.GetWorkTime(8, 45, 17, 30);
             double[] ary = { 7.75, 1.00, 0.00, 0.00 };
             Assert.AreEqual(ary, work);
@@ -226,5 +228,14 @@ namespace NIPPO_test
             DailyReport _dr = new DailyReport(2013, 1, 2013, 12, 8);
             Assert.AreEqual("2013/12/24 07:15:00", _dr.getTime(2013, 12, 24, 7, 15));
         }
+
+        [Test]
+        public void validNextDate_test()
+        {
+            DailyReport _dr = new DailyReport(2013, 1, 2013, 12, 8);
+            Assert.AreEqual("2013/01/02", _dr.getValidNextDate(2013, 1, 1));
+            Assert.AreEqual("2013/02/01", _dr.getValidNextDate(2013, 1, 31));
+            Assert.AreEqual("2014/01/01", _dr.getValidNextDate(2013, 12, 31));
+        }    
     }
 }

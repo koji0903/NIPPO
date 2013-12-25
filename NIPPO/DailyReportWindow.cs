@@ -47,8 +47,6 @@ namespace NIPPO
             // 年月日情報の表示
             this.Calender_Label.Text = _dr.GetDateStr();
 
-            DataSet ds = _dr.makeDataSet();
-
             // 勤務情報の初期値設定
             String[] time = _dr.initialWorkTime();
             this.StartTime_Hour_Combobox.Text = time[0];
@@ -59,8 +57,8 @@ namespace NIPPO
             this.Set_WorkTime_Textbox("start");
 
             // DataGridへの表示
-            this.WorkDetail_DateGridView.DataSource = ds;
-            if (ds.Tables.Count != 0)
+            this.WorkDetail_DateGridView.DataSource = _dr.ds;
+            if (_dr.ds.Tables.Count != 0)
             {
                 this.WorkDetail_DateGridView.DataMember = "work_detail";
             }
@@ -113,7 +111,7 @@ namespace NIPPO
 
         /// <summary>
         /// 勤務開始時間（時、分）、勤務終了時間（時、分）の値が変わった場合に、データを自動取得して、
-        /// 勤務時間を計算
+        /// 勤務時間を計算(☆日にちをまたいているときに不具合あり)
         /// </summary>
         private void Set_WorkTime_Textbox(String str)
         {
@@ -142,7 +140,7 @@ namespace NIPPO
             }
 
             // 時間の計算
-            Double[] time = _dr.calWorkTime(
+            Double[] time = _dr.GetWorkTime_str(
                 this.StartTime_Hour_Combobox.Text,
                 this.StartTime_Second_Combobox.Text,
                 this.EndTime_Hour_Combobox.Text,
@@ -191,6 +189,11 @@ namespace NIPPO
             this.TaskName_TextBox.Text = "テスト用業務";
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WorkDetail_DateGridView_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
@@ -240,48 +243,17 @@ namespace NIPPO
         /// <param name="e"></param>
         private void Regist_Button_Click(object sender, EventArgs e)
         {
-            // データベースへの更新作業
-            DialogResult time_cmp = DialogResult.OK;
-
-            // 勤務時間と、作業割り当て時間の割り振りチェック
-            String ret = _dr.timeCompare();
-            if (ret != "")
-            {
-                // 割り振り不十分なときは、確認ウィンドウ表示（OK/Cancel）
-                // OK -> 先に進む、　Cancel：元の画面に戻る
-                time_cmp = MessageBox.Show(
-                    ret,
-                    "メッセージ",
-                    MessageBoxButtons.OKCancel,
-                    MessageBoxIcon.Exclamation,
-                    MessageBoxDefaultButton.Button2);
-            }
-
-
-            if (time_cmp != DialogResult.Cancel)
-            {
-                // データベース更新
-                _dr.updateDailyWork(
+            DialogResult result = _dr.regist_action(
                     this.StartTime_Hour_Combobox.Text,
                     this.StartTime_Second_Combobox.Text,
                     this.EndTime_Hour_Combobox.Text,
                     this.EndTime_Second_Combobox.Text
                     );
-
-                // 更新確認用ウィンドウ出力
-                DialogResult result = MessageBox.Show(
-                    "日報情報を更新しました。",
-                    "実行完了",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information,
-                    MessageBoxDefaultButton.Button2);
-
-                //何が選択されたか調べる
-                if (result == DialogResult.OK)
-                {
-                    //「はい」が選択された時、それ以外の場合は元に戻る
-                    this.Close();
-                }
+            //何が選択されたか調べる
+            if (result == DialogResult.OK)
+            {
+                //「はい」が選択された時、それ以外の場合は元に戻る
+                this.Close();
             }
         }
 

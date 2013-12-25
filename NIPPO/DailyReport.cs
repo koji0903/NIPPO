@@ -134,7 +134,16 @@ namespace NIPPO
         /// <returns>DateTime指定用の文字列</returns>
         public String getTime(int year, int month, int day, int hour, int second)
         {
-            return String.Format("{0:D4}/{1:D2}/{2:D2} {3:D2}:{4:D2}:00", year, month, day, hour, second);
+            if (hour < 24)
+            {
+                // 24時まで
+                return String.Format("{0:D4}/{1:D2}/{2:D2} {3:D2}:{4:D2}:00", year, month, day, hour, second);
+            }
+            else
+            {
+                // 24時以降（次の日）
+                return String.Format("{0:D4}/{1:D2}/{2:D2} {3:D2}:{4:D2}:00", year, month, day+1, hour-24, second);
+            }
         }
 
         /// <summary>
@@ -160,8 +169,8 @@ namespace NIPPO
                     // データテーブルの作成
                     DataTable dt = this.ds.Tables["work_reports"];
                     DataRow dr = dt.Rows[0];
-                    dr["start_time"] = getTime(year, month, day, int.Parse(sh), int.Parse(ss));
-                    dr["end_time"] = getTime(year, month, day, int.Parse(eh), int.Parse(es));
+                    dr["start_time"] = this.getTime(year, month, day, int.Parse(sh), int.Parse(ss));
+                    dr["end_time"] = this.getTime(year, month, day, int.Parse(eh), int.Parse(es));
                     dr["work_times"] = this.time[0];
                     dr["overtime125"] = this.time[2];
                     dr["overtime150"] = this.time[3];
@@ -189,16 +198,75 @@ namespace NIPPO
         /// <param name="eh"></param>
         /// <param name="es"></param>
         /// <returns></returns>
-        public Double[] calWorkTime(String sh, String ss, String eh, String es)
+        public Double[] GetWorkTime_str(String sh, String ss, String eh, String es)
         {
             // 勤務時間の計算
-            this.time = this.GetWorkTime(
+            return this.GetWorkTime(
                 int.Parse(sh),
                 int.Parse(ss),
                 int.Parse(eh),
                 int.Parse(es)
             );
-            return time;
+        }
+
+
+        /// <summary>
+        /// 有効な次の日の文字列を返す
+        /// </summary>
+        /// <param name="year"></param>
+        /// <param name="month"></param>
+        /// <param name="day"></param>
+        /// <returns></returns>
+        public String getValidNextDate( int year, int month, int day )
+        {
+            String str = "";
+            if (this.IsDate(year, month, day + 1))
+            {
+                // 次の日
+                str = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month, day + 1);
+            }
+            else
+            {
+                // 翌月の1日
+                if (this.IsDate(year, month + 1, 1))
+                {
+                    str = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month + 1, 1);
+                }
+                else
+                {
+                    str = String.Format("{0:D4}/{1:D2}/{2:D2}", year+1, 1, 1);
+                }
+            }
+            return str;
+        }
+
+        /// <summary>
+        /// 有効な日であるかどうかの判定
+        /// </summary>
+        /// <param name="iYear"></param>
+        /// <param name="iMonth"></param>
+        /// <param name="iDay"></param>
+        /// <returns></returns>
+        private bool IsDate(int iYear, int iMonth, int iDay)
+        {
+            if ((DateTime.MinValue.Year > iYear) || (iYear > DateTime.MaxValue.Year))
+            {
+                return false;
+            }
+
+            if ((DateTime.MinValue.Month > iMonth) || (iMonth > DateTime.MaxValue.Month))
+            {
+                return false;
+            }
+
+            int iLastDay = DateTime.DaysInMonth(iYear, iMonth);
+
+            if ((DateTime.MinValue.Day > iDay) || (iDay > iLastDay))
+            {
+                return false;
+            }
+
+            return true;
         }
 
         /// <summary>
@@ -217,15 +285,15 @@ namespace NIPPO
             // [1] : 休憩時間（12:00～13:00, 17:30～18:00）
             // [2] : 普通残業時間 (05:00～08:45, 18:00～22:00)
             // [3] : 深夜残業時間 (22:00～05:00)
-            double[] time = new double[4];
+            double[] times = new double[4];
             string base_day = String.Format("{0:D4}/{1:D2}/{2:D2}", this.year, this.month, this.day);
             string target_day = String.Format("{0:D4}/{1:D2}/{2:D2}", this.year, this.month, this.day);
-            string next_day_start = String.Format("{0:D4}/{1:D2}/{2:D2} 00:00:00", this.year, this.month, this.day + 1);
+            string next_day_start = String.Format("{0} 00:00:00", this.getValidNextDate(this.year,this.month,this.day));
 
             // 残業が次の日まで持ち越した場合は、日にち、時間調整
             if (end_hour >= 24)
             {
-                target_day = String.Format("{0:D4}/{1:D2}/{2:D2}", year, month, day + 1);
+                target_day = this.getValidNextDate(this.year, this.month, this.day);
                 end_hour -= 24;
             }
 
@@ -272,11 +340,11 @@ namespace NIPPO
             normal_overtime = cal_second_to_hour(early_ot[0] + late_ot[0]);
             night_overtime = cal_second_to_hour(early_ot[1] + late_ot[1]);
 
-            time[0] = work_time;
-            time[1] = rest_time;
-            time[2] = normal_overtime;
-            time[3] = night_overtime;
-            return time;
+            times[0] = work_time;
+            times[1] = rest_time;
+            times[2] = normal_overtime;
+            times[3] = night_overtime;
+            return times;
         }
 
         /// <summary>
@@ -577,6 +645,7 @@ namespace NIPPO
         /// <returns></returns>
         public String[] initialWorkTime()
         {
+            DataSet ds = this.makeDataSet();
             String[] work_time = new String[4] { "8", "45", "17", "30" };
 
             // 勤務情報の初期値設定
@@ -602,6 +671,13 @@ namespace NIPPO
             return work_time;
         }
 
+        /// <summary>
+        /// ADDボタンが押された時のアクション
+        /// </summary>
+        /// <param name="project_name"></param>
+        /// <param name="task_name"></param>
+        /// <param name="description"></param>
+        /// <param name="worktime"></param>
         public void add_action(String project_name, String task_name, String description, String worktime )
         {
             bool same_data = false;
@@ -671,6 +747,48 @@ namespace NIPPO
                         MessageBoxDefaultButton.Button2);
                 }
             }
+        }
+
+        public DialogResult regist_action(String start_hour, String start_second, String end_hour, String end_second)
+        {
+            // データベースへの更新作業
+            DialogResult time_cmp = DialogResult.OK;
+            DialogResult result = DialogResult.None;
+
+            // 勤務時間と、作業割り当て時間の割り振りチェック
+            String ret = this.timeCompare();
+            if (ret != "")
+            {
+                // 割り振り不十分なときは、確認ウィンドウ表示（OK/Cancel）
+                // OK -> 先に進む、　Cancel：元の画面に戻る
+                time_cmp = MessageBox.Show(
+                    ret,
+                    "メッセージ",
+                    MessageBoxButtons.OKCancel,
+                    MessageBoxIcon.Exclamation,
+                    MessageBoxDefaultButton.Button2);
+            }
+
+
+            if (time_cmp != DialogResult.Cancel)
+            {
+                // データベース更新
+                this.updateDailyWork(
+                    start_hour,
+                    start_second,
+                    end_hour,
+                    end_second
+                    );
+
+                // 更新確認用ウィンドウ出力
+                result = MessageBox.Show(
+                    "日報情報を更新しました。",
+                    "実行完了",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information,
+                    MessageBoxDefaultButton.Button2);
+            }
+            return result;
         }
 
         // IDisposable対応（ガベージコレクション対策みたい）
