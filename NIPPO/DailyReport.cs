@@ -105,6 +105,21 @@ namespace NIPPO
             return this.ds;
         }
 
+        /// <summary>
+        /// データセットにテーブルが保存されているか
+        /// </summary>
+        /// <returns></returns>
+        public bool existTableInDS()
+        {
+            if (this.ds.Tables.Count != 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         
         /// <summary>
         /// 表示用の年月日曜日文字列を作成

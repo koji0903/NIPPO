@@ -58,7 +58,7 @@ namespace NIPPO
 
             // DataGridへの表示
             this.WorkDetail_DateGridView.DataSource = _dr.ds;
-            if (_dr.ds.Tables.Count != 0)
+            if ( _dr.existTableInDS() )
             {
                 this.WorkDetail_DateGridView.DataMember = "work_detail";
             }
