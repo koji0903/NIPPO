@@ -298,7 +298,7 @@ namespace NIPPO
                     "既に同等の業務詳細(同じプロジェクト、業務）が登録されています。異なる業務詳細を指定してください。",
                     "メッセージ",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation,
+                    MessageBoxIcon.Error,
                     MessageBoxDefaultButton.Button2);
 
             }
@@ -324,7 +324,7 @@ namespace NIPPO
                         "業務詳細の時間には0.25刻みの値しか入力することができません",
                         "メッセージ",
                         MessageBoxButtons.OK,
-                        MessageBoxIcon.Exclamation,
+                        MessageBoxIcon.Error,
                         MessageBoxDefaultButton.Button2);
                 }
                 else if ((string)dr["name"] != "" && (string)dr["name1"] != "" && (double)dr["times"] > 0.0)
@@ -340,7 +340,7 @@ namespace NIPPO
                         "入力情報が不足しています。",
                         "ワーニング",
                         MessageBoxButtons.OK,
-                        MessageBoxIcon.Exclamation,
+                        MessageBoxIcon.Warning,
                         MessageBoxDefaultButton.Button2);
                 }
             }
@@ -392,7 +392,7 @@ namespace NIPPO
                     "日報情報を更新しました。",
                     "実行完了",
                     MessageBoxButtons.OK,
-                    MessageBoxIcon.Exclamation,
+                    MessageBoxIcon.Information,
                     MessageBoxDefaultButton.Button2);
 
                 //何が選択されたか調べる
