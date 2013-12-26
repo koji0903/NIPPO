@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.WorkDetail_DateGridView = new System.Windows.Forms.DataGridView();
             this.ID_TextBox = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.name = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -145,10 +145,10 @@
             // time_TextBox
             // 
             this.time_TextBox.DataPropertyName = "times";
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
-            dataGridViewCellStyle3.Format = "N2";
-            dataGridViewCellStyle3.NullValue = null;
-            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleRight;
+            dataGridViewCellStyle1.Format = "N2";
+            dataGridViewCellStyle1.NullValue = null;
+            this.time_TextBox.DefaultCellStyle = dataGridViewCellStyle1;
             this.time_TextBox.HeaderText = "時間";
             this.time_TextBox.Name = "time_TextBox";
             this.time_TextBox.ReadOnly = true;
@@ -361,6 +361,7 @@
             // EndTime_Second_Combobox
             // 
             this.EndTime_Second_Combobox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.EndTime_Second_Combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EndTime_Second_Combobox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.EndTime_Second_Combobox.FormattingEnabled = true;
             this.EndTime_Second_Combobox.Items.AddRange(new object[] {
@@ -373,12 +374,12 @@
             this.EndTime_Second_Combobox.Size = new System.Drawing.Size(41, 24);
             this.EndTime_Second_Combobox.TabIndex = 3;
             this.EndTime_Second_Combobox.Tag = "";
-            this.EndTime_Second_Combobox.Text = "30";
             this.EndTime_Second_Combobox.SelectedIndexChanged += new System.EventHandler(this.EndTime_Second_Combobox_SelectedIndexChanged);
             // 
             // EndTime_Hour_Combobox
             // 
             this.EndTime_Hour_Combobox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.EndTime_Hour_Combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EndTime_Hour_Combobox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.EndTime_Hour_Combobox.FormattingEnabled = true;
             this.EndTime_Hour_Combobox.Items.AddRange(new object[] {
@@ -418,12 +419,12 @@
             this.EndTime_Hour_Combobox.Size = new System.Drawing.Size(41, 24);
             this.EndTime_Hour_Combobox.TabIndex = 2;
             this.EndTime_Hour_Combobox.Tag = "";
-            this.EndTime_Hour_Combobox.Text = "17";
             this.EndTime_Hour_Combobox.SelectedIndexChanged += new System.EventHandler(this.EndTime_Hour_Combobox_SelectedIndexChanged);
             // 
             // StartTime_Second_Combobox
             // 
             this.StartTime_Second_Combobox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.StartTime_Second_Combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StartTime_Second_Combobox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.StartTime_Second_Combobox.FormattingEnabled = true;
             this.StartTime_Second_Combobox.Items.AddRange(new object[] {
@@ -436,12 +437,12 @@
             this.StartTime_Second_Combobox.Size = new System.Drawing.Size(41, 24);
             this.StartTime_Second_Combobox.TabIndex = 1;
             this.StartTime_Second_Combobox.Tag = "";
-            this.StartTime_Second_Combobox.Text = "45";
             this.StartTime_Second_Combobox.SelectedIndexChanged += new System.EventHandler(this.StartTime_Second_Combobox_SelectedIndexChanged);
             // 
             // StartTime_Hour_Combobox
             // 
             this.StartTime_Hour_Combobox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.StartTime_Hour_Combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StartTime_Hour_Combobox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.StartTime_Hour_Combobox.FormattingEnabled = true;
             this.StartTime_Hour_Combobox.Items.AddRange(new object[] {
@@ -481,7 +482,6 @@
             this.StartTime_Hour_Combobox.Size = new System.Drawing.Size(41, 24);
             this.StartTime_Hour_Combobox.TabIndex = 0;
             this.StartTime_Hour_Combobox.Tag = "";
-            this.StartTime_Hour_Combobox.Text = "8";
             this.StartTime_Hour_Combobox.SelectedIndexChanged += new System.EventHandler(this.StartTime_Hour_Combobox_SelectedIndexChanged);
             // 
             // Add_Button
@@ -562,119 +562,127 @@
             // 
             // WokTime_DomainUpDown
             // 
-            this.WokTime_DomainUpDown.Items.Add("0.00");
-            this.WokTime_DomainUpDown.Items.Add("0.25");
-            this.WokTime_DomainUpDown.Items.Add("0.50");
-            this.WokTime_DomainUpDown.Items.Add("0.75");
-            this.WokTime_DomainUpDown.Items.Add("1.00");
-            this.WokTime_DomainUpDown.Items.Add("1.25");
-            this.WokTime_DomainUpDown.Items.Add("1.50");
-            this.WokTime_DomainUpDown.Items.Add("1.75");
-            this.WokTime_DomainUpDown.Items.Add("2.00");
-            this.WokTime_DomainUpDown.Items.Add("2.25");
-            this.WokTime_DomainUpDown.Items.Add("2.50");
-            this.WokTime_DomainUpDown.Items.Add("2.75");
-            this.WokTime_DomainUpDown.Items.Add("3.00");
-            this.WokTime_DomainUpDown.Items.Add("3.25");
-            this.WokTime_DomainUpDown.Items.Add("3.50");
-            this.WokTime_DomainUpDown.Items.Add("3.75");
-            this.WokTime_DomainUpDown.Items.Add("4.00");
-            this.WokTime_DomainUpDown.Items.Add("4.25");
-            this.WokTime_DomainUpDown.Items.Add("4.50");
-            this.WokTime_DomainUpDown.Items.Add("4.75");
-            this.WokTime_DomainUpDown.Items.Add("5.00");
-            this.WokTime_DomainUpDown.Items.Add("5.25");
-            this.WokTime_DomainUpDown.Items.Add("5.50");
-            this.WokTime_DomainUpDown.Items.Add("5.75");
-            this.WokTime_DomainUpDown.Items.Add("6.00");
-            this.WokTime_DomainUpDown.Items.Add("6.25");
-            this.WokTime_DomainUpDown.Items.Add("6.50");
-            this.WokTime_DomainUpDown.Items.Add("6.75");
-            this.WokTime_DomainUpDown.Items.Add("7.00");
-            this.WokTime_DomainUpDown.Items.Add("7.25");
-            this.WokTime_DomainUpDown.Items.Add("7.50");
-            this.WokTime_DomainUpDown.Items.Add("7.75");
-            this.WokTime_DomainUpDown.Items.Add("8.00");
-            this.WokTime_DomainUpDown.Items.Add("8.25");
-            this.WokTime_DomainUpDown.Items.Add("8.50");
-            this.WokTime_DomainUpDown.Items.Add("8.75");
-            this.WokTime_DomainUpDown.Items.Add("9.00");
-            this.WokTime_DomainUpDown.Items.Add("9.25");
-            this.WokTime_DomainUpDown.Items.Add("9.50");
-            this.WokTime_DomainUpDown.Items.Add("9.75");
-            this.WokTime_DomainUpDown.Items.Add("10.00");
-            this.WokTime_DomainUpDown.Items.Add("10.25");
-            this.WokTime_DomainUpDown.Items.Add("10.50");
-            this.WokTime_DomainUpDown.Items.Add("10.75");
-            this.WokTime_DomainUpDown.Items.Add("11.00");
-            this.WokTime_DomainUpDown.Items.Add("11.25");
-            this.WokTime_DomainUpDown.Items.Add("11.50");
-            this.WokTime_DomainUpDown.Items.Add("11.75");
-            this.WokTime_DomainUpDown.Items.Add("12.00");
-            this.WokTime_DomainUpDown.Items.Add("12.25");
-            this.WokTime_DomainUpDown.Items.Add("12.50");
-            this.WokTime_DomainUpDown.Items.Add("12.75");
-            this.WokTime_DomainUpDown.Items.Add("13.00");
-            this.WokTime_DomainUpDown.Items.Add("13.25");
-            this.WokTime_DomainUpDown.Items.Add("13.50");
-            this.WokTime_DomainUpDown.Items.Add("13.75");
-            this.WokTime_DomainUpDown.Items.Add("14.00");
-            this.WokTime_DomainUpDown.Items.Add("14.25");
-            this.WokTime_DomainUpDown.Items.Add("14.50");
-            this.WokTime_DomainUpDown.Items.Add("14.75");
-            this.WokTime_DomainUpDown.Items.Add("15.00");
-            this.WokTime_DomainUpDown.Items.Add("15.25");
-            this.WokTime_DomainUpDown.Items.Add("15.50");
-            this.WokTime_DomainUpDown.Items.Add("15.75");
-            this.WokTime_DomainUpDown.Items.Add("16.00");
-            this.WokTime_DomainUpDown.Items.Add("16.25");
-            this.WokTime_DomainUpDown.Items.Add("16.50");
-            this.WokTime_DomainUpDown.Items.Add("16.75");
-            this.WokTime_DomainUpDown.Items.Add("17.00");
-            this.WokTime_DomainUpDown.Items.Add("17.25");
-            this.WokTime_DomainUpDown.Items.Add("17.50");
-            this.WokTime_DomainUpDown.Items.Add("17.75");
-            this.WokTime_DomainUpDown.Items.Add("18.00");
-            this.WokTime_DomainUpDown.Items.Add("18.25");
-            this.WokTime_DomainUpDown.Items.Add("18.50");
-            this.WokTime_DomainUpDown.Items.Add("18.75");
-            this.WokTime_DomainUpDown.Items.Add("19.00");
-            this.WokTime_DomainUpDown.Items.Add("19.25");
-            this.WokTime_DomainUpDown.Items.Add("19.50");
-            this.WokTime_DomainUpDown.Items.Add("19.75");
-            this.WokTime_DomainUpDown.Items.Add("20.00");
-            this.WokTime_DomainUpDown.Items.Add("20.25");
-            this.WokTime_DomainUpDown.Items.Add("20.50");
-            this.WokTime_DomainUpDown.Items.Add("20.75");
-            this.WokTime_DomainUpDown.Items.Add("21.00");
-            this.WokTime_DomainUpDown.Items.Add("21.25");
-            this.WokTime_DomainUpDown.Items.Add("21.50");
-            this.WokTime_DomainUpDown.Items.Add("21.75");
-            this.WokTime_DomainUpDown.Items.Add("22.00");
-            this.WokTime_DomainUpDown.Items.Add("22.25");
-            this.WokTime_DomainUpDown.Items.Add("22.50");
-            this.WokTime_DomainUpDown.Items.Add("22.75");
-            this.WokTime_DomainUpDown.Items.Add("23.00");
-            this.WokTime_DomainUpDown.Items.Add("23.25");
-            this.WokTime_DomainUpDown.Items.Add("23.50");
-            this.WokTime_DomainUpDown.Items.Add("23.75");
-            this.WokTime_DomainUpDown.Items.Add("24.00");
-            this.WokTime_DomainUpDown.Items.Add("24.25");
-            this.WokTime_DomainUpDown.Items.Add("25.50");
-            this.WokTime_DomainUpDown.Items.Add("26.75");
-            this.WokTime_DomainUpDown.Items.Add("27.00");
-            this.WokTime_DomainUpDown.Items.Add("27.25");
-            this.WokTime_DomainUpDown.Items.Add("27.50");
-            this.WokTime_DomainUpDown.Items.Add("27.75");
-            this.WokTime_DomainUpDown.Items.Add("28.00");
-            this.WokTime_DomainUpDown.Items.Add("28.25");
-            this.WokTime_DomainUpDown.Items.Add("28.50");
-            this.WokTime_DomainUpDown.Items.Add("28.75");
-            this.WokTime_DomainUpDown.Items.Add("29.00");
-            this.WokTime_DomainUpDown.Items.Add("29.25");
-            this.WokTime_DomainUpDown.Items.Add("29.50");
-            this.WokTime_DomainUpDown.Items.Add("29.75");
             this.WokTime_DomainUpDown.Items.Add("30.00");
+            this.WokTime_DomainUpDown.Items.Add("29.75");
+            this.WokTime_DomainUpDown.Items.Add("29.50");
+            this.WokTime_DomainUpDown.Items.Add("29.25");
+            this.WokTime_DomainUpDown.Items.Add("29.00");
+            this.WokTime_DomainUpDown.Items.Add("28.75");
+            this.WokTime_DomainUpDown.Items.Add("28.50");
+            this.WokTime_DomainUpDown.Items.Add("28.25");
+            this.WokTime_DomainUpDown.Items.Add("28.00");
+            this.WokTime_DomainUpDown.Items.Add("27.75");
+            this.WokTime_DomainUpDown.Items.Add("27.50");
+            this.WokTime_DomainUpDown.Items.Add("27.25");
+            this.WokTime_DomainUpDown.Items.Add("27.00");
+            this.WokTime_DomainUpDown.Items.Add("26.75");
+            this.WokTime_DomainUpDown.Items.Add("26.50");
+            this.WokTime_DomainUpDown.Items.Add("26.25");
+            this.WokTime_DomainUpDown.Items.Add("26.00");
+            this.WokTime_DomainUpDown.Items.Add("25.75");
+            this.WokTime_DomainUpDown.Items.Add("25.50");
+            this.WokTime_DomainUpDown.Items.Add("25.25");
+            this.WokTime_DomainUpDown.Items.Add("25.00");
+            this.WokTime_DomainUpDown.Items.Add("24.75");
+            this.WokTime_DomainUpDown.Items.Add("24.50");
+            this.WokTime_DomainUpDown.Items.Add("24.25");
+            this.WokTime_DomainUpDown.Items.Add("24.00");
+            this.WokTime_DomainUpDown.Items.Add("23.75");
+            this.WokTime_DomainUpDown.Items.Add("23.50");
+            this.WokTime_DomainUpDown.Items.Add("23.25");
+            this.WokTime_DomainUpDown.Items.Add("23.00");
+            this.WokTime_DomainUpDown.Items.Add("22.75");
+            this.WokTime_DomainUpDown.Items.Add("22.50");
+            this.WokTime_DomainUpDown.Items.Add("22.25");
+            this.WokTime_DomainUpDown.Items.Add("22.00");
+            this.WokTime_DomainUpDown.Items.Add("21.75");
+            this.WokTime_DomainUpDown.Items.Add("21.50");
+            this.WokTime_DomainUpDown.Items.Add("21.25");
+            this.WokTime_DomainUpDown.Items.Add("21.00");
+            this.WokTime_DomainUpDown.Items.Add("20.75");
+            this.WokTime_DomainUpDown.Items.Add("20.50");
+            this.WokTime_DomainUpDown.Items.Add("20.25");
+            this.WokTime_DomainUpDown.Items.Add("20.00");
+            this.WokTime_DomainUpDown.Items.Add("19.75");
+            this.WokTime_DomainUpDown.Items.Add("19.50");
+            this.WokTime_DomainUpDown.Items.Add("19.25");
+            this.WokTime_DomainUpDown.Items.Add("19.00");
+            this.WokTime_DomainUpDown.Items.Add("18.75");
+            this.WokTime_DomainUpDown.Items.Add("18.50");
+            this.WokTime_DomainUpDown.Items.Add("18.25");
+            this.WokTime_DomainUpDown.Items.Add("18.00");
+            this.WokTime_DomainUpDown.Items.Add("17.75");
+            this.WokTime_DomainUpDown.Items.Add("17.50");
+            this.WokTime_DomainUpDown.Items.Add("17.25");
+            this.WokTime_DomainUpDown.Items.Add("17.00");
+            this.WokTime_DomainUpDown.Items.Add("16.75");
+            this.WokTime_DomainUpDown.Items.Add("16.50");
+            this.WokTime_DomainUpDown.Items.Add("16.25");
+            this.WokTime_DomainUpDown.Items.Add("16.00");
+            this.WokTime_DomainUpDown.Items.Add("15.75");
+            this.WokTime_DomainUpDown.Items.Add("15.50");
+            this.WokTime_DomainUpDown.Items.Add("15.25");
+            this.WokTime_DomainUpDown.Items.Add("15.00");
+            this.WokTime_DomainUpDown.Items.Add("14.75");
+            this.WokTime_DomainUpDown.Items.Add("14.50");
+            this.WokTime_DomainUpDown.Items.Add("14.25");
+            this.WokTime_DomainUpDown.Items.Add("14.00");
+            this.WokTime_DomainUpDown.Items.Add("13.75");
+            this.WokTime_DomainUpDown.Items.Add("13.50");
+            this.WokTime_DomainUpDown.Items.Add("13.25");
+            this.WokTime_DomainUpDown.Items.Add("13.00");
+            this.WokTime_DomainUpDown.Items.Add("12.75");
+            this.WokTime_DomainUpDown.Items.Add("12.50");
+            this.WokTime_DomainUpDown.Items.Add("12.25");
+            this.WokTime_DomainUpDown.Items.Add("12.00");
+            this.WokTime_DomainUpDown.Items.Add("11.75");
+            this.WokTime_DomainUpDown.Items.Add("11.50");
+            this.WokTime_DomainUpDown.Items.Add("11.25");
+            this.WokTime_DomainUpDown.Items.Add("11.00");
+            this.WokTime_DomainUpDown.Items.Add("10.75");
+            this.WokTime_DomainUpDown.Items.Add("10.50");
+            this.WokTime_DomainUpDown.Items.Add("10.25");
+            this.WokTime_DomainUpDown.Items.Add("10.00");
+            this.WokTime_DomainUpDown.Items.Add("9.75");
+            this.WokTime_DomainUpDown.Items.Add("9.50");
+            this.WokTime_DomainUpDown.Items.Add("9.25");
+            this.WokTime_DomainUpDown.Items.Add("9.00");
+            this.WokTime_DomainUpDown.Items.Add("8.75");
+            this.WokTime_DomainUpDown.Items.Add("8.50");
+            this.WokTime_DomainUpDown.Items.Add("8.25");
+            this.WokTime_DomainUpDown.Items.Add("8.00");
+            this.WokTime_DomainUpDown.Items.Add("7.75");
+            this.WokTime_DomainUpDown.Items.Add("7.50");
+            this.WokTime_DomainUpDown.Items.Add("7.25");
+            this.WokTime_DomainUpDown.Items.Add("7.00");
+            this.WokTime_DomainUpDown.Items.Add("6.75");
+            this.WokTime_DomainUpDown.Items.Add("6.50");
+            this.WokTime_DomainUpDown.Items.Add("6.25");
+            this.WokTime_DomainUpDown.Items.Add("6.00");
+            this.WokTime_DomainUpDown.Items.Add("5.75");
+            this.WokTime_DomainUpDown.Items.Add("5.50");
+            this.WokTime_DomainUpDown.Items.Add("5.25");
+            this.WokTime_DomainUpDown.Items.Add("5.00");
+            this.WokTime_DomainUpDown.Items.Add("4.75");
+            this.WokTime_DomainUpDown.Items.Add("4.50");
+            this.WokTime_DomainUpDown.Items.Add("4.25");
+            this.WokTime_DomainUpDown.Items.Add("4.00");
+            this.WokTime_DomainUpDown.Items.Add("3.75");
+            this.WokTime_DomainUpDown.Items.Add("3.50");
+            this.WokTime_DomainUpDown.Items.Add("3.25");
+            this.WokTime_DomainUpDown.Items.Add("3.00");
+            this.WokTime_DomainUpDown.Items.Add("2.75");
+            this.WokTime_DomainUpDown.Items.Add("2.50");
+            this.WokTime_DomainUpDown.Items.Add("2.25");
+            this.WokTime_DomainUpDown.Items.Add("2.00");
+            this.WokTime_DomainUpDown.Items.Add("1.75");
+            this.WokTime_DomainUpDown.Items.Add("1.50");
+            this.WokTime_DomainUpDown.Items.Add("1.25");
+            this.WokTime_DomainUpDown.Items.Add("1.00");
+            this.WokTime_DomainUpDown.Items.Add("0.75");
+            this.WokTime_DomainUpDown.Items.Add("0.50");
+            this.WokTime_DomainUpDown.Items.Add("0.25");
+            this.WokTime_DomainUpDown.Items.Add("0.00");
             this.WokTime_DomainUpDown.Location = new System.Drawing.Point(101, 66);
             this.WokTime_DomainUpDown.Name = "WokTime_DomainUpDown";
             this.WokTime_DomainUpDown.Size = new System.Drawing.Size(100, 19);
