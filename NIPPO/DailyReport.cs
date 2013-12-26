@@ -42,7 +42,7 @@ namespace NIPPO
             set;
         }
         // 上部表示用
-        public Double[] time{
+        public Double[] times{
             get;
             private set;
         }
@@ -80,7 +80,7 @@ namespace NIPPO
             this.work_time = 7.75;
             // 作業登録時間（比較用）
             this.regist_time = 0.0;
-            time = new Double[] { 0.00, 0.00, 0.00, 0.00 };
+            times = new Double[] { 0.00, 0.00, 0.00, 0.00 };
             this.project_ID = 0;
             this.task_ID = 0;
             DataSet ds = new DataSet();
@@ -625,12 +625,36 @@ namespace NIPPO
                 if (tmp != null && tmp.GetType() == typeof(DateTime))
                 {
                     DateTime end_time = (DateTime)ds.Tables["work_reports"].Rows[0]["end_time"];
-                    work_time[2] = end_time.ToString("%H");
+                    work_time[2] = getHour(end_time);
+//                    work_time[2] = end_time.ToString("%H");
                     work_time[3] = end_time.ToString("%m");
 
                 }
             }
             return work_time;
+        }
+
+        /// <summary>
+        /// DateTimeから翌日判定。翌日であった場合、時間に＋２４
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns></returns>
+        private String getHour(DateTime t)
+        {
+            // 時間を取得
+            int hour = int.Parse(t.ToString("%H"));
+            int work_day = int.Parse(t.ToString("%d"));
+
+            if ( work_day == this.day )
+            {
+                return hour.ToString();
+                
+            }
+            else
+            {
+                hour += 24;
+                return hour.ToString() ;
+            }
         }
 
 
@@ -788,10 +812,12 @@ namespace NIPPO
                     DataRow dr = dt.Rows[0];
                     dr["start_time"] = this.getTime(year, month, day, int.Parse(sh), int.Parse(ss));
                     dr["end_time"] = this.getTime(year, month, day, int.Parse(eh), int.Parse(es));
-                    dr["work_times"] = this.time[0];
-                    dr["overtime125"] = this.time[2];
-                    dr["overtime150"] = this.time[3];
-                    dr["rest_time"] = this.time[1];
+                    // 時間の再計算
+                    this.times = GetWorkTime(int.Parse(sh), int.Parse(ss), int.Parse(eh), int.Parse(es));
+                    dr["work_times"] = this.times[0];
+                    dr["overtime125"] = this.times[2];
+                    dr["overtime150"] = this.times[3];
+                    dr["rest_time"] = this.times[1];
                     dr["note"] = note;
                     // データベースへの更新作業
                     data_access.Update(this.ds, "work_reports");
