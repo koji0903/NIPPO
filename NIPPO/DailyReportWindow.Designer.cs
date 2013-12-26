@@ -361,6 +361,7 @@
             // EndTime_Second_Combobox
             // 
             this.EndTime_Second_Combobox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.EndTime_Second_Combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EndTime_Second_Combobox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.EndTime_Second_Combobox.FormattingEnabled = true;
             this.EndTime_Second_Combobox.Items.AddRange(new object[] {
@@ -373,12 +374,12 @@
             this.EndTime_Second_Combobox.Size = new System.Drawing.Size(41, 24);
             this.EndTime_Second_Combobox.TabIndex = 3;
             this.EndTime_Second_Combobox.Tag = "";
-            this.EndTime_Second_Combobox.Text = "30";
             this.EndTime_Second_Combobox.SelectedIndexChanged += new System.EventHandler(this.EndTime_Second_Combobox_SelectedIndexChanged);
             // 
             // EndTime_Hour_Combobox
             // 
             this.EndTime_Hour_Combobox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.EndTime_Hour_Combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.EndTime_Hour_Combobox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.EndTime_Hour_Combobox.FormattingEnabled = true;
             this.EndTime_Hour_Combobox.Items.AddRange(new object[] {
@@ -418,12 +419,12 @@
             this.EndTime_Hour_Combobox.Size = new System.Drawing.Size(41, 24);
             this.EndTime_Hour_Combobox.TabIndex = 2;
             this.EndTime_Hour_Combobox.Tag = "";
-            this.EndTime_Hour_Combobox.Text = "17";
             this.EndTime_Hour_Combobox.SelectedIndexChanged += new System.EventHandler(this.EndTime_Hour_Combobox_SelectedIndexChanged);
             // 
             // StartTime_Second_Combobox
             // 
             this.StartTime_Second_Combobox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.StartTime_Second_Combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StartTime_Second_Combobox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.StartTime_Second_Combobox.FormattingEnabled = true;
             this.StartTime_Second_Combobox.Items.AddRange(new object[] {
@@ -436,12 +437,12 @@
             this.StartTime_Second_Combobox.Size = new System.Drawing.Size(41, 24);
             this.StartTime_Second_Combobox.TabIndex = 1;
             this.StartTime_Second_Combobox.Tag = "";
-            this.StartTime_Second_Combobox.Text = "45";
             this.StartTime_Second_Combobox.SelectedIndexChanged += new System.EventHandler(this.StartTime_Second_Combobox_SelectedIndexChanged);
             // 
             // StartTime_Hour_Combobox
             // 
             this.StartTime_Hour_Combobox.Cursor = System.Windows.Forms.Cursors.Arrow;
+            this.StartTime_Hour_Combobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.StartTime_Hour_Combobox.Font = new System.Drawing.Font("MS UI Gothic", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.StartTime_Hour_Combobox.FormattingEnabled = true;
             this.StartTime_Hour_Combobox.Items.AddRange(new object[] {
@@ -481,7 +482,6 @@
             this.StartTime_Hour_Combobox.Size = new System.Drawing.Size(41, 24);
             this.StartTime_Hour_Combobox.TabIndex = 0;
             this.StartTime_Hour_Combobox.Tag = "";
-            this.StartTime_Hour_Combobox.Text = "8";
             this.StartTime_Hour_Combobox.SelectedIndexChanged += new System.EventHandler(this.StartTime_Hour_Combobox_SelectedIndexChanged);
             // 
             // Add_Button

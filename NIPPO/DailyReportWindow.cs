@@ -26,6 +26,7 @@ namespace NIPPO
         {
             InitializeComponent();
             _dr = new DailyReport(fy, userID, year, month, day);
+            _dr.initialWorkTime();
         }
 
         /// <summary>
@@ -48,11 +49,10 @@ namespace NIPPO
             this.Calender_Label.Text = _dr.GetDateStr();
 
             // 勤務情報の初期値設定
-            String[] time = _dr.initialWorkTime();
-            this.StartTime_Hour_Combobox.Text = time[0];
-            this.StartTime_Second_Combobox.Text = time[1];
-            this.EndTime_Hour_Combobox.Text = time[2];
-            this.EndTime_Second_Combobox.Text = time[3];
+            this.StartTime_Hour_Combobox.Text = _dr.times_str[0];
+            this.StartTime_Second_Combobox.Text = _dr.times_str[1];
+            this.EndTime_Hour_Combobox.Text = _dr.times_str[2];
+            this.EndTime_Second_Combobox.Text = _dr.times_str[3];
 
             this.Set_WorkTime_Textbox("start");
 
@@ -109,12 +109,18 @@ namespace NIPPO
             this.Set_WorkTime_Textbox("end");
         }
 
+
         /// <summary>
         /// 勤務開始時間（時、分）、勤務終了時間（時、分）の値が変わった場合に、データを自動取得して、
         /// 勤務時間を計算(☆日にちをまたいているときに不具合あり)
         /// </summary>
         private void Set_WorkTime_Textbox(String str)
         {
+            this.StartTime_Hour_Combobox.Text = _dr.times_str[0];
+            this.StartTime_Second_Combobox.Text = _dr.times_str[1];
+            this.EndTime_Hour_Combobox.Text = _dr.times_str[2];
+            this.EndTime_Second_Combobox.Text = _dr.times_str[3];
+
             // Textフィールドに値を表示
             if ( _dr.judgementTime(
                     int.Parse(this.StartTime_Hour_Combobox.Text),
