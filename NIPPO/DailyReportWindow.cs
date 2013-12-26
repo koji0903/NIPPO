@@ -263,7 +263,8 @@ namespace NIPPO
                     this.StartTime_Hour_Combobox.Text,
                     this.StartTime_Second_Combobox.Text,
                     this.EndTime_Hour_Combobox.Text,
-                    this.EndTime_Second_Combobox.Text
+                    this.EndTime_Second_Combobox.Text,
+                    this.Remark_Textbox.Text
                     );
             //何が選択されたか調べる
             if (result == DialogResult.OK)

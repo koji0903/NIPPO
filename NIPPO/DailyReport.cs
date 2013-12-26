@@ -720,7 +720,7 @@ namespace NIPPO
         /// <param name="end_hour">終了時</param>
         /// <param name="end_second">終了分</param>
         /// <returns></returns>
-        public DialogResult regist_action(String start_hour, String start_second, String end_hour, String end_second)
+        public DialogResult regist_action(String start_hour, String start_second, String end_hour, String end_second, String note = "")
         {
             // データベースへの更新作業
             DialogResult time_cmp = DialogResult.OK;
@@ -748,7 +748,8 @@ namespace NIPPO
                     start_hour,
                     start_second,
                     end_hour,
-                    end_second
+                    end_second,
+                    note
                     );
 
                 // 更新確認用ウィンドウ出力
@@ -774,7 +775,7 @@ namespace NIPPO
         /// <param name="ss">開始分</param>
         /// <param name="eh">終了時</param>
         /// <param name="es">終了分</param>
-        private void updateDailyWork(String sh, String ss, String eh, String es)
+        private void updateDailyWork(String sh, String ss, String eh, String es, String note ="" )
         {
             using (DataAccessClass data_access = new DataAccessClass())
             {
@@ -791,6 +792,7 @@ namespace NIPPO
                     dr["overtime125"] = this.time[2];
                     dr["overtime150"] = this.time[3];
                     dr["rest_time"] = this.time[1];
+                    dr["note"] = note;
                     // データベースへの更新作業
                     data_access.Update(this.ds, "work_reports");
                 }
