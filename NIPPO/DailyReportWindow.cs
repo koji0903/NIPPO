@@ -162,12 +162,13 @@ namespace NIPPO
         private void SerarchProject_Button_Click(object sender, EventArgs e)
         {
 
-            using ( SearchProjectsWindow _spw = new SearchProjectsWindow( year ) )
+            using ( SearchProjectsWindow _spw = new SearchProjectsWindow( _dr.year ) )
             {
                 _spw.ShowDialog(this);
-                this.project_ID = _spw._project_id;
-                _dr.project_ID = data_access.getProjectID(project_num);
-                this.ProjectName_Textbox.Text = _spw._project_name;             
+                _dr.project_ID = _spw._project_id;
+//                _dr.project_ID = data_access.getProjectID(project_num);
+                this.ProjectName_Textbox.Text = _spw._project_name;
+                this.ProjectCode_Textbox.Text = _spw._project_code;
             }
            
         //    using (DataAccessClass data_access = new DataAccessClass())
@@ -191,7 +192,7 @@ namespace NIPPO
             using (SearchTasksWindow _stw = new SearchTasksWindow() )
             {
                 _stw.ShowDialog(this);
-                this.task_ID = _stw._taskid;
+                _dr.task_ID = _stw._taskid;
                 this.TaskCode_Textbox.Text = _stw._taskcode;
                 this.TaskName_TextBox.Text = _stw._taskname;             
             }
