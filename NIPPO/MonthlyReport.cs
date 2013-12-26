@@ -508,6 +508,13 @@ namespace NIPPO
                 excelWriteDay(oSheet,i);
                 excelWriteWeek(oSheet, i);
                 excelWriteHoliday(oSheet, i);
+                excelWriteStartTime(oSheet, i);
+                excelWriteEndTime(oSheet, i);
+                // 備考は省略
+                excelWriteOverTime125(oSheet, i);
+                excelWriteOverTime150(oSheet, i);
+                excelWriteHolidayWorkTime(oSheet, i);
+                excelWriteProjectTimeEtc(oSheet, i);
             }
             return;
         }
@@ -540,5 +547,84 @@ namespace NIPPO
             excelWriteCommon(oSheet, 8 + index, 3, str);
             return;
         }
+
+        private void excelWriteStartTime(Microsoft.Office.Interop.Excel.Worksheet oSheet, int index)
+        {
+            if (this._monthDs == null)
+                this._monthDs = getMonthlyWorkReport();
+            string str = "";
+            if (this._monthDs.Tables[0].Rows[index]["start_time"] != null)
+            {
+                str = this._monthDs.Tables[0].Rows[index]["start_time"].ToString();
+            }
+            excelWriteCommon(oSheet, 8 + index, 4, str);
+            return;
+        }
+
+        private void excelWriteEndTime(Microsoft.Office.Interop.Excel.Worksheet oSheet, int index)
+        {
+            if (this._monthDs == null)
+                this._monthDs = getMonthlyWorkReport();
+            string str = "";
+            if (this._monthDs.Tables[0].Rows[index]["end_time"] != null)
+            {
+                str = this._monthDs.Tables[0].Rows[index]["end_time"].ToString();
+            }
+            excelWriteCommon(oSheet, 8 + index, 5, str);
+            return;
+        }
+
+        private void excelWriteOverTime125(Microsoft.Office.Interop.Excel.Worksheet oSheet, int index)
+        {
+            if (this._monthDs == null)
+                this._monthDs = getMonthlyWorkReport();
+            string str = "";
+            if (this._monthDs.Tables[0].Rows[index]["overtime125"] != null)
+            {
+                str = this._monthDs.Tables[0].Rows[index]["overtime125"].ToString();
+            }
+            excelWriteCommon(oSheet, 8 + index, 7, str);
+            return;
+        }
+
+        private void excelWriteOverTime150(Microsoft.Office.Interop.Excel.Worksheet oSheet, int index)
+        {
+            if (this._monthDs == null)
+                this._monthDs = getMonthlyWorkReport();
+            string str = "";
+            if (this._monthDs.Tables[0].Rows[index]["overtime150"] != null)
+            {
+                str = this._monthDs.Tables[0].Rows[index]["overtime150"].ToString();
+            }
+            excelWriteCommon(oSheet, 8 + index, 8, str);
+            return;
+        }
+
+        private void excelWriteHolidayWorkTime(Microsoft.Office.Interop.Excel.Worksheet oSheet, int index)
+        {
+            if (this._monthDs == null)
+                this._monthDs = getMonthlyWorkReport();
+            string str = "";
+            if (this._monthDs.Tables[0].Rows[index]["holiday_work_times"] != null)
+            {
+                str = this._monthDs.Tables[0].Rows[index]["holiday_work_times"].ToString();
+            }
+            excelWriteCommon(oSheet, 8 + index, 9, str);
+            return;
+        }
+
+        private void excelWriteProjectTimeEtc(Microsoft.Office.Interop.Excel.Worksheet oSheet, int index)
+        {
+            if (this._monthDs == null)
+                this._monthDs = getMonthlyWorkReport();
+            string str = "";
+            if (this._monthDs.Tables[0].Rows[index]["work_times"] != null)
+            {
+                str = this._monthDs.Tables[0].Rows[index]["work_times"].ToString();
+            }
+            excelWriteCommon(oSheet, 8 + index, 17, str);
+            return;
+        }
+
     }
 }
