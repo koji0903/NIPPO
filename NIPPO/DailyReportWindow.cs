@@ -161,14 +161,23 @@ namespace NIPPO
         /// <param name="e"></param>
         private void SerarchProject_Button_Click(object sender, EventArgs e)
         {
-            using (DataAccessClass data_access = new DataAccessClass())
+
+            using ( SearchProjectsWindow _spw = new SearchProjectsWindow( year ) )
             {
-                int project_num = 10;
-                // Task IDのセット
+                _spw.ShowDialog(this);
+                this.project_ID = _spw._project_id;
                 _dr.project_ID = data_access.getProjectID(project_num);
+                this.ProjectName_Textbox.Text = _spw._project_name;             
             }
-            this.ProjectCode_Textbox.Text = "1234";
-            this.ProjectName_Textbox.Text = "テスト用プロジェクト";
+           
+        //    using (DataAccessClass data_access = new DataAccessClass())
+        //    {
+        //        int project_num = 10;
+        //        // Task IDのセット
+        //        this.project_ID = data_access.getProjectID(project_num);
+        //    }
+        //    this.ProjectCode_Textbox.Text = "1234";
+        //    this.ProjectName_Textbox.Text = "テスト用プロジェクト";
         }
 
         /// <summary>
@@ -179,14 +188,20 @@ namespace NIPPO
         private void SearchBusiness_Button_Click(object sender, EventArgs e)
         {
             // 業務選択を行うウィンドウを表示
-            using (DataAccessClass data_access = new DataAccessClass())
+            using (SearchTasksWindow _stw = new SearchTasksWindow() )
             {
-                int task_code = 10;
-                // Task IDのセット
-                _dr.task_ID = data_access.getProjectID(task_code);
+                _stw.ShowDialog(this);
+                this.task_ID = _stw._taskid;
+                this.TaskCode_Textbox.Text = _stw._taskcode;
+                this.TaskName_TextBox.Text = _stw._taskname;             
             }
-            this.TaskCode_Textbox.Text = "5678";
-            this.TaskName_TextBox.Text = "テスト用業務";
+            
+         //  using (DataAccessClass data_access = new DataAccessClass())
+         //  {
+         //      int task_code = 10;
+         //      // Task IDのセット
+         //      this.task_ID = data_access.getProjectID(task_code);
+         //  }
         }
 
         /// <summary>

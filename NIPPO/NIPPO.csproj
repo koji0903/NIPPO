@@ -73,6 +73,18 @@
     </Compile>
     <Compile Include="DataAccess.cs" />
     <Compile Include="DataAccessClass.cs" />
+    <Compile Include="SearchProjectsWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchProjectsWindow.Designer.cs">
+      <DependentUpon>SearchProjectsWindow.cs</DependentUpon>
+    </Compile>
+    <Compile Include="SearchTasksWindow.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SearchTasksWindow.Designer.cs">
+      <DependentUpon>SearchTasksWindow.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="testCalc.cs" />
     <Compile Include="Login.cs" />
@@ -104,6 +116,12 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="DailyReportWindow.resx">
       <DependentUpon>DailyReportWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchProjectsWindow.resx">
+      <DependentUpon>SearchProjectsWindow.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SearchTasksWindow.resx">
+      <DependentUpon>SearchTasksWindow.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LoginWindow.resx">
       <DependentUpon>LoginWindow.cs</DependentUpon>
