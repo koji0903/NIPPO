@@ -42,7 +42,14 @@ namespace NIPPO
             set;
         }
         // 上部表示用
-        public Double[] times{
+        public Double[] times
+        {
+            get;
+            private set;
+        }
+        // 上部表示用
+        public String[] times_str
+        {
             get;
             private set;
         }
@@ -604,7 +611,7 @@ namespace NIPPO
         /// の初期値を決定するメソッド。初期値は全て０。既に登録済みの場合は、その値を使用
         /// </summary>
         /// <returns></returns>
-        public String[] initialWorkTime()
+        public void initialWorkTime()
         {
             DataSet ds = this.makeDataSet();
             String[] work_time = new String[4] { "8", "45", "17", "30" };
@@ -631,7 +638,7 @@ namespace NIPPO
 
                 }
             }
-            return work_time;
+            this.times_str = work_time;
         }
 
         /// <summary>
