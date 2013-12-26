@@ -83,6 +83,16 @@ INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VA
 INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES (3,1234,'false','“V‘','O˜Y',@d);
 INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES (4,1234,'false','ŸN–Ø','½',@d);
 INSERT INTO users (login,password,delete_flag,lastname,firstname) VALUES (5,1234,'false','ŸN–Ø','ƒ_ƒ~[');
+SET @d = (SELECT ID FROM sections WHERE name = 'ŠJ”­•”');
+INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES ('6','goal','false','–{“c','Œ\‰E',@d);
+INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES ('7','@-!=?','false','’·—F','—C“s',@d);
+INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES ('10','0123','false','ì','^i',@d);
+INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES ('01','Kakitani','false','Š`’J','—jˆê˜N',@d);
+INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES ('02','‚Ù‚½‚é','false','RŒû','Œu',@d);
+INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES ('001','','false','‰““¡','•Ûm',@d);
+INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES ('002','‰ªè','false','‰ªè','Ti',@d);
+INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES ('003','Zac@0401','false','Zaccheroni','Alberto',@d);
+INSERT INTO users (login,password,delete_flag,lastname,firstname,sections_ID) VALUES ('7204382','Naoki.Otani','false','‘å’J','’¼‹B',@d);
 
 
 --

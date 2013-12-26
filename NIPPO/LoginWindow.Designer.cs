@@ -39,6 +39,7 @@
             // id_textbox
             // 
             this.id_textbox.Location = new System.Drawing.Point(80, 34);
+            this.id_textbox.MaxLength = 20;
             this.id_textbox.Name = "id_textbox";
             this.id_textbox.Size = new System.Drawing.Size(134, 19);
             this.id_textbox.TabIndex = 0;
@@ -46,6 +47,7 @@
             // pw_textbox
             // 
             this.pw_textbox.Location = new System.Drawing.Point(80, 71);
+            this.pw_textbox.MaxLength = 20;
             this.pw_textbox.Name = "pw_textbox";
             this.pw_textbox.PasswordChar = '*';
             this.pw_textbox.Size = new System.Drawing.Size(134, 19);

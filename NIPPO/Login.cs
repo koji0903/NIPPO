@@ -29,7 +29,6 @@ namespace NIPPO
             this._ds = new DataSet(); 
         }
 
-
         public int LoginFunction()
         {
 
@@ -52,13 +51,13 @@ namespace NIPPO
                 else
                 {
                     //パスワードが間違っている場合。
-                    return iderror;
+                    return pwerror;
                 }
             }
             else
             {
                 // IDが間違っている場合。
-                return pwerror;
+                return iderror;
             }
         }
 
