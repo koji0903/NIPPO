@@ -192,7 +192,7 @@ namespace NIPPO
                 try
                 {
                     command.Connection = connection;
-                    command.CommandText = @"SELECT day,start_time,end_time,work_times,"
+                    command.CommandText = @"SELECT day,start_time,end_time,rest_time,work_times,"
                         + " overtime125,overtime150,holiday_work_times,note"
                         + " FROM work_reports"
                         + " WHERE users_ID='" + this._userID + "'"

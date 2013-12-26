@@ -165,6 +165,9 @@ namespace NIPPO
                     _form.ShowDialog(this);
                     _form.Dispose();
                     this.reloadWindow();
+                    // Window表示前の行を選択する
+                    list_dataGridView.ClearSelection();
+                    list_dataGridView.Rows[index].Selected = true;
                 }
                 /*
                 MessageBox.Show("DailyReportWindow.showDialog(" + _mr.getCalYear()
@@ -189,6 +192,10 @@ namespace NIPPO
             }
         }
 
+        private void MonthlyReportWindow_Load(object sender, EventArgs e)
+        {
+
+        }
 
     }
 }
