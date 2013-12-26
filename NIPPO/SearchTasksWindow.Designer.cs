@@ -54,7 +54,7 @@
             this.cord_TextBox,
             this.業務内容,
             this.略名});
-            this.TasksGridView.Location = new System.Drawing.Point(19, 77);
+            this.TasksGridView.Location = new System.Drawing.Point(15, 63);
             this.TasksGridView.MultiSelect = false;
             this.TasksGridView.Name = "TasksGridView";
             this.TasksGridView.ReadOnly = true;
@@ -62,14 +62,14 @@
             this.TasksGridView.RowTemplate.Height = 21;
             this.TasksGridView.RowTemplate.ReadOnly = true;
             this.TasksGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.TasksGridView.Size = new System.Drawing.Size(546, 196);
+            this.TasksGridView.Size = new System.Drawing.Size(476, 196);
             this.TasksGridView.TabIndex = 0;
             this.TasksGridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.TasksGridView_CellContentClick);
             // 
             // SelectButton
             // 
             this.SelectButton.ForeColor = System.Drawing.Color.Black;
-            this.SelectButton.Location = new System.Drawing.Point(391, 284);
+            this.SelectButton.Location = new System.Drawing.Point(317, 265);
             this.SelectButton.Name = "SelectButton";
             this.SelectButton.Size = new System.Drawing.Size(84, 24);
             this.SelectButton.TabIndex = 1;
@@ -79,7 +79,7 @@
             // 
             // Cancel_Button
             // 
-            this.Cancel_Button.Location = new System.Drawing.Point(481, 284);
+            this.Cancel_Button.Location = new System.Drawing.Point(407, 265);
             this.Cancel_Button.Name = "Cancel_Button";
             this.Cancel_Button.Size = new System.Drawing.Size(84, 24);
             this.Cancel_Button.TabIndex = 2;
@@ -90,7 +90,7 @@
             // Search_Button
             // 
             this.Search_Button.ForeColor = System.Drawing.Color.Black;
-            this.Search_Button.Location = new System.Drawing.Point(465, 38);
+            this.Search_Button.Location = new System.Drawing.Point(391, 33);
             this.Search_Button.Name = "Search_Button";
             this.Search_Button.Size = new System.Drawing.Size(47, 24);
             this.Search_Button.TabIndex = 3;
@@ -100,7 +100,7 @@
             // Clear_Button
             // 
             this.Clear_Button.ForeColor = System.Drawing.Color.Black;
-            this.Clear_Button.Location = new System.Drawing.Point(518, 38);
+            this.Clear_Button.Location = new System.Drawing.Point(444, 33);
             this.Clear_Button.Name = "Clear_Button";
             this.Clear_Button.Size = new System.Drawing.Size(47, 24);
             this.Clear_Button.TabIndex = 4;
@@ -110,7 +110,7 @@
             // Category_Label
             // 
             this.Category_Label.AutoSize = true;
-            this.Category_Label.Location = new System.Drawing.Point(27, 39);
+            this.Category_Label.Location = new System.Drawing.Point(12, 43);
             this.Category_Label.Name = "Category_Label";
             this.Category_Label.Size = new System.Drawing.Size(35, 12);
             this.Category_Label.TabIndex = 5;
@@ -119,22 +119,22 @@
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(84, 39);
+            this.comboBox1.Location = new System.Drawing.Point(53, 35);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(179, 20);
+            this.comboBox1.Size = new System.Drawing.Size(147, 20);
             this.comboBox1.TabIndex = 6;
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(269, 39);
+            this.textBox1.Location = new System.Drawing.Point(206, 36);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(190, 19);
+            this.textBox1.Size = new System.Drawing.Size(177, 19);
             this.textBox1.TabIndex = 7;
             // 
             // Search_Label
             // 
             this.Search_Label.AutoSize = true;
-            this.Search_Label.Location = new System.Drawing.Point(27, 9);
+            this.Search_Label.Location = new System.Drawing.Point(12, 9);
             this.Search_Label.Name = "Search_Label";
             this.Search_Label.Size = new System.Drawing.Size(29, 12);
             this.Search_Label.TabIndex = 8;
@@ -163,7 +163,7 @@
             this.業務内容.HeaderText = "業務内容";
             this.業務内容.Name = "業務内容";
             this.業務内容.ReadOnly = true;
-            this.業務内容.Width = 250;
+            this.業務内容.Width = 260;
             // 
             // 略名
             // 
@@ -177,7 +177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 324);
+            this.ClientSize = new System.Drawing.Size(511, 305);
             this.Controls.Add(this.Search_Label);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.comboBox1);
