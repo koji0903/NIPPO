@@ -30,7 +30,7 @@ namespace NIPPO
             {
                 if (_lw.ShowDialog(this) == DialogResult.OK)
                 {
-                    this.id = _lw.id;
+                    this.id = _lw._id;
                 }
                 else
                 {
